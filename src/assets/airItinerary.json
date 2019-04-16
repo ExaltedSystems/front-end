@@ -1,0 +1,693 @@
+{
+	"ItineraryRef": {
+		"attr": {
+			"ID": "IMYIGE",
+			"InhibitCode": "U",
+			"PartitionID": "AA",
+			"PrimeHostID": "1B"
+		},
+		"Source": {
+			"attr": {
+				"AAAPseudoCityCode": "X1CD",
+				"CreateDateTime": "01-16T08:28:00",
+				"CreationAgent": "AWC",
+				"HomePseudoCityCode": "X1CD",
+				"PseudoCityCode": "X1CD",
+				"ReceivedFrom": "MADNI TRAVELS - B2C",
+				"IssuedBy": null,
+				"FOP": null
+			}
+		}
+	},
+	"CustomerInfo": {
+		"PersonName": [{
+			"attr": {
+				"NameNumber": "01.01",
+				"PassengerType": "ADT"
+			},
+			"GivenName": {
+				"value": "FAIZA MR"
+			},
+			"Surname": {
+				"value": "MALIK"
+			},
+			"Email": [{
+				"value": "\u00c2\u0087INFO@REHMANTRAVEL.COM\u00c2\u0087CC"
+			}, {
+				"value": "\u00c2\u0087INFO@REHMANTRAVEL.COM\u00c2\u0087TO"
+			}, {
+				"value": "\u00c2\u0087MADNITRAVELPK@YAHOO.COM\u00c2\u0087FR"
+			}]
+		}, {
+			"attr": {
+				"NameNumber": "02.01",
+				"PassengerType": "ADT"
+			},
+			"GivenName": {
+				"value": "MUHAMMAD SHAHEER MSTR"
+			},
+			"Surname": {
+				"value": "MALIK"
+			}
+		}],
+		"Telephone": {
+			"attr": {
+				"AreaCityCode": "ISB",
+				"PhoneNumber": "03009609476-1.1",
+				"RPH": "001"
+			}
+		},
+		"Address": {
+			"AddressLine": [{
+				"value": "REHMAN GROUP OF TRAVELS"
+			}, {
+				"value": "OFFICE NO1 AALLY PLAZA FAZAL E HAQ ROAD BLUE AREA"
+			}, {
+				"value": " PAKISTAN 44000"
+			}]
+		}
+	},
+	"ItineraryInfo": {
+		"ReservationItems": {
+			"Item": [{
+				"attr": {
+					"RPH": "1"
+				},
+				"Air": {
+					"attr": {
+						"AirMilesFlown": "1224",
+						"ArrivalDateTime": "01-28T14:55:00",
+						"ConnectionInd": " O",
+						"DepartureDateTime": "2019-01-28T12:20:00",
+						"ElapsedTime": "03.35",
+						"FlightNumber": "0613",
+						"NumberInParty": "02",
+						"ResBookDesigCode": "Y",
+						"SegmentNumber": "0001",
+						"SmokingAllowed": "N",
+						"SpecialMeal": "N",
+						"Status": "HK",
+						"StopQuantity": "00",
+						"eTicket": "E"
+					},
+					"DepartureAirport": {
+						"attr": {
+							"LocationCode": "ISB"
+						}
+					},
+					"ArrivalAirport": {
+						"attr": {
+							"LocationCode": "DXB",
+							"Terminal": "TERMINAL 3",
+							"TerminalCode": "3"
+						}
+					},
+					"Equipment": {
+						"attr": {
+							"AirEquipType": "77W"
+						}
+					},
+					"MarketingAirline": {
+						"attr": {
+							"Code": "EK"
+						}
+					},
+					"MarriageGrp": {
+						"attr": {
+							"Group": "001",
+							"Ind": " O",
+							"Sequence": "1"
+						}
+					},
+					"UpdatedDepartureTime": {
+						"value": "01-28T12:20:00"
+					},
+					"UpdatedArrivalTime": {
+						"value": "01-28T14:55:00"
+					},
+					"SupplierRef": {
+						"attr": {
+							"ID": "DCEK*G4EVSW"
+						}
+					},
+					"Meal": {
+						"attr": {
+							"Code": "M"
+						}
+					}
+				}
+			}, {
+				"attr": {
+					"RPH": "2"
+				},
+				"Air": {
+					"attr": {
+						"AirMilesFlown": "7485",
+						"ArrivalDateTime": "01-29T19:30:00",
+						"ConnectionInd": "I",
+						"DepartureDateTime": "2019-01-28T22:40:00",
+						"ElapsedTime": "13.50",
+						"FlightNumber": "0416",
+						"NumberInParty": "02",
+						"ResBookDesigCode": "Y",
+						"SegmentNumber": "0002",
+						"SmokingAllowed": "N",
+						"SpecialMeal": "N",
+						"Status": "HK",
+						"StopQuantity": "00",
+						"eTicket": "E"
+					},
+					"DepartureAirport": {
+						"attr": {
+							"LocationCode": "DXB",
+							"Terminal": "TERMINAL 3",
+							"TerminalCode": "3"
+						}
+					},
+					"ArrivalAirport": {
+						"attr": {
+							"LocationCode": "SYD",
+							"Terminal": "TERMINAL 1 INTERNATIONAL",
+							"TerminalCode": "1"
+						}
+					},
+					"Equipment": {
+						"attr": {
+							"AirEquipType": "77W"
+						}
+					},
+					"MarketingAirline": {
+						"attr": {
+							"Code": "EK"
+						}
+					},
+					"MarriageGrp": {
+						"attr": {
+							"Group": "001",
+							"Ind": "I",
+							"Sequence": "2"
+						}
+					},
+					"UpdatedDepartureTime": {
+						"value": "01-28T22:40:00"
+					},
+					"UpdatedArrivalTime": {
+						"value": "01-29T19:30:00"
+					},
+					"SupplierRef": {
+						"attr": {
+							"ID": "DCEK*G4EVSW"
+						}
+					},
+					"Meal": {
+						"attr": {
+							"Code": "M"
+						}
+					}
+				}
+			}]
+		},
+		"Ticketing": {
+			"attr": {
+				"RPH": "001",
+				"TicketTimeLimit": "T-"
+			}
+		},
+		"ItineraryPricing": {
+			"PriceQuote": [{
+				"ResponseHeader": {
+					"Text": [{
+						"value": "FARE - PRICE RETAINED"
+					}, {
+						"value": "FARE SUBJECT TO CHANGE"
+					}]
+				},
+				"SignatureLine": {
+					"attr": {
+						"ExpirationDate": "12-31",
+						"Source": "SYS",
+						"Status": "EXPIRED"
+					},
+					"Text": {
+						"value": "X1CD X1CD*AWC 1928\/16JAN19"
+					}
+				},
+				"PricedItinerary": {
+					"attr": {
+						"InputMessage": "WPP1ADT\/1CNN\u00c2\u0087RQ",
+						"SequenceNumber": "1",
+						"StatusCode": "A",
+						"TaxExempt": "N",
+						"ValidatingCarrier": "EK"
+					},
+					"AirItineraryPricingInfo": {
+						"ItinTotalFare": {
+							"BaseFare": {
+								"attr": {
+									"Amount": "130710",
+									"CurrencyCode": "PKR"
+								}
+							},
+							"Taxes": {
+								"Tax": {
+									"attr": {
+										"Amount": 14399,
+										"TaxCode": "XT"
+									}
+								},
+								"TaxBreakdownCode": [{
+									"value": "2000SP"
+								}, {
+									"value": "5000RG"
+								}, {
+									"value": "1350XZ"
+								}, {
+									"value": "1350YD"
+								}, {
+									"value": "191ZR"
+								}, {
+									"value": "1335F6"
+								}, {
+									"value": "3173WY"
+								}, {
+									"value": "0PC"
+								}]
+							},
+							"TotalFare": {
+								"attr": {
+									"Amount": 145109,
+									"CurrencyCode": "PKR"
+								}
+							}
+						},
+						"PTC_FareBreakdown": {
+							"PassengerTypeQuantity": {
+								"attr": {
+									"Code": "ADT",
+									"Quantity": "01"
+								}
+							},
+							"FareBasis": {
+								"attr": {
+									"Code": "YOOWFPK1\/YOOWFPK1"
+								}
+							},
+							"FareCalculation": {
+								"Text": {
+									"value": "ISB EK X\/DXB EK SYD941.12NUC941.12END ROE138.886948"
+								}
+							},
+							"Endorsements": {
+								"Text": {
+									"value": "NON-END\/FLEX PLUS"
+								}
+							},
+							"ResTicketingRestrictions": [{
+								"value": "LAST DAY TO PURCHASE 19JAN\/1928"
+							}, {
+								"value": "GUARANTEED FARE APPL IF PURCHASED BEFORE 19JAN"
+							}],
+							"FlightSegment": [{
+								"attr": {
+									"Status": "OK",
+									"ConnectionInd": "O",
+									"DepartureDateTime": "01-28T12:20:00",
+									"FlightNumber": "613",
+									"SegmentNumber": " 1",
+									"ResBookDesigCode": "Y"
+								},
+								"DepartureAirport": {
+									"attr": {
+										"LocationCode": "ISB"
+									}
+								},
+								"MarketingAirline": {
+									"attr": {
+										"Code": "EK",
+										"FlightNumber": "613"
+									}
+								},
+								"FareBasis": {
+									"attr": {
+										"Code": "YOOWFPK1"
+									}
+								},
+								"ValidityDates": {
+									"NotValidAfter": {
+										"value": "01-28"
+									}
+								},
+								"BaggageAllowance": {
+									"attr": {
+										"Number": "35K"
+									}
+								}
+							}, {
+								"attr": {
+									"Status": "OK",
+									"ConnectionInd": "X",
+									"DepartureDateTime": "01-28T22:40:00",
+									"FlightNumber": "416",
+									"SegmentNumber": " 2",
+									"ResBookDesigCode": "Y"
+								},
+								"DepartureAirport": {
+									"attr": {
+										"LocationCode": "DXB"
+									}
+								},
+								"MarketingAirline": {
+									"attr": {
+										"Code": "EK",
+										"FlightNumber": "416"
+									}
+								},
+								"FareBasis": {
+									"attr": {
+										"Code": "YOOWFPK1"
+									}
+								},
+								"ValidityDates": {
+									"NotValidAfter": {
+										"value": "01-28"
+									}
+								},
+								"BaggageAllowance": {
+									"attr": {
+										"Number": "35K"
+									}
+								}
+							}, {
+								"DepartureAirport": {
+									"attr": {
+										"LocationCode": "SYD"
+									}
+								}
+							}]
+						}
+					}
+				}
+			}, {
+				"ResponseHeader": {
+					"Text": [{
+						"value": "FARE - PRICE RETAINED"
+					}, {
+						"value": "FARE USED TO CALCULATE DISCOUNT"
+					}, {
+						"value": "FARE SUBJECT TO CHANGE"
+					}]
+				},
+				"SignatureLine": {
+					"attr": {
+						"ExpirationDate": "12-31",
+						"Source": "SYS",
+						"Status": "EXPIRED"
+					},
+					"Text": {
+						"value": "X1CD X1CD*AWC 1928\/16JAN19"
+					}
+				},
+				"PricedItinerary": {
+					"attr": {
+						"InputMessage": "WPP1ADT\/1CNN\u00c2\u0087RQ",
+						"SequenceNumber": "2",
+						"StatusCode": "A",
+						"TaxExempt": "N",
+						"ValidatingCarrier": "EK"
+					},
+					"AirItineraryPricingInfo": {
+						"ItinTotalFare": {
+							"BaseFare": {
+								"attr": {
+									"Amount": "98040",
+									"CurrencyCode": "PKR"
+								}
+							},
+							"Taxes": {
+								"Tax": {
+									"attr": {
+										"Amount": 14399,
+										"TaxCode": "XT"
+									}
+								},
+								"TaxBreakdownCode": [{
+									"value": "2000SP"
+								}, {
+									"value": "5000RG"
+								}, {
+									"value": "1350XZ"
+								}, {
+									"value": "1350YD"
+								}, {
+									"value": "191ZR"
+								}, {
+									"value": "1335F6"
+								}, {
+									"value": "3173WY"
+								}, {
+									"value": "0PC"
+								}]
+							},
+							"TotalFare": {
+								"attr": {
+									"Amount": 112439,
+									"CurrencyCode": "PKR"
+								}
+							},
+							"Totals": {
+								"BaseFare": {
+									"attr": {
+										"Amount": "228750"
+									}
+								},
+								"Taxes": {
+									"Tax": {
+										"attr": {
+											"Amount": 28798
+										}
+									}
+								},
+								"TotalFare": {
+									"attr": {
+										"Amount": 257548
+									}
+								}
+							}
+						},
+						"PTC_FareBreakdown": {
+							"PassengerTypeQuantity": {
+								"attr": {
+									"Code": "CNN",
+									"Quantity": "01"
+								}
+							},
+							"FareBasis": {
+								"attr": {
+									"Code": "YOOWFPK1CH\/YOOWFPK1CH"
+								}
+							},
+							"FareCalculation": {
+								"Text": {
+									"value": "ISB EK X\/DXB EK SYD705.84NUC705.84END ROE138.886948"
+								}
+							},
+							"Endorsements": {
+								"Text": {
+									"value": "NON-END\/FLEX PLUS"
+								}
+							},
+							"ResTicketingRestrictions": [{
+								"value": "LAST DAY TO PURCHASE 19JAN\/1928"
+							}, {
+								"value": "GUARANTEED FARE APPL IF PURCHASED BEFORE 19JAN"
+							}],
+							"FlightSegment": [{
+								"attr": {
+									"Status": "OK",
+									"ConnectionInd": "O",
+									"DepartureDateTime": "01-28T12:20:00",
+									"FlightNumber": "613",
+									"SegmentNumber": " 1",
+									"ResBookDesigCode": "Y"
+								},
+								"DepartureAirport": {
+									"attr": {
+										"LocationCode": "ISB"
+									}
+								},
+								"MarketingAirline": {
+									"attr": {
+										"Code": "EK",
+										"FlightNumber": "613"
+									}
+								},
+								"FareBasis": {
+									"attr": {
+										"Code": "YOOWFPK1CH"
+									}
+								},
+								"ValidityDates": {
+									"NotValidAfter": {
+										"value": "01-28"
+									}
+								},
+								"BaggageAllowance": {
+									"attr": {
+										"Number": "35K"
+									}
+								}
+							}, {
+								"attr": {
+									"Status": "OK",
+									"ConnectionInd": "X",
+									"DepartureDateTime": "01-28T22:40:00",
+									"FlightNumber": "416",
+									"SegmentNumber": " 2",
+									"ResBookDesigCode": "Y"
+								},
+								"DepartureAirport": {
+									"attr": {
+										"LocationCode": "DXB"
+									}
+								},
+								"MarketingAirline": {
+									"attr": {
+										"Code": "EK",
+										"FlightNumber": "416"
+									}
+								},
+								"FareBasis": {
+									"attr": {
+										"Code": "YOOWFPK1CH"
+									}
+								},
+								"ValidityDates": {
+									"NotValidAfter": {
+										"value": "01-28"
+									}
+								},
+								"BaggageAllowance": {
+									"attr": {
+										"Number": "35K"
+									}
+								}
+							}, {
+								"DepartureAirport": {
+									"attr": {
+										"LocationCode": "SYD"
+									}
+								}
+							}]
+						}
+					}
+				}
+			}]
+		}
+	},
+	"SpecialServices": [{
+		"attr": {
+			"ItemRPH": "001",
+			"Type": "GFX"
+		},
+		"Service": {
+			"attr": {
+				"SSRCode": "SSR",
+				"SSRType": "DOCS"
+			},
+			"Name": {
+				"value": "MALIK\/FAIZA MR",
+				"attr": {
+					"Number": "01.01"
+				}
+			},
+			"Airline": {
+				"attr": {
+					"Code": "EK"
+				}
+			},
+			"Text": {
+				"value": "HK1\/P\/PK\/EE0763671\/PK\/06JUL1921\/M\/16JAN2023\/MALIK\/FAIZA MR"
+			}
+		}
+	}, {
+		"attr": {
+			"ItemRPH": "002",
+			"Type": "GFX"
+		},
+		"Service": {
+			"attr": {
+				"SSRCode": "SSR",
+				"SSRType": "DOCS"
+			},
+			"Name": {
+				"value": "MALIK\/MUHAMMAD SHAHEER MSTR",
+				"attr": {
+					"Number": "02.01"
+				}
+			},
+			"Airline": {
+				"attr": {
+					"Code": "EK"
+				}
+			},
+			"Text": {
+				"value": "HK1\/P\/PK\/EX0769471\/PK\/05NOV1927\/M\/16JAN2023\/MALIK\/MUHAMMAD SHAHEER MSTR"
+			}
+		}
+	}, {
+		"attr": {
+			"ItemRPH": "003",
+			"Type": "GFX"
+		},
+		"Service": {
+			"attr": {
+				"SSRCode": "OSI"
+			},
+			"Airline": {
+				"attr": {
+					"Code": "1B"
+				}
+			},
+			"Text": {
+				"value": "PLEASE TICKET FARE AS PER TKT\/TL IN PQ"
+			}
+		}
+	}, {
+		"attr": {
+			"ItemRPH": "004",
+			"Type": "GFX"
+		},
+		"Service": {
+			"attr": {
+				"SSRCode": "OSI"
+			},
+			"Airline": {
+				"attr": {
+					"Code": "1B"
+				}
+			},
+			"Text": {
+				"value": "PLEASE TICKET FARE AS PER TKT\/TL IN PQ"
+			}
+		}
+	}, {
+		"attr": {
+			"ItemRPH": "005",
+			"Type": "GFX"
+		},
+		"Service": {
+			"attr": {
+				"SSRCode": "SSR",
+				"SSRType": "ADTK"
+			},
+			"Airline": {
+				"attr": {
+					"Code": "1B"
+				}
+			},
+			"Text": {
+				"value": " RITK\/ADTKT BY 21JAN 0900 ISB LT"
+			}
+		}
+	}]
+}

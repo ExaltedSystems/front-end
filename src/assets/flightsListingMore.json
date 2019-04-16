@@ -1,0 +1,3551 @@
+{
+    "PricedItineraries": {
+        "PricedItinerary": [{
+            "SequenceNumber": 1,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 625,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T06:50:00",
+                            "ArrivalDateTime": "2019-01-17T08:55:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "771",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 245,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "771",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-17T14:00:00",
+                            "ArrivalDateTime": "2019-01-17T16:15:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "506",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 75,
+                            "DepartureAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "DXB",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "506",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "320",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2018-12-31",
+                "PrivateFareType": "@",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 93.44,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 19937,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 32447,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PrivateFareType": "@",
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "BAH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "DXB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }, {
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "BAH",
+                                "ArrivalAirportCode": "DXB",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 93.44,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "YQF",
+                                    "Amount": 8369,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "BH",
+                                    "Amount": 371,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "HM",
+                                    "Amount": 56,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "1251",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 19937,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 32447,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "GF",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "VLD ON GF \/NON END\/RES CHG\/NOSHOW FES APP\/MAX OF 2 BAGS ONLY"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "PRIVATE FARE APPLIED - CHECK RULES FOR CORRECT TICKETING"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - GF"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "GF",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }, {
+                                            "Id": 1
+                                        }],
+                                        "Allowance": [{
+                                            "Pieces": 2
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB GF X\/BAH GF DXB93.44NUC93.44END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "B"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "S"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "B"
+                            }
+                        }
+                    }, {
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "S"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "GF"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 60757.3
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~1"
+            }
+        }, {
+            "SequenceNumber": 2,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 380,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T06:50:00",
+                            "ArrivalDateTime": "2019-01-17T08:55:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "771",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 245,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "771",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-17T09:55:00",
+                            "ArrivalDateTime": "2019-01-17T12:10:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "504",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 75,
+                            "DepartureAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "DXB",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "504",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "320",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2018-12-31",
+                "PrivateFareType": "@",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 93.44,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 19937,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 32447,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PrivateFareType": "@",
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "BAH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "DXB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }, {
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "BAH",
+                                "ArrivalAirportCode": "DXB",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 93.44,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "YQF",
+                                    "Amount": 8369,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "BH",
+                                    "Amount": 371,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "HM",
+                                    "Amount": 56,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "1251",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 19937,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 32447,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "GF",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "VLD ON GF \/NON END\/RES CHG\/NOSHOW FES APP\/MAX OF 2 BAGS ONLY"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "PRIVATE FARE APPLIED - CHECK RULES FOR CORRECT TICKETING"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - GF"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "GF",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }, {
+                                            "Id": 1
+                                        }],
+                                        "Allowance": [{
+                                            "Pieces": 2
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB GF X\/BAH GF DXB93.44NUC93.44END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "B"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "S"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "B"
+                            }
+                        }
+                    }, {
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "S"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "GF"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 49995.7
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~2"
+            }
+        }, {
+            "SequenceNumber": 3,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 825,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T06:50:00",
+                            "ArrivalDateTime": "2019-01-17T08:55:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "771",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 245,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "771",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-17T17:20:00",
+                            "ArrivalDateTime": "2019-01-17T19:35:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "514",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 75,
+                            "DepartureAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "DXB",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "514",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "321",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2018-12-31",
+                "PrivateFareType": "@",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 93.44,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 19937,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 32447,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PrivateFareType": "@",
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "BAH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "DXB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }, {
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "BAH",
+                                "ArrivalAirportCode": "DXB",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 93.44,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "YQF",
+                                    "Amount": 8369,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "BH",
+                                    "Amount": 371,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "HM",
+                                    "Amount": 56,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "1251",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 19937,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 32447,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "GF",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "VLD ON GF \/NON END\/RES CHG\/NOSHOW FES APP\/MAX OF 2 BAGS ONLY"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "PRIVATE FARE APPLIED - CHECK RULES FOR CORRECT TICKETING"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - GF"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "GF",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }, {
+                                            "Id": 1
+                                        }],
+                                        "Allowance": [{
+                                            "Pieces": 2
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB GF X\/BAH GF DXB93.44NUC93.44END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "B"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "S"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "B"
+                            }
+                        }
+                    }, {
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "S"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "GF"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 67723.7
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~3"
+            }
+        }, {
+            "SequenceNumber": 4,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 1005,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T06:50:00",
+                            "ArrivalDateTime": "2019-01-17T08:55:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "771",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 245,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "771",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-17T20:20:00",
+                            "ArrivalDateTime": "2019-01-17T22:35:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "512",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 75,
+                            "DepartureAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "DXB",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "512",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "320",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2018-12-31",
+                "PrivateFareType": "@",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 93.44,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 19937,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 32447,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PrivateFareType": "@",
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "BAH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "DXB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }, {
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "BAH",
+                                "ArrivalAirportCode": "DXB",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 93.44,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "YQF",
+                                    "Amount": 8369,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "BH",
+                                    "Amount": 371,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "HM",
+                                    "Amount": 56,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "1251",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 19937,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 32447,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "GF",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "VLD ON GF \/NON END\/RES CHG\/NOSHOW FES APP\/MAX OF 2 BAGS ONLY"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "PRIVATE FARE APPLIED - CHECK RULES FOR CORRECT TICKETING"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - GF"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "GF",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }, {
+                                            "Id": 1
+                                        }],
+                                        "Allowance": [{
+                                            "Pieces": 2
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB GF X\/BAH GF DXB93.44NUC93.44END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "B"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "S"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "B"
+                            }
+                        }
+                    }, {
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "S"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "GF"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 69003.7
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~4"
+            }
+        }, {
+            "SequenceNumber": 5,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 885,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T06:50:00",
+                            "ArrivalDateTime": "2019-01-17T08:55:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "771",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 245,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "771",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-17T18:20:00",
+                            "ArrivalDateTime": "2019-01-17T20:35:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "510",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 75,
+                            "DepartureAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "DXB",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "510",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "320",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2018-12-31",
+                "PrivateFareType": "@",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 93.44,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 19937,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 32447,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PrivateFareType": "@",
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "BAH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "DXB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }, {
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "BAH",
+                                "ArrivalAirportCode": "DXB",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 93.44,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "YQF",
+                                    "Amount": 8369,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "BH",
+                                    "Amount": 371,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "HM",
+                                    "Amount": 56,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "1251",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 19937,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 32447,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "GF",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "VLD ON GF \/NON END\/RES CHG\/NOSHOW FES APP\/MAX OF 2 BAGS ONLY"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "PRIVATE FARE APPLIED - CHECK RULES FOR CORRECT TICKETING"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - GF"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "GF",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }, {
+                                            "Id": 1
+                                        }],
+                                        "Allowance": [{
+                                            "Pieces": 2
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB GF X\/BAH GF DXB93.44NUC93.44END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "B"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "S"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "B"
+                            }
+                        }
+                    }, {
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "S"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "GF"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 68208.2
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~5"
+            }
+        }, {
+            "SequenceNumber": 6,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 745,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T06:50:00",
+                            "ArrivalDateTime": "2019-01-17T08:55:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "771",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 245,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "771",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-17T16:00:00",
+                            "ArrivalDateTime": "2019-01-17T18:15:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "508",
+                            "ResBookDesigCode": "E",
+                            "ElapsedTime": 75,
+                            "DepartureAirport": {
+                                "LocationCode": "BAH",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "DXB",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "EK",
+                                "FlightNumber": "508",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "332",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "EK",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 3
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2018-12-31",
+                "PrivateFareType": "@",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 93.44,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 12510,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 19937,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 32447,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PrivateFareType": "@",
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "BAH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "DXB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }, {
+                                "PrivateFareType": "@",
+                                "BookingCode": "E",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "BAH",
+                                "ArrivalAirportCode": "DXB",
+                                "GovCarrier": "GF",
+                                "content": "EOWPK"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 93.44,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 12510,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "YQF",
+                                    "Amount": 8369,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "BH",
+                                    "Amount": 371,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "HM",
+                                    "Amount": 56,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "1251",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 19937,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 32447,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "GF",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "VLD ON GF \/NON END\/RES CHG\/NOSHOW FES APP\/MAX OF 2 BAGS ONLY"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "PRIVATE FARE APPLIED - CHECK RULES FOR CORRECT TICKETING"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - GF"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "GF",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }, {
+                                            "Id": 1
+                                        }],
+                                        "Allowance": [{
+                                            "Pieces": 2
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB GF X\/BAH GF DXB93.44NUC93.44END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "B"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "E",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 9,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "S"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "B"
+                            }
+                        }
+                    }, {
+                        "FareReference": "E",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 9,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "S"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "GF"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 66956.2
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~6"
+            }
+        }, {
+            "SequenceNumber": 7,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 425,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T20:35:00",
+                            "ArrivalDateTime": "2019-01-17T23:20:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "234",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 225,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "234",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "321",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-18T01:00:00",
+                            "ArrivalDateTime": "2019-01-18T02:40:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "5412",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 100,
+                            "DepartureAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "XNB",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "5412",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "BUS",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2019-01-08",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 170.95,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 12179,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 35069,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "BookingCode": "T",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "AUH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "XNB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }, {
+                                "BookingCode": "T",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "AUH",
+                                "ArrivalAirportCode": "XNB",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 170.95,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "2289",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 12179,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 35069,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Surcharges": [{
+                                    "Ind": "Q",
+                                    "Type": "MISCELLANEOUS\/OTHER",
+                                    "content": "2.50"
+                                }],
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "EY",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "NON ENDO\/ NONREF"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - EY"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "EY",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }],
+                                        "Allowance": [{
+                                            "Weight": 30,
+                                            "Unit": "kg"
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB EY X\/AUH EY DXB Q ISBDXB2.50 168.45NUC170.95END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "M"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "N"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "M"
+                            }
+                        }
+                    }, {
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "N"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "EY"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 59177.5
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~7"
+            }
+        }, {
+            "SequenceNumber": 8,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 535,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T20:35:00",
+                            "ArrivalDateTime": "2019-01-17T23:20:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "234",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 225,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "234",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "321",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-18T02:50:00",
+                            "ArrivalDateTime": "2019-01-18T04:30:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "5414",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 100,
+                            "DepartureAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "XNB",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "5414",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "BUS",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2019-01-08",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 170.95,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 12179,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 35069,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "BookingCode": "T",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "AUH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "XNB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }, {
+                                "BookingCode": "T",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "AUH",
+                                "ArrivalAirportCode": "XNB",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 170.95,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "2289",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 12179,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 35069,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Surcharges": [{
+                                    "Ind": "Q",
+                                    "Type": "MISCELLANEOUS\/OTHER",
+                                    "content": "2.50"
+                                }],
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "EY",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "NON ENDO\/ NONREF"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - EY"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "EY",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }],
+                                        "Allowance": [{
+                                            "Weight": 30,
+                                            "Unit": "kg"
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB EY X\/AUH EY DXB Q ISBDXB2.50 168.45NUC170.95END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "M"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "N"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "M"
+                            }
+                        }
+                    }, {
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "N"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "EY"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 67091.8
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~8"
+            }
+        }, {
+            "SequenceNumber": 9,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 799,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T20:35:00",
+                            "ArrivalDateTime": "2019-01-17T23:20:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "234",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 225,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "234",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "321",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-18T07:14:00",
+                            "ArrivalDateTime": "2019-01-18T08:54:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "5416",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 100,
+                            "DepartureAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "XNB",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "5416",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "BUS",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2019-01-08",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 170.95,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 12179,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 35069,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "BookingCode": "T",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "AUH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "XNB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }, {
+                                "BookingCode": "T",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "AUH",
+                                "ArrivalAirportCode": "XNB",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 170.95,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "2289",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 12179,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 35069,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Surcharges": [{
+                                    "Ind": "Q",
+                                    "Type": "MISCELLANEOUS\/OTHER",
+                                    "content": "2.50"
+                                }],
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "EY",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "NON ENDO\/ NONREF"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - EY"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "EY",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }],
+                                        "Allowance": [{
+                                            "Weight": 30,
+                                            "Unit": "kg"
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB EY X\/AUH EY DXB Q ISBDXB2.50 168.45NUC170.95END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "M"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "N"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "M"
+                            }
+                        }
+                    }, {
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "N"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "EY"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 70918
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~9"
+            }
+        }, {
+            "SequenceNumber": 10,
+            "AirItinerary": {
+                "DirectionInd": "OneWay",
+                "OriginDestinationOptions": {
+                    "OriginDestinationOption": [{
+                        "ElapsedTime": 844,
+                        "FlightSegment": [{
+                            "DepartureDateTime": "2019-01-17T20:35:00",
+                            "ArrivalDateTime": "2019-01-17T23:20:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "234",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 225,
+                            "DepartureAirport": {
+                                "LocationCode": "ISB",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "234",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "321",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "O",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 5
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }, {
+                            "DepartureDateTime": "2019-01-18T07:59:00",
+                            "ArrivalDateTime": "2019-01-18T09:39:00",
+                            "StopQuantity": 0,
+                            "FlightNumber": "5418",
+                            "ResBookDesigCode": "T",
+                            "ElapsedTime": 100,
+                            "DepartureAirport": {
+                                "LocationCode": "AUH",
+                                "TerminalID": "1",
+                                "content": ""
+                            },
+                            "ArrivalAirport": {
+                                "LocationCode": "XNB",
+                                "content": ""
+                            },
+                            "OperatingAirline": {
+                                "Code": "SV",
+                                "FlightNumber": "5418",
+                                "content": ""
+                            },
+                            "Equipment": [{
+                                "AirEquipType": "BUS",
+                                "content": ""
+                            }],
+                            "MarketingAirline": {
+                                "Code": "SV",
+                                "content": ""
+                            },
+                            "MarriageGrp": "I",
+                            "DepartureTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "ArrivalTimeZone": {
+                                "GMTOffset": 4
+                            },
+                            "TPA_Extensions": {
+                                "eTicket": {
+                                    "Ind": true
+                                }
+                            }
+                        }]
+                    }]
+                }
+            },
+            "AirItineraryPricingInfo": [{
+                "LastTicketDate": "2019-01-08",
+                "PricingSource": "ADVJR1",
+                "PricingSubSource": "MIP",
+                "FareReturned": true,
+                "ItinTotalFare": {
+                    "BaseFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "FareConstruction": {
+                        "Amount": 170.95,
+                        "CurrencyCode": "NUC",
+                        "DecimalPlaces": 2
+                    },
+                    "EquivFare": {
+                        "Amount": 22890,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    },
+                    "Taxes": {
+                        "Tax": [{
+                            "TaxCode": "TOTALTAX",
+                            "Amount": 12179,
+                            "CurrencyCode": "PKR",
+                            "DecimalPlaces": 0,
+                            "content": ""
+                        }]
+                    },
+                    "TotalFare": {
+                        "Amount": 35069,
+                        "CurrencyCode": "PKR",
+                        "DecimalPlaces": 0
+                    }
+                },
+                "PTC_FareBreakdowns": {
+                    "PTC_FareBreakdown": [{
+                        "PassengerTypeQuantity": {
+                            "Code": "ADT",
+                            "Quantity": 1
+                        },
+                        "FareBasisCodes": {
+                            "FareBasisCode": [{
+                                "BookingCode": "T",
+                                "DepartureAirportCode": "ISB",
+                                "ArrivalAirportCode": "AUH",
+                                "FareComponentBeginAirport": "ISB",
+                                "FareComponentEndAirport": "XNB",
+                                "FareComponentDirectionality": "FROM",
+                                "FareComponentVendorCode": "ATP",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }, {
+                                "BookingCode": "T",
+                                "AvailabilityBreak": true,
+                                "DepartureAirportCode": "AUH",
+                                "ArrivalAirportCode": "XNB",
+                                "GovCarrier": "EY",
+                                "content": "TOW1PK\/YB"
+                            }]
+                        },
+                        "PassengerFare": {
+                            "BaseFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR"
+                            },
+                            "FareConstruction": {
+                                "Amount": 170.95,
+                                "CurrencyCode": "NUC",
+                                "DecimalPlaces": 2
+                            },
+                            "EquivFare": {
+                                "Amount": 22890,
+                                "CurrencyCode": "PKR",
+                                "DecimalPlaces": 0
+                            },
+                            "Taxes": {
+                                "Tax": [{
+                                    "TaxCode": "ZR",
+                                    "Amount": 190,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "RG3",
+                                    "Amount": 5000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "SP",
+                                    "Amount": 2000,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "XZ",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "YD",
+                                    "Amount": 1350,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0,
+                                    "content": ""
+                                }, {
+                                    "TaxCode": "PC",
+                                    "Amount": "2289",
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": "0",
+                                    "content": ""
+                                }],
+                                "TotalTax": {
+                                    "Amount": 12179,
+                                    "CurrencyCode": "PKR",
+                                    "DecimalPlaces": 0
+                                }
+                            },
+                            "TotalFare": {
+                                "Amount": 35069,
+                                "CurrencyCode": "PKR"
+                            },
+                            "TPA_Extensions": {
+                                "Surcharges": [{
+                                    "Ind": "Q",
+                                    "Type": "MISCELLANEOUS\/OTHER",
+                                    "content": "2.50"
+                                }],
+                                "Messages": {
+                                    "Message": [{
+                                        "AirlineCode": "EY",
+                                        "Type": "N",
+                                        "FailCode": 0,
+                                        "Info": "NON ENDO\/ NONREF"
+                                    }, {
+                                        "Type": "W",
+                                        "FailCode": 0,
+                                        "Info": "VALIDATING CARRIER - EY"
+                                    }]
+                                },
+                                "BaggageInformationList": {
+                                    "BaggageInformation": [{
+                                        "ProvisionType": "A",
+                                        "AirlineCode": "EY",
+                                        "Segment": [{
+                                            "Id": 0
+                                        }],
+                                        "Allowance": [{
+                                            "Weight": 30,
+                                            "Unit": "kg"
+                                        }]
+                                    }]
+                                }
+                            }
+                        },
+                        "Endorsements": {
+                            "NonRefundableIndicator": true
+                        },
+                        "TPA_Extensions": {
+                            "FareCalcLine": {
+                                "Info": "ISB EY X\/AUH EY DXB Q ISBDXB2.50 168.45NUC170.95END ROE133.864743"
+                            }
+                        },
+                        "FareInfos": {
+                            "FareInfo": [{
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "M"
+                                    }
+                                }
+                            }, {
+                                "FareReference": "T",
+                                "TPA_Extensions": {
+                                    "SeatsRemaining": {
+                                        "Number": 2,
+                                        "BelowMin": false
+                                    },
+                                    "Cabin": {
+                                        "Cabin": "Y"
+                                    },
+                                    "Meal": {
+                                        "Code": "N"
+                                    }
+                                }
+                            }]
+                        }
+                    }]
+                },
+                "FareInfos": {
+                    "FareInfo": [{
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "M"
+                            }
+                        }
+                    }, {
+                        "FareReference": "T",
+                        "TPA_Extensions": {
+                            "SeatsRemaining": {
+                                "Number": 2,
+                                "BelowMin": false
+                            },
+                            "Cabin": {
+                                "Cabin": "Y"
+                            },
+                            "Meal": {
+                                "Code": "N"
+                            }
+                        }
+                    }]
+                },
+                "TPA_Extensions": {
+                    "DivideInParty": {
+                        "Indicator": false
+                    }
+                }
+            }],
+            "TicketingInfo": {
+                "TicketType": "eTicket",
+                "ValidInterline": "Yes"
+            },
+            "TPA_Extensions": {
+                "ValidatingCarrier": {
+                    "Code": "EY"
+                },
+                "DiversitySwapper": {
+                    "WeighedPriceAmount": 71331.5
+                },
+                "TagID": "BFM~f79b1ad6-b2e0-401a-b401-6523eab00cfc~10"
+            }
+        }]
+    }
+}
