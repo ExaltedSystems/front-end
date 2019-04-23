@@ -1,0 +1,186 @@
+<app-header></app-header>
+<section class="flight-search pt-0 pt-sm-2">
+
+  <div class="current-flight-search d-block d-sm-none mb-3">
+    <div class="current-search-sector row d-flex align-items-center pb-2">
+      <div class="col px-0">
+        <p>Islamabad Marriot Hotel, Islamabad, Pakistan</p>
+      </div>
+    </div>
+    <p class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infantt</p>
+    <div class="current-search-footer d-flex justify-content-between align-items-center dropdown">
+      <div class="current-search-dates d-flex align-items-center">
+        <i-calendar class="feather"></i-calendar>
+        <p class="mr-3">Apr 24, 2019</p>
+        <i-calendar class="feather"></i-calendar>
+        <p>Apr 30, 2019</p>
+      </div>
+      <div>
+        <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
+      </div>
+    </div>
+  </div> 
+
+  <div class="container">
+
+    <!-- <div class="current-flight-search shadow d-none d-sm-flex justify-content-between align-items-center mb-3">
+      <div class="current-search-sector d-flex align-items-center">
+        <div class="col px-0">
+          <p>Islamabad Marriot Hotel, Islamabad, Pakistan</p>
+        </div>
+      </div>|
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="current-search-dates d-flex align-items-center">
+          <i-calendar class="feather" _nghost-c13="">
+            <svg _ngcontent-c13="" class="feather feather-calendar" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect _ngcontent-c13="" height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+              <line _ngcontent-c13="" x1="16" x2="16" y1="2" y2="6"></line>
+              <line _ngcontent-c13="" x1="8" x2="8" y1="2" y2="6"></line>
+              <line _ngcontent-c13="" x1="3" x2="21" y1="10" y2="10"></line>
+            </svg>
+          </i-calendar>
+          <p class="mr-3">Apr 24, 2019</p>
+          <i-calendar class="feather" _nghost-c13="">
+            <svg _ngcontent-c13="" class="feather feather-calendar" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect _ngcontent-c13="" height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+              <line _ngcontent-c13="" x1="16" x2="16" y1="2" y2="6"></line>
+              <line _ngcontent-c13="" x1="8" x2="8" y1="2" y2="6"></line>
+              <line _ngcontent-c13="" x1="3" x2="21" y1="10" y2="10"></line>
+            </svg>
+          </i-calendar>
+          <p>Apr 30, 2019</p>
+        </div>
+      </div>|
+      <div class="d-flex justify-content-middle">
+        <p class="mr-3">6 Nights</p>
+      </div>|
+      <div class="">
+        <p class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infant</p>
+      </div>
+      <div class="">
+        <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
+      </div>
+    </div> -->
+
+    <mat-card class="custom-material-form mt-2 mb-3 rounded-0">
+        <app-hotel-search-form></app-hotel-search-form>
+    </mat-card>
+
+    <div class="row">
+      <div class="col-sm-3 d-none d-sm-block">
+        <div class="sidebar-list">
+          <h3 class="sidebar-title">Filter Your Search</h3>
+          <ul class="list-style-none p-0 stop-filter">
+            <!---->
+            <li>
+              <mat-checkbox>Hotels</mat-checkbox>
+            </li>
+            <li class="ng-star-inserted">
+              <mat-checkbox>Guest House</mat-checkbox>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="sidebar-subscribe mt-4">
+          <p class="mb-0">Subscribe to Get Amazing Offers</p>
+          <h3>Hotel Deals!</h3>
+          <button class="btn btn-secondary">Subscribe</button>
+        </div>
+      </div>
+
+      <div class="col-sm-9 flight-listing">
+
+        <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 mat-card">
+
+          <div class="d-flex justify-content-between">
+            <div>
+              <button class="btn rounded-0 shadow btn-secondary">
+                <i-sliders class="button-feather"></i-sliders> Filter</button>
+            </div>
+            <div>
+              <a class="btn rounded-0 shadow btn-primary" routerlink="/" href="/">
+                <i-search class="button-feather"></i-search> New Search</a>
+              <button class="btn rounded-0 shadow btn-secondary">
+                <i-bell class="button-feather mx-0"></i-bell>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+
+        <div class="mb-3 p-0">
+          <mat-card class="p-1 mb-3 hotel-search-item mat-card ng-star-inserted">
+
+            <div class="row">
+              <div class="col-sm-4">
+                <!-- gallary -->
+              </div>
+              <div class="col-sm-8 pl-sm-0">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h5 class="hotel-name mt-0 mb-1">Islamabad Marriot Hotel</h5>
+                    <div class="d-flex align-items-center">
+                      <i class="property-type">Hotel</i>
+                      <div class="mx-2 ng-star-inserted">|</div>
+                      <div class="star-rating d-flex align-items-center ng-star-inserted">
+                        <i-star class="feather active ng-star-inserted"></i-star>
+                      </div>
+                      <div class="mx-2">|</div>
+                      <div class="map-view d-flex align-items-center">
+                        <i-map class="hotel-feather-icon"></i-map>
+                        <a class="pl-1" href=""> View On Map</a>
+                      </div>
+                    </div>
+                    <div class="address d-flex my-1">
+                      <i-map-pin class="hotel-feather-icon"></i-map-pin>
+                      <p class="ml-1">Blue Area Islamabad</p>
+                    </div>
+                    <div class="cancellation d-flex text-success my-1">
+                      <i-check class="success hotel-feather-icon"></i-check>
+                      <p class="ml-1">Free Cancellation</p>
+                    </div>
+                    <div class="tags my-1">
+                      <span class="badge badge-info ng-star-inserted">Parking</span>
+                      <span class="badge badge-info ng-star-inserted">Internet</span>
+                      <span class="badge badge-info ng-star-inserted">Breakfast</span>
+                      <span class="badge badge-success ng-star-inserted">3+</span>
+                    </div>
+                    <div class="facilities my-1">
+                      <img alt="" class="icon" src="assets/img/icons/svg/wifi-solid.svg">
+                      <img alt="" class="icon" src="assets/img/icons/svg/utensils-solid.svg">
+                      <img alt="" class="icon" src="assets/img/icons/svg/swimming-pool-solid.svg">
+                      <img alt="" class="icon" src="assets/img/icons/svg/plane-solid.svg">
+                      <img alt="" class="icon" src="assets/img/icons/svg/dumbbell-solid.svg">
+                      <a href="http://">+21</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="hotel-price p-2 d-flex flex-column justify-content-between">
+                      <div class="reviews">
+                        <strong class="d-block">Excellent</strong>
+                        <small>7 Reviews</small>
+                      </div>
+                      <div>
+                        <div class="price text-right">
+                          <span class="text-muted org-price">10,000</span>
+                          <h5 class="d-block">PKR
+                            <span class="text-danger">90.00</span>
+                          </h5>
+                        </div>
+                        <button class="btn btn-primary shadow-sm rounded-0 w-100 align-self-end">Select Your Room</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </mat-card>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

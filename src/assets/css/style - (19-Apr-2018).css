@@ -64,14 +64,12 @@ img{}
 .custom-material-form .form-control{
 	line-height: 2.4;
 	font-size: 14px;
-	padding-left: 0 !important;
 }
 
 .main-search-form .material-input,
 .custom-material-form .material-input{
 	padding: 0 .75rem;
-	border-left: 1px solid #ced4da;
-	padding-left: 0;
+    border-left: 1px solid #ced4da;
   }
 
 .main-search-form .input-group .material-input,
@@ -88,9 +86,7 @@ img{}
 .main-search-form .mat-form-field-infix,
 .custom-material-form .mat-form-field-infix {
     padding: 0; 
-	border-top: 0;
-	display: flex;
-	align-items: center;
+    border-top: 0;
 }
 
 .main-search-form .material-input input[type=text], 

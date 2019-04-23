@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   @Input()
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
   flightSearch: FormGroup;
+  hotelSearch: FormGroup;
   flightType: string;
   flyingFrom: string = 'ISB,Islamabad,Pakistan';
   flyingTo: string = 'LHR,London,United Kingdom';
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   adults: number = 1;
   children: number = 0;
   infant: number = 0;
+  rooms: number = 1;
   preferredClass = 'Y';
   preferredAirline;
   selectedFlyFrom = 'ISB,Islamabad,Pakistan';
@@ -47,7 +49,8 @@ export class HomeComponent implements OnInit {
   frmObj: any;
   cookieObj;
 
-  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, private __cookieService: CookieService) { }
+  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, 
+    private __cookieService: CookieService) { }
 
   ngOnInit() {
     //this.__ms.getJSON('../../assets/js/locations.json').subscribe(res => {
@@ -87,6 +90,17 @@ export class HomeComponent implements OnInit {
       children: [],
       infant: []
     });
+
+    // Hotel form
+    this.hotelSearch = this.__fb.group({
+      destination: ["destination"],
+      checkInDate: ["checkInDate"],
+      checkOutDate: ["checkOutDate"],
+      rooms: [],
+      adults: ["1"],
+      children: []
+    })
+    
     this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
 
     this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);

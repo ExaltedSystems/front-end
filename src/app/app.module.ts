@@ -7,7 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule, MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule} from '@angular/material';
+import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
+  MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -28,6 +30,10 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 import { PnrViewComponent } from './components/pnr-view/pnr-view.component';
 import { CookieService } from 'ngx-cookie-service';
 import {StickyModule} from 'ng2-sticky-kit';
+import { HotelSearchFormComponent } from './components/hotels/hotel-search-form/hotel-search-form.component';
+import { HotelsListingComponent } from './components/hotels/hotels-listing/hotels-listing.component';
+import { HotelDetailsComponent } from './components/hotels/hotel-details/hotel-details.component';
+import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline-search-form/hotel-inline-search-form.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +54,15 @@ import {StickyModule} from 'ng2-sticky-kit';
     
     DateFormatPipe,
     
-    PnrViewComponent
+    PnrViewComponent,
+    
+    HotelSearchFormComponent,
+    
+    HotelsListingComponent,
+    
+    HotelDetailsComponent,
+    
+    HotelInlineSearchFormComponent
   ],
   imports: [
     BrowserModule,
