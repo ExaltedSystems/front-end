@@ -317,6 +317,9 @@ img{}
 
 .btn{
 	font-size: 14px;
+}
+
+form .btn{
 	padding: .76rem .75rem;
 }
 
