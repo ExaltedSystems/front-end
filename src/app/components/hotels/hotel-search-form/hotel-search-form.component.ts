@@ -1,6 +1,9 @@
 import { MainService } from './../../../services/main.service';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotel-search-form',
@@ -15,6 +18,13 @@ export class HotelSearchFormComponent implements OnInit {
   rooms: number = 1;
   currDate: Date = new Date();
 
+  hotelsAutocomplete = new FormControl();
+  hotelsList: string[] = ['One', 'Two', 'Three'];
+  filteredList: Observable<string[]>;
+
+  @Output()
+  dateChange: EventEmitter<MatDatepickerInputEvent<Date>>
+
   constructor(private __fb: FormBuilder, private __ms: MainService) { }
 
   ngOnInit() {
@@ -23,10 +33,23 @@ export class HotelSearchFormComponent implements OnInit {
       destination: ["destination"],
       checkInDate: ["checkInDate"],
       checkOutDate: ["checkOutDate"],
+      dates: ["dates"],
       rooms: [],
       adults: ["1"],
       children: []
-    })
+    });
+
+    this.filteredList = this.hotelsAutocomplete.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+
+  } // onInit
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.hotelsList.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   incrementNumber(type) {
@@ -71,6 +94,15 @@ export class HotelSearchFormComponent implements OnInit {
       }
     }
   }
+
+  keytab(event){
+    let element = event.targetElement.nextElementSibling; // get the sibling element
+
+    if(element == null){  // check if its null
+        return;
+    } else
+        element.focus();   // focus if not null
+    }
 
   searchHotels(formInputs){
     if(this.hotelSearch.valid){

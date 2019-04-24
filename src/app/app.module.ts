@@ -35,6 +35,9 @@ import { HotelsListingComponent } from './components/hotels/hotels-listing/hotel
 import { HotelDetailsComponent } from './components/hotels/hotel-details/hotel-details.component';
 import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline-search-form/hotel-inline-search-form.component';
 
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { NgxGalleryModule } from 'ngx-gallery';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +94,12 @@ import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline
     MatCardModule,
     MatSidenavModule,
     StickyModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    NgxDaterangepickerMd.forRoot({
+      separator: '  -  ', 
+      format: "DD/MM/YYYY",
+    }),
+    NgxGalleryModule
   ],
   providers: [MainService, CookieService],
   bootstrap: [AppComponent]
