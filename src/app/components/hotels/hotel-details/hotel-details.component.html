@@ -20,10 +20,15 @@
       </div>
     </div>
   </div>
+
+  
   <div  class="container">
+    
+    <mat-card class="custom-material-form mt-2 mb-3 rounded-0">
+        <app-hotel-search-form></app-hotel-search-form>
+    </mat-card>
 
-
-    <div  class="current-flight-search shadow d-none d-sm-flex justify-content-between align-items-center mb-3">
+    <!-- <div  class="current-flight-search shadow d-none d-sm-flex justify-content-between align-items-center mb-3">
       <div  class="current-search-sector d-flex align-items-center">
         <div  class="col px-0">
           <p >Islamabad Marriot Hotel, Islamabad, Pakistan</p>
@@ -46,10 +51,10 @@
       <div  class="">
         <button  class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
       </div>
-    </div>
+    </div> -->
 
 
-    <mat-card  class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 mat-card">
+    <mat-card  class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3">
 
       <div  class="d-flex justify-content-between">
         <div >
@@ -68,7 +73,7 @@
 
     <!---->
 
-    <mat-card  class="p-2 mb-3 d-flex justify-content-between mat-card">
+    <mat-card  class="p-2 mb-3 d-flex justify-content-between rounded-0 sticky-top">
       <div >
         <h3  class="mb-0">Islamabad Marriot Hotel</h3>
         <p >Blue Area Islamabad,Islamabad,Pakistan</p>
@@ -84,7 +89,7 @@
       </div>
     </mat-card>
 
-    <mat-card  class="p-2 mb-3 mat-card">
+    <mat-card  class="p-2 mb-3 rounded-0">
       <div  class="row">
         <div  class="col-sm-8">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
@@ -93,7 +98,27 @@
       </div>
     </mat-card>
 
-    <mat-card  class="p-2 mb-3 mat-card">
+    <mat-card class="mb-3 rounded-0">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="checkIn">
+          <b>Check In Date</b>
+          <p class="text-primary m-0">Fri, 17 May 2018</p>
+        </div>
+        <div class="checkIn">
+            <b>Check In Date</b>
+            <p class="text-primary m-0">Fri, 17 May 2018</p>
+          </div>
+          <div class="checkIn">
+              <b>Guests</b>
+              <p class="text-primary m-0">2 Adults</p>
+            </div>
+          <div>
+            <button class="btn btn-primary shadow-sm rounded-0">Change Search</button>
+          </div>
+      </div>
+    </mat-card>
+
+    <mat-card  class="p-2 mb-3 rounded-0">
       <p >Number of rooms: 12</p>
       <h4 >Room Types at Islamabad Marriot Hotel</h4>
       <table  class="table table-bordered room-details-table">
@@ -418,13 +443,18 @@
 </section>
 
 <mat-card class="reservation-options p-3 rounded-0 mat-card">
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="d-flex">
-        <!---->
-        <div class="pl-3 text-warning">
-          <p></p>
-        </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex">
+        <div class="pr-3 border-right ng-star-inserted">
+            <p class="mb-1">2 Rooms Selected</p>
+            <b class="text-primary">PKR </b>168000
+          </div>
+          <div class="pl-3 text-warning">
+            <p>You still need to fit 3 more adult.</p>
+          </div>
+      </div>
+      <button class="btn btn-primary shadow-sm rounded-0">Continue Reservation</button>
     </div>
-    <button class="btn btn-primary shadow-sm rounded-0">Continue Reservation</button>
-  </div>
-</mat-card>
+  </mat-card>
+
+  <app-footer></app-footer>

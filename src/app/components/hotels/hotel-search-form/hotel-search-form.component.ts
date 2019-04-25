@@ -30,10 +30,10 @@ export class HotelSearchFormComponent implements OnInit {
   ngOnInit() {
     // Hotel form
     this.hotelSearch = this.__fb.group({
-      destination: ["destination"],
-      checkInDate: ["checkInDate"],
-      checkOutDate: ["checkOutDate"],
-      dates: ["dates"],
+      destination: [""],
+      checkInDate: [""],
+      checkOutDate: [""],
+      dates: [""],
       rooms: [],
       adults: ["1"],
       children: []

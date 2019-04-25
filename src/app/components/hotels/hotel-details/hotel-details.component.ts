@@ -15,19 +15,20 @@ export class HotelDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.galleryOptions = [
+      { "previewCloseOnClick": true, "previewCloseOnEsc": true },
         {
             width: '100%',
             height: '600px',
-            thumbnailsColumns: 4,
+            thumbnailsColumns: 8,
             imageAnimation: NgxGalleryAnimation.Slide
         },
         // max-width 800
         {
             breakpoint: 800,
             width: '100%',
-            height: '100%',
+            height: '500px',
             imagePercent: 100,
-            thumbnailsPercent: 10,
+            thumbnailsPercent: 100,
             thumbnailsMargin: 5,
             thumbnailMargin: 5
         },
