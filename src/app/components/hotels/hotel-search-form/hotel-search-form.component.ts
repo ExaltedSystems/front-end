@@ -4,6 +4,9 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MatDatepickerInputEvent } from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-hotel-search-form',
@@ -12,20 +15,33 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class HotelSearchFormComponent implements OnInit {
 
+  @Output() searchEvent = new EventEmitter<string>();
+
   hotelSearch: FormGroup;
   adults: number = 1;
   children: number = 0;
   rooms: number = 1;
   currDate: Date = new Date();
+  searchBtn: string = 'Search';
+  destValu: string;
 
   hotelsAutocomplete = new FormControl();
-  hotelsList: string[] = ['One', 'Two', 'Three'];
+  hotelsList: string[] = [];
   filteredList: Observable<string[]>;
+  isLoading: boolean = true;
+
+  cookieExists: boolean;
+  searchQuery: object;
+
+  hotelSearchResult:any;
 
   @Output()
   dateChange: EventEmitter<MatDatepickerInputEvent<Date>>
 
-  constructor(private __fb: FormBuilder, private __ms: MainService) { }
+  constructor(private __fb: FormBuilder, private __ms: MainService, private _date: DatePipe, private _router: Router,
+  private _cookieService: CookieService) { 
+   
+   }
 
   ngOnInit() {
     // Hotel form
@@ -34,10 +50,41 @@ export class HotelSearchFormComponent implements OnInit {
       checkInDate: [""],
       checkOutDate: [""],
       dates: [""],
-      rooms: [],
+      rooms: ["1"],
       adults: ["1"],
       children: []
     });
+
+    let searchCookie = this._cookieService.get('hotelQuery');
+    let currentSearch = JSON.parse(searchCookie);
+    // this.searchQuery = searchCookie;
+    this.cookieExists = this._cookieService.check('hotelQuery');
+    if(this.cookieExists == true){
+      this.hotelSearch.setValue({
+        destination: currentSearch.destination,
+        checkInDate: this._date.transform(currentSearch.dates.startDate,'M/d/yy'),
+        checkOutDate: this._date.transform(currentSearch.dates.endDate,'M/d/yy'),
+        dates: currentSearch.dates,
+        rooms: currentSearch.rooms,
+        adults: currentSearch.adults,
+        children: currentSearch.children
+      });
+      this.rooms = currentSearch.rooms;
+      this.adults = currentSearch.adults;
+      this.children = currentSearch.children;
+      // this.selectedDestination();
+      this.destValu = currentSearch.destination;
+      // this.searchBtn = 'Search';
+    }
+
+    // get search results
+    this.hotelSearchResult = this.getSearchResults(currentSearch);
+
+    // get hotels list
+    this.__ms.getLIst('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/getHotels').subscribe(data => {
+     this.hotelsList = data;
+     this.isLoading = false;
+    })
 
     this.filteredList = this.hotelsAutocomplete.valueChanges.pipe(
       startWith(''),
@@ -46,10 +93,15 @@ export class HotelSearchFormComponent implements OnInit {
 
   } // onInit
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  public selectedDestination = () => {
+    return 'test destination'
+  }
 
-    return this.hotelsList.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  private _filter(value: string): string[] {
+    if(value.length > 2) {
+      const filterValue = value.toLowerCase();
+      return this.hotelsList.filter(option => option.toLowerCase().includes(filterValue));
+    } 
   }
 
   incrementNumber(type) {
@@ -95,6 +147,14 @@ export class HotelSearchFormComponent implements OnInit {
     }
   }
 
+  createRange(number){
+    var items: number[] = [];
+    for(var i = 1; i <= number; i++){
+       items.push(i);
+    }
+    return items;
+  }
+
   keytab(event){
     let element = event.targetElement.nextElementSibling; // get the sibling element
 
@@ -102,11 +162,35 @@ export class HotelSearchFormComponent implements OnInit {
         return;
     } else
         element.focus();   // focus if not null
-    }
+  }
+  
+  public getSearchResults = (obj) => {
+    this.searchBtn = 'Loading';
+    this.__ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search',obj).subscribe(result => {
+      this.hotelSearchResult = result;
+      this.searchEvent.emit(this.hotelSearchResult);
+      this.searchBtn = 'Search';
+    })
+  }
 
   searchHotels(formInputs){
+    
     if(this.hotelSearch.valid){
-      console.log(formInputs)
+      let formObj = {
+        destination: formInputs.destination,
+        checkInDate: this._date.transform(formInputs.dates.startDate._d,'M/d/yy'),
+        checkOutDate: this._date.transform(formInputs.dates.endDate._d,'M/d/yy'),
+        dates: formInputs.dates,
+        rooms: formInputs.rooms,
+        adults: formInputs.adults,
+        children: formInputs.children
+      }
+      this._cookieService.set('hotelQuery', JSON.stringify(formObj));
+      // get search results
+      this.getSearchResults(formObj);
+      if(this._router.url !== '/hotels-listing'){
+        this._router.navigate(['/hotels-listing']);
+      }
     } else {
       console.log('form invalid!')
     }

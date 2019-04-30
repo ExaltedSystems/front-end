@@ -150,8 +150,8 @@ img{}
 	-webkit-position: absolute !important;
 	-moz-position: absolute !important;
 	-o-position: absolute !important;
-    left: -54px;
-	width: 124%;
+    left: -49px;
+	width: 100% !important;
 	top: 8px !important;
     z-index: 99999;
 }
@@ -313,6 +313,13 @@ img{}
 
 .dropdown-menu .form-group{
 	margin-bottom: 0.5rem
+}
+
+.dropdown-menu .form-control{
+	height: 45px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn{
@@ -1005,7 +1012,7 @@ legend {
 }
 .star-rating i-star{
 	width: 16px;
-	height: 16px;
+	/* height: 16px; */
 }
 
 .star-rating i-star.active{
@@ -1029,7 +1036,7 @@ legend {
 
 .hotel-feather-icon {
 	width: 16px !important;
-	height: 16px !important;
+	/* height: 16px !important; */
 }
 
 .room-wise-facilities{
@@ -1051,8 +1058,12 @@ legend {
 }
 .form-control{height: 47px !important;}
 .home-flight-search-form .mat-input-element {width: 90% !important;margin-top: 20px !important;}
-.mat-autocomplete-panel {width: 270px !important;}
+.mat-autocomplete-panel {min-width: 270px !important;}
 .feather-x-circle {width: 18px !important;}
+
+.md-drppicker{
+	z-index: 99999 !important;
+}
 
  /*Small devices (portrait phones, 576px and up)*/
 @media (max-width: 575px) { 
@@ -1069,6 +1080,12 @@ legend {
 		z-index: 2;
     	width: 100%;
 	} */
+	.md-drppicker.double {
+		width: -webkit-fill-available !important;
+	}
+	.md-drppicker .calendar {
+		margin: 4px 10px;
+	}
 	.mobile-sub-nav{
 		background: #b2b2b2;
 		font-size: 15;
@@ -1120,7 +1137,11 @@ legend {
 	}
 	.main-search-form .mobile-input-group-control,
 	.custom-material-form .mobile-input-group-control{
-		width: 85%;
+		width: 84%;
+	}
+	.main-search-form .material-input,
+	.custom-material-form .material-input{
+		padding: 0;
 	}
 	.main-search-form .material-input input[type=text], .main-search-form .mat-input-element,
 	.custom-material-form .material-input input[type=text], .custom-material-form .mat-input-element{
@@ -1227,7 +1248,7 @@ legend {
 	h3{font-size: 1.1rem;color: #0248b1;}
 	h4{font-size: 1rem;color: #0248b1;}
 	.ck-editor-data h3{color: #0248b1;font-size: 1.2rem;}
-	.mat-autocomplete-panel {width: 330px !important;}
+	.mat-autocomplete-panel {min-width: 330px !important;}
 }
 @media (min-width: 768px) {
 	.shadow-sm-none{

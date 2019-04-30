@@ -15,6 +15,7 @@ export class MainService {
   byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
   revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
   FlightInfo:object;
+  hotelSearchQuery: object;
   constructor(private __httpClient: HttpClient, private __http: Http) { }
 
 
@@ -25,6 +26,13 @@ export class MainService {
    */
   getData(url): Observable<response> {
     return this.__httpClient.get<response>(url);
+  }
+  /**
+   * 
+   * @param url 
+   */
+  getLIst(url): Observable<any> {
+    return this.__httpClient.get<any>(url);
   }
   public getJSON(jsonFile): Observable<any> {
     return this.__httpClient.get(jsonFile);
@@ -192,7 +200,11 @@ export class MainService {
 export interface response {
   status: boolean,
   message: string,
-  data: object
+  data: object[]
+}
+
+export interface list {
+  data: string[]
 }
 
 export interface ipInformation {

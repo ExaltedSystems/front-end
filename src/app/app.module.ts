@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
-   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule} from '@angular/material';
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -37,6 +37,8 @@ import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { DatePipe } from '@angular/common';
+import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,6 @@ import { NgxGalleryModule } from 'ngx-gallery';
     FlightsListingComponent,
     AirPortsPipe,
     SecondsPipePipe,
-    
     FlightBookingComponent,
     
     DateFormatPipe,
@@ -65,7 +66,9 @@ import { NgxGalleryModule } from 'ngx-gallery';
     
     HotelDetailsComponent,
     
-    HotelInlineSearchFormComponent
+    HotelInlineSearchFormComponent,
+    
+    HotelFiltersPipe
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     MatFormFieldModule,
     MatDatepickerModule,
     MatRadioModule,
+    MatButtonModule,
     MatCheckboxModule,
     MatNativeDateModule,
     MatAutocompleteModule,
@@ -101,7 +105,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     }),
     NgxGalleryModule
   ],
-  providers: [MainService, CookieService],
+  providers: [MainService, CookieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
