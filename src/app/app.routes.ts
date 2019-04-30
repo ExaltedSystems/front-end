@@ -12,5 +12,5 @@ export const APP_ROUTES: Routes = [
   	{ path: 'flight-booking', component: FlightBookingComponent },
   	{ path: 'pnrView', component: PnrViewComponent },
   	{ path: 'hotels-listing', component: HotelsListingComponent },
-  	{ path: 'hotels-details', component: HotelDetailsComponent }
+  	{ path: 'hotel-details', component: HotelDetailsComponent }
 ];

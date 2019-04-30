@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { MainService } from 'src/app/services/main.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-hotel-details',
@@ -10,9 +12,22 @@ export class HotelDetailsComponent implements OnInit {
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  constructor() { }
+
+  hotelData: any;
+  hotelId
+  isLoading: boolean = true;
+  constructor(private _ms: MainService, private _cookieService: CookieService) { }
 
   ngOnInit(): void {
+
+    this.hotelId = this._cookieService.get('hotelId');
+    console.log('id',this.hotelId)
+
+    this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/hotelDetails',this.hotelId).subscribe(result => {
+        this.hotelData = result;
+        console.log('hotel data',this.hotelData)
+    })
+
 
     this.galleryOptions = [
       { "previewCloseOnClick": true, "previewCloseOnEsc": true },
@@ -56,6 +71,13 @@ export class HotelDetailsComponent implements OnInit {
             big: 'assets/img/destinations/sg-trip.jpg'
         }
     ];
+  }
+
+  public getSearchResults = ($event) => {
+    this.isLoading = true;
+    this.hotelData = $event;
+    console.log('results',this.hotelData)
+    this.isLoading = false;
   }
 
 }

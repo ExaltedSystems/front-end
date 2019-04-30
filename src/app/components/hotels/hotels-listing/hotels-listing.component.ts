@@ -4,6 +4,7 @@ import { MainService } from 'src/app/services/main.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HotelSearchFormComponent } from 'src/app/components/hotels/hotel-search-form/hotel-search-form.component';
 import { HotelFiltersPipe } from 'src/app/pipes/hotel-filters.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotels-listing',
@@ -27,7 +28,7 @@ export class HotelsListingComponent implements OnInit {
     public filterSections: Array<any>;
     private _lipsum: any;
 
-  constructor(private _ms: MainService, private _cookieService: CookieService,private pipe: HotelFiltersPipe) { 
+  constructor(private _ms: MainService, private _cookieService: CookieService,private _router: Router) { 
      
   }
 
@@ -134,6 +135,10 @@ export class HotelsListingComponent implements OnInit {
     this.isLoading = false;
   }
 
+  public selectHotel = (id) => {
+      this._cookieService.set('hotelId',id);
+    this._router.navigate(['/hotel-details']);
+  }
 
   checked() {
     return this.filterSections.filter(item => { return item.checked; });

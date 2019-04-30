@@ -118,7 +118,13 @@
 
         <div class="mb-3 p-0">
           <mat-card class="rounded-0 mb-3 py-1">
-            <b>Sort:</b> <button mat-button (click)="sortByPrice()" [(ngModel)]="asc">Price</button>
+            <b class="d-inline-block mr-4">Sort:</b>
+            <div class="d-inline-flex justify-content-between">
+                <button mat-button (click)="sortByPrice()" [(ngModel)]="asc" class="mx-2">Price</button>
+                <button mat-button (click)="sortByPrice()" [(ngModel)]="asc" class="mx-2">Star Rating</button>
+                <button mat-button (click)="sortByPrice()" [(ngModel)]="asc" class="mx-2">Distance form City Center</button>
+                <button mat-button (click)="sortByPrice()" [(ngModel)]="asc" class="mx-2">RGT Recomended</button>
+            </div>
           </mat-card>
           <mat-card class="p-1 mb-3 hotel-search-item" *ngFor="let item of hotelsSearchResult | hotelFilters: { prperty_name: ''} : checked() : false">
 
@@ -179,7 +185,7 @@
                             <span class="text-danger">{{item.parking_price_per_day}}</span>
                           </h5>
                         </div>
-                        <button class="btn btn-primary shadow-sm rounded-0 w-100 align-self-end">Select Your Room</button>
+                        <button class="btn btn-primary shadow-sm rounded-0 w-100 align-self-end" (click)="selectHotel(item.id)">Select Your Room</button>
                       </div>
                     </div>
                   </div>
