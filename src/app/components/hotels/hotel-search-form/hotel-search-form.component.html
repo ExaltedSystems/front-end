@@ -71,14 +71,14 @@
           <div class="form-group">
             <div class="input-group mb-3 text-center">
               <div class="input-group-prepend">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('rooms')">
+                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('rooms')">
                   <i-minus class="dropdown-feather"></i-minus>
                 </button>
               </div>
               <span class="form-control">{{rooms}} Rooms</span>
               <input formControlName="rooms" type="hidden" value="{{rooms}}">
               <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('rooms')">
+                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('rooms')">
                   <i-plus class="dropdown-feather"></i-plus>
                 </button>
               </div>
@@ -87,14 +87,14 @@
           <div class="form-group">
             <div class="input-group mb-3 text-center">
               <div class="input-group-prepend">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('adults')">
+                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('adults')">
                   <i-minus class="dropdown-feather"></i-minus>
                 </button>
               </div>
               <span class="form-control">{{adults}} Adults</span>
               <input formControlName="adults" type="hidden" value="{{adults}}">
               <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('adults')">
+                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('adults')">
                   <i-plus class="dropdown-feather"></i-plus>
                 </button>
               </div>
@@ -103,18 +103,30 @@
           <div class="form-group">
             <div class="input-group mb-3 text-center">
               <div class="input-group-prepend">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('children')">
+                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('children')">
                   <i-minus class="dropdown-feather"></i-minus>
                 </button>
               </div>
               <span class="form-control">{{children}} Children</span>
               <input formControlName="children" type="hidden" value="0">
               <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('children')">
+                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
                   <i-plus class="dropdown-feather"></i-plus>
                 </button>
               </div>
             </div>
+          </div>
+          <div class="form-group" *ngIf="children > 0">
+            <p>Children's ages (years)</p>
+            <div class="d-inline-block" formArrayName="childrenAges" *ngFor="let item of hotelSearch.get('childrenAges').controls; let i = index;">
+              <div formGroupName="{{i}}">
+                  <select formControlName="childAge" class="form-control child-age-select">
+                      <option value="-1>" selected="selected">< 1</option>
+                      <option *ngFor="let item of createRange(17)" [value]="item">{{item}}</option>
+                    </select>
+              </div>
+            </div>
+            
           </div>
 
           <!-- <div class="dropdown-divider"></div>

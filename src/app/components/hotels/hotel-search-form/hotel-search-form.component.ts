@@ -1,6 +1,6 @@
 import { MainService } from './../../../services/main.service';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -35,6 +35,8 @@ export class HotelSearchFormComponent implements OnInit {
 
   hotelSearchResult:any;
 
+  childrenAges: FormArray
+
   @Output()
   dateChange: EventEmitter<MatDatepickerInputEvent<Date>>
 
@@ -46,34 +48,44 @@ export class HotelSearchFormComponent implements OnInit {
   ngOnInit() {
     // Hotel form
     this.hotelSearch = this.__fb.group({
-      destination: [""],
+      destination: ["abc"],
       checkInDate: [""],
       checkOutDate: [""],
       dates: [""],
       rooms: ["1"],
       adults: ["1"],
-      children: []
+      children: [""],
+      childrenAges: this.__fb.array([ ])
     });
+
+    // this.addChildrenAgeForm();
 
     let searchCookie = this._cookieService.get('hotelQuery');
     let currentSearch = JSON.parse(searchCookie);
     // this.searchQuery = searchCookie;
     this.cookieExists = this._cookieService.check('hotelQuery');
     if(this.cookieExists == true){
-      this.hotelSearch.setValue({
-        destination: currentSearch.destination,
-        checkInDate: this._date.transform(currentSearch.dates.startDate,'M/d/yy'),
-        checkOutDate: this._date.transform(currentSearch.dates.endDate,'M/d/yy'),
-        dates: currentSearch.dates,
-        rooms: currentSearch.rooms,
-        adults: currentSearch.adults,
-        children: currentSearch.children
-      });
+      this.hotelSearch.controls['destination'].setValue(currentSearch.destination);
+      this.hotelSearch.controls['checkInDate'].setValue(this._date.transform(currentSearch.dates.startDate,'M/d/yy'));
+      this.hotelSearch.controls['checkOutDate'].setValue(this._date.transform(currentSearch.dates.endDate,'M/d/yy'));
+      this.hotelSearch.controls['dates'].setValue(currentSearch.dates);
+      // this.hotelSearch.setValue({
+      //   destination: currentSearch.destination,
+      //   checkInDate: this._date.transform(currentSearch.dates.startDate,'M/d/yy'),
+      //   checkOutDate: this._date.transform(currentSearch.dates.endDate,'M/d/yy'),
+      //   dates: currentSearch.dates,
+      //   rooms: currentSearch.rooms,
+      //   adults: currentSearch.adults,
+      //   children: currentSearch.children,
+      //   childrenAges: this.childrenAges
+      // });
       this.rooms = currentSearch.rooms;
       this.adults = currentSearch.adults;
       this.children = currentSearch.children;
-      // this.selectedDestination();
+      this.childrenAges = this.__fb.array([this.createChildForm(currentSearch.childrenAges,currentSearch.children)])
       this.destValu = currentSearch.destination;
+      // console.log('current search',currentSearch)
+      // console.log('childrenages',currentSearch.childrenAges)
       // this.searchBtn = 'Search';
     }
 
@@ -93,6 +105,38 @@ export class HotelSearchFormComponent implements OnInit {
 
   } // onInit
 
+  createChildForm(formData,childrensCount) {
+    let chd_arr = this.hotelSearch.controls.childrenAges as FormArray;
+    for(let i = 0; i < childrensCount; i++){
+      chd_arr.push(this.childAge(formData[i].childAge));
+    }
+  }
+
+  childAge(formData): FormGroup {
+    if(formData != null){
+      return this.__fb.group({
+        childAge: [formData]
+      });
+    }
+    
+  }
+
+  addChild(): void {
+    this.childrenAges = this.hotelSearch.controls.childrenAges as FormArray;
+    this.childrenAges.push(this.childAge(''));
+  }
+
+  removeChild(index): void {
+    this.childrenAges = this.hotelSearch.get('childrenAges') as FormArray;
+    this.childrenAges.removeAt(index);
+  }
+
+  // addChildrenAgeForm = () => {
+  //   if(this.children > 0){
+  //     this.hotelSearch.addControl('childrenAges',this.__fb.array([]));
+  //   }
+  // }
+
   public selectedDestination = () => {
     return 'test destination'
   }
@@ -104,7 +148,7 @@ export class HotelSearchFormComponent implements OnInit {
     } 
   }
 
-  incrementNumber(type) {
+  incrementNumbers(type) {
     switch (type) {
       case 'adults': {
         this.adults = +this.adults + 1;
@@ -114,6 +158,8 @@ export class HotelSearchFormComponent implements OnInit {
       case 'children': {
         this.children = +this.children + 1;
         this.hotelSearch.controls['children'].setValue(this.children);
+        // this.addChildrenAgeForm();
+        this.addChild();
         break;
       }
       case 'rooms': {
@@ -124,7 +170,7 @@ export class HotelSearchFormComponent implements OnInit {
     }
   }
 
-  decrementNumber(type) {
+  decrementNumbers(type) {
     switch (type) {
       case 'adults': {
         this.adults--;
@@ -136,6 +182,10 @@ export class HotelSearchFormComponent implements OnInit {
         this.children--;
         this.children < 0 ? this.children = 0 : this.children;
         this.hotelSearch.controls['children'].setValue(this.children);
+        // this.addChildrenAgeForm(); 
+        if(this.children > 0){
+          this.removeChild(0);
+        }
         break;
       }
       case 'rooms': {
@@ -174,7 +224,7 @@ export class HotelSearchFormComponent implements OnInit {
   }
 
   searchHotels(formInputs){
-    
+    // console.log('forminputs',formInputs);
     if(this.hotelSearch.valid){
       let formObj = {
         destination: formInputs.destination,
@@ -183,7 +233,8 @@ export class HotelSearchFormComponent implements OnInit {
         dates: formInputs.dates,
         rooms: formInputs.rooms,
         adults: formInputs.adults,
-        children: formInputs.children
+        children: formInputs.children,
+        childrenAges: formInputs.childrenAges
       }
       this._cookieService.set('hotelQuery', JSON.stringify(formObj));
       // get search results

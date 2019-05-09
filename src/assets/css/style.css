@@ -237,6 +237,15 @@ img{}
 	display: inline-block
 }
 
+.child-age-select{
+	display: inline-block !important;
+    width: auto;
+    line-height: 1 !important;
+    padding: 0px 10px !important;
+    margin-bottom: 20px;
+    margin-right: 16px;
+}
+
 .md-drppicker{
 	top: 100% !important;
     left: -48px !important;
@@ -424,7 +433,12 @@ form .btn{
 section{
 	padding: 20px 0px;
 }
-
+.list-divider {
+    height: 0;
+    margin: .5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #c1c2c4;
+}
 .section-title{
 	text-align: center;
 	padding: 20px 0px;
@@ -1064,6 +1078,27 @@ legend {
 .md-drppicker{
 	z-index: 99999 !important;
 }
+
+.stepBarClass {
+	width:90%;
+	height:10px;
+	background:lightgray;
+	border-radius:5px;
+	}
+
+.stepSliderClass
+{
+	width:20px;
+	height:20px;
+	background:lightgray;
+	border-radius:50%;    
+	border:1px solid royalblue;
+	bottom:-50% !important;
+	}
+.stephighlightClass{
+	background:royalblue;
+	}
+
 
  /*Small devices (portrait phones, 576px and up)*/
 @media (max-width: 575px) { 

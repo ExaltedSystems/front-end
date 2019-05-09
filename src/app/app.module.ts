@@ -37,8 +37,15 @@ import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { RangeSliderModule  } from 'ngx-rangeslider-component';
 import { DatePipe } from '@angular/common';
 import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
+import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
+import { PriceFilterPipe } from './pipes/price-filter.pipe';
+import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -68,7 +75,17 @@ import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
     
     HotelInlineSearchFormComponent,
     
-    HotelFiltersPipe
+    HotelFiltersPipe,
+    
+    OrderByPipe,
+    
+    StarRatingFilterPipe,
+    
+    BreakfastTypeFilterPipe,
+    
+    PriceFilterPipe,
+    
+    FacilityFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -103,7 +120,9 @@ import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
       separator: '  -  ', 
       format: "DD/MM/YYYY",
     }),
-    NgxGalleryModule
+    NgxGalleryModule,
+    RangeSliderModule,
+    FilterPipeModule
   ],
   providers: [MainService, CookieService, DatePipe],
   bootstrap: [AppComponent]

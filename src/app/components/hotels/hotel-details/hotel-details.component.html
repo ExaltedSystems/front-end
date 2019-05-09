@@ -1,10 +1,11 @@
 <app-header></app-header>
+<mat-card *ngIf="isLoading == ture">Loading</mat-card>
 <!-- <input type="text" ngxDaterangepickerMd class="form-control"/> -->
-<section  class="flight-search pt-0 pt-sm-2">
+<section  class="flight-search pt-0 pt-sm-2" *ngIf="isLoading == false">
   <div  class="current-flight-search d-block d-sm-none mb-3">
     <div  class="current-search-sector row d-flex align-items-center pb-2">
       <div  class="col px-0">
-        <p >Islamabad Marriot Hotel, Islamabad, Pakistan</p>
+        <p >{{hotelDetails.name}}</p>
       </div>
     </div>
     <p  class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infantt</p>
@@ -62,8 +63,8 @@
             <i-sliders  class="button-feather"></i-sliders> Filter</button>
         </div>
         <div >
-          <a  class="btn rounded-0 shadow btn-primary" routerlink="/" href="/">
-            <i-search  class="button-feather"></i-search> New Search</a>
+          <!--<a  class="btn rounded-0 shadow btn-primary" routerlink="/" href="/">
+             <i-search  class="button-feather"></i-search> New Search</a> -->
           <button  class="btn rounded-0 shadow btn-secondary">
             <i-bell  class="button-feather mx-0"> </i-bell>
           </button>
@@ -75,14 +76,14 @@
 
     <mat-card  class="p-2 mb-3 d-flex justify-content-between rounded-0 sticky-top">
       <div >
-        <h3  class="mb-0">Islamabad Marriot Hotel</h3>
-        <p >Blue Area Islamabad,Islamabad,Pakistan</p>
+        <h3  class="mb-0">{{hotelDetails.name}}</h3>
+        <p >{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
       </div>
       <div >
         <div  class="price text-right">
           <span  class="text-muted org-price">10,000</span>
           <h5  class="d-block">PKR
-            <span  class="text-danger">90.00</span>
+            <span  class="text-danger">{{hotelDetails.price}}</span>
           </h5>
           <button  class="btn btn-primary shadow-sm rounded-0">Book Now</button>
         </div>
@@ -94,7 +95,21 @@
         <div  class="col-sm-8">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
         </div>
-        <div  class="col-sm-4"></div>
+        <div  class="col-sm-4">
+          <div >
+            <h3  class="mb-0">{{hotelDetails.name}}</h3>
+            <p >{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
+          </div>
+          <div >
+            <div  class="price text-right">
+              <span  class="text-muted org-price">10,000</span>
+              <h5  class="d-block">PKR
+                <span  class="text-danger">{{hotelDetails.price}}</span>
+              </h5>
+              <button  class="btn btn-primary shadow-sm rounded-0">Book Now</button>
+            </div>
+          </div>
+        </div>
       </div>
     </mat-card>
 
@@ -102,15 +117,19 @@
       <div class="d-flex align-items-center justify-content-between">
         <div class="checkIn">
           <b>Check In Date</b>
-          <p class="text-primary m-0">Fri, 17 May 2018</p>
+          <p class="text-primary m-0">{{checkInDate | date:mediumDate}}</p>
         </div>
         <div class="checkIn">
             <b>Check In Date</b>
-            <p class="text-primary m-0">Fri, 17 May 2018</p>
+            <p class="text-primary m-0">{{searchQuery.dates.endDate | date:mediumDate}}</p>
           </div>
+        <div>
+          <p class="m-0">{{totalNights}} Night Stay</p>
+        </div>
           <div class="checkIn">
               <b>Guests</b>
-              <p class="text-primary m-0">2 Adults</p>
+              <p class="text-primary m-0" *ngIf="searchQuery.adults > 0">{{searchQuery.adults}} Adult(s)</p>
+              <p class="text-primary m-0" *ngIf="searchQuery.children > 0">{{searchQuery.children}} Children</p>
             </div>
           <div>
             <button class="btn btn-primary shadow-sm rounded-0">Change Search</button>
@@ -127,251 +146,45 @@
             <th  width="20%">&nbsp;</th>
             <th  class="td-filled" width="10%">Options</th>
             <th  width="7%">Max occupancy</th>
-            <th  class="td-filled" width="7%">Price for 6 Night</th>
+            <th  class="td-filled" width="7%">Price for {{totalNights}} Night</th>
             <th  class="td-filled" width="7%">Rooms</th>
-
           </tr>
         </thead>
         <tbody >
           <!---->
-          <tr  class="">
+          <tr *ngFor="let room of hotelDetails.room_details; let i = index">
             <td >
-              <b  class="text-primary">Bed in 10-Bed Male Dormitory Room</b>
-              <p  class="mb-1">
+              <b  class="text-primary">{{room.room_title}}</b>
+              <p  class="mb-1" *ngIf="room.facility.length > 0">
                 <b >Facilities:</b>
               </p>
               <ul  class="room-wise-facilities">
-                <!---->
-                <li  class="d-inline-block ">Drying rack for clothing -&nbsp;</li>
-                <li  class="d-inline-block ">Wardrobe/Closet -&nbsp;</li>
-                <li  class="d-inline-block ">Extra long beds (&gt; 6.5 ft) -&nbsp;</li>
-                <li  class="d-inline-block ">Fan -&nbsp;</li>
-                <li  class="d-inline-block ">Heating -&nbsp;</li>
-                <li  class="d-inline-block ">Iron -&nbsp;</li>
-                <li  class="d-inline-block ">Mosquito net -&nbsp;</li>
-                <li  class="d-inline-block ">Sitting area -&nbsp;</li>
-                <li  class="d-inline-block ">Desk -&nbsp;</li>
-                <li  class="d-inline-block ">Cable channels -&nbsp;</li>
-                <li  class="d-inline-block ">Flat-screen TV -&nbsp;</li>
-                <li  class="d-inline-block ">Telephone -&nbsp;</li>
-                <li  class="d-inline-block ">TV -&nbsp;</li>
-                <li  class="d-inline-block ">Dining table -&nbsp;</li>
-                <li  class="d-inline-block ">Toaster -&nbsp;</li>
-                <li  class="d-inline-block ">Electric kettle -&nbsp;</li>
-                <li  class="d-inline-block ">Alarm clock -&nbsp;</li>
-                <li  class="d-inline-block ">Wake-up service -&nbsp;</li>
-                <li  class="d-inline-block ">Towels -&nbsp;</li>
-                <li  class="d-inline-block ">Towels/Sheets (extra fee) -&nbsp;</li>
-                <li  class="d-inline-block ">Balcony -&nbsp;</li>
-                <li  class="d-inline-block ">Room is completely wheelchair accessible -&nbsp;</li>
-                <li  class="d-inline-block ">Toilet paper -&nbsp;</li>
-                <li  class="d-inline-block ">Bathtub -&nbsp;</li>
-                <li  class="d-inline-block ">Shower -&nbsp;</li>
-                <li  class="d-inline-block ">Slippers -&nbsp;</li>
-                <li  class="d-inline-block ">Child safety socket covers -&nbsp;</li>
+                <li  class="d-inline-block " *ngFor="let facility of room.facility">{{facility}} -&nbsp;</li>
               </ul>
             </td>
             <td  class="td-filled">
-              <div >
-                <!---->
-                <!---->
-                <div  class="">Good Breakfast
-                  <br > PKR:20.00/-</div>
-              </div>
+              <!-- <div [ngSwitch]="room.breakfast">
+                <div  *ngSwitchCase="Yes, Its Optional">Good Breakfast
+                <br/> {{room.breakfast_price}}</div>
+                  <div *ngSwitchCase="Yes, Its Free">Free Breakfast</div>
+              </div> -->
             </td>
             <td  align="center">
               <div  class="d-flex align-items-center">
-                <i-user>
-                  <svg  class="feather feather-user" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path  d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle  cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </i-user>
-                <b  class="ml-1">x 8</b>
+                <i-user></i-user>
+                <b  class="ml-1">x {{room.no_of_guest}}</b>
               </div>
             </td>
             <td  class="td-filled">
-              <b  class="text-primary">PKR </b>30000.00</td>
-            <td  class="td-filled">
-              <select  class="form-control" id="" name="">
+              <b  class="text-primary">PKR </b>{{room.price_pp_pn}}</td>
+            <td  class="td-filled">{{i}}
+              <select  class="form-control" #rooms (change)="getRoomsPrice(rooms.value,room.price_pp_pn)">
                 <option  value="0">0</option>
-                <option  value="1">1 (PKR 30000)</option>
-                <option  value="2">2 (PKR 60000)</option>
-                <option  value="3">3 (PKR 90000)</option>
-                <option  value="4">4 (PKR 120000)</option>
-                <option  value="5">5 (PKR 150000)</option>
-              </select>
-            </td>
-
-          </tr>
-          <tr  class="">
-            <td >
-              <b  class="text-primary">Deluxe Family Room</b>
-              <p  class="mb-1">
-                <b >Facilities:</b>
-              </p>
-              <ul  class="room-wise-facilities">
-                <!---->
-              </ul>
-            </td>
-            <td  class="td-filled">
-              <div >
-                <!---->
-                <!---->
-                <div  class="">Good Breakfast
-                  <br > PKR:20.00/-</div>
-              </div>
-            </td>
-            <td  align="center">
-              <div  class="d-flex align-items-center">
-                <i-user>
-                  <svg  class="feather feather-user" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path  d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle  cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </i-user>
-                <b  class="ml-1">x 4</b>
-              </div>
-            </td>
-            <td  class="td-filled">
-              <b  class="text-primary">PKR </b>36000.00</td>
-            <td  class="td-filled">
-              <select  class="form-control" id="" name="">
-                <option  value="0">0</option>
-                <option  value="1">1 (PKR 36000)</option>
-                <option  value="2">2 (PKR 72000)</option>
-                <option  value="3">3 (PKR 108000)</option>
-                <option  value="4">4 (PKR 144000)</option>
-                <option  value="5">5 (PKR 180000)</option>
-              </select>
-            </td>
-
-          </tr>
-          <tr  class="">
-            <td >
-              <b  class="text-primary">Single Room with Mountain View</b>
-              <p  class="mb-1">
-                <b >Facilities:</b>
-              </p>
-              <ul  class="room-wise-facilities">
-                <!---->
-              </ul>
-            </td>
-            <td  class="td-filled">
-              <div >
-                <!---->
-                <!---->
-                <div  class="">Good Breakfast
-                  <br > PKR:20.00/-</div>
-              </div>
-            </td>
-            <td  align="center">
-              <div  class="d-flex align-items-center">
-                <i-user>
-                  <svg  class="feather feather-user" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path  d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle  cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </i-user>
-                <b  class="ml-1">x 8</b>
-              </div>
-            </td>
-            <td  class="td-filled">
-              <b  class="text-primary">PKR </b>3000.00</td>
-            <td  class="td-filled">
-              <select  class="form-control" id="" name="">
-                <option  value="0">0</option>
-                <option  value="1">1 (PKR 3000)</option>
-                <option  value="2">2 (PKR 6000)</option>
-                <option  value="3">3 (PKR 9000)</option>
-                <option  value="4">4 (PKR 12000)</option>
-                <option  value="5">5 (PKR 15000)</option>
-              </select>
-            </td>
-
-          </tr>
-          <tr  class="">
-            <td >
-              <b  class="text-primary">Deluxe Double Room with Extra Bed</b>
-              <p  class="mb-1">
-                <b >Facilities:</b>
-              </p>
-              <ul  class="room-wise-facilities">
-                <!---->
-              </ul>
-            </td>
-            <td  class="td-filled">
-              <div >
-                <!---->
-                <!---->
-                <div  class="">Good Breakfast
-                  <br > PKR:20.00/-</div>
-              </div>
-            </td>
-            <td  align="center">
-              <div  class="d-flex align-items-center">
-                <i-user>
-                  <svg  class="feather feather-user" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path  d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle  cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </i-user>
-                <b  class="ml-1">x 8</b>
-              </div>
-            </td>
-            <td  class="td-filled">
-              <b  class="text-primary">PKR </b>30000.00</td>
-            <td  class="td-filled">
-              <select  class="form-control" id="" name="">
-                <option  value="0">0</option>
-                <option  value="1">1 (PKR 30000)</option>
-                <option  value="2">2 (PKR 60000)</option>
-                <option  value="3">3 (PKR 90000)</option>
-                <option  value="4">4 (PKR 120000)</option>
-                <option  value="5">5 (PKR 150000)</option>
-              </select>
-            </td>
-
-          </tr>
-          <tr  class="">
-            <td >
-              <b  class="text-primary">Deluxe Double Room (1 adult + 1 child)</b>
-              <p  class="mb-1">
-                <b >Facilities:</b>
-              </p>
-              <ul  class="room-wise-facilities">
-                <!---->
-              </ul>
-            </td>
-            <td  class="td-filled">
-              <div >
-                <!---->
-                <!---->
-                <div  class="">Good Breakfast
-                  <br > PKR:20.00/-</div>
-              </div>
-            </td>
-            <td  align="center">
-              <div  class="d-flex align-items-center">
-                <i-user>
-                  <svg  class="feather feather-user" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path  d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle  cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </i-user>
-                <b  class="ml-1">x 8</b>
-              </div>
-            </td>
-            <td  class="td-filled">
-              <b  class="text-primary">PKR </b>90.00</td>
-            <td  class="td-filled">
-              <select  class="form-control" id="" name="">
-                <option  value="0">0</option>
-                <option  value="1">1 (PKR 90)</option>
-                <option  value="2">2 (PKR 180)</option>
-                <option  value="3">3 (PKR 270)</option>
-                <option  value="4">4 (PKR 360)</option>
-                <option  value="5">5 (PKR 450)</option>
+                <option  value="1">1 (PKR {{room.price_pp_pn *1}})</option>
+                <option  value="2">2 (PKR {{room.price_pp_pn *2}})</option>
+                <option  value="3">3 (PKR {{room.price_pp_pn *3}})</option>
+                <option  value="4">4 (PKR {{room.price_pp_pn *4}})</option>
+                <option  value="5">5 (PKR {{room.price_pp_pn *5}})</option>
               </select>
             </td>
 
@@ -446,8 +259,8 @@
     <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex">
         <div class="pr-3 border-right ng-star-inserted">
-            <p class="mb-1">2 Rooms Selected</p>
-            <b class="text-primary">PKR </b>168000
+            <p class="mb-1">{{totalRoomsSelected}} Rooms Selected</p>
+            <b class="text-primary">PKR </b>{{totalPrice}}
           </div>
           <div class="pl-3 text-warning">
             <p>You still need to fit 3 more adult.</p>
