@@ -38,8 +38,12 @@ export class HotelDetailsComponent implements OnInit {
     cookieExists: boolean;
     currentSearch: any;
 
+    roomsSelected: number[] = [];
     totalRoomsSelected: number = 0;
-    totalPrice: number = 0;
+    roomsPrice: number[] = [];
+    totalRoomsPrice: number = 0;
+    roomsGuests: number[] = [];
+    totalRoomsGuests: number = 0;
 
     inlineSearchForm: boolean = false;
     hotelPaymentDetails: any;
@@ -54,7 +58,7 @@ export class HotelDetailsComponent implements OnInit {
         this.checkInDate = this.searchQuery['dates']['startDate'];
         this.checkOutDate = this.searchQuery['dates']['endDate'];
         this.totalNights = this.calculateDate(this.checkInDate, this.checkOutDate)
-        console.log('nights', this.totalNights)
+        // console.log('nights', this.totalNights)
 
         this.hotelId = this._cookieService.get('hotelId');
         this.hotelObj = {
@@ -66,8 +70,8 @@ export class HotelDetailsComponent implements OnInit {
             this.galleryImages = result['images'];
             this.isLoading = false;
             this.hotelPaymentDetails = JSON.parse(result['payment_mothods']);
-            console.log('payment',this.hotelPaymentDetails)
-            console.log('hotel data', this.hotelDetails)
+            // console.log('payment',this.hotelPaymentDetails)
+            // console.log('hotel data', this.hotelDetails)
         })
 
         this.galleryOptions = [
@@ -110,11 +114,11 @@ export class HotelDetailsComponent implements OnInit {
             childrenAges: this.__fb.array([])
         });
 
-        let searchCookie = this._cookieService.get('hotelQuery');
-        this.currentSearch = JSON.parse(searchCookie);
         // this.searchQuery = searchCookie;
         this.cookieExists = this._cookieService.check('hotelQuery');
         if (this.cookieExists == true) {
+            let searchCookie = this._cookieService.get('hotelQuery');
+            this.currentSearch = JSON.parse(searchCookie);
             this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.dates.startDate);
             this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.dates.endDate);
             this.UpdateHotelSearch.controls['dates'].setValue(this.currentSearch.dates);
@@ -239,6 +243,10 @@ export class HotelDetailsComponent implements OnInit {
         return items;
     }
 
+    scroll(el: HTMLElement) {
+        el.scrollIntoView();
+    }
+
     calculateDate = (date1: any, date2: any) => {
         //our custom function with two parameters, each for a selected date
         let diffc = new Date(date1).getTime() - new Date(date2).getTime();
@@ -250,10 +258,29 @@ export class HotelDetailsComponent implements OnInit {
         return days;
     }
 
-    public getRoomsPrice = (rooms: number, price: number) => {
-        this.totalPrice = this.totalPrice + (+price * +rooms);
-        this.totalRoomsSelected = this.totalRoomsSelected + +rooms;
+    public getRoomsPrice = (rooms: number, price: number,i,guests) => {
+        this.roomsPrice[i] = 0;
+        this.roomsSelected[i] = 0;
+        this.roomsGuests[i] = 0;
+        this.roomsPrice[i] = price * rooms;
+        this.roomsSelected[i] = +rooms;
+        this.roomsGuests[i] = +guests * +rooms;
+        // for(let j = 0; j <= totalCount; j++){
+        //     if(index == j){
+        //         this.roomsPrice[j] = 0;
+        //         this.roomsSelected[j] = 0;
+        //         this.roomsPrice[j] = price * rooms;
+        //         this.roomsSelected[j] = +rooms;
+        //     }
+        // }
+        this.totalRoomsPrice = this.roomsPrice.reduce(this.getSum);
+        this.totalRoomsSelected = this.roomsSelected.reduce(this.getSum);
+        this.totalRoomsGuests = this.roomsGuests.reduce(this.getSum);
     }
+
+     getSum = (total, num) => {
+        return total + num;
+      }
 
     changeInlineSearch = () => {
         let check_in_date = this._date.transform(this.checkInDate, 'd-M-yy');

@@ -49,7 +49,7 @@ export class HotelSearchFormComponent implements OnInit {
   ngOnInit() {
     // Hotel form
     this.hotelSearch = this.__fb.group({
-      destination: ["abc"],
+      destination: [""],
       checkInDate: [""],
       checkOutDate: [""],
       dates: [""],
@@ -61,11 +61,12 @@ export class HotelSearchFormComponent implements OnInit {
 
     // this.addChildrenAgeForm();
 
-    let searchCookie = this._cookieService.get('hotelQuery');
-    let currentSearch = JSON.parse(searchCookie);
+    
     // this.searchQuery = searchCookie;
     this.cookieExists = this._cookieService.check('hotelQuery');
     if(this.cookieExists == true){
+      let searchCookie = this._cookieService.get('hotelQuery');
+      let currentSearch = JSON.parse(searchCookie);
       // let options = this._auto.autocomplete.options.toArray()
     // this.myControl.setValue(options[1].value)
       this.hotelsAutocomplete.setValue(currentSearch.destination);
@@ -80,10 +81,10 @@ export class HotelSearchFormComponent implements OnInit {
       this.children = currentSearch.children;
       this.childrenAges = this.__fb.array([this.createChildForm(currentSearch.childrenAges,currentSearch.children)])
       this.destValu = currentSearch.destination;
+      // get search results
+      this.hotelSearchResult = this.getSearchResults(currentSearch);
     }
 
-    // get search results
-    this.hotelSearchResult = this.getSearchResults(currentSearch);
 
     // get hotels list
     this.__ms.getLIst('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/getHotels').subscribe(data => {
@@ -129,10 +130,6 @@ export class HotelSearchFormComponent implements OnInit {
   //     this.hotelSearch.addControl('childrenAges',this.__fb.array([]));
   //   }
   // }
-
-  public selectedDestination = () => {
-    return 'test destination'
-  }
 
   private _filter(value: string): string[] {
     if(value.length > 2) {

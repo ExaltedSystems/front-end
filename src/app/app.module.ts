@@ -122,7 +122,8 @@ import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
     }),
     NgxGalleryModule,
     RangeSliderModule,
-    FilterPipeModule
+    FilterPipeModule,
+    MatProgressSpinnerModule
     
   ],
   providers: [MainService, CookieService, DatePipe],
