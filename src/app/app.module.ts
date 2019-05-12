@@ -123,6 +123,7 @@ import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
     NgxGalleryModule,
     RangeSliderModule,
     FilterPipeModule
+    
   ],
   providers: [MainService, CookieService, DatePipe],
   bootstrap: [AppComponent]

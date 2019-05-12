@@ -104,19 +104,6 @@
               <mat-checkbox [(ngModel)]="item.selected" [value]="item.title">{{item.title}}</mat-checkbox>
             </li>
 
-            <!-- <div class="list-divider"></div>
-            
-            <li class="mb-1"><b>Bed Preference</b></li>
-            <li *ngFor="let item of starRating">
-              <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
-            </li>
-
-            <div class="list-divider"></div>
-            
-            <li class="mb-1"><b>Room accessibility</b></li>
-            <li *ngFor="let item of starRating">
-              <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
-            </li> -->
           </ul>
         </div>
 
@@ -162,20 +149,21 @@
             </div>
           </mat-card>
           
-          <mat-card class="p-1 mb-3 hotel-search-item" 
-          *ngFor="let item of hotelsSearchResult 
-          | priceFilter : selectedPriceValue
-          | hotelFilters: selectedFilters 
-          | starRatingFilter: selectedStarRating 
-          | breakfastTypeFilter: slelctedBreakfast 
-          | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities } : false
-          |  orderBy : order : reverse">
+          <mat-card class="p-1 mb-3 hotel-search-item rounded-0" 
+            *ngFor="let item of hotelsSearchResult 
+            | priceFilter : selectedPriceValue
+            | hotelFilters: selectedFilters 
+            | starRatingFilter: selectedStarRating 
+            | breakfastTypeFilter: slelctedBreakfast 
+            | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities, 
+              parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false
+            |  orderBy : order : reverse">
 
-          <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
-          *ngFor="let item of hotelsSearchResult | filterBy: userFilter |  orderBy : order : reverse"> -->
+            <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
+            *ngFor="let item of hotelsSearchResult | filterBy: userFilter |  orderBy : order : reverse"> -->
 
-          <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
-          *ngFor="let item of hotelsSearchResult | hotelFilters:{ prperty_name: selectedFilters, star_rating: selectedStarRating } : false |  orderBy : order : reverse"> -->
+            <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
+           *ngFor="let item of hotelsSearchResult | hotelFilters:{ prperty_name: selectedFilters, star_rating: selectedStarRating } : false |  orderBy : order : reverse"> -->
 
             <div class="row">
               <div class="col-sm-4">
@@ -202,15 +190,23 @@
                       <i-map-pin class="hotel-feather-icon"></i-map-pin>
                       <p class="ml-1">{{item.address}}</p>
                     </div>
-                    <div class="cancellation d-flex text-success my-1">
+                    <div class="cancellation d-flex align-items-center text-success my-1">
                       <i-check class="success hotel-feather-icon"></i-check>
                       <p class="ml-1">Free Cancellation</p>
                     </div>
                     <div class="tags my-1">
-                      <span class="badge badge-info mr-1">Parking</span>
-                      <span class="badge badge-info mr-1">Internet</span>
-                      <span class="badge badge-info mr-1">Breakfast</span>
-                      <!-- <span class="badge badge-success mr-1">3+</span> -->
+                      <span [ngSwitch]="item.parking_availability">
+                          <span *ngSwitchCase="'Yes, Paid'" class="badge badge-info mr-1">Parking</span>
+                          <span *ngSwitchCase="'Yes, Free'" class="badge badge-success mr-1">Free Parking</span>
+                      </span>
+                      <span [ngSwitch]="item.internet_availability">
+                        <span *ngSwitchCase="'Yes, Paid'" class="badge badge-info mr-1">Internet</span>
+                        <span *ngSwitchCase="'Yes, Free'" class="badge badge-success mr-1">Free Internet</span>
+                      </span>
+                      <span [ngSwitch]="item.breakfast">
+                        <span *ngSwitchCase="'Yes, Its Optional'" class="badge badge-info mr-1">Breakfast</span>
+                        <span *ngSwitchCase="'Yes, Included in Price'" class="badge badge-success mr-1">Free Breakfast</span>
+                      </span>
                     </div>
                     <div class="facilities my-1">
                       <img alt="" class="icon" src="assets/img/icons/svg/wifi-solid.svg">
@@ -243,6 +239,14 @@
             </div>
 
           </mat-card>
+
+          <mat-card class="text-center" *ngIf="(hotelsSearchResult | priceFilter : selectedPriceValue
+          | hotelFilters: selectedFilters 
+          | starRatingFilter: selectedStarRating 
+          | breakfastTypeFilter: slelctedBreakfast 
+          | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities,
+            parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false).length == 0">No Matching Result Found.</mat-card>
+          
         </div>
 
       </div>

@@ -9,13 +9,13 @@
         </div>
         <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm-none">
           <input matInput formControlName="destination" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" 
-          [matAutocomplete]="destinationAutocomplet" [(ngModel)]="destValu">
+          [matAutocomplete]="destinationAutocomplet">
           <mat-autocomplete #destinationAutocomplet="matAutocomplete" autoActiveFirstOption>
             <mat-option *ngFor="let option of filteredList | async" [value]="option">
               {{option}}
             </mat-option>
           </mat-autocomplete>
-          <i-x-circle class="feather-x-circle" *ngIf="destValu" (click)="destValu=''"></i-x-circle>
+          <i-x-circle class="feather-x-circle" *ngIf="destValu" (click)="hotelSearch.controls.destination.value=''"></i-x-circle>
         </mat-form-field>
       </div>
     </div>
@@ -108,7 +108,7 @@
                 </button>
               </div>
               <span class="form-control">{{children}} Children</span>
-              <input formControlName="children" type="hidden" value="0">
+              <input formControlName="children" type="hidden" value="{{children}}">
               <div class="input-group-append">
                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
                   <i-plus class="dropdown-feather"></i-plus>

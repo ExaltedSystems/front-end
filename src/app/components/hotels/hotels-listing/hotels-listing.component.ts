@@ -117,12 +117,12 @@ export class HotelsListingComponent implements OnInit {
 
         this.popularFacilities = [
             {
-                value: 'Yes, Its Free',
+                value: 'Yes, Free',
                 title: 'Free Parking',
                 slelcted: false
             },
             {
-                value: 'Yes its Free',
+                value: 'Yes, Free',
                 title: 'Free Internet',
                 slelcted: false
             },
@@ -132,7 +132,7 @@ export class HotelsListingComponent implements OnInit {
                 slelcted: false
             },
             {
-                value: 'Yes, Its Free',
+                value: 'Yes, Included in Price',
                 title: 'Free Breakfast',
                 slelcted: false
             },

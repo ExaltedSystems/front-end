@@ -1,112 +1,69 @@
 <app-header></app-header>
-<mat-card *ngIf="isLoading == ture">Loading</mat-card>
-<!-- <input type="text" ngxDaterangepickerMd class="form-control"/> -->
-<section  class="flight-search pt-0 pt-sm-2" *ngIf="isLoading == false">
-  <div  class="current-flight-search d-block d-sm-none mb-3">
-    <div  class="current-search-sector row d-flex align-items-center pb-2">
-      <div  class="col px-0">
-        <p >{{hotelDetails.name}}</p>
+<mat-card *ngIf="hotelDetails == ''">Loading</mat-card>
+
+<section class="flight-search pt-0 pt-sm-2" *ngIf="isLoading == false">
+
+  <!-- current search for mobile -->
+  <div class="current-flight-search d-block d-sm-none mb-3">
+    <div class="current-search-sector row d-flex align-items-center pb-2">
+      <div class="col px-0">
+        <p>{{hotelDetails.name}}</p>
       </div>
     </div>
-    <p  class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infantt</p>
-    <div  class="current-search-footer d-flex justify-content-between align-items-center dropdown">
-      <div  class="current-search-dates d-flex align-items-center">
-        <i-calendar  class="feather" ></i-calendar>
-        <p  class="mr-3">Apr 24, 2019</p>
-        <i-calendar  class="feather" ></i-calendar>
-        <p >Apr 30, 2019</p>
+    <p class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infantt</p>
+    <div class="current-search-footer d-flex justify-content-between align-items-center dropdown">
+      <div class="current-search-dates d-flex align-items-center">
+        <i-calendar class="feather"></i-calendar>
+        <p class="mr-3">Apr 24, 2019</p>
+        <i-calendar class="feather"></i-calendar>
+        <p>Apr 30, 2019</p>
       </div>
-      <div >
-        <button  class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
+      <div>
+        <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
       </div>
     </div>
   </div>
+  <!-- / -->
 
-  
-  <div  class="container">
-    
+  <div class="container">
+
     <mat-card class="custom-material-form mt-2 mb-3 rounded-0">
-        <app-hotel-search-form (searchEvent)="getSearchResults($event)"></app-hotel-search-form>
+      <app-hotel-search-form (searchEvent)="getSearchResults($event)"></app-hotel-search-form>
     </mat-card>
 
-    <!-- <div  class="current-flight-search shadow d-none d-sm-flex justify-content-between align-items-center mb-3">
-      <div  class="current-search-sector d-flex align-items-center">
-        <div  class="col px-0">
-          <p >Islamabad Marriot Hotel, Islamabad, Pakistan</p>
+    <!-- filters for mobile -->
+    <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <button class="btn rounded-0 shadow btn-secondary">
+            <i-sliders class="button-feather"></i-sliders> Filter</button>
         </div>
-      </div>|
-      <div  class="d-flex justify-content-center align-items-center">
-        <div  class="current-search-dates d-flex align-items-center">
-          <i-calendar  class="feather" ></i-calendar>
-          <p  class="mr-3">Apr 24, 2019</p>
-          <i-calendar  class="feather" ></i-calendar>
-          <p >Apr 30, 2019</p>
-        </div>
-      </div>|
-      <div  class="d-flex justify-content-middle">
-        <p  class="mr-3">6 Nights</p>
-      </div>|
-      <div  class="">
-        <p  class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infant</p>
-      </div>
-      <div  class="">
-        <button  class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
-      </div>
-    </div> -->
-
-
-    <mat-card  class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3">
-
-      <div  class="d-flex justify-content-between">
-        <div >
-          <button  class="btn rounded-0 shadow btn-secondary">
-            <i-sliders  class="button-feather"></i-sliders> Filter</button>
-        </div>
-        <div >
-          <!--<a  class="btn rounded-0 shadow btn-primary" routerlink="/" href="/">
-             <i-search  class="button-feather"></i-search> New Search</a> -->
-          <button  class="btn rounded-0 shadow btn-secondary">
-            <i-bell  class="button-feather mx-0"> </i-bell>
+        <div>
+          <button class="btn rounded-0 shadow btn-secondary">
+            <i-bell class="button-feather mx-0"> </i-bell>
           </button>
         </div>
       </div>
     </mat-card>
+    <!-- / -->
 
-    <!---->
-
-    <mat-card  class="p-2 mb-3 d-flex justify-content-between rounded-0 sticky-top">
-      <div >
-        <h3  class="mb-0">{{hotelDetails.name}}</h3>
-        <p >{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
-      </div>
-      <div >
-        <div  class="price text-right">
-          <span  class="text-muted org-price">10,000</span>
-          <h5  class="d-block">PKR
-            <span  class="text-danger">{{hotelDetails.price}}</span>
-          </h5>
-          <button  class="btn btn-primary shadow-sm rounded-0">Book Now</button>
+    <mat-card class="p-2 mb-3 rounded-0">
+      <div class="row">
+        <div class="col-sm-8">
+          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
         </div>
-      </div>
-    </mat-card>
-
-    <mat-card  class="p-2 mb-3 rounded-0">
-      <div  class="row">
-        <div  class="col-sm-8">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-        </div>
-        <div  class="col-sm-4">
-          <div >
-            <h3  class="mb-0">{{hotelDetails.name}}</h3>
-            <p >{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
+        <div class="col-sm-4">
+          <div>
+            <h3 class="mb-0">{{hotelDetails.name}}</h3>
+            <p>{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
           </div>
-          <div >
-            <div  class="price text-right">
-              <span  class="text-muted org-price">10,000</span>
-              <h5  class="d-block">PKR
-                <span  class="text-danger">{{hotelDetails.price}}</span>
+          <div>
+            <div class="price text-right">
+              <span class="text-muted org-price">10,000</span>
+              <h5 class="d-block">PKR
+                <span class="text-danger">{{hotelDetails.price * totalNights}}</span>
               </h5>
-              <button  class="btn btn-primary shadow-sm rounded-0">Book Now</button>
+              <button class="btn btn-primary shadow-sm rounded-0">Book Now</button>
             </div>
           </div>
         </div>
@@ -114,135 +71,260 @@
     </mat-card>
 
     <mat-card class="mb-3 rounded-0">
-      <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center justify-content-around" *ngIf="inlineSearchForm == false">
         <div class="checkIn">
           <b>Check In Date</b>
-          <p class="text-primary m-0">{{checkInDate | date:mediumDate}}</p>
+          <p class="text-primary m-0">{{searchQuery.dates.startDate | date:mediumDate}}</p>
         </div>
         <div class="checkIn">
-            <b>Check In Date</b>
-            <p class="text-primary m-0">{{searchQuery.dates.endDate | date:mediumDate}}</p>
-          </div>
+          <b>Check In Date</b>
+          <p class="text-primary m-0">{{searchQuery.dates.endDate | date:mediumDate}}</p>
+        </div>
         <div>
           <p class="m-0">{{totalNights}} Night Stay</p>
         </div>
-          <div class="checkIn">
-              <b>Guests</b>
-              <p class="text-primary m-0" *ngIf="searchQuery.adults > 0">{{searchQuery.adults}} Adult(s)</p>
-              <p class="text-primary m-0" *ngIf="searchQuery.children > 0">{{searchQuery.children}} Children</p>
-            </div>
-          <div>
-            <button class="btn btn-primary shadow-sm rounded-0">Change Search</button>
-          </div>
+        <div class="checkIn">
+          <b class="d-block">Guests</b>
+          <p class="text-primary m-0 mr-1 d-inline-block" *ngIf="searchQuery.adults > 0">{{searchQuery.adults}} Adult<span *ngIf="searchQuery.adults > 1">s</span>,</p>
+          <p class="text-primary m-0 d-inline-block" *ngIf="searchQuery.children > 0">{{searchQuery.children}} Children</p>
+        </div>
+        <div>
+          <button class="btn btn-primary shadow-sm rounded-0" (click)="toggleInlineSearch(true)">Change Search</button>
+        </div>
       </div>
+      <form [formGroup]="UpdateHotelSearch" [hidden]="inlineSearchForm == false" (submit)="updateInlineSearch(UpdateHotelSearch.value)" class="custom-material-form">
+        <div class="form-group row mb-0 d-flex align-items-center">
+          <div class="col-sm-5">
+              <div class="input-group mb-4 mb-sm-0">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text rounded-0">
+                        <i-calendar (click)="checkInDate.open()"></i-calendar>
+                      </span>
+                    </div>
+                    <mat-form-field class="form-control material-input rounded-0">
+                        <input matInput type="text" [autoApply]="true" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/>
+                    </mat-form-field>
+              </div>
+              <!-- <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0">
+                      <i-calendar (click)="checkInDate.open()"></i-calendar>
+                    </span>
+                  </div>
+                  <mat-form-field class="form-control material-input">
+                    <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" name="inlineCheckInDate" 
+                     (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0" 
+                    placeholder="CheckIn Date" [min]="currDate">
+                    <mat-datepicker touchUi #checkInDate></mat-datepicker>
+                  </mat-form-field>
+      
+                  <div class="input-group-prepend" (click)="checkOutDate.open()">
+                    <span class="input-group-text rounded-0">
+                      <i-calendar></i-calendar>
+                    </span>
+                  </div>
+                  <mat-form-field class="form-control rounded-0 material-input">
+                    <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (dateChange)="keytab($event)" (focus)="checkOutDate.open()" name="inlineCheckOutDate" 
+                     (click)="checkOutDate.open()"class="border-left-0 rounded-0" 
+                    placeholder="Checkout Date" [min]="inlineCheckInDate">
+                    <mat-datepicker touchUi #checkOutDate></mat-datepicker>
+                  </mat-form-field>
+                </div> -->
+          </div>
+          <div class="col-sm-1 text-center">
+           {{totalNights}} Nights
+          </div>
+          <div class="col-sm-4">
+              <div class="input-group dropdown mb-4 mb-sm-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded-0">
+                    <i-users></i-users>
+                  </span>
+                </div>
+                <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu"
+                  type="button">
+                  <small class="d-block">No of Guests</small>
+                  <p class="d-inline-block mb-0">{{rooms}} Rooms - {{adults}} Adult - {{children}} Child</p>
+                  <i-chevron-down class="dropdown-feather"></i-chevron-down>
+                </button>
+                <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
+                  <div class="form-group">
+                    <div class="input-group mb-3 text-center">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('rooms')">
+                          <i-minus class="dropdown-feather"></i-minus>
+                        </button>
+                      </div>
+                      <span class="form-control">{{rooms}} Rooms</span>
+                      <input formControlName="rooms" type="hidden" value="{{rooms}}">
+                      <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('rooms')">
+                          <i-plus class="dropdown-feather"></i-plus>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group mb-3 text-center">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('adults')">
+                          <i-minus class="dropdown-feather"></i-minus>
+                        </button>
+                      </div>
+                      <span class="form-control">{{adults}} Adults</span>
+                      <input formControlName="adults" type="hidden" value="{{adults}}">
+                      <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('adults')">
+                          <i-plus class="dropdown-feather"></i-plus>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group mb-3 text-center">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('children')">
+                          <i-minus class="dropdown-feather"></i-minus>
+                        </button>
+                      </div>
+                      <span class="form-control">{{children}} Children</span>
+                      <input formControlName="children" type="hidden" value="{{children}}">
+                      <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
+                          <i-plus class="dropdown-feather"></i-plus>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" *ngIf="children > 0">
+                    <p>Children's ages (years)</p>
+                    <div class="d-inline-block" formArrayName="childrenAges" *ngFor="let item of UpdateHotelSearch?.get('childrenAges')?.controls; let i = index;">
+                      <div formGroupName="{{i}}">
+                          <select formControlName="childAge" class="form-control child-age-select">
+                              <option value="-1>" selected="selected">< 1</option>
+                              <option *ngFor="let item of createRange(17)" [value]="item">{{item}}</option>
+                            </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary rounded-0 shadow-sm mr-2">Update</button>
+            <button type="button" class="btn btn-default shadow-sm rounded-0" (click)="toggleInlineSearch(false)">Cancel</button>
+          </div>
+        </div>
+      </form>
     </mat-card>
 
-    <mat-card  class="p-2 mb-3 rounded-0">
-      <p >Number of rooms: 12</p>
-      <h4 >Room Types at Islamabad Marriot Hotel</h4>
-      <table  class="table table-bordered room-details-table">
-        <thead >
-          <tr >
-            <th  width="20%">&nbsp;</th>
-            <th  class="td-filled" width="10%">Options</th>
-            <th  width="7%">Max occupancy</th>
-            <th  class="td-filled" width="7%">Price for {{totalNights}} Night</th>
-            <th  class="td-filled" width="7%">Rooms</th>
+    <mat-card class="p-2 mb-3 rounded-0">
+      <p>Number of rooms: 12</p>
+      <h4>Room Types at Islamabad Marriot Hotel</h4>
+      <table class="table table-bordered room-details-table">
+        <thead>
+          <tr>
+            <th width="20%">&nbsp;</th>
+            <th class="td-filled" width="10%">Options</th>
+            <th width="7%">Max occupancy</th>
+            <th class="td-filled" width="7%">Price for {{totalNights}} Night</th>
+            <th class="td-filled" width="7%">Rooms</th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           <!---->
           <tr *ngFor="let room of hotelDetails.room_details; let i = index">
-            <td >
-              <b  class="text-primary">{{room.room_title}}</b>
-              <p  class="mb-1" *ngIf="room.facility.length > 0">
-                <b >Facilities:</b>
+            <td>
+              <b class="text-primary">{{room.room_title}}</b>
+              <p class="mb-1" *ngIf="room.facility.length > 0">
+                <b>Facilities:</b>
               </p>
-              <ul  class="room-wise-facilities">
-                <li  class="d-inline-block " *ngFor="let facility of room.facility">{{facility}} -&nbsp;</li>
+              <ul class="room-wise-facilities">
+                <li class="d-inline-block " *ngFor="let facility of room.facility">{{facility}} -&nbsp;</li>
               </ul>
             </td>
-            <td  class="td-filled">
+            <td class="td-filled">
               <!-- <div [ngSwitch]="room.breakfast">
                 <div  *ngSwitchCase="Yes, Its Optional">Good Breakfast
                 <br/> {{room.breakfast_price}}</div>
                   <div *ngSwitchCase="Yes, Its Free">Free Breakfast</div>
               </div> -->
             </td>
-            <td  align="center">
-              <div  class="d-flex align-items-center">
+            <td align="center">
+              <div class="d-flex align-items-center">
                 <i-user></i-user>
-                <b  class="ml-1">x {{room.no_of_guest}}</b>
+                <b class="ml-1">x {{room.no_of_guest}}</b>
               </div>
             </td>
-            <td  class="td-filled">
-              <b  class="text-primary">PKR </b>{{room.price_pp_pn}}</td>
-            <td  class="td-filled">{{i}}
-              <select  class="form-control" #rooms (change)="getRoomsPrice(rooms.value,room.price_pp_pn)">
-                <option  value="0">0</option>
-                <option  value="1">1 (PKR {{room.price_pp_pn *1}})</option>
-                <option  value="2">2 (PKR {{room.price_pp_pn *2}})</option>
-                <option  value="3">3 (PKR {{room.price_pp_pn *3}})</option>
-                <option  value="4">4 (PKR {{room.price_pp_pn *4}})</option>
-                <option  value="5">5 (PKR {{room.price_pp_pn *5}})</option>
+            <td class="td-filled">
+              <b class="text-primary">PKR </b>{{room.price_pp_pn * totalNights}}</td>
+            <td class="td-filled">{{i}}
+              <select class="form-control" #rooms (change)="getRoomsPrice(rooms.value,room.price_pp_pn)">
+                <option value="0">0</option>
+                <option value="1">1 (PKR {{(room.price_pp_pn * totalNights) *1}})</option>
+                <option value="2">2 (PKR {{(room.price_pp_pn * totalNights) *2}})</option>
+                <option value="3">3 (PKR {{(room.price_pp_pn * totalNights) *3}})</option>
+                <option value="4">4 (PKR {{(room.price_pp_pn * totalNights) *4}})</option>
+                <option value="5">5 (PKR {{(room.price_pp_pn * totalNights) *5}})</option>
               </select>
             </td>
 
           </tr>
         </tbody>
       </table>
-      <h4 > Info</h4>
-      <table  cellspacing="7" class="table table-bordered">
-        <tbody >
-          <tr >
-            <td  width="30%">
-              <b >Check In</b>
+      <h4> Info</h4>
+      <table cellspacing="7" class="table table-bordered">
+        <tbody>
+          <tr>
+            <td width="30%">
+              <b>Check In</b>
             </td>
-            <td >12:00:00 -- 14:00:00</td>
+            <td>{{hotelDetails.checkin_from}} -- {{hotelDetails.checkin_to}}</td>
           </tr>
-          <tr >
-            <td >
-              <b >Check Out</b>
+          <tr>
+            <td>
+              <b>Check Out</b>
             </td>
-            <td >12:00:00 -- 14:00:00</td>
+            <td>{{hotelDetails.checkout_from}} -- {{hotelDetails.checkout_to}}</td>
           </tr>
         </tbody>
       </table>
 
-      <h4 >Policies at Islamabad Marriot Hotel</h4>
-      <table  cellspacing="7" class="table table-bordered">
-        <tbody >
-          <tr >
-            <td  width="30%">
-              <b >Cancellation/Prepayment</b>
+      <h4>Policies at Islamabad Marriot Hotel</h4>
+      <table cellspacing="7" class="table table-bordered">
+        <tbody>
+          <tr>
+            <td width="30%">
+              <b>Cancellation/Prepayment</b>
             </td>
-            <td >
-              <!---->
-              <!---->
-              <span  class="">Guests won't be charged anything if they cancel 1 day before check-in, otherwise they will pay for the full
-                stay
+            <td>
+              <span class="">Guests won't be charged anything if they cancel {{hotelDetails.cancellation_days}} day before check-in, otherwise they will pay for the 
+                full stay
               </span>
             </td>
           </tr>
-          <tr >
-            <td >
-              <b >Accepted credit cards</b>
+          <tr *ngIf="hotelPaymentDetails.payment_form.is_credit_card == 'yes'">
+            <td>
+              <b>Accepted credit cards</b>
             </td>
-            <td >
-
+            <td>
+              <span *ngIf="hotelPaymentDetails.payment_form.master == true" class="mr-2">Master</span>
+              <span *ngIf="hotelPaymentDetails.payment_form.visa == true" class="mr-2">Visa</span>
+              <span *ngIf="hotelPaymentDetails.payment_form.amx == true" class="mr-2">American Express</span>
+              <span *ngIf="hotelPaymentDetails.payment_form.mestro == true" class="mr-2">Mestro</span>
             </td>
           </tr>
-          <tr >
-            <td >
-              <b >VAT/Tax settings</b>
+          <tr>
+            <td>
+              <b>VAT/Tax settings</b>
             </td>
-            <td >12:00:00 -- 14:00:00</td>
+            <td>12:00:00 -- 14:00:00</td>
           </tr>
-          <tr >
-            <td >
-              <b >City tax</b>
+          <tr *ngIf="hotelPaymentDetails.payment_form.default_tax == true">
+            <td>
+              <b>City tax</b>
             </td>
-            <td >12:00:00 -- 14:00:00</td>
+            <td>Default (17 % is usually excluded in Islamabad room prices)</td>
           </tr>
         </tbody>
       </table>
@@ -256,18 +338,18 @@
 </section>
 
 <mat-card class="reservation-options p-3 rounded-0 mat-card">
-    <div class="d-flex align-items-center justify-content-between">
-      <div class="d-flex">
-        <div class="pr-3 border-right ng-star-inserted">
-            <p class="mb-1">{{totalRoomsSelected}} Rooms Selected</p>
-            <b class="text-primary">PKR </b>{{totalPrice}}
-          </div>
-          <div class="pl-3 text-warning">
-            <p>You still need to fit 3 more adult.</p>
-          </div>
+  <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex">
+      <div class="pr-3 border-right ng-star-inserted">
+        <p class="mb-1">{{totalRoomsSelected}} Rooms Selected</p>
+        <b class="text-primary">PKR </b>{{totalPrice}}
       </div>
-      <button class="btn btn-primary shadow-sm rounded-0">Continue Reservation</button>
+      <div class="pl-3 text-warning">
+        <p>You still need to fit 3 more adult.</p>
+      </div>
     </div>
-  </mat-card>
+    <button class="btn btn-primary shadow-sm rounded-0">Continue Reservation</button>
+  </div>
+</mat-card>
 
-  <app-footer></app-footer>
+<app-footer></app-footer>
