@@ -5,6 +5,7 @@ import { FlightBookingComponent } from './components/flight-booking/flight-booki
 import { PnrViewComponent } from './components/pnr-view/pnr-view.component';
 import { HotelsListingComponent } from 'src/app/components/hotels/hotels-listing/hotels-listing.component';
 import { HotelDetailsComponent } from 'src/app/components/hotels/hotel-details/hotel-details.component';
+import { HotelBookingComponent } from 'src/app/components/hotels/hotel-booking/hotel-booking.component';
 
 export const APP_ROUTES: Routes = [
   	{ path: '', component: HomeComponent },
@@ -12,5 +13,6 @@ export const APP_ROUTES: Routes = [
   	{ path: 'flight-booking', component: FlightBookingComponent },
   	{ path: 'pnrView', component: PnrViewComponent },
   	{ path: 'hotels-listing', component: HotelsListingComponent },
-  	{ path: 'hotel-details', component: HotelDetailsComponent }
+  	{ path: 'hotel-details', component: HotelDetailsComponent },
+  	{ path: 'hotel-booking', component: HotelBookingComponent }
 ];

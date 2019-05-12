@@ -46,6 +46,7 @@ import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
 import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
 import { PriceFilterPipe } from './pipes/price-filter.pipe';
 import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
+import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,9 @@ import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
     
     PriceFilterPipe,
     
-    FacilityFilterPipe
+    FacilityFilterPipe,
+    
+    HotelBookingComponent
   ],
   imports: [
     BrowserModule,

@@ -12,13 +12,13 @@
         <p>{{hotelDetails.name}}</p>
       </div>
     </div>
-    <p class="current-search-passenger text-center">1 Adult(s), 0 Child, 0 Infantt</p>
+    <p class="current-search-passenger text-center">{{rooms}} Rooms, {{adults}} Adult(s), {{children}} Child</p>
     <div class="current-search-footer d-flex justify-content-between align-items-center dropdown">
       <div class="current-search-dates d-flex align-items-center">
         <i-calendar class="feather"></i-calendar>
-        <p class="mr-3">Apr 24, 2019</p>
+        <p class="mr-3">{{checkInDate}}</p>
         <i-calendar class="feather"></i-calendar>
-        <p>Apr 30, 2019</p>
+        <p>{{checkOutDate}}</p>
       </div>
       <div>
         <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
@@ -377,7 +377,7 @@
         <p>You still need to fit {{adults - totalRoomsGuests}} more adult.</p>
       </div>
     </div>
-    <button class="btn btn-primary shadow-sm rounded-0 py-2" [disabled]="totalRoomsGuests < adults">Continue Booking</button>
+    <button class="btn btn-primary shadow-sm rounded-0 py-2" [disabled]="totalRoomsGuests < adults" (click)="continueBooking()">Continue Booking</button>
   </div>
 </mat-card>
 

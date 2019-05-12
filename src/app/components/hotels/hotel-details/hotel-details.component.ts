@@ -306,4 +306,8 @@ export class HotelDetailsComponent implements OnInit {
         this.isLoading = false;
     }
 
+    public continueBooking = () => {
+        this._router.navigate(['/hotel-booking']);
+    }
+
 }
