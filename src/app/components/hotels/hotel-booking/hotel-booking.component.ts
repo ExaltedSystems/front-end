@@ -30,6 +30,7 @@ export class HotelBookingComponent implements OnInit {
   ngOnInit() {
     // get search query
     this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
+    console.log('serach', this.searchQuery)
     this.checkInDate = this.searchQuery['dates']['startDate'];
     this.checkOutDate = this.searchQuery['dates']['endDate'];
     this.totalNights = this.calculateDate(this.checkInDate, this.checkOutDate)
@@ -43,36 +44,38 @@ export class HotelBookingComponent implements OnInit {
       this.hotelDetails = result;
       this.galleryImages = result['images'];
       this.isLoading = false;
+      console.log('hotel details', this.hotelDetails)
     })
 
     this.galleryOptions = [
-      { "previewCloseOnClick": true, "previewCloseOnEsc": true },
       {
-        width: '100%',
-        height: '600px',
-        thumbnailsColumns: 8,
-        imagePercent: 100,
-        thumbnailsPercent: 10,
-        thumbnailsMargin: 5,
-        thumbnailMargin: 5,
-        imageAnimation: NgxGalleryAnimation.Slide
+          width: '100%',
+          height: '100%',
+          thumbnailsColumns: 4,
+          imageAnimation: NgxGalleryAnimation.Slide
       },
       // max-width 800
       {
-        breakpoint: 800,
-        width: '100%',
-        height: '500px',
-        imagePercent: 100,
-        thumbnailsPercent: 25,
-        thumbnailsMargin: 5,
-        thumbnailMargin: 5
+          breakpoint: 800,
+          width: '100%',
+          height: '100%',
+          imagePercent: 100,
+          thumbnailsPercent: 20,
+          thumbnailsMargin: 5,
+          thumbnailMargin: 5
       },
       // max-width 400
       {
-        breakpoint: 400,
-        preview: false
+          breakpoint: 400,
+          width: '100%',
+          height: '200px',
+          imagePercent: 100,
+          thumbnailsPercent: 20,
+          thumbnailsMargin: 5,
+          thumbnailMargin: 5,
+          preview: false
       }
-    ];
+  ];
   } //
 
   calculateDate = (date1: any, date2: any) => {
@@ -84,6 +87,14 @@ export class HotelBookingComponent implements OnInit {
     //this is the actual equation that calculates the number of days.
 
     return days;
+  }
+
+  createRange(number) {
+    var items: number[] = [];
+    for (var i = 1; i <= number; i++) {
+      items.push(i);
+    }
+    return items;
   }
 
 }

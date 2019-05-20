@@ -1,5 +1,11 @@
+html{
+	font-size: 16px;
+}
 body{
 	background: #ececec !important;
+}
+p, label{
+	font-size: 0.9rem;
 }
 header{
 	background: #fff;
@@ -64,14 +70,19 @@ img{}
 .custom-material-form .form-control{
 	line-height: 2.4;
 	font-size: 14px;
-	padding-left: 0 !important;
+	/* padding-left: 0 !important; */
 }
 
 .main-search-form .material-input,
 .custom-material-form .material-input{
 	padding: 0 .75rem;
 	border-left: 1px solid #ced4da;
-	padding-left: 0;
+	/* padding-left: 0; */
+  }
+
+  .main-search-form .material-input,
+  .main-search-form .form-control{
+	  padding-left: 0 !important;
   }
 
 .main-search-form .input-group .material-input,
@@ -194,6 +205,11 @@ img{}
 	width: 18px;
 	height: 18px;
 }
+
+/* .main-search-form .input-group,
+.custom-material-form .input-group{
+	flex-wrap: nowrap;
+} */
 
 .main-search-form .form-group,
 .custom-material-form .form-group{
@@ -536,6 +552,10 @@ section{
 	font-size: 1.2rem;
 	padding-top: 0;
     padding-bottom: 0.7rem;
+}
+
+.text-primary{
+	color: #2072b9 !important;
 }
 
 .sidebar-list ul{
@@ -1044,6 +1064,10 @@ legend {
 	height: 100%
 }
 
+.light-grey-bg{
+	background: #f7f6f6;
+}
+
 .org-price{
 	text-decoration: line-through
 }
@@ -1103,6 +1127,18 @@ legend {
 	background:royalblue;
 	}
 
+.mobile-room-view{
+	border: solid 1px #333;
+}
+
+.selected-room .form-control {
+	height: 30px !important;
+	padding: 0.375rem;
+}
+.remove-hotel-icon{
+	position: absolute;
+	right: 0;
+}
 
  /*Small devices (portrait phones, 576px and up)*/
 @media (max-width: 575px) { 
@@ -1180,7 +1216,7 @@ legend {
 	}
 	.main-search-form .material-input,
 	.custom-material-form .material-input{
-		padding: 0;
+		/* padding: 0; */
 	}
 	.main-search-form .material-input input[type=text], .main-search-form .mat-input-element,
 	.custom-material-form .material-input input[type=text], .custom-material-form .mat-input-element{

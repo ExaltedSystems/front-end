@@ -47,6 +47,7 @@ import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
 import { PriceFilterPipe } from './pipes/price-filter.pipe';
 import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
 import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-b
     NgxGalleryModule,
     RangeSliderModule,
     FilterPipeModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DeviceDetectorModule.forRoot()
     
   ],
   providers: [MainService, CookieService, DatePipe],

@@ -9,6 +9,7 @@ import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 import * as _ from 'lodash';
 import { StarRatingFilterPipe } from 'src/app/pipes/star-rating-filter.pipe';
 import { isArray } from 'util';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -46,10 +47,15 @@ export class HotelsListingComponent implements OnInit {
     public filterSections: any[];
     private _lipsum: any;
 
+    deviceInfo = null;
+    isDesktop = null;
+    isMobile = null;
+    isTablet = null;
+
     userFilter: any = { star_rating: '', price: '' };
 
-    constructor(private _ms: MainService, private _cookieService: CookieService, private _router: Router) {
-
+    constructor(private _ms: MainService, private _cookieService: CookieService, private _router: Router,private deviceService: DeviceDetectorService) {
+        this.epicFunction();
     }
 
     ngOnInit(): void {
@@ -82,6 +88,12 @@ export class HotelsListingComponent implements OnInit {
             // max-width 400
             {
                 breakpoint: 400,
+                width: '100%',
+                height: '200px',
+                imagePercent: 100,
+                thumbnailsPercent: 20,
+                thumbnailsMargin: 5,
+                thumbnailMargin: 5,
                 preview: false
             }
         ];
@@ -156,6 +168,24 @@ export class HotelsListingComponent implements OnInit {
         return self.indexOf(value) === index;
     }
 
+    epicFunction() {
+        this.deviceInfo = this.deviceService.getDeviceInfo();
+        this.isMobile = this.deviceService.isMobile();
+        this.isTablet = this.deviceService.isTablet();
+        this.isDesktop = this.deviceService.isDesktop();
+        console.log('device',this.deviceInfo);
+        console.log('mobile',this.isMobile);
+      }
+
+     isJson = (str) => {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
     getFiltersList = (arr) => {
         arr.forEach((element) => {
             // console.log('element',element.price)
@@ -163,12 +193,15 @@ export class HotelsListingComponent implements OnInit {
             this.propertyTypes.push({ value: element.prperty_name, title: element.prperty_name, slelcted: false });
 
             // get property list array
-            let breakfastArr = JSON.parse(element.breakfast_type);
-            if (isArray(breakfastArr)) {
-                breakfastArr.forEach((ele) => {
-                    this.breakfastTypes.push({ value: ele.id, title: ele.name, slelcted: false });
-                });
+            if(this.isJson(element.breakfast_type) == true){
+                let breakfastArr = JSON.parse(element.breakfast_type);
+                if (isArray(breakfastArr)) {
+                    breakfastArr.forEach((ele) => {
+                        this.breakfastTypes.push({ value: ele.id, title: ele.name, slelcted: false });
+                    });
+                }
             }
+            
 
             // get price array
             this.priceList.push(element.price);

@@ -99,6 +99,13 @@ export class HotelDetailsComponent implements OnInit {
             // max-width 400
             {
                 breakpoint: 400,
+                width: '100%',
+                height: '300px',
+                thumbnailsColumns: 5,
+                imagePercent: 100,
+                thumbnailsPercent: 20,
+                thumbnailsMargin: 5,
+                thumbnailMargin: 5,
                 preview: false
             }
         ];
