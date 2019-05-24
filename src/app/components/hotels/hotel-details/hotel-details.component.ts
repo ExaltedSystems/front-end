@@ -45,6 +45,8 @@ export class HotelDetailsComponent implements OnInit {
     roomsGuests: number[] = [];
     totalRoomsGuests: number = 0;
 
+    selectedRoomsId = [];
+
     inlineSearchForm: boolean = false;
     hotelPaymentDetails: any;
 
@@ -265,7 +267,7 @@ export class HotelDetailsComponent implements OnInit {
         return days;
     }
 
-    public getRoomsPrice = (rooms: number, price: number,i,guests) => {
+    public getRoomsPrice = (rooms: number, price: number,i,guests,roomId) => {
         this.roomsPrice[i] = 0;
         this.roomsSelected[i] = 0;
         this.roomsGuests[i] = 0;
@@ -280,6 +282,7 @@ export class HotelDetailsComponent implements OnInit {
         //         this.roomsSelected[j] = +rooms;
         //     }
         // }
+        this.selectedRoomsId.push(roomId);
         this.totalRoomsPrice = this.roomsPrice.reduce(this.getSum);
         this.totalRoomsSelected = this.roomsSelected.reduce(this.getSum);
         this.totalRoomsGuests = this.roomsGuests.reduce(this.getSum);
@@ -314,6 +317,7 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     public continueBooking = () => {
+        this._cookieService.set('roomsInfo',JSON.stringify(this.selectedRoomsId));
         this._router.navigate(['/hotel-booking']);
     }
 

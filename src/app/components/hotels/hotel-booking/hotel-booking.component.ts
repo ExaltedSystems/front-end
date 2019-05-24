@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { MainService } from 'src/app/services/main.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -25,7 +26,14 @@ export class HotelBookingComponent implements OnInit {
   checkOutDate: Date;
   totalNights: number;
 
-  constructor(private _ms: MainService, private _cookieService: CookieService) { }
+  roomsInfo: any;
+  selectedRooms: any;
+
+  isLinear = false;
+  bookingInfoFrom: FormGroup;
+  paymentInfoForm: FormGroup;
+
+  constructor(private _ms: MainService, private _cookieService: CookieService,private __fb: FormBuilder) { }
 
   ngOnInit() {
     // get search query
@@ -46,6 +54,8 @@ export class HotelBookingComponent implements OnInit {
       this.isLoading = false;
       console.log('hotel details', this.hotelDetails)
     })
+
+    this.getSelectedRooms();
 
     this.galleryOptions = [
       {
@@ -76,7 +86,51 @@ export class HotelBookingComponent implements OnInit {
           preview: false
       }
   ];
+
+  this.bookingInfoFrom = this.__fb.group({
+    title: ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    confirmEmail: ['', Validators.required],
+    bookingFor: ['', Validators.required],
+  });
+  this.paymentInfoForm = this.__fb.group({
+    cardType: ['', Validators.required],
+    cardNumber: ['', Validators.required],
+    cvn: ['', Validators.required],
+    cardHolderFirstName: ['', Validators.required],
+    cardholderLastName: ['', Validators.required],
+    expiryMonth: ['', Validators.required],
+    expiryYear: ['', Validators.required],
+    email: ['', Validators.required],
+    phone: ['', Validators.required],
+    address: ['', Validators.required],
+  });
+  
   } //
+
+  getSelectedRooms = () => {
+    this.roomsInfo = JSON.parse(this._cookieService.get('roomsInfo'));
+
+    let reservedRooms = {
+      hotel_id: this.hotelId,
+      room_ids: this.roomsInfo
+    }
+
+    this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/reservedHotelDetails',reservedRooms).subscribe(result => {
+      console.log(result);
+      this.selectedRooms = result['room_details']
+    })
+  }
+
+  removeSelectedRoom = (id) => {
+    for( var i = this.roomsInfo.length-1; i--;){
+      if ( this.roomsInfo[i] === id) this.roomsInfo.splice(i, 1);
+      }
+    this._cookieService.set('roomsInfo',JSON.stringify(this.roomsInfo));
+    this.getSelectedRooms();
+  }
 
   calculateDate = (date1: any, date2: any) => {
     //our custom function with two parameters, each for a selected date
@@ -95,6 +149,39 @@ export class HotelBookingComponent implements OnInit {
       items.push(i);
     }
     return items;
+  }
+
+  conformBooking = () => {
+    let bookingObj = {
+      hotelId: '',
+      checkInDate: '',
+      checkOutDate: '',
+      totalNights: '',
+      guests: {
+        adults: '',
+        children: '',
+        childrenAges: []
+      },
+      rooms: [{
+        roomId: '',
+        roomsCount: '',
+        roomGuests: ''
+      }],
+      title: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      country: '',
+      paymentInfo: {
+        cardType: '',
+        cardNo: '',
+        ccv: '',
+        expiryDate: '',
+        cardHolderFirstName: '',
+        cardHolderLastName: '',
+      }
+    }
   }
 
 }

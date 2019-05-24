@@ -58,6 +58,10 @@
           <p>1 x King Room</p>
         </mat-card>
         <mat-card class="rounded-0 mt-2 mb-3">
+            <h3 class="sidebar-title text-primary">Price</h3>
+            
+          </mat-card>
+        <mat-card class="rounded-0 mt-2 mb-3">
           <h3 class="sidebar-title text-primary">Your Booking Includes</h3>
           <span *ngIf="hotelDetails.parking_availability == 'Yes, Free'" class="badge badge-success mr-1">Free Parking</span>
           <span *ngIf="hotelDetails.internet_availability == 'Yes, Free'" class="badge badge-success mr-1">Free Internet</span>
@@ -110,88 +114,178 @@
             </div>
           </div>
           <div class="list-divider"></div>
-          <h3 class="sidebar-title text-primary mt-3">Enter Your Details</h3>
 
           <p class="d-block d-sm-flex align-items-center">
-              <i-user class="hotel-feather-icon mr-1"></i-user> <a href="">Sign in</a>&nbsp;to book with your saved details or&nbsp;<a href="">register</a>&nbsp;to manage your bookings on the go!
-            </p>
+            <i-user class="hotel-feather-icon mr-1"></i-user>
+            <a href="">Sign in</a>&nbsp;to book with your saved details or&nbsp;
+            <a href="">register</a>&nbsp;to manage your bookings on the go!
+          </p>
 
-            <form class="custom-material-form">
-              <div class="form-group row">
-                <div class="col-sm-2">
-                    <select name="" id="" class="form-control mb-3 mb-sm-0 rounded-0">
+          <mat-horizontal-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="bookingInfoFrom">
+              <form [formGroup]="bookingInfoFrom" class="custom-material-form">
+                <ng-template matStepLabel>Enter Your Details</ng-template>
+                <div class="form-group row">
+                  <div class="col-sm-2">
+                    <select formControlName="title" class="form-control mb-3 mb-sm-0 rounded-0">
                       <option value="" disabled>Title</option>
                       <option value="Mr.">Mr.</option>
                       <option value="Miss.">Miss.</option>
                       <option value="Mrs.">Mrs.</option>
                     </select>
-                </div>
-                <div class="col-sm-4">
-                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                        <input matInput placeholder="First Name" class="">
-                      </mat-form-field>
-                </div>
-                <div class="col-sm-4">
-                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                        <input matInput placeholder="Last Name" class="">
-                      </mat-form-field>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <div class="col-sm-4">
-                      <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                          <input matInput placeholder="Email" class="">
-                        </mat-form-field>
                   </div>
                   <div class="col-sm-4">
-                      <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                          <input matInput placeholder="Conform Email" class="">
-                        </mat-form-field>
-                    </div>
+                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                      <input matInput formControlName="firstName" placeholder="First Name" class="">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                      <input matInput formControlName="lastName" placeholder="Last Name" class="">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                      <input matInput formControlName="email" placeholder="Email" class="">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                      <input matInput formControlName="confirmEmail" placeholder="Conform Email" class="">
+                    </mat-form-field>
+                  </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12">
-                      <b class="d-block mb-2">Who are you booking for?</b>
-                      <mat-radio-group aria-label="Select an option">
-                          <mat-radio-button class="d-block" value="1">I am the main guest</mat-radio-button>
-                          <mat-radio-button class="d-block" value="2">Booking is for someone else</mat-radio-button>
-                        </mat-radio-group>
+                    <b class="d-block mb-2">Who are you booking for?</b>
+                    <mat-radio-group aria-label="Select an option" formControlName="bookingFor">
+                      <mat-radio-button class="d-block" value="1">I am the main guest</mat-radio-button>
+                      <mat-radio-button class="d-block" value="2">Booking is for someone else</mat-radio-button>
+                    </mat-radio-group>
                   </div>
                 </div>
-            </form>
+                <div class="selected-room light-grey-bg p-3 mb-3 position-relative" *ngFor="let room of selectedRooms">
+                    <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                      <i-x-circle></i-x-circle>
+                    </a>
+                    <p class="mb-1">
+                      <b>{{room.room_title}}</b>
+                    </p>
+                    <small>Can I cancel? When do I pay?</small>
+                    <div class="form-group row d-flex align-items-center my-2">
+                      <label class="col-sm-1 m-0">Guests</label>
+                      <div class="col-sm-2">
+                        <select class="form-control rounded-0">
+                          <option *ngFor="let item of createRange(room.no_of_guest);  let last = last" [attr.selected]="last" [value]="item">{{item}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4">
+                        Non Smooking
+                      </div>
+                    </div>
+                    <div class="list-divider"></div>
+                    <div class="form-group row mb-0">
+                      <div class="col-sm-5">
+                        <label for="">Full Guest Name</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+        
+                  </div>
+        
+                  <div class="form-group">
+                    <mat-checkbox class="d-block">
+                      I'm interested in renting a car
+                    </mat-checkbox>
+                    <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
+                  </div>
+                <div>
+                  <button matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="paymentInfoForm">
+              <form [formGroup]="paymentInfoForm"  class="custom-material-form">
+                <ng-template matStepLabel>Payment Details</ng-template>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                      <mat-radio-group aria-label="Select an option" formControlName="cardType">
+                        <mat-radio-button value="1" class="mr-4">Master</mat-radio-button>
+                        <mat-radio-button value="2">Visa</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="col-sm-6">
+                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                          <input matInput formControlName="cardNumber" placeholder="Card Number" class="">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                          <input matInput formControlName="cvn" placeholder="CVN" class="">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                          <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                            <input matInput formControlName="cardHolderFirstName" placeholder="Card Holder First Name" class="">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                          <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                            <input matInput formControlName="cardholderLastName" placeholder="cardholderLastName" class="">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-3">
+                            <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                              <input matInput formControlName="expiryMonth" placeholder="Expiry Month" class="">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-sm-3">
+                            <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                              <input matInput formControlName="expiryYear" placeholder="Expiry Year" class="">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-sm-3">
+                              <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                <input matInput formControlName="email" placeholder="Email" class="">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                              <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                <input matInput formControlName="phone" placeholder="Phone" class="">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-8">
+                              <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                <input matInput formControlName="address" placeholder="Address" class="">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                <div>
+                    <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2">Back</button>
+                    <button matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                  </div>
+              </form>
 
-            <div class="selected-room light-grey-bg p-3 mb-3 position-relative" *ngFor="let room of hotelDetails.room_details">
-              <a class="remove-hotel-icon"><i-x-circle></i-x-circle> </a>
-              <p class="mb-1"><b>{{room.room_title}}</b></p>
-              <small>Can I cancel? When do I pay?</small>
-              <div class="form-group row d-flex align-items-center my-2">
-                <label class="col-sm-1 m-0">Guests</label>
-                <div class="col-sm-2">
-                    <select class="form-control rounded-0">
-                      <option *ngFor="let item of createRange(room.no_of_guest);  let last = last" [attr.selected]="last" [value]="item">{{item}}</option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                  Non Smooking
-                </div>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Review Your Booking</ng-template>
+              You are now done.
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
               </div>
-              <div class="list-divider"></div>
-              <div class="form-group row mb-0">
-                <div class="col-sm-5">
-                  <label for="">Full Guest Name</label>
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-              
-            </div>
-
-            <div class="form-group">
-                <mat-checkbox class="d-block">
-                    I'm interested in renting a car
-                </mat-checkbox>
-                <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
-              </div>
-          
+            </mat-step>
+          </mat-horizontal-stepper>
         </mat-card>
       </div>
     </div>

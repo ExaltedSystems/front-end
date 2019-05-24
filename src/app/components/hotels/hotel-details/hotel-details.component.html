@@ -312,7 +312,7 @@
                   <td class="td-filled">
                     <b class="text-primary">PKR </b>{{room.price_pp_pn}}</td>
                   <td class="td-filled">
-                    <select class="form-control" #rooms (change)="getRoomsPrice(rooms.value,(room.price_pp_pn),i,room.no_of_guest)">
+                    <select class="form-control" #rooms (change)="getRoomsPrice(rooms.value,(room.price_pp_pn),i,room.no_of_guest,room.id)">
                       <option value="0">0</option>
                       <option value="1">1 (PKR {{(room.price_pp_pn) *1}})</option>
                       <option value="2">2 (PKR {{(room.price_pp_pn) *2}})</option>
@@ -347,7 +347,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                       <p class="mb-0"><b class="text-primary">PKR </b>{{room.price_pp_pn}}/-</p>
-                      <select class="form-control w-50" #rooms (change)="getRoomsPrice(rooms.value,(room.price_pp_pn),i,room.no_of_guest)">
+                      <select class="form-control w-50" #rooms (change)="getRoomsPrice(rooms.value,(room.price_pp_pn),i,room.no_of_guest,room.id)">
                         <option value="" disabled>Select Room</option>
                         <option value="1">1 (PKR {{(room.price_pp_pn) *1}})</option>
                         <option value="2">2 (PKR {{(room.price_pp_pn) *2}})</option>
