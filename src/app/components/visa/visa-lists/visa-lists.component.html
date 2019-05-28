@@ -1,0 +1,83 @@
+<div class="banner d-flex align-items-center">
+  <img src="assets/img/visa-background-image.jpg" class="img-fluid">
+  <div class="page-search">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 offset-sm-4">
+          <h3>Lets Travel Around the World</h3>
+          <form action="" method="get" accept-charset="utf-8">
+            <div class="input-group shadow shadow-xs-none">
+              <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
+                <span class="input-group-text rounded-0">
+                  <span data-feather="map-pin"></span>
+                </span>
+              </div>
+              <input type="text" class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none" placeholder="Visa You Looking For">
+              <div class="input-group-append">
+                <button class="btn btn-primary rounded-0">GO</button>
+              </div>
+            </div>
+          </form>
+          <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="visa-contents">
+	<div class="container sidebar">
+		<div class="section-title">
+			<h1>visit visa</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		</div>
+		<div class="row">
+			<div class="col-sm-3 order-12 order-sm-1">
+				<div class="sidebar-list">
+					<h3 class="sidebar-title">Amazing Visa Offers</h3>
+					<ul>
+						<li *ngFor="let item of popularVisa;"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }} <span class="float-right">{{item.validityId}}</span></a></li>
+						<!-- <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li> -->
+					</ul>
+					<a href="" class="view-all">View All</a>
+				</div>
+				<div class="sidebar-list">
+					<h3 class="sidebar-title">Top Exiciting Offers</h3>
+					<ul>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+					</ul>
+					<a href="" class="view-all">View All</a>
+				</div>
+				<div class="sidebar-subscribe mt-4">
+					<p class="mb-0">Subscribe to Get Amazing Offers</p>
+					<h3>Tour Alerts</h3>
+					<button class="btn btn-secondary">Subscribe</button>
+				</div>
+			</div>
+			<div class="col-sm-9 order-1 order-sm-12">
+				<div class="card-deck">
+					<div class="col-sm-4" *ngFor="let item of allVisas;">
+						<div class="visa-card card shadow">
+							<img class="card-img-top img-fluid" src="{{ baseUrl+item.visaThumbnail }}" alt="{{ item.countryName }} Rehman Travels">
+							<div class="card-body">
+								<h5 class="card-title">{{ item.countryName }}</h5>
+								<small class="text-muted">{{ item.numEntries }}</small>
+								<h5>{{item.validityId}}</h5>
+								<p class="visa-price">{{ item.currencyCode }} {{ item.visaPrice }}/-</p>
+								<small class="visa-price-small">per person</small>
+								<a href="#" class="btn btn-primary rounded-0 shadow" routerLink="/{{ item.visaUrl }}">View Details</a>
+							</div>
+						</div>
+						<div class="w-100 m-3"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

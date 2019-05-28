@@ -37,17 +37,18 @@ import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { RangeSliderModule  } from 'ngx-rangeslider-component';
 import { DatePipe } from '@angular/common';
 import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
-import { OrderByPipe } from './pipes/order-by.pipe';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
-import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
-import { PriceFilterPipe } from './pipes/price-filter.pipe';
-import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
-import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
-import { DeviceDetectorModule } from 'ngx-device-detector';
+import { ContactusComponent } from './components/contactus/contactus.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { ToursComponent } from './components/tours/tours.component';
+import { DealsComponent } from './components/deals/deals.component';
+import { UmrahComponent } from './components/umrah/umrah.component';
+import { VisaComponent } from './components/visa/visa.component';
+import { RequstCallBackFormComponent } from './components/requst-call-back-form/requst-call-back-form.component';
+import { PopularAirlineAndHotelsComponent } from './components/popular-airline-and-hotels/popular-airline-and-hotels.component';
+import { DetailComponent } from './components/popular-airline-and-hotels/detail/detail.component';
+import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.component';
 
 @NgModule({
   declarations: [
@@ -79,17 +80,25 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     
     HotelFiltersPipe,
     
-    OrderByPipe,
+    ContactusComponent,
     
-    StarRatingFilterPipe,
+    AboutusComponent,
     
-    BreakfastTypeFilterPipe,
+    ToursComponent,
     
-    PriceFilterPipe,
+    DealsComponent,
     
-    FacilityFilterPipe,
+    UmrahComponent,
     
-    HotelBookingComponent
+    VisaComponent,
+    
+    RequstCallBackFormComponent,
+    
+    PopularAirlineAndHotelsComponent,
+    
+    DetailComponent,
+    
+    VisaListsComponent
   ],
   imports: [
     BrowserModule,
@@ -124,12 +133,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
       separator: '  -  ', 
       format: "DD/MM/YYYY",
     }),
-    NgxGalleryModule,
-    RangeSliderModule,
-    FilterPipeModule,
-    MatProgressSpinnerModule,
-    DeviceDetectorModule.forRoot()
-    
+    NgxGalleryModule
   ],
   providers: [MainService, CookieService, DatePipe],
   bootstrap: [AppComponent]
