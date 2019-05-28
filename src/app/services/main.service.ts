@@ -9,15 +9,14 @@ import { Http, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class MainService {
-  public baseUrl = 'http://localhost:4200/';
-  backEndUrl: string = 'http://127.0.0.1/rgtapp/index.php/services/';
-  flightsUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
-  byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
-  revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
-  FlightInfo:object;
+  public baseUrl = 'http://www.cheapfly.pk/';
+  backEndUrl     : string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
+  flightsUrl     : string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
+  byTagUrl       : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
+  revalidateUrl  : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
+  FlightInfo     :object;
   hotelSearchQuery: object;
   constructor(private __httpClient: HttpClient, private __http: Http) { }
-
 
   /**
    * get all data
@@ -70,9 +69,9 @@ export class MainService {
   setDateFormat(date, time?) {
     let formatedDate = date;
     if(!time){
-      let newDate = new Date(date);
-      let month = (newDate.getMonth() + 1 > 9 ? (newDate.getMonth() + 1) : "0" + (newDate.getMonth() + 1));
-      let day = (newDate.getDate() > 9 ? newDate.getDate() : "0" + newDate.getDate());
+      let newDate  = new Date(date);
+      let month    = (newDate.getMonth() + 1 > 9 ? (newDate.getMonth() + 1) : "0" + (newDate.getMonth() + 1));
+      let day      = (newDate.getDate() > 9 ? newDate.getDate() : "0" + newDate.getDate());
       formatedDate = newDate.getFullYear() + '-' + month + '-' + day;
     }else{
       let timeOnly = date.split('T');
@@ -208,12 +207,12 @@ export interface list {
 }
 
 export interface ipInformation {
-  city: string;
-  country: string;
+  city    : string;
+  country : string;
   hostname: string;
-  ip: string;
-  loc: string;
-  org: string;
-  postal: string;
-  region: string;
+  ip      : string;
+  loc     : string;
+  org     : string;
+  postal  : string;
+  region  : string;
 }
