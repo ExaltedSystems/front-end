@@ -15,6 +15,7 @@ import { DealsComponent } from	'src/app/components/deals/deals.component';
 import { ToursComponent } from	'src/app/components/tours/tours.component';
 import { AboutusComponent } from  'src/app/components/aboutus/aboutus.component';
 import  { DetailComponent } from 'src/app/components/popular-airline-and-hotels/detail/detail.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 
 
@@ -38,5 +39,6 @@ export const APP_ROUTES: Routes = [
 	{ path: 'hotels-listing', component: HotelsListingComponent },
 	{ path: 'hotel-details', component: HotelDetailsComponent },
 	{ path: 'airlines/:airline', component : DetailComponent},
+	{ path: 'thank-you', component : ThankYouComponent},
 	{ path: 'hotels/:hotel', component : DetailComponent}
 ];

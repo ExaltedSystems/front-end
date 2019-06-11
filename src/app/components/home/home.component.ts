@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit {
     { value: "F", label: "First" }];
   frmObj: any;
   cookieObj;
+  popularVisa : any;
+  baseUrl : any;
 
   constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, 
     private __cookieService: CookieService) { }
@@ -65,16 +67,16 @@ export class HomeComponent implements OnInit {
     // console.log(this.adults)
     
     if(this.__cookieService.get('srchCookies')){
-      let cookiesData = JSON.parse(this.__cookieService.get('srchCookies'))
-      this.flightType = cookiesData[0].value;
-      this.flyingFrom = cookiesData[1].value;
-      this.flyingTo = cookiesData[2].value;
-      this.departureDate = cookiesData[3].value;
-      this.returnDate = cookiesData[4].value;
-      this.adults = cookiesData[5].value;
-      this.children = cookiesData[6].value;
-      this.infant = cookiesData[7].value;
-      this.preferredClass = cookiesData[8].value;
+      let cookiesData       = JSON.parse(this.__cookieService.get('srchCookies'))
+      this.flightType       = cookiesData[0].value;
+      this.flyingFrom       = cookiesData[1].value;
+      this.flyingTo         = cookiesData[2].value;
+      this.departureDate    = cookiesData[3].value;
+      this.returnDate       = cookiesData[4].value;
+      this.adults           = cookiesData[5].value;
+      this.children         = cookiesData[6].value;
+      this.infant           = cookiesData[7].value;
+      this.preferredClass   = cookiesData[8].value;
       this.preferredAirline = cookiesData[9].value;
     }
 
@@ -118,6 +120,7 @@ export class HomeComponent implements OnInit {
     this.flightSearch.controls['returnDate'].setValue(defaultRtnDate);
 
     this.flightSearch.controls['preferredClass'].setValue(this.preferredClass);
+    this.popularVisas();
   }
 
   addDays = function (days, dptDate?) {
@@ -132,11 +135,10 @@ export class HomeComponent implements OnInit {
   filterFlyingFrom(ev) {
     this.airlineSectors = this.__ms.locationsJson().pipe(
       map(sectors => this.__ms.__filterFlyFrom(sectors, ev.target.value)),
-    )
-    // this.airlineSectors = this.__ms.getJsonData('../../assets/js/locations.json')
-    //   .pipe(
-    //     map(sectors => this.__filterFlyFrom(sectors, ev.target.value)),
-    //   )
+    );
+    // this.airlineSectors = this.__ms.getAirPorts_v1().pipe(
+    //   map(sectors => this.__ms.__filterFlyFrom(sectors, ev.target.value)),
+    // )
   }
   __filterFlyFrom(sectors, val) {
     if (val.length > 3) {
@@ -146,7 +148,7 @@ export class HomeComponent implements OnInit {
     }
   }
   filterFlyingTo(ev) {
-    this.flyToSectors = this.__ms.getJsonData('../../assets/js/locations.json')
+    this.flyToSectors = this.__ms.locationsJson()
       .pipe(
         map(sectors => this.__filterFlyTo(sectors, ev.target.value)),
       )
@@ -313,5 +315,12 @@ export class HomeComponent implements OnInit {
     jQuery(ev.path[3]).removeClass('show')
 
   }
-
+  popularVisas(){
+    this.baseUrl = this.__ms.baseUrl;
+    this.__ms.getData(this.__ms.backEndUrl+'Cms/popularVisaRecords/').subscribe(res => {
+      this.popularVisa = res.data;
+    });
+    // console.log(this.popularVisa);
+  }
+  
 }

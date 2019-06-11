@@ -1,36 +1,35 @@
 <form [formGroup]="hotelSearch" (submit)="searchHotels(hotelSearch.value)">
-  <div class="form-group mobile-form-group shadow-sm shadow-xs-none row no-gutters mb-0">
-    <div class="col-sm-4">
-      <div class="input-group flex-nowrap">
-        <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm-none">
-          <span class="input-group-text rounded-0">
+    <div class="form-group mobile-form-group shadow-sm shadow-xs-none row no-gutters mb-0">
+        <div class="col-sm-4">
+            <div class="input-group flex-nowrap">
+                <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm-none">
+                    <span class="input-group-text rounded-0">
             <i-map-pin></i-map-pin>
           </span>
-        </div>
-        <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 pl-0 shadow-sm-none">
-          <input matInput formControlName="destination" [(ngModel)]="destValu" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" 
-          [matAutocomplete]="destinationAutocomplet">
-          <mat-autocomplete #destinationAutocomplet="matAutocomplete" autoActiveFirstOption>
-            <mat-option *ngFor="let option of filteredList | async" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-          <i-x-circle class="feather-x-circle" *ngIf="destValu" (click)="destValu=''"></i-x-circle>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="input-group flex-nowrap mb-4 mb-sm-0">
-          <div class="input-group-prepend">
-              <span class="input-group-text rounded-0">
-                <i-calendar (click)="checkInDate.open()"></i-calendar>
-              </span>
+                </div>
+                <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 pl-0 shadow-sm-none">
+                    <input matInput formControlName="destination" [(ngModel)]="destValu" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" [matAutocomplete]="destinationAutocomplet">
+                    <mat-autocomplete #destinationAutocomplet="matAutocomplete" autoActiveFirstOption>
+                        <mat-option *ngFor="let option of filteredList | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <i-x-circle class="feather-x-circle" *ngIf="destValu" (click)="destValu=''"></i-x-circle>
+                </mat-form-field>
             </div>
-            <mat-form-field class="form-control material-input rounded-0 pl-0">
-                <input matInput type="text" [autoApply]="true" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/>
-            </mat-form-field>
-      </div>
-      <!-- <div class="input-group">
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group flex-nowrap mb-4 mb-sm-0">
+                <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0">
+                <i-calendar></i-calendar>
+              </span>
+                </div>
+                <mat-form-field class="form-control material-input rounded-0 pl-0">
+                    <input matInput type="text" [autoApply]="true" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut" />
+                </mat-form-field>
+            </div>
+            <!-- <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text rounded-0">
             <i-calendar (click)="checkInDate.open()"></i-calendar>
@@ -53,97 +52,96 @@
           <mat-datepicker touchUi #checkOutDate></mat-datepicker>
         </mat-form-field>
       </div> -->
-    </div>
-    <div class="col-sm-3">
-      <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0">
-        <div class="input-group-prepend">
-          <span class="input-group-text rounded-0">
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0">
+                <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0">
             <i-users></i-users>
           </span>
-        </div>
-        <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn pl-0" data-toggle="dropdown" id="flightPaxDropdownMenu"
-          type="button">
+                </div>
+                <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn pl-0" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
           <small class="d-block">No of Passenger</small>
           <p class="d-inline-block mb-0">{{rooms}} Rooms - {{adults}} Adult - {{children}} Child</p>
           <i-chevron-down class="dropdown-feather"></i-chevron-down>
         </button>
-        <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
-          <div class="form-group">
-            <div class="input-group mb-3 text-center">
-              <div class="input-group-prepend">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('rooms')">
+                <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
+                    <div class="form-group">
+                        <div class="input-group mb-3 text-center">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('rooms')">
                   <i-minus class="dropdown-feather"></i-minus>
                 </button>
-              </div>
-              <span class="form-control">{{rooms}} Rooms</span>
-              <input formControlName="rooms" type="hidden" value="{{rooms}}">
-              <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('rooms')">
+                            </div>
+                            <span class="form-control">{{rooms}} Rooms</span>
+                            <input formControlName="rooms" type="hidden" value="{{rooms}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('rooms')">
                   <i-plus class="dropdown-feather"></i-plus>
                 </button>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group mb-3 text-center">
-              <div class="input-group-prepend">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('adults')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3 text-center">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('adults')">
                   <i-minus class="dropdown-feather"></i-minus>
                 </button>
-              </div>
-              <span class="form-control">{{adults}} Adults</span>
-              <input formControlName="adults" type="hidden" value="{{adults}}">
-              <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('adults')">
+                            </div>
+                            <span class="form-control">{{adults}} Adults</span>
+                            <input formControlName="adults" type="hidden" value="{{adults}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('adults')">
                   <i-plus class="dropdown-feather"></i-plus>
                 </button>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group mb-3 text-center">
-              <div class="input-group-prepend">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('children')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3 text-center">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('children')">
                   <i-minus class="dropdown-feather"></i-minus>
                 </button>
-              </div>
-              <span class="form-control">{{children}} Children</span>
-              <input formControlName="children" type="hidden" value="{{children}}">
-              <div class="input-group-append">
-                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
+                            </div>
+                            <span class="form-control">{{children}} Children</span>
+                            <input formControlName="children" type="hidden" value="{{children}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
                   <i-plus class="dropdown-feather"></i-plus>
                 </button>
-              </div>
-            </div>
-          </div>
-          <div class="form-group" *ngIf="children > 0">
-            <p>Children's ages (years)</p>
-            <div class="d-inline-block" formArrayName="childrenAges" *ngFor="let item of hotelSearch.get('childrenAges').controls; let i = index;">
-              <div formGroupName="{{i}}">
-                  <select formControlName="childAge" class="form-control child-age-select">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="children > 0">
+                        <p>Children's ages (years)</p>
+                        <div class="d-inline-block" formArrayName="childrenAges" *ngFor="let item of hotelSearch.get('childrenAges').controls; let i = index;">
+                            <div formGroupName="{{i}}">
+                                <select formControlName="childAge" class="form-control child-age-select">
                       <option value="-1>" selected="selected">< 1</option>
                       <option *ngFor="let item of createRange(17)" [value]="item">{{item}}</option>
                     </select>
-              </div>
-            </div>
-            
-          </div>
+                            </div>
+                        </div>
 
-          <!-- <div class="dropdown-divider"></div>
+                    </div>
+
+                    <!-- <div class="dropdown-divider"></div>
           <a class="float-right" (click)="closeDropDown($event)">
             <i-check class="dropdown-feather text-success float-left m-1"></i-check>
             <span class="float-right">Done</span>
           </a> -->
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="col-sm-2">
+            <button class="btn btn-primary btn-block rounded-0 search-flight-btn" type="submit">{{searchBtn}}</button>
+        </div>
     </div>
-    <div class="col-sm-2">
-        <button class="btn btn-primary btn-block rounded-0 search-flight-btn" type="submit">{{searchBtn}}</button>
-    </div>
-  </div>
-  <p class="form-error mb-0"></p>
-  <!---->
-  <!-- <div class="text-right">
+    <p class="form-error mb-0"></p>
+    <!---->
+    <!-- <div class="text-right">
     
   </div> -->
 </form>

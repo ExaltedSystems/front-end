@@ -1,1 +1,5 @@
 /* Contact Us Inline CSS */
+
+.form-control {
+    padding-left: 0.75rem !important;
+}

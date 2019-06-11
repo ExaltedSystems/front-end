@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { HomeComponent } from '../home/home.component';
+import { CookieService } from 'ngx-cookie-service';
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 declare var jQuery;
 
@@ -38,6 +39,9 @@ export class FlightsListingComponent implements OnInit {
   dLocation:any;
   cabin:any;
   prefAirline:any;
+  adults:any;
+  children:any;
+  infant:any;
   adtQty:number;
   cnnQty:number;
   infQty:number;
@@ -78,9 +82,12 @@ export class FlightsListingComponent implements OnInit {
   mbyTag = null;
   mOriginDestinationOptions = [];
 
-  mChangeSearch:boolean = false
+  mChangeSearch:boolean = false;
+  currDate:Date = new Date();
+  cookieObj;
 
-  constructor(private __actRouter:ActivatedRoute, private __ms: MainService, private __router: Router, private __fb: FormBuilder, private __hm: HomeComponent) { }
+  constructor(private __actRouter:ActivatedRoute, private __ms: MainService, private __router: Router, private __fb: FormBuilder, 
+    private __hm: HomeComponent, private __cookieService: CookieService) { }
 
   ngOnInit() {
     this.queryParams = this.__actRouter.snapshot.queryParams;
@@ -249,8 +256,8 @@ export class FlightsListingComponent implements OnInit {
         let e;
         this.availableFlights = res;
         if(res != null){
-          if(res['PricedItineraries']['PricedItinerary'].length > 0){
-            this.availableFlights = res['PricedItineraries']['PricedItinerary'];
+          if(res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'].length > 0){
+            this.availableFlights = res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'];
             
             this.loadingMore = true;
           }else{
@@ -279,10 +286,10 @@ export class FlightsListingComponent implements OnInit {
         let e;
         this.moreFlights[this.defaultPage] = res;
         if(res != null){
-          if(res['PricedItineraries']['PricedItinerary'].length > 0){
-            this.moreFlights[this.defaultPage] = res['PricedItineraries']['PricedItinerary'];
+          if(res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'].length > 0){
+            this.moreFlights[this.defaultPage] = res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'];
             jQuery('.loadingMore').hide();
-            if(res['PricedItineraries']['PricedItinerary'].length < 10){
+            if(res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'].length < 10){
               this.loadingMore = false;
             }
           }
@@ -736,5 +743,69 @@ export class FlightsListingComponent implements OnInit {
 
   showFlightDetailsM(tagID, i){
     this.airByTag(tagID, i, 'M');
+  }
+  searchFlights(formInputs) {
+    if (this.flightSearch.valid) {
+      formInputs.departureDate = this.__ms.setDateFormat(formInputs.departureDate);
+      formInputs.returnDate = this.__ms.setDateFormat(formInputs.returnDate);
+
+      localStorage.setItem('oLocation', formInputs.flyingFrom);
+      localStorage.setItem('dLocation', formInputs.flyingTo);
+
+      let flightType = formInputs.flightType;
+
+      this.__cookieService.set('flightType', formInputs.flightType);
+      this.__cookieService.set('flyingFrom', formInputs.flyingFrom);
+      this.__cookieService.set('flyingTo', formInputs.flyingTo);
+      this.__cookieService.set('departureDate', formInputs.departureDate);
+      if (flightType == 'Return') {
+        this.__cookieService.set('returnDate', formInputs.returnDate);
+      }
+      this.__cookieService.set('preferredClass', formInputs.preferredClass);
+
+      let dptDate = formInputs.departureDate;
+      let oLocation = (formInputs.flyingFrom).split(',')[0];
+      let dLocation = (formInputs.flyingTo).split(',')[0];
+      let cabin = formInputs.preferredClass != null ? formInputs.preferredClass : 'Y';
+      let prefAirline: any = formInputs.PreferredAirline != null ? formInputs.PreferredAirline.slice(0, 2) : 0;
+      let adtQty = formInputs.adults;
+      let cnnQty: number = formInputs.children == null ? 0 : formInputs.children;
+      let infQty: number = formInputs.infant == null ? 0 : formInputs.infant;
+
+      this.__cookieService.set('adtQty', adtQty);
+      this.__cookieService.set('cnnQty', String(cnnQty));
+      this.__cookieService.set('infQty', String(infQty));
+      
+      this.cookieObj = [{ name: 'flightType', value: flightType },{ name: 'flyingFrom', value: formInputs.flyingFrom },{ name: 'flyingTo', value: formInputs.flyingTo },{ name: 'departureDate', value: formInputs.departureDate },{ name: 'returnDate', value: formInputs.returnDate },{ name: 'adults', value: formInputs.adults },{ name: 'children', value: formInputs.children },{ name: 'infant', value: formInputs.infant },{ name: 'preferredClass', value: formInputs.preferredClass },{ name: 'prefAirline', value: 
+      formInputs.prefAirline }]
+
+      this.__cookieService.set('srchCookies', JSON.stringify(this.cookieObj));
+      
+
+      this.__router.navigate(["/flights-listing"], {
+        // relativeTo: this.__route,
+        queryParams: {
+          _flight_type: flightType,
+          _flying_from: oLocation,
+          _flying_to: dLocation,
+          _departure_date: dptDate,
+          _return_date: formInputs.returnDate,
+          adults: adtQty,
+          children: cnnQty,
+          infant: infQty,
+          cabin: cabin,
+          prefAirline: prefAirline
+        }
+      });
+      // return false;      
+    }
+
+  }
+
+  closeDropDown(ev) {
+    // console.log(ev.path[2]);
+    jQuery(ev.path[2]).removeClass('show')
+    jQuery(ev.path[3]).removeClass('show')
+
   }
 }

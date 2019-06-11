@@ -16,7 +16,10 @@ export class MainService {
   revalidateUrl  : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
   FlightInfo     :object;
   hotelSearchQuery: object;
-  constructor(private __httpClient: HttpClient, private __http: Http) { }
+  public ipAddress: any;
+  constructor(private __httpClient: HttpClient, private __http: Http) {
+    this.getIpAddress();
+  }
 
   /**
    * get all data
@@ -43,6 +46,9 @@ export class MainService {
   getAirPorts() {
     return this.__http.get('../../assets/js/locations.json').pipe(map((res:any) => res.json()));
   }
+  getAirPorts_v1() {
+    return this.__httpClient.get<any>('http://www.cheapfly.pk/rgtapp/assets/locations.json');
+  }
   /**
     * Get All Client All Informations
     * @param url type any 
@@ -51,6 +57,12 @@ export class MainService {
   getClientInfo(url): Observable<ipInformation> {
     return this.__httpClient.get<ipInformation>(url);
   }
+
+    getIpAddress(){
+        this.__httpClient.get<{ip:string}>('https://jsonip.com').subscribe(data => {
+            this.ipAddress = data.ip
+        })
+    }
 
   /**
    * post data to server api
@@ -87,6 +99,7 @@ export class MainService {
 
   locationsJson() {
     return this.getJsonData('../../assets/js/locations.json');         
+    // return this.getJsonData('http://www.cheapfly.pk/assets/locations.json');         
   }
   __filterFlyFrom(sectors, val) {
     if (val.length > 3) {

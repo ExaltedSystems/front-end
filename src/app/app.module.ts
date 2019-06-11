@@ -49,6 +49,14 @@ import { RequstCallBackFormComponent } from './components/requst-call-back-form/
 import { PopularAirlineAndHotelsComponent } from './components/popular-airline-and-hotels/popular-airline-and-hotels.component';
 import { DetailComponent } from './components/popular-airline-and-hotels/detail/detail.component';
 import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
+import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
+import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
+import { PriceFilterPipe } from './pipes/price-filter.pipe';
+import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -56,49 +64,40 @@ import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.comp
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
-    FlightsComponent,
-    HotelsComponent,
-    FlightsSearchComponent,
-    HotelsSearchComponent,
     HomeComponent,
+    FlightsComponent,
+    FlightsSearchComponent,
+    FlightBookingComponent,
+    HotelsComponent,
+    HotelsSearchComponent,
+    HotelSearchFormComponent,
+    HotelsListingComponent,
+    HotelDetailsComponent,
+    HotelInlineSearchFormComponent,
+    HotelFiltersPipe,
+    HotelBookingComponent,
     FlightsListingComponent,
     AirPortsPipe,
     SecondsPipePipe,
     FlightBookingComponent,
-    
-    DateFormatPipe,
-    
+    DateFormatPipe,    
     PnrViewComponent,
-    
-    HotelSearchFormComponent,
-    
-    HotelsListingComponent,
-    
-    HotelDetailsComponent,
-    
-    HotelInlineSearchFormComponent,
-    
-    HotelFiltersPipe,
-    
     ContactusComponent,
-    
     AboutusComponent,
-    
-    ToursComponent,
-    
-    DealsComponent,
-    
-    UmrahComponent,
-    
-    VisaComponent,
-    
-    RequstCallBackFormComponent,
-    
-    PopularAirlineAndHotelsComponent,
-    
-    DetailComponent,
-    
-    VisaListsComponent
+    ToursComponent,    
+    DealsComponent, 
+    UmrahComponent,    
+    VisaComponent,    
+    RequstCallBackFormComponent,    
+    PopularAirlineAndHotelsComponent,    
+    DetailComponent,    
+    VisaListsComponent,    
+    ThankYouComponent,
+    StarRatingFilterPipe,
+    OrderByPipe,
+    FacilityFilterPipe,
+    PriceFilterPipe,
+    BreakfastTypeFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -128,6 +127,7 @@ import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.comp
     MatCardModule,
     MatSidenavModule,
     StickyModule,
+    DeviceDetectorModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
     NgxDaterangepickerMd.forRoot({
       separator: '  -  ', 

@@ -25,7 +25,7 @@ export class HotelsListingComponent implements OnInit {
     galleryOptions: NgxGalleryOptions[];
     galleryImages: NgxGalleryImage[];
 
-    searchQuery: object;
+    searchQuery: any;
     hotelsSearchResult: any = [];
 
     order: string = 'price';

@@ -1,19 +1,45 @@
 <h3 class="sidebar-title">Request a call back</h3>
-<form class="main-search-form position-relative" novalidate="">
-  <div class="form-group">
-  	<mat-form-field class="form-control mb-3">
-  	<input matInput  placeholder="Name" class="rounded-5 mb-4 mb-sm-0">
-  	</mat-form-field>
-  	<mat-form-field class="form-control mb-3">
-  	<input matInput placeholder="Email" class="rounded-5 mb-4 mb-sm-0">
-  	</mat-form-field>
-  	<mat-form-field class="form-control mb-3">
-  	<input matInput placeholder="Phone" class="rounded-5 mb-4 mb-sm-0">
-  	</mat-form-field>
-  	<mat-form-field class="form-control mb-3">
-  	<textarea matInput cols="33" placeholder="Message" class="rounded-5 mb-4 mb-sm-0"></textarea>
-    </mat-form-field>
-    <br>
-  	<button class="btn btn-primary btn-block btn-lg shadow rounded-0" type="submit" disabled="">Sumbit Query</button>
-  </div>
+
+<form class="main-search-form position-relative" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
+    <div class="form-group">
+        <mat-form-field class="form-control material-input mb-3 shadow">
+            <input matInput placeholder="Name" class="rounded-5" formControlName="name" matInput required>
+        </mat-form-field>
+        <div class="form-error" *ngIf="contactForm.controls['name'].hasError('required') && contactForm.controls['name'].touched">
+            Name required.
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="form-control material-input mb-3 shadow">
+            <input matInput placeholder="Email" class="rounded-5" formControlName="email" matInput required>
+        </mat-form-field>
+        <div class="form-error" *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
+            Email address required.
+        </div>
+        <div class="form-error" *ngIf="contactForm.controls['email'].invalid && contactForm.controls['email'].touched">
+            Email address not valid.
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="form-control material-input mb-3 shadow">
+            <input matInput placeholder="Phone" class="rounded-5" formControlName="phone" matInput required>
+        </mat-form-field>
+        <div class="form-error" *ngIf="contactForm.controls['phone'].hasError('required') && contactForm.controls['phone'].touched">
+            Phone number required.
+        </div>
+        <div class="form-error" *ngIf="contactForm.controls['phone'].invalid && contactForm.controls['phone'].touched">
+            Invalid Phone Number.
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="form-control material-input mb-3 shadow">
+            <textarea matInput cols="33" placeholder=" Message" class="rounded-5" formControlName="emailMessage" matInput required></textarea>
+        </mat-form-field>
+        <div class="form-error" *ngIf="contactForm.controls['emailMessage'].hasError('required') && contactForm.controls['emailMessage'].touched">
+            Email message required.
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!contactForm.valid" type="submit">Submit Query</button>
+    </div>
 </form>
