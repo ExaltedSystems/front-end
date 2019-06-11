@@ -10,7 +10,7 @@ import { Http, Response } from '@angular/http';
 })
 export class MainService {
   public baseUrl = 'http://localhost:4200/';
-  backEndUrl: string = 'http://127.0.0.1/rgtapp/index.php/services/';
+  backEndUrl: string = 'http://localhost/rgtapp/index.php/services/';
   flightsUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
   byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
   revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
@@ -52,6 +52,11 @@ export class MainService {
    */
   postData(url, obj): Observable<response> {
     return this.__httpClient.post<response>(url, obj);
+  }
+
+  sendPostData(url, obj){
+    obj = JSON.stringify(obj)    
+    return this.__httpClient.request("POST",url,obj);
   }
   putData(url, obj) {
     return this.__httpClient.put(url, obj)
