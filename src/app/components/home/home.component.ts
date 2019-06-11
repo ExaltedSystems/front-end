@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   @Input()
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
   flightSearch: FormGroup;
+  hotelSearch: FormGroup;
   flightType: string;
   flyingFrom: string = 'ISB,Islamabad,Pakistan';
   flyingTo: string = 'LHR,London,United Kingdom';
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   adults: number = 1;
   children: number = 0;
   infant: number = 0;
+  rooms: number = 1;
   preferredClass = 'Y';
   preferredAirline;
   selectedFlyFrom = 'ISB,Islamabad,Pakistan';
@@ -46,8 +48,11 @@ export class HomeComponent implements OnInit {
     { value: "F", label: "First" }];
   frmObj: any;
   cookieObj;
+  popularVisa : any;
+  baseUrl : any;
 
-  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, private __cookieService: CookieService) { }
+  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, 
+    private __cookieService: CookieService) { }
 
   ngOnInit() {
     //this.__ms.getJSON('../../assets/js/locations.json').subscribe(res => {
@@ -62,16 +67,16 @@ export class HomeComponent implements OnInit {
     // console.log(this.adults)
     
     if(this.__cookieService.get('srchCookies')){
-      let cookiesData = JSON.parse(this.__cookieService.get('srchCookies'))
-      this.flightType = cookiesData[0].value;
-      this.flyingFrom = cookiesData[1].value;
-      this.flyingTo = cookiesData[2].value;
-      this.departureDate = cookiesData[3].value;
-      this.returnDate = cookiesData[4].value;
-      this.adults = cookiesData[5].value;
-      this.children = cookiesData[6].value;
-      this.infant = cookiesData[7].value;
-      this.preferredClass = cookiesData[8].value;
+      let cookiesData       = JSON.parse(this.__cookieService.get('srchCookies'))
+      this.flightType       = cookiesData[0].value;
+      this.flyingFrom       = cookiesData[1].value;
+      this.flyingTo         = cookiesData[2].value;
+      this.departureDate    = cookiesData[3].value;
+      this.returnDate       = cookiesData[4].value;
+      this.adults           = cookiesData[5].value;
+      this.children         = cookiesData[6].value;
+      this.infant           = cookiesData[7].value;
+      this.preferredClass   = cookiesData[8].value;
       this.preferredAirline = cookiesData[9].value;
     }
 
@@ -87,6 +92,17 @@ export class HomeComponent implements OnInit {
       children: [],
       infant: []
     });
+
+    // Hotel form
+    this.hotelSearch = this.__fb.group({
+      destination: ["destination"],
+      checkInDate: ["checkInDate"],
+      checkOutDate: ["checkOutDate"],
+      rooms: [],
+      adults: ["1"],
+      children: []
+    })
+    
     this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
 
     this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);
@@ -104,6 +120,7 @@ export class HomeComponent implements OnInit {
     this.flightSearch.controls['returnDate'].setValue(defaultRtnDate);
 
     this.flightSearch.controls['preferredClass'].setValue(this.preferredClass);
+    this.popularVisas();
   }
 
   addDays = function (days, dptDate?) {
@@ -299,5 +316,12 @@ export class HomeComponent implements OnInit {
     jQuery(ev.path[3]).removeClass('show')
 
   }
-
+  popularVisas(){
+    this.baseUrl = this.__ms.baseUrl;
+    this.__ms.getData(this.__ms.backEndUrl+'Cms/popularVisaRecords/').subscribe(res => {
+      this.popularVisa = res.data;
+    });
+    // console.log(this.popularVisa);
+  }
+  
 }

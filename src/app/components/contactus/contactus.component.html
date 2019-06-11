@@ -1,0 +1,75 @@
+<!--<section class="about-section">
+    <div class="container">
+        <div class="section-title">
+            <h1>{{ page_info.name }}</h1>
+        </div>
+				<div [innerHTML]="page_info.description"></div>
+    </div>
+</section>-->
+<div>
+  <img class="img-fluid" src="assets/img/visa-background-image.jpg">
+</div>
+   <section class="visa-contents">
+        <div class="container sidebar">
+         <!-- <div class="section-title">
+            <h1>visit visa</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>-->
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="sidebar-list">
+                <!--<app-requst-call-back-form></app-requst-call-back-form>-->
+              </div>
+
+              <div class="sidebar-subscribe mt-4">
+                <p class="mb-0">Subscribe to Get Amazing Offers</p>
+                <h3>Tour Alerts</h3>
+                <button class="btn btn-secondary">Subscribe</button>
+              </div>
+            </div>
+            <div class="col-sm-9" *ngIf="page_info">
+            	<h1>{{ page_info.name }}</h1>
+            	<nav aria-label="breadcrumb">
+      	          <ol class="breadcrumb">
+      	            <li class="breadcrumb-item">
+      	              <a routerLink="/">Home</a>
+      	            </li>
+      	            <li class="breadcrumb-item active">{{ page_info.name }}</li>
+      	          </ol>
+      	        </nav>
+            	<div [innerHTML]="page_info.description"></div>
+            	<form class="main-search-form position-relative" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            	  <div class="form-group">
+            	  	<div class="row">
+	            	  	<div class="col-sm-4">
+		            	  	<mat-form-field class="form-control mb-4 shadow">
+		            	  	<input matInput  placeholder=" Name" class="rounded-5 mb-4 mb-sm-0 pl-2 pb-2" formControlName="name" required>
+		            	  	</mat-form-field>
+	            	  	</div>
+	            	  	<div class="col-sm-4">
+		            	  	<mat-form-field class="form-control mb-4 shadow">
+		            	  	<input matInput placeholder=" Email" class="rounded-5 mb-4 mb-sm-0 pl-2 pb-2" formControlName="email" required>
+		            	  	</mat-form-field>
+	            	  	</div>
+	            	  	<div class="col-sm-4">
+		            	  	<mat-form-field class="form-control mb-4 shadow">
+		            	  	<input matInput placeholder=" Phone" class="rounded-5 mb-4 mb-sm-0 pl-2 pb-2" formControlName="phone" required>
+		            	  	</mat-form-field>
+		            	  </div>
+		            	</div>
+		            	<div class="row">
+		            	  <div class="col-sm-12">
+		            	  	<mat-form-field class="form-control mb-4 shadow">
+		            	  		<textarea matInput cols="33" placeholder=" Message" class="rounded-5 mb-4 mb-sm-0 pl-2 pb-2" formControlName="message" required></textarea>
+		            	    </mat-form-field>
+	            	  	</div>
+            			</div>
+            	  	<button class="btn btn-primary btn-lg shadow rounded-2" [disabled]="!contactForm.valid" type="submit">Submit</button>
+            	  </div>
+            	</form>
+            	<br >
+            </div>
+          </div>
+        </div>
+   </section>

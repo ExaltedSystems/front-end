@@ -1,11 +1,10 @@
-<app-header></app-header>
 <!-- Image Slider -->
 <div class="mian-slider">
     <!-- Search Form -->
     <div class="main-search-form pt-sm-3 pt-5 pt-md-5">
         <div class="container">
             <div class="row card-deck">
-                <div class="col-sm-12 col-lg-7 form-col">
+                <div class="col-sm-12 form-col">
                     <div class="main-search-form-container">
                         <ul class="nav nav-tabs border-bottom-0" id="myTab" role="tablist">
                             <li class="nav-item mb-0">
@@ -17,70 +16,79 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="flights" role="tabpanel" aria-labelledby="flights-tab">
-                                <form [formGroup]="flightSearch" class="home-flight-search-form" (submit)="searchFlights(flightSearch.value)">
+                                <form [formGroup]="flightSearch" class="home-flight-search-for custom-material-form" (submit)="searchFlights(flightSearch.value)">
                                     <mat-radio-group class="d-block my-2" formControlName="flightType" (change)="setFlightType($event)">
                                         <mat-radio-button class="mr-3" value="Return"> Return</mat-radio-button>
                                         <mat-radio-button value="OneWay"> One Way</mat-radio-button>
                                     </mat-radio-group>
-                                    <div class="form-group mobile-form-group">
-                                        <div class="input-group shadow shadow-xs-none">
-                                            <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
-                                                <span class="input-group-text rounded-0"><i-map-pin></i-map-pin></span>
-                                            </div>
-                                            <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                                                <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (keyup)="filterFlyingFrom($event)">
-                                                <mat-autocomplete #flyingFromAuto="matAutocomplete">
-                                                    <mat-option *ngFor="let sector of airlineSectors | async" [value]="sector">
-                                                        {{sector}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingFrom').value" (click)="flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
-                                            </mat-form-field>
-                                            <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
-                                                <span class="input-group-text rounded-0"><i-map-pin></i-map-pin></span>
-                                            </div>
-                                            <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                                                <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (keyup)="filterFlyingTo($event)">
-                                                <mat-autocomplete #flyingToAuto="matAutocomplete">
-                                                    <mat-option *ngFor="let sector of flyToSectors | async" [value]="sector">
-                                                        {{sector}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group shadow {{isReturn ? '' : 'w-50'}}" >
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text rounded-0">
-                                                    <i-calendar (click)="departureDate.open()"></i-calendar>
-                                                </span>
-                                            </div>
-                                            <mat-form-field class="form-control material-input">
-                                                <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open()" class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
-                                                <mat-datepicker touchUi #departureDate></mat-datepicker>
-                                            </mat-form-field>
-                                            
-                                            <div class="input-group-prepend" (click)="returnDate.open()" [hidden]="!isReturn">
-                                                <span class="input-group-text rounded-0">
-                                                    <i-calendar></i-calendar>
-                                                </span>
-                                            </div>
-                                            <mat-form-field class="form-control material-input" [hidden]="!isReturn">
-                                                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open()" class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
-                                                <mat-datepicker touchUi #returnDate></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mobile-form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="input-group dropdown shadow mb-4 mb-sm-0">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text rounded-0"><i-users></i-users></span>
+                                    <div class="form-group mobile-form-group shadow-sm shadow-xs-none">
+                                        <div class="row no-gutters">
+                                            <div class="col-sm-6 shadow-sm shadow-xs-none">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm shadow-sm-none">
+                                                        <span class="input-group-text rounded-0">
+                                                            <i-map-pin></i-map-pin>
+                                                        </span>
                                                     </div>
-                                                    <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
+                                                    <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm shadow-sm-none">
+                                                        <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (keyup)="filterFlyingFrom($event)">
+                                                        <mat-autocomplete #flyingFromAuto="matAutocomplete">
+                                                            <mat-option *ngFor="let sector of airlineSectors | async" [value]="sector">
+                                                                {{sector}}
+                                                            </mat-option>
+                                                        </mat-autocomplete>
+                                                        <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingFrom').value" (click)="flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
+                                                    </mat-form-field>
+                                                    <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
+                                                        <span class="input-group-text rounded-0">
+                                                            <i-map-pin></i-map-pin>
+                                                        </span>
+                                                    </div>
+                                                    <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
+                                                        <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (keyup)="filterFlyingTo($event)">
+                                                        <mat-autocomplete #flyingToAuto="matAutocomplete">
+                                                            <mat-option *ngFor="let sector of flyToSectors | async" [value]="sector">
+                                                                {{sector}}
+                                                            </mat-option>
+                                                        </mat-autocomplete>
+                                                        <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group mb-4 mb-sm-0">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text rounded-0">
+                                                            <i-calendar (click)="departureDate.open()"></i-calendar>
+                                                        </span>
+                                                    </div>
+                                                    <mat-form-field class="form-control material-input">
+                                                        <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open()" class="border-left-0 rounded-0"
+                                                            placeholder="Departure Date" [min]="currDate">
+                                                        <mat-datepicker touchUi #departureDate></mat-datepicker>
+                                                    </mat-form-field>
+
+                                                    <div class="input-group-prepend" (click)="returnDate.open()" [hidden]="!isReturn">
+                                                        <span class="input-group-text rounded-0">
+                                                            <i-calendar></i-calendar>
+                                                        </span>
+                                                    </div>
+                                                    <mat-form-field class="form-control rounded-0 material-input" [hidden]="!isReturn">
+                                                        <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open()" class="border-left-0 rounded-0"
+                                                            placeholder="Return Date" [min]="currDate">
+                                                        <mat-datepicker touchUi #returnDate></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group dropdown mb-4 mb-sm-0">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text rounded-0">
+                                                            <i-users></i-users>
+                                                        </span>
+                                                    </div>
+                                                    <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu"
+                                                        type="button">
                                                         <small class="d-block">No of Passenger</small>
                                                         <p class="d-inline-block mb-0">{{adults}} Adult, {{children}} Child, {{infant}} Infant</p>
                                                         <i-chevron-down class="dropdown-feather"></i-chevron-down>
@@ -142,93 +150,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group dropdown shadow mb-4 mb-sm-0">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text rounded-0"><i-plus></i-plus></span>
-                                                    </div>
-                                                    <!-- <input type="text" class="form-control border-left-0 rounded-0" placeholder="More Options"> -->
-                                                    <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown">More Options
-                                                        <i-chevron-down class="dropdown-feather"></i-chevron-down>
-                                                    </button>
-                                                    <div class="dropdown-menu shadow rounded-0 p-3 pb-0" aria-labelledby="dropdownMenuLink" (click)="$event.stopPropagation()">
-                                                        <div class="form-group">
-                                                            <div class="input-group mb-3 text-center">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text rounded-0"><i-send></i-send></span>
-                                                                    
-                                                                </div>
-                                                                
-                                                                    <input type="text" class="form-control border-left-0 rounded-0" formControlName="PreferredAirline" placeholder="Prefered Airline" [matAutocomplete]="airlinesAutoComplete" (keyup)="filterAirlines($event)">
-
-                                                                    <mat-autocomplete #airlinesAutoComplete="matAutocomplete">
-                                                                        <mat-option *ngFor="let airline of airlinesAuto | async" [value]="airline">
-                                                                            {{airline}}
-                                                                        </mat-option>
-                                                                    </mat-autocomplete>
-                                                                    <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('PreferredAirline').value" (click)="flightSearch.get('PreferredAirline').setValue('')"></i-x-circle>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="input-group mb-3 text-center">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text rounded-0"><i-award></i-award></span>
-                                                                </div>
-                                                                <mat-form-field class="form-control border-left-0 rounded-0">
-                                                                    <mat-select formControlName="preferredClass" placeholder="Preferred Class">
-                                                                      <mat-option *ngFor="let option of preferredClasses" [value]="option.value" >
-                                                                        {{option.label}}
-                                                                      </mat-option>
-                                                                    </mat-select>
-                                                                  </mat-form-field>
-                                                                <!-- <input type="text" class="form-control border-left-0 rounded-0" placeholder="Prefered Class"> -->
-                                                            </div>
-                                                        </div>
-                                                        <!-- <div class="dropdown-divider"></div>
-		                                  <button class="btn btn-primary btn-sm float-right rounded-0 shadow">Done</button> -->
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary shadow rounded-0 search-flight-btn" >Search Flights</button>
+                                    <div class="text-right">
+                                        <button class="btn btn-primary shadow rounded-0 search-flight-btn">Search Flights</button>
+                                    </div>
                                 </form>
                                 <!-- /Flights Form - Round Trip -->
                             </div>
                             <div class="tab-pane fade" id="hotels" role="tabpanel" aria-labelledby="hotel-tab">
-                                Hotel Form
+                                <app-hotel-search-form></app-hotel-search-form>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 d-none d-lg-block">
-                    <div class="main-search-form-container">
-                        <div id="package-slider" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#package-slider" data-slide-to="0" class="active"></li>
-                                <li data-target="#package-slider" data-slide-to="1"></li>
-                                <li data-target="#package-slider" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" src="assets/slider/ad-2462858_1920.jpg" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="assets/slider/ad-2462858_1920.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="assets/slider/ad-2462858_1920.jpg" alt="Third slide">
-                                </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#package-slider" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#package-slider" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -259,7 +191,9 @@
                     <h5 class="card-title">Serene Air Promotional Fares</h5>
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.
                     </p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
                     <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
                 </div>
             </div>
@@ -268,7 +202,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Get upto 24% Discount on Al Kiswa Tower rooms</h5>
                     <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
                     <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
                 </div>
             </div>
@@ -279,7 +215,9 @@
                     <h5 class="card-title">PIA Special Fares</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
                     </p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
                     <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
                 </div>
             </div>
@@ -289,7 +227,9 @@
                     <h5 class="card-title">Qatar Air Promotional Fares</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
                     </p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
                     <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
                 </div>
             </div>
@@ -317,17 +257,17 @@
         </div>
 
         <div class="card-deck">
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/destinations/KL_BG2.jpg" alt="Card image cap">
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngFor="let item of popularVisa;">
+                <img class="card-img-top rounded-0" src="{{ baseUrl+item.visaThumbnail }}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Malaysia</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.
+                    <h5 class="card-title">{{ item.countryName }}</h5>
+                    <p class="card-text">{{ item.shortDescription }}
                     </p>
-                    <p class="card-title">PKR 70,000/-</p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Details</button>
+                    <p class="card-title">{{ item.currencyCode }} {{ item.visaPrice }}</p>
+                    <a  class="btn btn-outline-primary btn-sm shadow rounded-0" routerLink="{{ item.visaUrl }}">View Details</a>
                 </div>
             </div>
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
+           <!-- <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
                 <img class="card-img-top rounded-0" src="assets/img/destinations/sg-trip.jpg" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">Singapore</h5>
@@ -356,10 +296,10 @@
                     <p class="card-title">PKR 70,000/-</p>
                     <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Details</button>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="section-details-button">
-            <button class="btn btn-primary rounded-0 shadow">View All Destinations</button>
+            <button class="btn btn-primary rounded-0 shadow" routerLink="/visa">View All Destinations</button>
         </div>
     </div>
 </section>
@@ -384,7 +324,9 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Online Tickets</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio
+                                suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo,
+                                aperiam at nihil sunt?</p>
                         </div>
                     </div>
                 </div>
@@ -399,7 +341,9 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Online Hotel Reservation</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio
+                                suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo,
+                                aperiam at nihil sunt?</p>
                         </div>
                     </div>
                 </div>
@@ -414,7 +358,9 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Word Tours</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio
+                                suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo,
+                                aperiam at nihil sunt?</p>
                         </div>
                     </div>
                 </div>
@@ -429,7 +375,9 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Online Visa Processing</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio
+                                suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo,
+                                aperiam at nihil sunt?</p>
                         </div>
                     </div>
                 </div>
@@ -444,7 +392,9 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Executive Hajj & Umrah</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio
+                                suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo,
+                                aperiam at nihil sunt?</p>
                         </div>
                     </div>
                 </div>
@@ -459,7 +409,9 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Pakistan Tours</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio
+                                suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo,
+                            aperiam at nihil sunt?</p>
                         </div>
                     </div>
                 </div>
@@ -480,50 +432,27 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur hic, pariatur ad commodi autem.</p>
         </div>
 
-        <p>Rehmantravel.com is a leading online travel agency. Our services include Flights Reservation/Airline Tickets, Travel Insurance, Hotel Reservation System, Visa Services, Umrah and Hajj. All our rates are competitive rates. We are known for After
-            Sale Services. We Rehmantravel.com are always working for the special deals to facilitate our valuable clients. These are the lowest and market competitive offers for UK, USA, Canada & Australia based frequent travelers. Rehmantravel.com is
-            offering all the transaction via online Banking.. Rehmantravel.com has its user friendly interface and you can purchase online ticket in just few clicks. Moreover our design is also compatible to fit on every desired device which helps user
-            in finding the lowest rates. All you need to do is enter your travelling dates and destinations, rest Rehmantravel.com will find you with the lowest airfares. You can also filter/customize your search by selecting the specific airlines.</p>
+        <p>Rehmantravel.com is a leading online travel agency. Our services include Flights Reservation/Airline Tickets, Travel
+            Insurance, Hotel Reservation System, Visa Services, Umrah and Hajj. All our rates are competitive rates. We are
+            known for After Sale Services. We Rehmantravel.com are always working for the special deals to facilitate our
+            valuable clients. These are the lowest and market competitive offers for UK, USA, Canada & Australia based frequent
+            travelers. Rehmantravel.com is offering all the transaction via online Banking.. Rehmantravel.com has its user
+            friendly interface and you can purchase online ticket in just few clicks. Moreover our design is also compatible
+            to fit on every desired device which helps user in finding the lowest rates. All you need to do is enter your
+            travelling dates and destinations, rest Rehmantravel.com will find you with the lowest airfares. You can also
+            filter/customize your search by selecting the specific airlines.</p>
 
-        <p>Rehmantravel.com has its head office in Islamabad and branches available in major cities; i.e. Lahore, Karachi, Peshawar, Attock, Malakand and many more. We have also options to purchase products by using credit card or online banking. Make your
-            booking now and start your memorable journey. We always have special deals, keep visiting rehmantravel.com. We have cheapest rates of all Airlines like PIA, Emirates Airline, Saudi Airline, Thai Airways, Qatar Airways, Oman Air, Fly Dubai,
-            Air Lanka, Air China, Nas Airline and lot others. We have more than 400 Airlines listed and you will get the best match as per your need. We are not limited to only GDS airlines you can also avail our services for NON GDS airlines like AirBlue,
-            Shaheen Air, Air Asia, Serene Air etc. We are open for 7 days a week from 9AM till 12AM. You can call our UAN number 051 111 786 785 for further assistance.</p>
+        <p>Rehmantravel.com has its head office in Islamabad and branches available in major cities; i.e. Lahore, Karachi, Peshawar,
+            Attock, Malakand and many more. We have also options to purchase products by using credit card or online banking.
+            Make your booking now and start your memorable journey. We always have special deals, keep visiting rehmantravel.com.
+            We have cheapest rates of all Airlines like PIA, Emirates Airline, Saudi Airline, Thai Airways, Qatar Airways,
+            Oman Air, Fly Dubai, Air Lanka, Air China, Nas Airline and lot others. We have more than 400 Airlines listed
+            and you will get the best match as per your need. We are not limited to only GDS airlines you can also avail
+            our services for NON GDS airlines like AirBlue, Shaheen Air, Air Asia, Serene Air etc. We are open for 7 days
+            a week from 9AM till 12AM. You can call our UAN number 051 111 786 785 for further assistance.</p>
 
-        <div class="section-title">
-            <h3 class="text-left">We Organise Your Trips</h3>
-        </div>
-
-        <div class="border-bottom">
-            <div class="row">
-                <div class="col-sm-4 col-md-2 text-center py-3 border-right">
-                    <span data-feather="send"></span>
-                    <h5>Popular Airlines</h5>
-                    <small class="text-muted">on rehmantravel.com</small>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <p class="p-2">
-                        EmiratesQatar AirwaysSaudi Airlines Turkish AirlinesEtihad AirwaysAmerican International AirlinesAirBlueAir ArabiaAir ChinaAir MalindoBritish AirwaysCathay PacificSriLankan Airlines Shaheen AirSerene Air Pakistan International AirlinesFly DubaiGulf AirKenya
-                        AirwaysKuwait AirwaysOman AirKLMLufthansaRyanairSingapore AirlinesAir AsiaAir CanadaAustrian AirlinesEasyJetJet Airways</p>
-                </div>
-            </div>
-        </div>
-        <div class="border-bottom">
-            <div class="row">
-                <div class="col-sm-4 col-md-2 text-center py-3 border-right">
-                    <span data-feather="send"></span>
-                    <h5>Popular Hotels</h5>
-                    <small class="text-muted">on rehmantravel.com</small>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <p class="p-2">
-                        Fairmont Clock Tower MakkahAl Kiswah Towers HotelIntercontinental Dar Al TawhidHotels in Makkah Near HaramPullman Zamzam MakkahSwissotel MakkahMovenpick Hajar TowerAl Marwa Rayhaan By RotanaMakkah Millennium HotelHilton Makkah Convention HotelAl Haram
-                        HotelAnjum HotelDar Al Hijra Intercontinental HotelDar Al TaqwaDar Al TawhidMakarim Ajyad HotelAl-Eiman Royal HotelShaza Al MadinaSofaraa Al Huda Hotel MadinahMarriott Hotel IslamabadSerena Hotel Islamabad</p>
-                </div>
-            </div>
-        </div>
+    <app-popular-airline-and-hotels></app-popular-airline-and-hotels>
     </div>
     <!-- /container -->
 </section>
 <!-- /About -->
-<app-footer></app-footer>

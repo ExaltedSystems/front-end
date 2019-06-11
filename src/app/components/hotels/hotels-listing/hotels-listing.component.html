@@ -1,0 +1,291 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #filters mode="over" class="p-2">
+    <div class="sidebar-list">
+      <h3 class="sidebar-title">Filter Results
+        <i-x-circle class="dropdown-feather" (click)="filters.close()"></i-x-circle>
+      </h3>
+      <ul class="list-style-none p-0 stop-filter">
+        <!-- <li class="mb-1">
+          <b>Price Range</b>
+        </li>
+        <li class="pt-1">
+          <range-slider [min]="min" [max]="max" [step]="100" [(ngModel)]="range" class="d-block mt-3" (onRangeChange)="rangeChanged($event)"></range-slider>
+        </li>
+
+        <div class="list-divider"></div> -->
+
+        <li class="mb-1">
+          <b>Property Types</b>
+        </li>
+        <li *ngFor="let item of propertyTypes">
+          <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
+        </li>
+
+        <div class="list-divider"></div>
+
+        <li class="mb-1">
+          <b>Star Rating</b>
+        </li>
+        <li *ngFor="let item of starRating">
+          <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
+        </li>
+
+        <div class="list-divider"></div>
+
+        <li class="mb-1">
+          <b>Popular Facilities</b>
+        </li>
+        <li *ngFor="let item of popularFacilities">
+          <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
+        </li>
+
+        <div class="list-divider"></div>
+
+        <li class="mb-1">
+          <b>Breakfast</b>
+        </li>
+        <li *ngFor="let item of breakfastTypes">
+          <mat-checkbox [(ngModel)]="item.selected" [value]="item.title">{{item.title}}</mat-checkbox>
+        </li>
+
+      </ul>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav #searchForm mode="over" position="end" class="custom-material-form p-2">
+    <h3 class="sidebar-title mb-3">Change Your Search
+      <i-x-circle class="dropdown-feather" (click)="searchForm.close()"></i-x-circle>
+    </h3>
+    <app-hotel-search-form (searchEvent)="getSearchResults($event)"></app-hotel-search-form>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <app-header></app-header>
+    <section class="flight-search pt-0 pt-sm-2">
+
+      <div class="current-flight-search d-block d-sm-none mb-3">
+        <div class="current-search-sector row d-flex align-items-center pb-2">
+          <div class="col ">
+            <p>{{searchQuery.destination}}</p>
+          </div>
+        </div>
+        <p class="current-search-passenger text-center"> {{searchQuery.rooms}} Rooms, {{searchQuery.adults}} Adult(s), {{searchQuery.child}} Child</p>
+        <div class="current-search-footer d-flex justify-content-between align-items-center dropdown">
+          <div class="current-search-dates d-flex align-items-center">
+            <i-calendar class=""></i-calendar>
+            <p class="mr-3">{{searchQuery.dates.startDate | date:mediumDate}}</p>
+            <i-calendar class=""></i-calendar>
+            <p>{{searchQuery.dates.endDate | date:mediumDate}}</p>
+          </div>
+          <div>
+            <button class="btn btn-primary btn-sm rounded-0 shadow" (click)="searchForm.toggle()">Change Search</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+
+        <mat-card class="custom-material-form mt-2 mb-3 rounded-0 d-none d-sm-block">
+          <app-hotel-search-form (searchEvent)="getSearchResults($event)"></app-hotel-search-form>
+        </mat-card>
+
+        <div class="row">
+          <div class="col-sm-3 d-none d-sm-block">
+            <div class="sidebar-list">
+              <h3 class="sidebar-title">Filter Results</h3>
+              <ul class="list-style-none p-0 stop-filter">
+                <li class="mb-1">
+                  <b>Price Range</b>
+                </li>
+                <li class="pt-1">
+                  <range-slider [min]="min" [max]="max" [step]="100" [(ngModel)]="range" class="d-block mt-3" (onRangeChange)="rangeChanged($event)"></range-slider>
+                </li>
+
+                <div class="list-divider"></div>
+
+                <li class="mb-1">
+                  <b>Property Types</b>
+                </li>
+                <li *ngFor="let item of propertyTypes">
+                  <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
+                </li>
+
+                <div class="list-divider"></div>
+
+                <li class="mb-1">
+                  <b>Star Rating</b>
+                </li>
+                <li *ngFor="let item of starRating">
+                  <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
+                </li>
+
+                <div class="list-divider"></div>
+
+                <li class="mb-1">
+                  <b>Popular Facilities</b>
+                </li>
+                <li *ngFor="let item of popularFacilities">
+                  <mat-checkbox [(ngModel)]="item.selected" [value]="item.value">{{item.title}}</mat-checkbox>
+                </li>
+
+                <div class="list-divider"></div>
+
+                <li class="mb-1">
+                  <b>Breakfast</b>
+                </li>
+                <li *ngFor="let item of breakfastTypes">
+                  <mat-checkbox [(ngModel)]="item.selected" [value]="item.title">{{item.title}}</mat-checkbox>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="sidebar-subscribe mt-4">
+              <p class="mb-0">Subscribe to Get Amazing Offers</p>
+              <h3>Hotel Deals!</h3>
+              <button class="btn btn-secondary">Subscribe</button>
+            </div>
+          </div>
+
+          <div class="col-sm-9 flight-listing">
+
+            <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 rounded-0">
+
+              <div class="d-flex justify-content-between">
+                <div>
+                  <button class="btn rounded-0 shadow-sm btn-secondary" (click)="filters.toggle()">
+                    <i-sliders class="button-feather"></i-sliders> Filter</button>
+                </div>
+                <div>
+                  <button class="btn rounded-0 shadow-sm btn-secondary">
+                    <i-bell class="button-feather mx-0"></i-bell>
+                  </button>
+                </div>
+              </div>
+            </mat-card>
+
+            <div [hidden]="!isLoading">
+              <p class="center">Loading Results</p>
+              <mat-progress-bar ngDefaultControl mode="indeterminate"></mat-progress-bar>
+            </div>
+
+            <div class="mb-3 p-0">
+              <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block">
+                <b class="d-inline-block mr-4">Sort:</b>
+                <div class="d-inline-flex justify-content-between">
+                  <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>
+                  <button mat-button (click)="orderBy('star_rating')" class="mx-2">Star Rating</button>
+                  <button mat-button (click)="orderBy('distance')" class="mx-2">Distance form City Center</button>
+                  <button mat-button (click)="orderBy('recomended')" class="mx-2">RGT Recomended</button>
+                </div>
+              </mat-card>
+
+              <mat-card class="p-1 mb-3 hotel-search-item rounded-0" *ngFor="let item of hotelsSearchResult 
+            | priceFilter : selectedPriceValue
+            | hotelFilters: selectedFilters 
+            | starRatingFilter: selectedStarRating 
+            | breakfastTypeFilter: slelctedBreakfast 
+            | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities, 
+              parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false
+            |  orderBy : order : reverse">
+
+                <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
+            *ngFor="let item of hotelsSearchResult | filterBy: userFilter |  orderBy : order : reverse"> -->
+
+                <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
+           *ngFor="let item of hotelsSearchResult | hotelFilters:{ prperty_name: selectedFilters, star_rating: selectedStarRating } : false |  orderBy : order : reverse"> -->
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <!-- gallary -->
+                    <ngx-gallery [options]="galleryOptions" [images]="item.images"></ngx-gallery>
+                  </div>
+                  <div class="col-sm-8 pl-sm-0">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h5 class="hotel-name mt-0 mb-1">{{item.name}}</h5>
+                        <div class="d-flex align-items-center">
+                          <i class="property-type">{{item.prperty_name}}</i>
+                          <div class="mx-2">|</div>
+                          <div class="star-rating d-flex align-items-center" *ngFor="let item of createRange(item.star_rating); let index">
+                            <i-star class="feather active"></i-star>
+                          </div>
+                          <div class="mx-2">|</div>
+                          <div class="map-view d-flex align-items-center">
+                            <!-- <i-map class="hotel-feather-icon"></i-map> -->
+                            <a class="pl-1" href=""> View On Map</a>
+                          </div>
+                        </div>
+                        <div class="address d-flex align-items-center my-1">
+                          <i-map-pin class="hotel-feather-icon"></i-map-pin>
+                          <p class="ml-1">{{item.address}}</p>
+                        </div>
+                        <div class="cancellation d-flex align-items-center text-success my-1">
+                          <i-check class="success hotel-feather-icon"></i-check>
+                          <p class="ml-1">Free Cancellation</p>
+                        </div>
+                        <div class="tags my-1">
+                          <span [ngSwitch]="item.parking_availability">
+                            <span *ngSwitchCase="'Yes, Paid'" class="badge badge-info mr-1">Parking</span>
+                            <span *ngSwitchCase="'Yes, Free'" class="badge badge-success mr-1">Free Parking</span>
+                          </span>
+                          <span [ngSwitch]="item.internet_availability">
+                            <span *ngSwitchCase="'Yes, Paid'" class="badge badge-info mr-1">Internet</span>
+                            <span *ngSwitchCase="'Yes, Free'" class="badge badge-success mr-1">Free Internet</span>
+                          </span>
+                          <span [ngSwitch]="item.breakfast">
+                            <span *ngSwitchCase="'Yes, Its Optional'" class="badge badge-info mr-1">Breakfast</span>
+                            <span *ngSwitchCase="'Yes, Included in Price'" class="badge badge-success mr-1">Free Breakfast</span>
+                          </span>
+                        </div>
+                        <!-- <div class="facilities my-1">
+                          <img alt="" class="icon" src="assets/img/icons/svg/wifi-solid.svg">
+                          <img alt="" class="icon" src="assets/img/icons/svg/utensils-solid.svg">
+                          <img alt="" class="icon" src="assets/img/icons/svg/swimming-pool-solid.svg">
+                          <img alt="" class="icon" src="assets/img/icons/svg/plane-solid.svg">
+                          <img alt="" class="icon" src="assets/img/icons/svg/dumbbell-solid.svg">
+                          <a href="http://">+21 More</a>
+                        </div> -->
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="hotel-price p-2 d-flex flex-column justify-content-between">
+                          <div class="reviews d-none d-sm-block">
+                            <strong class="d-block">Excellent</strong>
+                            <small>7 Reviews</small>
+                          </div>
+                          <div>
+                            <div class="price text-right">
+                              <span class="text-muted org-price">10,000</span>
+                              <h5 class="d-block">PKR
+                                <span class="text-danger">{{item.price}}</span>
+                              </h5>
+                            </div>
+                            <button class="btn btn-primary shadow-sm rounded-0 w-100 align-self-end" (click)="selectHotel(item.id)">Select Your Room</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </mat-card>
+
+              <mat-card class="text-center" [hidden]="isLoading" *ngIf="(hotelsSearchResult | priceFilter : selectedPriceValue
+          | hotelFilters: selectedFilters 
+          | starRatingFilter: selectedStarRating 
+          | breakfastTypeFilter: slelctedBreakfast 
+          | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities,
+            parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false).length == 0">No Matching Result Found.</mat-card>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
