@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -16,6 +15,7 @@ export class MainService {
   byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
   revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
   FlightInfo:object;
+  hotelSearchQuery: object;
   constructor(private __httpClient: HttpClient, private __http: Http) { }
 
 
