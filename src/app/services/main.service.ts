@@ -60,6 +60,11 @@ export class MainService {
   postData(url, obj): Observable<response> {
     return this.__httpClient.post<response>(url, obj);
   }
+  
+  sendPostData(url, obj){
+    obj = JSON.stringify(obj)    
+    return this.__httpClient.request("POST",url,obj);
+  }
   putData(url, obj) {
     return this.__httpClient.put(url, obj)
   }
