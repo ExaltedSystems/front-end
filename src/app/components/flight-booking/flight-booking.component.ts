@@ -8,6 +8,7 @@ import { AirPortsPipe } from 'src/app/air-ports.pipe';
 import { DatePipe } from '@angular/common';
 import { MatStep, MatStepper } from '@angular/material';
 import { DateFormatPipe } from 'src/app/pipes/date-format.pipe';
+import { HttpHeaders } from '@angular/common/http';
 declare var jQuery;
 
 @Component({
@@ -315,17 +316,20 @@ export class FlightBookingComponent implements OnInit {
       travellers : postTravellers,
       segmentArr: this.segmentInfoArr
     }
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     // console.log('postData',this.travellersObj)
-    let step1Url = 'http://localhost/rgtapp/index.php/services/Ticket/reservation';
-    this.__ms.postData(step1Url, this.travellersObj).subscribe(res => {
-      console.log(res)
-    this.referenceNo = res['ref_no'];
-    })
+    let step1Url = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retRefNo';
+    // this.__ms.postData(step1Url, this.travellersObj).subscribe(res => {
+    //   console.log(res)
+    //   localStorage.setItem("paxToken", res['jwt']);
+    //   this.referenceNo = res['ref_no'];
+    // })
+    this.referenceNo = 'RT-000095';
     return true;
   }
 
   creditCardPost(formInputs){
-    let creditCardUrl = 'http://localhost/rgtapp/index.php/services/Ticket/creditCard';
+    let creditCardUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/creditCard';
     let reservationObj = Object.assign(formInputs, this.travellersObj, this.segmentInfoArr, {refrenceNo: this.referenceNo});
     this.__ms.postData(creditCardUrl, reservationObj).subscribe(res => {
       console.log(res)
@@ -338,6 +342,72 @@ export class FlightBookingComponent implements OnInit {
     })
     console.log(reservationObj)
   } //
+
+  cashOnDelivery(){
+    let flightInfoObj = {
+      _refrenceNo: this.referenceNo,
+      _token: localStorage.getItem("paxToken")
+    }
+    Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
+    let flightInfoUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retFlightInfo';
+    this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      console.log(res);
+      if(res['res_flag'] == true){
+        this.createPnr(res);
+      }
+    })
+
+    
+  } //
+
+  createPnr(flightInfos){
+    let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
+    let pnrObj = {
+      __isView: "W",
+      __isAction: "C",
+      __isVendorId: 1,
+      __isAgentId: 0,
+      __isParantId: 0,
+      __isUserId: 0,
+      __isFlightType: flightInfos.__isFlightType,
+      __isFr: flightInfos.__isEmail,
+      __isTo: flightInfos.__isEmail,
+      __isCc: flightInfos.__isEmail,
+      __isAirType: "O",
+      __isTravelDate: flightInfos.__isTravelDate,
+      __isReceivedFrom: "CheapFly",
+      __isPhoneNumber: flightInfos.__isPhone,
+      __isPassengers:flightInfos.passengers,
+      __isSectors: flightInfos.segmentArr,
+      __isTravellers: flightInfos.travellers
+    } //  end pnr obj
+    // console.log(pnrObj)
+    let pnr = 'DSYHLZ'; 
+    this.pnrCreated(pnr);
+    // this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
+      // console.log(resp)
+    // let pnr = 'JFLWVB'; // res['__isPnr'];
+    // this.pnrCreated(pnr);
+    // })
+    // JFLWVB
+  } // 
+
+  pnrCreated(pnr){
+    let pnrSaveUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/pnrCreated';
+    let pnrSaveObj = {
+      pnr: pnr,
+      _token: localStorage.getItem("paxToken")
+    }
+    this.__ms.postData(pnrSaveUrl, pnrSaveObj).subscribe(res => {
+      console.log(res)
+      this.__router.navigate(["/thank-you"], {
+        // relativeTo: this.__route,
+        queryParams: {
+          _token: localStorage.getItem("paxToken")
+        }
+      });
+    })
+  }
 
   viewFareRules(){
     let fareBasis = this.byTagResponse['AirItineraryPricingInfo'][0]['PTC_FareBreakdowns']['PTC_FareBreakdown'][0]['FareBasisCodes']['FareBasisCode'];
