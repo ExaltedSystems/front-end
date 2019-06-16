@@ -621,9 +621,6 @@ export class FlightsListingComponent implements OnInit {
       }
     })
 
-    // this.__ms.getJsonData('../../../assets/airByTag.json').subscribe(res => {
-    //   this.airRevalidate(res, i);  
-    // });
   } //
   
   airRevalidate(byTagRes, i, flag?){
