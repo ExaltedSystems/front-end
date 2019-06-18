@@ -46,20 +46,28 @@
           <a href="">Travelling on different dates?</a>
           <div class="list-divider"></div>
           <b>Your Group</b>
-          <p>{{searchQuery.adults}} Adults, {{searchQuery.children}} Children (
+          <p>{{searchQuery.adults}} Adults
+            <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
             <span *ngFor="let age of searchQuery.childrenAges; let last = last">
               <span *ngIf="last"> and </span>{{age.childAge}}
               <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
-            </span> Years Old )
+            </span> Years Old )</span>
           </p>
           <div class="list-divider"></div>
           <b>You Selected</b>
-          <p>1 x Double Room</p>
-          <p>1 x King Room</p>
+          <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
+            <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
+            <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+              <i-x-circle></i-x-circle>
+            </a>
+          </div>
         </mat-card>
         <mat-card class="rounded-0 mt-2 mb-3">
             <h3 class="sidebar-title text-primary">Price</h3>
-            
+            <div class="d-flex justify-content-between align-items-center">
+                <b>Total Price :</b><b>{{totalPrice}}</b>
+            </div>
+            <small>For {{searchQuery.adults + searchQuery.children}} Guests</small>
           </mat-card>
         <mat-card class="rounded-0 mt-2 mb-3">
           <h3 class="sidebar-title text-primary">Your Booking Includes</h3>
@@ -123,7 +131,7 @@
 
           <mat-horizontal-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="bookingInfoFrom">
-              <form [formGroup]="bookingInfoFrom" class="custom-material-form">
+              <form [formGroup]="bookingInfoFrom" (submit)="guestInfo(bookingInfoFrom.value)" class="custom-material-form">
                 <ng-template matStepLabel>Enter Your Details</ng-template>
                 <div class="form-group row">
                   <div class="col-sm-2">
@@ -196,18 +204,19 @@
                   </div>
         
                   <div class="form-group">
-                    <mat-checkbox class="d-block">
+                    <mat-checkbox class="d-block" formControlName="rentACar">
                       I'm interested in renting a car
                     </mat-checkbox>
                     <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
                   </div>
                 <div>
-                  <button matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                  <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                  <small class="form-error" *ngIf="bookingInfoFrom.invalid">{{bookingErrorMsg}}</small>
                 </div>
               </form>
             </mat-step>
             <mat-step [stepControl]="paymentInfoForm">
-              <form [formGroup]="paymentInfoForm"  class="custom-material-form">
+              <form [formGroup]="paymentInfoForm" (submit)="paymentInfo(paymentInfoForm.value)"  class="custom-material-form">
                 <ng-template matStepLabel>Payment Details</ng-template>
                 <div class="form-group row">
                     <div class="col-sm-12">
@@ -272,17 +281,89 @@
                           </div>
                 <div>
                     <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2">Back</button>
-                    <button matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                    <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                    <small class="form-error" *ngIf="paymentInfoForm.invalid">{{paymentErrorMsg}}</small>
                   </div>
               </form>
 
             </mat-step>
             <mat-step>
               <ng-template matStepLabel>Review Your Booking</ng-template>
-              You are now done.
+                <h4 class="text-center">Review Your Booking</h4>
+                <table class="table" *ngIf="bookingComplete == true">
+                  <tr>
+                    <td>Hotel</td>
+                    <td><b>{{hotelDetails.name}}</b></td>
+                  </tr>
+                  <tr>
+                      <td>Check In</td>
+                      <td><b>{{checkInDate | date:fullDate}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Check Out</td>
+                        <td><b>{{checkOutDate | date:fullDate}}</b></td>
+                      </tr>
+                      <tr>
+                          <td>Total Nights</td>
+                          <td><b>{{totalNights}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Guests</td>
+                            <td><b>{{searchQuery.adults}} Adults
+                                <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
+                                <span *ngFor="let age of searchQuery.childrenAges; let last = last">
+                                  <span *ngIf="last"> and </span>{{age.childAge}}
+                                  <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
+                                </span> Years Old )</span></b></td>
+                          </tr>
+                          <tr>
+                              <td>Total Price (PKR)</td>
+                              <td><b>{{totalPrice}}/-</b></td>
+                            </tr>
+
+                            <tr>
+                                <td>Rooms</td>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
+                                        <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
+                                        <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                                          <i-x-circle></i-x-circle>
+                                        </a>
+                                      </div>
+                                </td>
+                              </tr>  
+
+
+                  <tr>
+                      <td>Full Guest Name</td>
+                      <td><b>{{guestFormInfo.firstName}} {{guestFormInfo.lastName}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td><b>{{guestFormInfo.email}}</b></td>
+                      </tr>
+                      <tr>
+                          <td>Phone No</td>
+                          <td><b>{{paymentFormInfo.phone}}</b></td>
+                        </tr>
+                        <!-- <tr>
+                            <td>Card Type</td>
+                            <td><b *ngIf"paymentFormInfo.cardType == 1">Master</b>
+                              <b *ngIf"paymentFormInfo.cardType == 2">Visa</b></td>
+                          </tr> -->
+                          <tr>
+                              <td>Card Holder Name</td>
+                              <td><b>{{paymentFormInfo.cardHolderFirstName}} {{paymentFormInfo.cardHolderLastName}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td><b>{{paymentFormInfo.address}}</b></td>
+                              </tr>
+                </table>
               <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
+                <button class="btn btn-default rounded-0 shadow-sm" matStepperPrevious>Back</button>
+                <button class="btn btn-default rounded-0 shadow-sm" (click)="stepper.reset()">Reset</button>
+                <button class="btn btn-success rounded-0 shadow-sm w-40" (click)="conformBooking()">Confirm Booking</button>
               </div>
             </mat-step>
           </mat-horizontal-stepper>

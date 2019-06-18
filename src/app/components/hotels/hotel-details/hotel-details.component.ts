@@ -282,7 +282,16 @@ export class HotelDetailsComponent implements OnInit {
         //         this.roomsSelected[j] = +rooms;
         //     }
         // }
-        this.selectedRoomsId.push(roomId);
+        // let room_id;
+        // room_id[i] = roomId; 
+        let roomsObj = {
+            roomId: roomId,
+            roomsCount: this.roomsSelected[i],
+            price: this.roomsPrice[i]
+        }
+        
+        this.selectedRoomsId[i] = roomsObj;
+        console.log('roomsinfo',this.selectedRoomsId);
         this.totalRoomsPrice = this.roomsPrice.reduce(this.getSum);
         this.totalRoomsSelected = this.roomsSelected.reduce(this.getSum);
         this.totalRoomsGuests = this.roomsGuests.reduce(this.getSum);
@@ -317,7 +326,13 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     public continueBooking = () => {
-        this._cookieService.set('roomsInfo',JSON.stringify(this.selectedRoomsId));
+        let bookingInfo = {
+            roomsInfo: this.selectedRoomsId,
+            totalRooms: this.totalRoomsSelected,
+            totalPrice: this.totalRoomsPrice,
+            totalGuests: this.totalRoomsGuests
+        }
+        this._cookieService.set('bookingInfo',JSON.stringify(bookingInfo));
         this._router.navigate(['/hotel-booking']);
     }
 
