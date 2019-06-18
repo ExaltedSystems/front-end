@@ -1324,6 +1324,15 @@ legend {
 	h4{font-size: 1rem;color: #0248b1;}
 	.ck-editor-data h3{color: #0248b1;font-size: 1.2rem;}
 	.mat-autocomplete-panel {min-width: 330px !important;}
+	.mian-slider{
+		overflow: visible
+	}
+	.calendar right{
+		display: none;
+	}
+	.md-drppicker.double{
+		width: 250px !important;
+	}
 }
 @media (min-width: 768px) {
 	.shadow-sm-none{

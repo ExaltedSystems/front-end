@@ -34,6 +34,12 @@ export class HotelBookingComponent implements OnInit {
   totalPrice;
   totalGuests;
 
+  currentYear = new Date().getFullYear();
+  currentMonth = new Date().getMonth();
+  monthsNames = [{"name": "January", "value": 0}, {"name": "February", "value": 1}, {"name": "March", "value": 2}, {"name": "April", "value": 3}, {"name": "May", "value": 4}, {"name": "June", "value": 5}, {"name": "July", "value": 6}, {"name": "August", "value": 7}, {"name": "September", "value": 8}, {"name": "October", "value": 9}, {"name": "November", "value": 10}, {"name": "December", "value": 11}];
+  monthItems = [];
+  yearItems = [];
+
   myRooms: any;
 
   isLinear = true;
@@ -108,6 +114,7 @@ export class HotelBookingComponent implements OnInit {
       title: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', Validators.required],
       confirmEmail: ['', Validators.required],
       bookingFor: ['', Validators.required],
@@ -125,6 +132,17 @@ export class HotelBookingComponent implements OnInit {
       phone: ['', Validators.required],
       address: ['', Validators.required],
     });
+
+    // years list
+    for (let i = 0; i < 10; i++) {      
+      this.yearItems.push({"value": this.currentYear + i});
+    }
+    // months list
+    for (let j = 0; j < this.monthsNames.length; j++) {
+      if(j >= this.currentMonth){
+        this.monthItems.push(this.monthsNames[j]);
+      }
+    }
 
   } //
 
@@ -182,6 +200,7 @@ export class HotelBookingComponent implements OnInit {
     }
     else{
       this.bookingErrorMsg = "Please Fill All Required Fields";
+      this.bookingInfoFrom.controls['bookingFor'].markAsTouched();
     }
   }
 

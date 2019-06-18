@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
-   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule} from '@angular/material';
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatIconModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -109,6 +109,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatIconModule,
     IconsModule,
     MatSidenavModule,
     MatProgressBarModule,

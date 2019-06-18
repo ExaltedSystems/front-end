@@ -54,6 +54,7 @@ export class HotelDetailsComponent implements OnInit {
          private _cookieService: CookieService) { }
 
     ngOnInit(): void {
+        window.scroll(0,0);
         // get search query
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
 
