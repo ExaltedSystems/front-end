@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainService } from  "src/app/services/main.service";
 
 @Component({
   selector: 'app-hotels',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
+  page_info:any = {name:'', description:''};
 
-  constructor() { }
+  constructor(private __ms:MainService) { }
 
   ngOnInit() {
+    this.getPageData();
+  }
+  getPageData(){
+    this.__ms.getData(this.__ms.backEndUrl+'Cms/pageDetails/?urlLink=/hotels').subscribe(res => {
+    this.page_info = res.data;
+    });
   }
 
 }

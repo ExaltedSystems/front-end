@@ -11,6 +11,7 @@ import { Http, Response } from '@angular/http';
 export class MainService {
   public baseUrl = 'http://www.cheapfly.pk/';
   backEndUrl     : string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
+  // backEndUrl     : string = 'http://localhost/rgtapp/index.php/services/';
   flightsUrl     : string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
   byTagUrl       : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
   revalidateUrl  : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
@@ -46,9 +47,6 @@ export class MainService {
   getAirPorts() {
     return this.__http.get('../../assets/js/locations.json').pipe(map((res:any) => res.json()));
   }
-  getAirPorts_v1() {
-    return this.__httpClient.get<any>('http://www.cheapfly.pk/rgtapp/assets/locations.json');
-  }
   /**
     * Get All Client All Informations
     * @param url type any 
@@ -57,12 +55,11 @@ export class MainService {
   getClientInfo(url): Observable<ipInformation> {
     return this.__httpClient.get<ipInformation>(url);
   }
-
-    getIpAddress(){
-        this.__httpClient.get<{ip:string}>('https://jsonip.com').subscribe(data => {
-            this.ipAddress = data.ip
-        })
-    }
+  getIpAddress(){
+      this.__httpClient.get<{ip:string}>('https://jsonip.com').subscribe(data => {
+          this.ipAddress = data.ip
+      })
+  }
 
   /**
    * post data to server api
@@ -72,6 +69,12 @@ export class MainService {
   postData(url, obj): Observable<response> {
     return this.__httpClient.post<response>(url, obj);
   }
+  
+  sendPostData(url, obj){
+    obj = JSON.stringify(obj)    
+    return this.__httpClient.request("POST",url,obj);
+  }
+
   putData(url, obj) {
     return this.__httpClient.put(url, obj)
   }
@@ -99,7 +102,6 @@ export class MainService {
 
   locationsJson() {
     return this.getJsonData('../../assets/js/locations.json');         
-    // return this.getJsonData('http://www.cheapfly.pk/assets/locations.json');         
   }
   __filterFlyFrom(sectors, val) {
     if (val.length > 3) {

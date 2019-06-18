@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
-   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule} from '@angular/material';
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -30,6 +30,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 import { PnrViewComponent } from './components/pnr-view/pnr-view.component';
 import { CookieService } from 'ngx-cookie-service';
 import {StickyModule} from 'ng2-sticky-kit';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { HotelSearchFormComponent } from './components/hotels/hotel-search-form/hotel-search-form.component';
 import { HotelsListingComponent } from './components/hotels/hotels-listing/hotels-listing.component';
 import { HotelDetailsComponent } from './components/hotels/hotel-details/hotel-details.component';
@@ -37,8 +38,17 @@ import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { RangeSliderModule  } from 'ngx-rangeslider-component';
 import { DatePipe } from '@angular/common';
 import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
+import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
+import { PriceFilterPipe } from './pipes/price-filter.pipe';
+import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
+import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { ToursComponent } from './components/tours/tours.component';
@@ -49,14 +59,7 @@ import { RequstCallBackFormComponent } from './components/requst-call-back-form/
 import { PopularAirlineAndHotelsComponent } from './components/popular-airline-and-hotels/popular-airline-and-hotels.component';
 import { DetailComponent } from './components/popular-airline-and-hotels/detail/detail.component';
 import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.component';
-import { DeviceDetectorModule } from 'ngx-device-detector';
-import { ThankYouComponent } from './components/thank-you/thank-you.component';
-import { OrderByPipe } from './pipes/order-by.pipe';
-import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
-import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
-import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
-import { PriceFilterPipe } from './pipes/price-filter.pipe';
-import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
+import { FilterVisaByNamePipe } from './pipes/filter-visa-by-name.pipe';
 
 @NgModule({
   declarations: [
@@ -64,44 +67,44 @@ import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
-    HomeComponent,
     FlightsComponent,
-    FlightsSearchComponent,
-    FlightBookingComponent,
     HotelsComponent,
+    FlightsSearchComponent,
     HotelsSearchComponent,
-    HotelSearchFormComponent,
-    HotelsListingComponent,
-    HotelDetailsComponent,
-    HotelInlineSearchFormComponent,
-    HotelFiltersPipe,
-    HotelBookingComponent,
+    HomeComponent,
     FlightsListingComponent,
     AirPortsPipe,
     SecondsPipePipe,
     FlightBookingComponent,
-    DateFormatPipe,    
+    DateFormatPipe,
     PnrViewComponent,
-    ContactusComponent,
-    AboutusComponent,
+    ThankYouComponent,
+    HotelSearchFormComponent,
+    HotelsListingComponent,
+    HotelDetailsComponent,
+    HotelInlineSearchFormComponent,
+    HotelFiltersPipe,    
+    OrderByPipe,    
+    StarRatingFilterPipe,    
+    BreakfastTypeFilterPipe,    
+    PriceFilterPipe,    
+    FacilityFilterPipe,    
+    HotelBookingComponent,
+    ContactusComponent,    
+    AboutusComponent,    
     ToursComponent,    
-    DealsComponent, 
+    DealsComponent,    
     UmrahComponent,    
     VisaComponent,    
     RequstCallBackFormComponent,    
     PopularAirlineAndHotelsComponent,    
     DetailComponent,    
-    VisaListsComponent,    
-    ThankYouComponent,
-    StarRatingFilterPipe,
-    OrderByPipe,
-    FacilityFilterPipe,
-    PriceFilterPipe,
-    BreakfastTypeFilterPipe
+    VisaListsComponent, FilterVisaByNamePipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -127,13 +130,16 @@ import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
     MatCardModule,
     MatSidenavModule,
     StickyModule,
-    DeviceDetectorModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
     NgxDaterangepickerMd.forRoot({
       separator: '  -  ', 
       format: "DD/MM/YYYY",
     }),
-    NgxGalleryModule
+    NgxGalleryModule,
+    RangeSliderModule,
+    FilterPipeModule,
+    MatTabsModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [MainService, CookieService, DatePipe],
   bootstrap: [AppComponent]

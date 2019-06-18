@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from  "src/app/services/main.service";
+import { MainService } from "src/app/services/main.service";
+import { Meta, Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flights',
@@ -7,16 +9,24 @@ import { MainService } from  "src/app/services/main.service";
   styleUrls: ['./flights.component.css']
 })
 export class FlightsComponent implements OnInit {
-  	page_info:any = {name:'', description:''};
-    constructor(private _ms:MainService) { }
+  page_info: any = { name: '', description: '' };
+  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) { }
 
-    ngOnInit() {
-    	this.getPageData();
-    }
-    getPageData(){
-    	this._ms.getData(this._ms.backEndUrl+'Cms/pageDetails/?urlLink=/flights').subscribe(res => {
+  ngOnInit() {
+    console.log(this.__router)
+    this.getPageData();
+  }
+  getPageData() {
+    this.__ms.getData(this.__ms.backEndUrl + 'Cms/pageDetails/?urlLink=/flights').subscribe(res => {
       this.page_info = res.data;
-      // console.log(this.page_info.data);
-      });
-    }
+      this.updateMetaTags(res.data);
+    });
+  }
+  updateMetaTags(result) {
+    this.__title.setTitle(result.metaTitle);
+    this.__meta.updateTag({ name: 'description', content: result.metaDescription });
+    this.__meta.updateTag({ property: "og:title", content: result.metaTitle });
+    this.__meta.updateTag({ property: "og:description", content: result.metaDescription });
+    this.__meta.updateTag({ property: "og:url", content: window.location.href });
+  }
 }

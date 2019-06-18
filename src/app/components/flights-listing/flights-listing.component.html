@@ -386,17 +386,17 @@
 
                 <form [formGroup]="flightSearch" class="home-flight-search-form" (submit)="changeSearch(flightSearch.value)">
                     <div class="current-flight-search shadow d-none d-sm-flex justify-content-between align-items-center mb-3" (click)="editMode=true">
-                        <div class="" *ngIf="editMode">
+                        <!-- <div class="" *ngIf="editMode">
                             <mat-radio-group class="d-block my-2" formControlName="flightType" (change)="setFlightType($event)">
                                 <mat-radio-button class="mr-3" value="Return"> Return</mat-radio-button>
                                 <mat-radio-button value="OneWay"> One Way</mat-radio-button>
                             </mat-radio-group>
-                        </div>
+                        </div> -->
                         <div class="w-100 current-search-sector d-flex align-items-center">
 
                             <div class="col-sm-6 col-5 pr-0">
                                 <p>{{oLocation | airPorts}}</p>
-                                <span *ngIf="editMode">
+                                <!-- <span *ngIf="editMode">
                   <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
                     <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto"
                       (keyup)="filterFlyingFrom($event)">
@@ -407,14 +407,14 @@
                     </mat-autocomplete>
                     <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingFrom').value" (click)="flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
                   </mat-form-field>
-                </span>
+                </span> -->
                             </div>
                             <div class="col-sm-2 col-2 text-center">
                                 <i-arrow-right class="feather mt-2"></i-arrow-right>
                             </div>
                             <div class="col-sm-6 col-5 pl-0">
                                 <p>{{dLocation | airPorts}}</p>
-                                <span *ngIf="editMode">
+                                <!-- <span *ngIf="editMode">
                   <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
                     <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto"
                       (keyup)="filterFlyingTo($event)">
@@ -425,37 +425,34 @@
                     </mat-autocomplete>
                     <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
                   </mat-form-field>
-                </span>
+                </span> -->
                             </div>
                         </div>
                         <div class="col-sm-3 w-50 d-flex justify-content-center align-items-center">
                             <div class="current-search-dates d-flex align-items-center">
-                                <!-- <span  *ngIf="!editMode"> -->
                                 <i-calendar class="feather" _nghost-c13=""></i-calendar>
                                 <p class="mr-3">{{dptDate | date}}</p>
-                                <!-- </span> -->
-                                <!---->
-                                <span *ngIf="editMode">
+                                <!-- <span *ngIf="editMode">
                   <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
                     <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open()"
                       class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
                     <mat-datepicker touchUi #departureDate></mat-datepicker>
                   </mat-form-field>
-                </span>
+                </span> -->
                             </div>
                         </div>
                         <div *ngIf="isReturn" class="w-50 d-flex justify-content-center align-items-center">
                             <div class="current-search-dates d-flex align-items-center">
                                 <i-calendar class="feather" _nghost-c13=""></i-calendar>
                                 <p class="mr-3">{{rtnDate | date}}</p>
-                                <span *ngIf="editMode">
+                                <!-- <span *ngIf="editMode">
                   <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none"
                     [hidden]="!isReturn">
                     <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open()"
                       class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
                     <mat-datepicker touchUi #returnDate></mat-datepicker>
                   </mat-form-field>
-                </span>
+                </span> -->
                                 <p></p>
                             </div>
                         </div>
@@ -518,9 +515,9 @@
                             </div>
 
                         </div>
-                        <div class="">
+                        <!-- <div class="">
                             <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
 
@@ -548,11 +545,11 @@
                             </div>
 
                         </div>
-                        <div class="sidebar-subscribe mt-4">
+                        <!-- <div class="sidebar-subscribe mt-4">
                             <p class="mb-0">Subscribe to Get Amazing Offers</p>
                             <h3>Flight Alerts</h3>
                             <button class="btn btn-secondary">Subscribe</button>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-sm-9 flight-listing">
 

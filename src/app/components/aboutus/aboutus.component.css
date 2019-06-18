@@ -1,1 +1,11 @@
 /* About Us Inline CSS */
+.well {
+    border: solid 1px #037da4;
+    margin-bottom: 10px;
+    padding: 9px;
+    margin-right: 0px;
+    background: #fff
+}
+h3{
+	font-size: 1.5rem;
+}

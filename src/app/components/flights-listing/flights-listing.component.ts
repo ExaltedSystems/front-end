@@ -200,8 +200,8 @@ export class FlightsListingComponent implements OnInit {
     //     this.availableFlights = res;
     //     console.log(this.availableFlights)
     //     if(res != null){
-    //       if(res['PricedItineraries']['PricedItinerary'].length > 0){
-    //         this.availableFlights = res['PricedItineraries']['PricedItinerary'];            
+    //       if(res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'].length > 0){
+    //         this.availableFlights = res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'];            
     //       }
     //     }
         
@@ -226,8 +226,8 @@ export class FlightsListingComponent implements OnInit {
     //     let e;
     //     this.moreFlights[this.defaultPage] = res;
     //     if(res != null){
-    //       if(res['PricedItineraries']['PricedItinerary'].length > 0){
-    //         this.moreFlights[this.defaultPage] = res['PricedItineraries']['PricedItinerary'];
+    //       if(res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'].length > 0){
+    //         this.moreFlights[this.defaultPage] = res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'];
     //         jQuery('.loadingMore').hide();
     //       }
     //     }

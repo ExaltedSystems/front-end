@@ -170,65 +170,74 @@
     </div>
     <!-- /Search Form -->
 
-    <img src="assets/slider/koblenz-3453860_1920.jpg" class="img-fluid d-none d-sm-block" alt="">
+    <img *ngIf="!isMobile" src="assets/slider/koblenz-3453860_1920.jpg" class="img-fluid d-none d-sm-block" alt="Background Image Rehman Travels">
 </div>
 
 
 <!-- Deals -->
-<section class="deals-section">
+<section class="deals-section" *ngIf="popularDeals">
     <div class="container">
         <div class="section-title">
             <h1>Make your best deals</h1>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, natus rerum unde alias quam fuga eos esse.</p>
+            <!-- <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, natus rerum unde alias quam fuga eos esse.</p> -->
         </div>
 
         <div class="card-deck">
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/Serene-Air-Planes-1-1024x650.jpg" alt="Card image cap">
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngFor="let deal of popularDeals;">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/{{deal.image}}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Serene Air Promotional Fares</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <p class="card-text">
+                    <h5 class="card-title">{{deal.name}}</h5>
+                    <p class="card-text">{{deal.shortDescription}}</p>
+                    <!-- <p class="card-text">
                         <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
+                    </p> -->
+                    <a class="btn btn-outline-primary btn-sm shadow rounded-0" routerLink="/{{deal.URL}}">View Deal</a>
                 </div>
             </div>
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/132278307.jpg" alt="Card image cap">
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngIf="popularDeals.length == 1">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/uploads/no-image-default.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Get upto 24% Discount on Al Kiswa Tower rooms</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text">
+                    <h5 class="card-title">Comming Soon</h5>
+                    <p class="card-text"></p>
+                    <!-- <p class="card-text">
                         <small class="text-muted">Last updated 3 mins ago</small>
                     </p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
+                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button> -->
                 </div>
             </div>
-            <div class="w-100 d-none d-sm-block d-lg-none"></div>
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/Boeing_747-367,_Pakistan_International_Airlines_(PIA)_JP290327.jpg" alt="Card image cap">
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngIf="popularDeals.length == 1">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/uploads/no-image-default.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">PIA Special Fares</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
+                    <h5 class="card-title">Comming Soon</h5>
+                    <p class="card-text"></p>
                 </div>
             </div>
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/Qatar-Airways.jpg" alt="Card image cap">
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngIf="popularDeals.length == 1">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/uploads/no-image-default.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Qatar Air Promotional Fares</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Deal</button>
+                    <h5 class="card-title">Comming Soon</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngIf="popularDeals.length == 2">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/uploads/no-image-default.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Comming Soon</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngIf="popularDeals.length == 2">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/uploads/no-image-default.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Comming Soon</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngIf="popularDeals.length == 3">
+                <img class="card-img-top rounded-0" src="{{this.__ms.baseUrl}}rgtapp/uploads/no-image-default.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Comming Soon</h5>
+                    <p class="card-text"></p>
                 </div>
             </div>
         </div>
@@ -242,9 +251,9 @@
 <!-- /Deals -->
 
 <!-- Subscribe for deals -->
-<section class="subscribe-deal">
+<!-- <section class="subscribe-deal">
     <h1 class="text-center">Subscribe For Deals Section</h1>
-</section>
+</section> -->
 <!-- /Subscribe for deals -->
 
 <!-- Top Destinations -->
@@ -259,42 +268,11 @@
                 <img class="card-img-top rounded-0" src="{{ baseUrl+item.visaThumbnail }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ item.countryName }}</h5>
-                    <p class="card-text">{{ item.shortDescription }}
-                    </p>
+                    <p class="card-text">{{ item.shortDescription }}</p>
                     <p class="card-title">{{ item.currencyCode }} {{ item.visaPrice }}</p>
                     <a class="btn btn-outline-primary btn-sm shadow rounded-0" routerLink="{{ item.visaUrl }}">View Details</a>
                 </div>
             </div>
-            <!-- <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/destinations/sg-trip.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Singapore</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-title">PKR 70,000/-</p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Details</button>
-                </div>
-            </div>
-            <div class="w-100 d-none d-sm-block d-lg-none"></div>
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/destinations/5ad9c5d3ef0e6.jpeg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Turkey</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <p class="card-title">PKR 70,000/-</p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Details</button>
-                </div>
-            </div>
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0">
-                <img class="card-img-top rounded-0" src="assets/img/destinations/thailand.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Thailand</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <p class="card-title">PKR 70,000/-</p>
-                    <button class="btn btn-outline-primary btn-sm shadow rounded-0">View Details</button>
-                </div>
-            </div>-->
         </div>
         <div class="section-details-button">
             <button class="btn btn-primary rounded-0 shadow" routerLink="/visa">View All Destinations</button>
@@ -422,12 +400,6 @@
             Sale Services. We Rehmantravel.com are always working for the special deals to facilitate our valuable clients. These are the lowest and market competitive offers for UK, USA, Canada & Australia based frequent travelers. Rehmantravel.com is
             offering all the transaction via online Banking.. Rehmantravel.com has its user friendly interface and you can purchase online ticket in just few clicks. Moreover our design is also compatible to fit on every desired device which helps user
             in finding the lowest rates. All you need to do is enter your travelling dates and destinations, rest Rehmantravel.com will find you with the lowest airfares. You can also filter/customize your search by selecting the specific airlines.</p>
-
-        <p>Rehmantravel.com has its head office in Islamabad and branches available in major cities; i.e. Lahore, Karachi, Peshawar, Attock, Malakand and many more. We have also options to purchase products by using credit card or online banking. Make your
-            booking now and start your memorable journey. We always have special deals, keep visiting rehmantravel.com. We have cheapest rates of all Airlines like PIA, Emirates Airline, Saudi Airline, Thai Airways, Qatar Airways, Oman Air, Fly Dubai,
-            Air Lanka, Air China, Nas Airline and lot others. We have more than 400 Airlines listed and you will get the best match as per your need. We are not limited to only GDS airlines you can also avail our services for NON GDS airlines like AirBlue,
-            Shaheen Air, Air Asia, Serene Air etc. We are open for 7 days a week from 9AM till 12AM. You can call our UAN number 051 111 786 785 for further assistance.</p>
-
         <app-popular-airline-and-hotels></app-popular-airline-and-hotels>
     </div>
     <!-- /container -->

@@ -1,3 +1,140 @@
-<p>
-  flights-search works!
-</p>
+<div class="modifySearchForm mb-4 d-none d-sm-block">
+  <mat-card _ngcontent-c36="" class="p-3 mat-card" style="background: rgba(255,255,255,.7)">
+    <form [formGroup]="flightSearch" class="home-flight-search-for custom-material-form" (submit)="searchFlights(flightSearch.value)">
+      <mat-radio-group class="d-block my-2" formControlName="flightType" (change)="setFlightType($event)">
+        <mat-radio-button class="mr-3" value="Return"> Return</mat-radio-button>
+        <mat-radio-button value="OneWay"> One Way</mat-radio-button>
+      </mat-radio-group>
+      <div class="form-group mobile-form-group shadow-sm shadow-xs-none">
+        <div class="row no-gutters">
+          <div class="col-sm-6 shadow-sm shadow-xs-none">
+            <div class="input-group">
+              <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm shadow-sm-none">
+                <span class="input-group-text rounded-0">
+                  <i-map-pin></i-map-pin>
+                </span>
+              </div>
+              <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm shadow-sm-none">
+                <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (keyup)="filterFlyingFrom($event)">
+                <mat-autocomplete #flyingFromAuto="matAutocomplete">
+                  <mat-option *ngFor="let sector of airlineSectors | async" [value]="sector">
+                    {{sector}}
+                  </mat-option>
+                </mat-autocomplete>
+                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingFrom').value" (click)="flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
+              </mat-form-field>
+              <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
+                <span class="input-group-text rounded-0">
+                  <i-map-pin></i-map-pin>
+                </span>
+              </div>
+              <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
+                <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (keyup)="filterFlyingTo($event)">
+                <mat-autocomplete #flyingToAuto="matAutocomplete">
+                  <mat-option *ngFor="let sector of flyToSectors | async" [value]="sector">
+                    {{sector}}
+                  </mat-option>
+                </mat-autocomplete>
+                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="input-group mb-4 mb-sm-0">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-0">
+                  <i-calendar (click)="departureDate.open()"></i-calendar>
+                </span>
+              </div>
+              <mat-form-field class="form-control material-input">
+                <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open()" class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
+                <mat-datepicker touchUi #departureDate></mat-datepicker>
+              </mat-form-field>
+              <div class="input-group-prepend" (click)="returnDate.open()" [hidden]="!isReturn">
+                <span class="input-group-text rounded-0">
+                  <i-calendar></i-calendar>
+                </span>
+              </div>
+              <mat-form-field class="form-control rounded-0 material-input" [hidden]="!isReturn">
+                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open()" class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
+                <mat-datepicker touchUi #returnDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="input-group dropdown mb-4 mb-sm-0">
+              <div class="input-group-prepend">
+                <span class="input-group-text rounded-0">
+                  <i-users></i-users>
+                </span>
+              </div>
+              <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
+                <small class="d-block">No of Passenger</small>
+                <p class="d-inline-block mb-0">{{adults}} Adult, {{children}} Child, {{infant}} Infant</p>
+                <i-chevron-down class="dropdown-feather"></i-chevron-down>
+              </button>
+              <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
+                <div class="form-group">
+                  <div class="input-group mb-3 text-center">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('adults')">
+                        <i-minus class="dropdown-feather"></i-minus>
+                      </button>
+                    </div>
+                    <span class="form-control">{{adults}} Adults</span>
+                    <input formControlName="adults" type="hidden" value="{{adults}}">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('adults')">
+                        <i-plus class="dropdown-feather"></i-plus>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3 text-center">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('children')">
+                        <i-minus class="dropdown-feather"></i-minus>
+                      </button>
+                    </div>
+                    <span class="form-control">{{children}} Children</span>
+                    <input formControlName="children" type="hidden" value="0">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('children')">
+                        <i-plus class="dropdown-feather"></i-plus>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3 text-center">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('infant')">
+                        <i-minus class="dropdown-feather"></i-minus>
+                      </button>
+                    </div>
+                    <span class="form-control">{{infant}} Infant</span>
+                    <input formControlName="infant" type="hidden" value="0">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('infant')">
+                        <i-plus class="dropdown-feather"></i-plus>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="float-right" (click)="closeDropDown($event)">
+                  <i-check class="dropdown-feather text-success float-left m-1"></i-check>
+                  <span class="float-right">Done</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-primary shadow rounded-0 search-flight-btn">Search Flights</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

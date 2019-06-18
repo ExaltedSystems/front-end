@@ -1,39 +1,70 @@
 <app-header></app-header>
 <div>
-  <img class="img-fluid" src="assets/img/visa-background-image.jpg">
+    <img class="img-fluid" src="assets/img/visa-background-image.jpg">
 </div>
-   <section class="visa-contents">
-        <div class="container sidebar">
-         <!-- <div class="section-title">
+<section class="visa-contents">
+    <div class="container sidebar">
+        <!-- <div class="section-title">
             <h1>visit visa</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.</p>
           </div>-->
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="sidebar-list">
-                <app-requst-call-back-form></app-requst-call-back-form>
-              </div>
+        <div class="row">
+            <div class="col-sm-3 order-last order-sm-first">
+                <div class="sidebar-list">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
 
-              <div class="sidebar-subscribe mt-4">
+                <!-- <div class="sidebar-subscribe mt-4">
                 <p class="mb-0">Subscribe to Get Amazing Offers</p>
                 <h3>Tour Alerts</h3>
                 <button class="btn btn-secondary">Subscribe</button>
-              </div>
+              </div> -->
             </div>
-            <div class="col-sm-9" *ngIf="page_info">
-            	<h1>{{ page_info.name }}</h1>
-            	<nav _ngcontent-c37="" aria-label="breadcrumb">
-      	          <ol _ngcontent-c37="" class="breadcrumb">
-      	            <li class="breadcrumb-item">
-      	              <a routerLink="/">Home</a>
-      	            </li>
-      	            <li class="breadcrumb-item active">{{ page_info.name }}</li>
-      	          </ol>
-      	        </nav>
-            	<div [innerHTML]="page_info.description"></div>
+            <div class="col-sm-9 order-sm-2 ng-star-inserted" *ngIf="page_info">
+                <h1>{{ page_info.name }}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a routerLink="/">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{ page_info.name }}</li>
+                    </ol>
+                </nav>
+                <div [innerHTML]="page_info.description"></div>
+                <iframe src="http://www.cheapfly.pk/doc/profile-book-version-02April.pdf" width="100%" height="1000" frameborder="0"></iframe>
             </div>
-          </div>
+            <div class="col-sm-9 order-sm-2 ng-star-inserted" *ngIf="bankDetails">
+                <h1>Bank Details</h1>
+                <div class="card-deck">
+                    <div class="col-sm-6" *ngFor="let b of bankDetails;let i=index">
+                        <div class="row well well-sm">
+                            <div class="col-sm-4 col-4"><img src="assets/banks-logos/{{b.logo}}" class="width-100" alt="{{b.name}} Logo Rehman Travels"></div>
+                            <div class="col-sm-8 col-8">
+                                <h3>{{b.name}}</h3>
+                                <small class="inline-block">TITLE : {{b.title}}</small><br>
+                                <small class="inline-block">BRANCH CODE : {{b.branchCode}}</small><br>
+                                <small class="inline-block">ACCOUNT # : <b>{{b.accNumber}}</b></small><br>
+                            </div>
+                            <p class="visa-price" *ngIf="b.ibanNumber">IBAN #: {{ b.ibanNumber }}</p>
+                        </div>
+                        <!-- <div class="visa-card card shadow">
+                            <div class="col-sm-4"><img class="card-img-top img-fluid" src="assets/banks-logos/{{b.logo}}" alt="{{i}} Rehman Travels"></div>
+                            <div class="col-sm-4">
+                                <h5 class="card-title">{{ b.name }}</h5>
+                                <small class="text-muted">{{ b.branchCode }}</small></div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ b.name }}</h5>
+                                <small class="text-muted">{{ b.branchCode }}</small>
+                                <h5>{{b.accNumber}}</h5>
+                                <p class="visa-price">{{ b.ibanNumber }}/-</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
         </div>
-   </section>
- <app-footer></app-footer>
+    </div>
+</section>
+<app-footer></app-footer>

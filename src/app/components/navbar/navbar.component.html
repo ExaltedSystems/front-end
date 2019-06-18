@@ -1,60 +1,45 @@
-<style type="text/css" media="screen">
-	/*.dropdown-toggle:hover>.dropdown-menu {
-	  display: block;
-	}*/
-	.dropdown-toggle:hover > .dropdown-menu {
-	    display: block;
-	}
-	.dropdown-toggle > .dropdown-toggle:active {
-	    /*Without this, clicking will make it sticky*/
-	    pointer-events: none;
-	}
-</style>
 <mat-card class="p-0 rounded-0">
-	<div class="container">
+    <div class="container">
 
-		<div class="navbar navbar-expand-lg navbar-light bg-light p-0">
-			<a class="navbar-brand d-none d-sm-block" routerLink="/">
-				<img src="assets/img/logo-drk-blue.png" alt="">
-				<!--<img src="assets/img/iata_logo.jpg" alt="" width="20%">-->
-			</a>
-			<button class="navbar-toggler d-none d-sm-block d-lg-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="navbar navbar-expand-lg navbar-light bg-light p-0">
+            <a class="navbar-brand d-none d-sm-block" routerLink="/">
+                <img src="assets/img/logo-drk-blue.png" alt="Logo Rehman Travels">
+            </a>
+            <button class="navbar-toggler d-none d-sm-block d-lg-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item" *ngFor="let item of nav; let i = index">
-					<a *ngIf="!item.children" routerLink="/{{ item.urlLink }}" class="px-3 nav-link">{{ item.navbarTitle }}</a>
-					<a *ngIf="item.children" href="#" class="px-3 nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">{{ item.navbarTitle }}</a>
-					<div *ngIf="item.children" class="dropdown-menu mega-menu v-2 row z-depth-1 special-color shadow" aria-labelledby="navbarDropdownMenuLink1">
-						<div class="row mx-md-4 mx-1">
-							<div class="col-sm-4 sub-menu my-4">
-								<h6 class="sub-title text-uppercase font-weight-bold white-text">{{ item.navbarTitle }}</h6>
-								<ul class="caret-style pl-0">
-									<li *ngFor="let subitem of item.children | slice:0:(item.children.length)/3; let j = index">
-										<a class="menu-item" routerLink="/{{ subitem.urlLink }}">{{ subitem.navbarTitle }}</a>
-									</li>
-								</ul>
-							</div>
-								<div class="col-sm-4 sub-menu my-4">
-									<h6 class="sub-title text-uppercase font-weight-bold white-text">&nbsp;</h6>
-									<ul class="caret-style pl-0">
-										<li *ngFor="let subitem of item.children | slice:(item.children.length)/3:((item.children.length)/3*2); let j = index">
-											<a class="menu-item" routerLink="/{{ subitem.urlLink }}">{{ subitem.navbarTitle }}</a>
-										</li>
-									</ul>
-								</div>
-								<div class="col-sm-4 sub-menu my-4">
-									<h6 class="sub-title text-uppercase font-weight-bold white-text">&nbsp;</h6>
-									<ul class="caret-style pl-0">
-										<li *ngFor="let subitem of item.children | slice:((item.children.length)/3*2); let j = index">
-											<a class="menu-item" routerLink="/{{ subitem.urlLink }}">{{ subitem.navbarTitle }}</a>
-										</li>
-									</ul>
-								</div>
-							<!--	<div class="col-sm-6 sub-menu my-4 d-none d-sm-block">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" *ngFor="let item of nav; let i = index">
+                        <a *ngIf="!item.children" routerLink="/{{ item.urlLink }}" class="px-3 nav-link">{{ item.navbarTitle }}</a>
+                        <a *ngIf="item.children" href="#" class="px-3 nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.navbarTitle }}</a>
+                        <div *ngIf="item.children" class="dropdown-menu mega-menu v-2 row z-depth-1 special-color shadow" aria-labelledby="navbarDropdownMenuLink1">
+                            <div class="row mx-md-4 mx-1">
+                                <div class="col-sm-4 sub-menu my-4">
+                                    <h6 class="sub-title text-uppercase font-weight-bold white-text">{{ item.navbarTitle }}</h6>
+                                    <ul class="caret-style pl-0">
+                                        <li *ngFor="let subitem of item.children | slice:0:(item.children.length)/3; let j = index">
+                                            <a class="menu-item shadow" routerLink="/{{ subitem.urlLink }}">{{ subitem.navbarTitle }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4 sub-menu my-4">
+                                    <h6 class="sub-title text-uppercase font-weight-bold white-text">&nbsp;</h6>
+                                    <ul class="caret-style pl-0">
+                                        <li *ngFor="let subitem of item.children | slice:(item.children.length)/3:((item.children.length)/3*2); let j = index">
+                                            <a class="menu-item shadow" routerLink="/{{ subitem.urlLink }}">{{ subitem.navbarTitle }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4 sub-menu my-4">
+                                    <h6 class="sub-title text-uppercase font-weight-bold white-text">&nbsp;</h6>
+                                    <ul class="caret-style pl-0">
+                                        <li *ngFor="let subitem of item.children | slice:((item.children.length)/3*2); let j = index">
+                                            <a class="menu-item shadow" routerLink="/{{ subitem.urlLink }}">{{ subitem.navbarTitle }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--	<div class="col-sm-6 sub-menu my-4 d-none d-sm-block">
 									<h6 class="sub-title text-uppercase font-weight-bold white-text">Featured</h6>
 									<div class="row">
 										<div class="col-sm-4">
@@ -107,10 +92,10 @@
 										</div>
 									</div>
 								</div>-->
-							</div>
-						</div>
-					</li>
-				<!--	<li class="nav-item active">
+                            </div>
+                        </div>
+                    </li>
+                    <!--	<li class="nav-item active">
 						<a class="px-3 nav-link" routerLink="/">Home
 							<span class="sr-only">(current)</span>
 						</a>
@@ -261,30 +246,30 @@
 					<li class="nav-item">
 						<a class="px-3 nav-link" href="#">Contact</a>
 					</li>-->
-				</ul>
-				<!-- <form class="form-inline my-2 my-lg-0">
+                </ul>
+                <!-- <form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form> -->
-			</div>
-		</div>
+            </div>
+        </div>
 
-		<div class="row">
-			<ul class="mobile-sub-nav d-flex flex-row justify-content-between align-items-center mb-0 px-4 p-2 w-100 d-sm-none">
-				<li>
-					<a href="">Umrah</a>
-				</li>
-				<li>
-					<a href="">Visa</a>
-				</li>
-				<li>
-					<a href="">Tours</a>
-				</li>
-				<li>
-					<a href="">Franchise</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+        <div class="row">
+            <ul class="mobile-sub-nav d-flex flex-row justify-content-between align-items-center mb-0 px-4 p-2 w-100 d-sm-none">
+                <li>
+                    <a routerLink="/umrah">Umrah</a>
+                </li>
+                <li>
+                    <a routerLink="/visa">Visa</a>
+                </li>
+                <li>
+                    <a href="https://www.rehmantravel.com/tours">Tours</a>
+                </li>
+                <li>
+                    <a routerLink="/franchise-reg">Franchise</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </mat-card>
 <!-- Main Navigation -->

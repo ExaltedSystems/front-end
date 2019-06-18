@@ -1,44 +1,74 @@
 <app-header></app-header>
-<div *ngIf="page_info" [hidden]="page_info.image==''">
-  <img class="img-fluid" src="{{ baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image }}">
+<div class="banner d-flex align-items-center" *ngIf="page_info.image">
+    <img class="img-fluid" src="{{ baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image }}">
+
+    <!-- <div class="page-search">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-flights-search></app-flights-search>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>
 <section class="visa-contents">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" *ngIf="pageType == 'airlines'">
+                <app-flights-search></app-flights-search>
+            </div>
+            <div class="col-sm-12 main-search-form position-relative" *ngIf="pageType == 'hotels'">
+                <app-hotel-search-form></app-hotel-search-form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="visa-contents">
     <div class="container sidebar">
-     <!-- <div class="section-title">
+        <!-- <div class="section-title">
         <h1>visit visa</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>-->
-      <div class="row">
-        <div class="col-sm-3 order-last order-sm-first">
-          <div class="sidebar-list">
-            <app-requst-call-back-form></app-requst-call-back-form>
-          </div>
+        <div class="row">
+            <div class="col-sm-3 order-last order-sm-first">
+                <div class="sidebar-list">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <div class="sidebar-list mt-4" *ngIf="popularVisa">
+                    <h3 class="sidebar-title">Amazing Visa Offers</h3>
+                    <ul>
+                        <li *ngFor="let item of popularVisa;"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }}
+                <span class="float-right">{{item.validityId}}</span></a></li>
+                    </ul>
+                    <a routerLink="/visa" class="view-all">View All</a>
+                </div>
 
-          <div class="sidebar-subscribe mt-4">
-            <p class="mb-0">Subscribe to Get Amazing Offers</p>
-            <h3>Tour Alerts</h3>
-            <button class="btn btn-secondary">Subscribe</button>
-          </div>
+                <!-- <div class="sidebar-subscribe mt-4">
+                    <p class="mb-0">Subscribe to Get Amazing Offers</p>
+                    <h3>Tour Alerts</h3>
+                    <button class="btn btn-secondary">Subscribe</button>
+                </div> -->
+            </div>
+            <div class="col-sm-9 order-sm-2" *ngIf="page_info">
+                <h1>{{ page_info.title }}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a routerLink="/">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{ page_info.title }}</li>
+                    </ol>
+                </nav>
+                <div [innerHTML]="page_info.details"></div>
+            </div>
         </div>
-        <div class="col-sm-9 order-sm-2" *ngIf="page_info">
-        	<h1>{{ page_info.title }}</h1>
-        	<nav aria-label="breadcrumb">
-  	          <ol class="breadcrumb">
-  	            <li class="breadcrumb-item">
-  	              <a routerLink="/">Home</a>
-  	            </li>
-  	            <li class="breadcrumb-item active">{{ page_info.title }}</li>
-  	          </ol>
-  	        </nav>
-					<div [innerHTML]="page_info.details"></div>
-        </div>
-      </div>
     </div>
 </section>
 <section>
-	<div class="container">
-		<app-popular-airline-and-hotels></app-popular-airline-and-hotels>
-	</div>
+    <div class="container">
+        <app-popular-airline-and-hotels></app-popular-airline-and-hotels>
+    </div>
 </section>
 <app-footer></app-footer>

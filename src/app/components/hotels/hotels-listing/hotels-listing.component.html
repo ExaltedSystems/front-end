@@ -99,7 +99,7 @@
                                     <b>Price Range</b>
                                 </li>
                                 <li class="pt-1">
-                                    <!-- <range-slider [min]="min" [max]="max" [step]="100" [(ngModel)]="range" class="d-block mt-3" (onRangeChange)="rangeChanged($event)"></range-slider> -->
+                                    <range-slider [min]="min" [max]="max" [step]="100" [(ngModel)]="range" class="d-block mt-3" (onRangeChange)="rangeChanged($event)"></range-slider>
                                 </li>
 
                                 <div class="list-divider"></div>
@@ -171,7 +171,7 @@
                         </div>
 
                         <div class="mb-3 p-0">
-                            <!-- <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block">
+                            <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block">
                 <b class="d-inline-block mr-4">Sort:</b>
                 <div class="d-inline-flex justify-content-between">
                   <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>
@@ -179,10 +179,18 @@
                   <button mat-button (click)="orderBy('distance')" class="mx-2">Distance form City Center</button>
                   <button mat-button (click)="orderBy('recomended')" class="mx-2">RGT Recomended</button>
                 </div>
-              </mat-card> -->
+              </mat-card>
 
-                            <mat-card class="p-1 mb-3 hotel-search-item rounded-0" *ngFor="let item of hotelsSearchResult 
-            ">
+              <mat-card class="p-1 mb-3 hotel-search-item rounded-0" *ngFor="let item of hotelsSearchResult 
+            | priceFilter : selectedPriceValue
+            | hotelFilters: selectedFilters 
+            | starRatingFilter: selectedStarRating 
+            | breakfastTypeFilter: slelctedBreakfast 
+            | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities, 
+              parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false
+            |  orderBy : order : reverse">
+
+              
 
                                 <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
             *ngFor="let item of hotelsSearchResult | filterBy: userFilter |  orderBy : order : reverse"> -->
@@ -265,7 +273,14 @@
 
                             </mat-card>
 
-                            <mat-card class="text-center" [hidden]="isLoading" *ngIf="(hotelsSearchResult).length == 0">No Matching Result Found.</mat-card>
+                            <!-- <mat-card class="text-center" [hidden]="isLoading" *ngIf="(hotelsSearchResult).length == 0">No Matching Result Found.</mat-card> -->
+                            <mat-card class="text-center" [hidden]="isLoading" *ngIf="(hotelsSearchResult | priceFilter : selectedPriceValue
+          | hotelFilters: selectedFilters 
+          | starRatingFilter: selectedStarRating 
+          | breakfastTypeFilter: slelctedBreakfast 
+          | facilityFilter: { breakfast: slectedFacilities, extra_bed: slectedFacilities, parking_type: slectedFacilities,
+            parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false).length == 0">No Matching Result Found.</mat-card>
+
 
                         </div>
 

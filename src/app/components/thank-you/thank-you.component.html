@@ -1,3 +1,27 @@
-<p>
-  thank-you works!
-</p>
+<mat-drawer-container class="mat-drawer-container mat-drawer-transition">
+    <mat-drawer-content class="mat-drawer-content">
+        <app-header></app-header>
+        <section class="about-section">
+            <div class="container">
+                <div class="section-title">
+                    <h1>Thank You</h1>
+                </div>
+                <div [innerHTML]="thankYouMsg"></div>
+                <div>
+                    <p>We have received your message and would like to thank you for writing to us. </p>
+                    <p>For Urgent inquiry Contact on the below mentioned detail: </p>
+                    <h4>Our Contact Details : </h4>
+                    <p>
+                        <b style="margin-left: 3em;">Phone :</b> +92 51 111 786 785<br>
+                        <b style="margin-left: 3em;">Email :</b> info@rehmantravel.com<br>
+                        <b style="margin-left: 3em;">Address :</b> Plot No 512, Street 33, E 11/3, Islamabad, Pakistan <br>
+                        <b style="margin-left: 3em;">Bank Details :</b> Check out <a routerLink="/bank-details"><b>our
+                banks</b></a>
+                        <br> <br> Please check our <a routerLink="/contactUs">contact us</a> page for more information. <br> Have a great day ahead!
+                    </p>
+                </div>
+            </div>
+        </section>
+        <app-footer></app-footer>
+    </mat-drawer-content>
+</mat-drawer-container>

@@ -4,6 +4,7 @@
     <div class="form-group">
         <mat-form-field class="form-control material-input mb-3 shadow">
             <input matInput placeholder="Name" class="rounded-5" formControlName="name" matInput required>
+            <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('name').value" (click)="this.contactForm.get('name').setValue('')"></i-x-circle>
         </mat-form-field>
         <div class="form-error" *ngIf="contactForm.controls['name'].hasError('required') && contactForm.controls['name'].touched">
             Name required.
@@ -12,6 +13,7 @@
     <div class="form-group">
         <mat-form-field class="form-control material-input mb-3 shadow">
             <input matInput placeholder="Email" class="rounded-5" formControlName="email" matInput required>
+            <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('email').value" (click)="this.contactForm.get('email').setValue('')"></i-x-circle>
         </mat-form-field>
         <div class="form-error" *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
             Email address required.
@@ -23,6 +25,7 @@
     <div class="form-group">
         <mat-form-field class="form-control material-input mb-3 shadow">
             <input matInput placeholder="Phone" class="rounded-5" formControlName="phone" matInput required>
+            <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('phone').value" (click)="this.contactForm.get('phone').setValue('')"></i-x-circle>
         </mat-form-field>
         <div class="form-error" *ngIf="contactForm.controls['phone'].hasError('required') && contactForm.controls['phone'].touched">
             Phone number required.
@@ -34,6 +37,7 @@
     <div class="form-group">
         <mat-form-field class="form-control material-input mb-3 shadow">
             <textarea matInput cols="33" placeholder=" Message" class="rounded-5" formControlName="emailMessage" matInput required></textarea>
+            <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('emailMessage').value" (click)="this.contactForm.get('emailMessage').setValue('')"></i-x-circle>
         </mat-form-field>
         <div class="form-error" *ngIf="contactForm.controls['emailMessage'].hasError('required') && contactForm.controls['emailMessage'].touched">
             Email message required.

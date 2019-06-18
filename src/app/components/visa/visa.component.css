@@ -1,1 +1,5 @@
 /* Visa Inline CSS */
+
+img {
+    width: 100% !important;
+}

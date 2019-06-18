@@ -3,6 +3,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FlightsListingComponent } from './components/flights-listing/flights-listing.component';
 import { FlightBookingComponent } from './components/flight-booking/flight-booking.component';
 import { PnrViewComponent } from './components/pnr-view/pnr-view.component';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { HotelsListingComponent } from 'src/app/components/hotels/hotels-listing/hotels-listing.component';
 import { HotelDetailsComponent } from 'src/app/components/hotels/hotel-details/hotel-details.component';
 import { ContactusComponent } from 'src/app/components/contactus/contactus.component';
@@ -15,9 +16,7 @@ import { DealsComponent } from	'src/app/components/deals/deals.component';
 import { ToursComponent } from	'src/app/components/tours/tours.component';
 import { AboutusComponent } from  'src/app/components/aboutus/aboutus.component';
 import  { DetailComponent } from 'src/app/components/popular-airline-and-hotels/detail/detail.component';
-import { ThankYouComponent } from './components/thank-you/thank-you.component';
-
-
+import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
 
 export const APP_ROUTES: Routes = [
 	{ path: '', component: HomeComponent },
@@ -35,10 +34,11 @@ export const APP_ROUTES: Routes = [
 	{ path: 'contactUs', component: ContactusComponent },
 	{ path: 'flights-listing', component: FlightsListingComponent },
 	{ path: 'flight-booking', component: FlightBookingComponent },
-	{ path: 'pnrView', component: PnrViewComponent },
+  	{ path: 'pnrView', component: PnrViewComponent },
+  	{ path: 'thank-you', component: ThankYouComponent },
 	{ path: 'hotels-listing', component: HotelsListingComponent },
 	{ path: 'hotel-details', component: HotelDetailsComponent },
 	{ path: 'airlines/:airline', component : DetailComponent},
-	{ path: 'thank-you', component : ThankYouComponent},
-	{ path: 'hotels/:hotel', component : DetailComponent}
+	{ path: 'hotels/:hotel', component : DetailComponent},
+	{ path: 'hotel-booking', component: HotelBookingComponent }
 ];

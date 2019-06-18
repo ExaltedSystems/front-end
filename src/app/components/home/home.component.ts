@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Meta, Title } from '@angular/platform-browser';
+import { DeviceDetectorService } from 'ngx-device-detector';
 // import { Route } from '@angular/compiler/src/core';
 // import * as airportLocations from '../../../assets/js/locations.json';
 declare var jQuery;
@@ -48,13 +50,19 @@ export class HomeComponent implements OnInit {
     { value: "F", label: "First" }];
   frmObj: any;
   cookieObj;
+  popularDeals : any;
   popularVisa : any;
   baseUrl : any;
+  isMobile:boolean;
 
-  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, 
-    private __cookieService: CookieService) { }
+  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __meta:Meta, 
+    private __activated: ActivatedRoute, private __cookieService: CookieService, private __device: DeviceDetectorService) {
+      this.__meta.updateTag({property:"og:url", content: window.location.href}); 
+    }
 
   ngOnInit() {
+    this.isMobile = this.__device.isMobile();
+    
     //this.__ms.getJSON('../../assets/js/locations.json').subscribe(res => {
     //this.airlineSectors = res;
     //});
@@ -120,6 +128,7 @@ export class HomeComponent implements OnInit {
     this.flightSearch.controls['returnDate'].setValue(defaultRtnDate);
 
     this.flightSearch.controls['preferredClass'].setValue(this.preferredClass);
+    this.getPopularDeals();
     this.popularVisas();
   }
 
@@ -315,12 +324,16 @@ export class HomeComponent implements OnInit {
     jQuery(ev.path[3]).removeClass('show')
 
   }
+  getPopularDeals(){
+    this.baseUrl = this.__ms.baseUrl;
+    this.__ms.getData(this.__ms.backEndUrl+'Cms/popularDeals/').subscribe(res => {
+      this.popularDeals = res.data;
+    });
+  }
   popularVisas(){
     this.baseUrl = this.__ms.baseUrl;
     this.__ms.getData(this.__ms.backEndUrl+'Cms/popularVisaRecords/').subscribe(res => {
       this.popularVisa = res.data;
     });
-    // console.log(this.popularVisa);
   }
-  
 }
