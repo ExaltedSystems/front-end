@@ -44,6 +44,9 @@ export class FlightBookingComponent implements OnInit {
   cnnStart:number = 1;
   infStart:number = 1;
 
+  bankDetails: [];
+  branchesDetails: [];
+
   isLinear = true;
   @Input('form') form: NgForm;
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
@@ -224,8 +227,14 @@ export class FlightBookingComponent implements OnInit {
         this.monthItems.push(this.monthsNames[j]);
       }
     }
-    
-  }
+    this.__ms.getBankDetails().subscribe(res => {
+      this.bankDetails = res.data;
+    });
+
+    this.__ms.getBranchesDetails().subscribe(res => {
+      this.branchesDetails = res.data;      
+    });
+  }// end oninit
 
   getValidDobDate = function(t) {
     var n = new Date(this.flightInfo.dptDate),

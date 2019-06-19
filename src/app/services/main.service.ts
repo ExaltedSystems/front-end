@@ -10,7 +10,7 @@ import { Http, Response } from '@angular/http';
 })
 export class MainService {
   public baseUrl = 'http://localhost:4200/';
-  backEndUrl: string = 'http://localhost/rgtapp/index.php/services/';
+  backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
   flightsUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
   byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
   revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
@@ -43,6 +43,16 @@ export class MainService {
 
   getAirPorts() {
     return this.__http.get('../../assets/js/locations.json').pipe(map((res:any) => res.json()));
+  }
+
+  getBankDetails(){
+    let banksUrl = this.backEndUrl + 'cms/allBankDetails';
+    return this.getJsonData(banksUrl);         
+  }
+
+  getBranchesDetails(){
+    let branchesUrl = this.backEndUrl + 'cms/allBranchesLists';
+    return this.getJsonData(branchesUrl);         
   }
   /**
     * Get All Client All Informations

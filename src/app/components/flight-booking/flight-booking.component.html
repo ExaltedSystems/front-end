@@ -511,8 +511,50 @@
 
                         <button (click)="cashOnDelivery()">Confirm</button>
                       </mat-tab>
-                      <mat-tab label="Bank"> Content 3 </mat-tab>
-                      <mat-tab label="Branches"> Content 3 </mat-tab>
+                      <mat-tab label="Bank">
+                      <h2>Bank</h2> 
+                      <p>You can pay in any branch of below mentioned Banks.</p>
+                      <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6 eachBrankBranch" *ngFor="let eachBank of bankDetails">
+                              <div class="col-sm-12 well well-sm">
+                                <div class="col-sm-4"><img src="https://www.rehmantravel.com/assets/banks-logos/{{eachBank.logo}}" class="width-100" alt="Allied Bank"></div>
+                                <div class="col-sm-8">
+                                  <b>{{eachBank.name}}</b>
+                                  <small class="inline-block">TITLE : {{eachBank.title}}</small>
+                                  <small class="inline-block">BR-CODE : {{eachBank.branchCode}}</small>
+                                  <small class="inline-block">AC# : {{eachBank.accNumber}}</small>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                      </div>
+                      <div class="center">
+                        <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary rounded-0 shadow btn-sm" (click)="byBank()">Confirm</button>
+                      </div>
+                    </mat-tab>
+                      <mat-tab label="Branches">
+                      <h2>Branches</h2> 
+                      <p>You can pay in any of below mentioned branches.</p>
+                      <div class="col-sm-12">
+                          <div class="row">                              
+                            <div class="col-6 col-lg-4" *ngFor="let eachBranch of branchesDetails">
+                                <div class="branch">
+                                  <b class="border-bottom py-1 mb-2 d-block">{{eachBranch.branchName}}</b>
+                                  <p class="branch-address">{{eachBranch.address}}</p>
+                                  <p class="phone">Ph: {{eachBranch.branchPhone}}</p>
+                                </div>
+                              </div>                              
+                          </div>
+                          
+                        </div>
+                      <div class="center">
+                        <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary rounded-0 shadow btn-sm" (click)="byBranch()">Confirm</button>
+                      </div>
+                    </mat-tab>
                     </mat-tab-group>
                     <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>
                 </mat-step>
