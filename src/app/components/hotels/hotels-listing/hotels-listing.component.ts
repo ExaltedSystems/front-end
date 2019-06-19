@@ -54,7 +54,7 @@ export class HotelsListingComponent implements OnInit {
 
     userFilter: any = { star_rating: '', price: '' };
 
-    constructor(private _ms: MainService, private _cookieService: CookieService, private _router: Router,private deviceService: DeviceDetectorService) {
+    constructor(private _ms: MainService, private _cookieService: CookieService, private _router: Router, private deviceService: DeviceDetectorService) {
         this.epicFunction();
     }
 
@@ -173,11 +173,11 @@ export class HotelsListingComponent implements OnInit {
         this.isMobile = this.deviceService.isMobile();
         this.isTablet = this.deviceService.isTablet();
         this.isDesktop = this.deviceService.isDesktop();
-        console.log('device',this.deviceInfo);
-        console.log('mobile',this.isMobile);
-      }
+        console.log('device', this.deviceInfo);
+        console.log('mobile', this.isMobile);
+    }
 
-     isJson = (str) => {
+    isJson = (str) => {
         try {
             JSON.parse(str);
         } catch (e) {
@@ -192,17 +192,11 @@ export class HotelsListingComponent implements OnInit {
             // get property list array
             this.propertyTypes.push({ value: element.prperty_name, title: element.prperty_name, slelcted: false });
 
-            // get property list array
-            if(this.isJson(element.breakfast_type) == true){
-                let breakfastArr = JSON.parse(element.breakfast_type);
-                if (isArray(breakfastArr)) {
-                    breakfastArr.forEach((ele) => {
-                        this.breakfastTypes.push({ value: ele.id, title: ele.name, slelcted: false });
-                    });
-                }
+            if (element.breakfast_type.length > 0) {
+                element.breakfast_type.forEach((ele) => {
+                    this.breakfastTypes.push({ value: ele.id, title: ele.name, slelcted: false });
+                });
             }
-            
-
             // get price array
             this.priceList.push(element.price);
         });
@@ -221,10 +215,10 @@ export class HotelsListingComponent implements OnInit {
 
 
     rangeChanged(event: any) {
-        this.selectedPriceValue = [event[0],event[1]];
+        this.selectedPriceValue = [event[0], event[1]];
     }
 
-    get selectedPrice(){
+    get selectedPrice() {
         return this.selectedPriceValue;
     }
 

@@ -60,6 +60,8 @@ import { PopularAirlineAndHotelsComponent } from './components/popular-airline-a
 import { DetailComponent } from './components/popular-airline-and-hotels/detail/detail.component';
 import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.component';
 import { FilterVisaByNamePipe } from './pipes/filter-visa-by-name.pipe';
+import { SubscribeComponent } from './components/subscribe/subscribe.component';
+import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
 
 @NgModule({
   declarations: [
@@ -95,11 +97,14 @@ import { FilterVisaByNamePipe } from './pipes/filter-visa-by-name.pipe';
     ToursComponent,    
     DealsComponent,    
     UmrahComponent,    
-    VisaComponent,    
-    RequstCallBackFormComponent,    
-    PopularAirlineAndHotelsComponent,    
-    DetailComponent,    
-    VisaListsComponent, FilterVisaByNamePipe
+    VisaComponent,
+    RequstCallBackFormComponent,
+    PopularAirlineAndHotelsComponent,
+    DetailComponent,
+    VisaListsComponent,
+    FilterVisaByNamePipe,
+    SubscribeComponent,
+    GeneralPagesComponent
   ],
   imports: [
     BrowserModule,

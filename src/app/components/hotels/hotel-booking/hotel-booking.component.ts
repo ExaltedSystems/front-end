@@ -111,14 +111,16 @@ export class HotelBookingComponent implements OnInit {
       email: ['', Validators.required],
       confirmEmail: ['', Validators.required],
       bookingFor: ['', Validators.required],
+      phone: ['', Validators.required],
       rentACar: [''],
+      
     });
     this.paymentInfoForm = this.__fb.group({
       cardType: ['', Validators.required],
       cardNumber: ['', Validators.required],
       cvn: ['', Validators.required],
       cardHolderFirstName: ['', Validators.required],
-      cardholderLastName: ['', Validators.required],
+      cardHolderLastName: ['', Validators.required],
       expiryMonth: ['', Validators.required],
       expiryYear: ['', Validators.required],
       email: ['', Validators.required],
@@ -149,10 +151,18 @@ export class HotelBookingComponent implements OnInit {
 
 
   removeSelectedRoom = (id) => {
+    console.log("removeRoom:", id)
     for (var i = this.roomsInfo.length - 1; i--;) {
       if (this.roomsInfo[i].roomId === id) this.roomsInfo.splice(i, 1);
+      this.roomsInfo = this.roomsInfo.splice(i, 1);
     }
-    this._cookieService.set('roomsInfo', JSON.stringify(this.roomsInfo));
+    console.log('roomsInfo:', this.roomsInfo)
+    let bookingInfo = {
+      roomsInfo: this.roomsInfo,
+      totalPrice: this.totalPrice,
+      totalGuests: this.totalGuests
+  }
+    this._cookieService.set('bookingInfo', JSON.stringify(bookingInfo));
     this.getSelectedRooms();
   }
 

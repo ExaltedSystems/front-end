@@ -144,6 +144,7 @@
                         <div class="sidebar-subscribe mt-4">
                             <p class="mb-0">Subscribe to Get Amazing Offers</p>
                             <h3>Hotel Deals!</h3>
+                            <!-- <app-subscribe></app-subscribe> -->
                             <button class="btn btn-secondary">Subscribe</button>
                         </div>
                     </div>
@@ -172,16 +173,16 @@
 
                         <div class="mb-3 p-0">
                             <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block">
-                <b class="d-inline-block mr-4">Sort:</b>
-                <div class="d-inline-flex justify-content-between">
-                  <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>
-                  <button mat-button (click)="orderBy('star_rating')" class="mx-2">Star Rating</button>
-                  <button mat-button (click)="orderBy('distance')" class="mx-2">Distance form City Center</button>
-                  <button mat-button (click)="orderBy('recomended')" class="mx-2">RGT Recomended</button>
-                </div>
-              </mat-card>
+                                <b class="d-inline-block mr-4">Sort:</b>
+                                <div class="d-inline-flex justify-content-between">
+                                    <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>
+                                    <button mat-button (click)="orderBy('star_rating')" class="mx-2">Star Rating</button>
+                                    <button mat-button (click)="orderBy('distance')" class="mx-2">Distance form City Center</button>
+                                    <button mat-button (click)="orderBy('recomended')" class="mx-2">RGT Recomended</button>
+                                </div>
+                            </mat-card>
 
-              <mat-card class="p-1 mb-3 hotel-search-item rounded-0" *ngFor="let item of hotelsSearchResult 
+                            <mat-card class="p-1 mb-3 hotel-search-item rounded-0" *ngFor="let item of hotelsSearchResult 
             | priceFilter : selectedPriceValue
             | hotelFilters: selectedFilters 
             | starRatingFilter: selectedStarRating 
@@ -190,7 +191,7 @@
               parking_availability:slectedFacilities,internet_availability:slectedFacilities,internet_type:slectedFacilities } : false
             |  orderBy : order : reverse">
 
-              
+
 
                                 <!-- <mat-card class="p-1 mb-3 hotel-search-item" 
             *ngFor="let item of hotelsSearchResult | filterBy: userFilter |  orderBy : order : reverse"> -->

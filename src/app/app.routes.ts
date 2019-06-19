@@ -17,6 +17,7 @@ import { ToursComponent } from	'src/app/components/tours/tours.component';
 import { AboutusComponent } from  'src/app/components/aboutus/aboutus.component';
 import  { DetailComponent } from 'src/app/components/popular-airline-and-hotels/detail/detail.component';
 import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
+import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
 
 export const APP_ROUTES: Routes = [
 	{ path: '', component: HomeComponent },
@@ -40,5 +41,6 @@ export const APP_ROUTES: Routes = [
 	{ path: 'hotel-details', component: HotelDetailsComponent },
 	{ path: 'airlines/:airline', component : DetailComponent},
 	{ path: 'hotels/:hotel', component : DetailComponent},
-	{ path: 'hotel-booking', component: HotelBookingComponent }
+	{ path: 'hotel-booking', component: HotelBookingComponent },
+	{ path: '**', component: GeneralPagesComponent }
 ];

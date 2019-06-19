@@ -173,7 +173,20 @@
     <img *ngIf="!isMobile" src="assets/slider/koblenz-3453860_1920.jpg" class="img-fluid d-none d-sm-block" alt="Background Image Rehman Travels">
 </div>
 
-
+<section class="subscribe-deal">
+    <div class="container">
+        <mat-card class="p-2 p-sm-0 mat-card">
+            <div class="row d-block d-sm-flex align-items-center">
+                <div class="col-sm-4">
+                    <img alt="" class="img-fluid mb-3 mb-sm-0" src="assets/img/Subscribe-button.png">
+                </div>
+                <div class="col-sm-8">
+                    <app-subscribe></app-subscribe>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</section>
 <!-- Deals -->
 <section class="deals-section" *ngIf="popularDeals">
     <div class="container">
@@ -252,7 +265,8 @@
 
 <!-- Subscribe for deals -->
 <!-- <section class="subscribe-deal">
-    <h1 class="text-center">Subscribe For Deals Section</h1>
+    <h1 class="text-center">Subscribe For Deals</h1>
+    <app-subscribe></app-subscribe>
 </section> -->
 <!-- /Subscribe for deals -->
 
@@ -286,7 +300,7 @@
     <div class="container">
         <div class="section-title">
             <h1>what we offer</h1>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, natus rerum unde alias quam fuga eos esse.</p>
+            <!-- <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, natus rerum unde alias quam fuga eos esse.</p> -->
         </div>
 
         <div class="row">
@@ -300,7 +314,7 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Online Tickets</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Rehman Travel offers online ticket reservation and booking option for domestic as well as international flights for travelers wishing to book flights from the comfort of their own desk.</p>
                         </div>
                     </div>
                 </div>
@@ -315,7 +329,7 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Online Hotel Reservation</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Booking of hotels through Rehman Travel online system is convenient and offers you a range of options from star rating to location or searching a specific hotel by name.</p>
                         </div>
                     </div>
                 </div>
@@ -330,7 +344,7 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Word Tours</h2>
-                            <p class="service-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Rehman Travel offers you world tours at most competitive rates to destinations ranging from Dubai, Singapore, Turkey, Azerbaijan, Europe and America. Rehman Travels offers honeymoon and family packages including corporate tours.</p>
                         </div>
                     </div>
                 </div>
@@ -345,7 +359,8 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Online Visa Processing</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Rehman Travel has online visa processing facility for a number of countries like Azarbaijan, Turkey and Dubai. Rehman Travels provides guidance and assistance in applying for all e-visa countries and their experienced team
+                                is ever willing to provide help to travellers wishing to apply through e-visa.</p>
                         </div>
                     </div>
                 </div>
@@ -360,7 +375,8 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Executive Hajj & Umrah</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Do you want to experience a holy trip in luxury? Well, you can try our executive Umrah package because it provides you with top notch facilities and amazing traveling experience Our executive packages will take you to five-star
+                                hotels, amazing cuisines, pick and drop services in air-conditioned cars and so much more</p>
                         </div>
                     </div>
                 </div>
@@ -375,7 +391,8 @@
                         </div>
                         <div class="col-9">
                             <h2 class="service-title">Pakistan Tours</h2>
-                            <p class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi aut culpa magni distinctio optio suscipit explicabo porro hic? Debitis deserunt veniam mollitia eos corrupti recusandae explicabo, aperiam at nihil sunt?</p>
+                            <p class="service-text">Rehman Holidays a Tour Company is a subsidiary of Rehman Group of Companies offering Pakistan Tours and Travels in Pakistan. The Pakistan travel packages range from northern area tour packages, Summer Tour Packages to Winter
+                                Tour Packages and also including City tours and Historical area Tours.</p>
                         </div>
                     </div>
                 </div>
@@ -393,13 +410,17 @@
     <div class="container">
         <div class="section-title">
             <h1>we are well organised</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur hic, pariatur ad commodi autem.</p>
+            <p>Rehman Travels is an established name for Umrah and Hajj travel where we endeavour to provide the best value for money and comfort during your stay in Saudi Arabia.</p>
         </div>
 
         <p>Rehmantravel.com is a leading online travel agency. Our services include Flights Reservation/Airline Tickets, Travel Insurance, Hotel Reservation System, Visa Services, Umrah and Hajj. All our rates are competitive rates. We are known for After
             Sale Services. We Rehmantravel.com are always working for the special deals to facilitate our valuable clients. These are the lowest and market competitive offers for UK, USA, Canada & Australia based frequent travelers. Rehmantravel.com is
             offering all the transaction via online Banking.. Rehmantravel.com has its user friendly interface and you can purchase online ticket in just few clicks. Moreover our design is also compatible to fit on every desired device which helps user
             in finding the lowest rates. All you need to do is enter your travelling dates and destinations, rest Rehmantravel.com will find you with the lowest airfares. You can also filter/customize your search by selecting the specific airlines.</p>
+        <p>Rehmantravel.com has its head office in Islamabad and branches available in major cities; i.e. Lahore, Karachi, Peshawar, Attock, Malakand and many more. We have also options to purchase products by using credit card or online banking. Make your
+            booking now and start your memorable journey. We always have special deals, keep visiting rehmantravel.com. We have cheapest rates of all Airlines like PIA, Emirates Airline, Saudi Airline, Thai Airways, Qatar Airways, Oman Air, Fly Dubai,
+            Air Lanka, Air China, Nas Airline and lot others. We have more than 400 Airlines listed and you will get the best match as per your need. We are not limited to only GDS airlines you can also avail our services for NON GDS airlines like AirBlue,
+            Shaheen Air, Air Asia, Serene Air etc. We are open for 7 days a week from 9AM till 12AM. You can call our UAN number 051 111 786 785 for further assistance.</p>
         <app-popular-airline-and-hotels></app-popular-airline-and-hotels>
     </div>
     <!-- /container -->

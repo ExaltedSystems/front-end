@@ -1,12 +1,12 @@
 <app-header></app-header>
 <mat-card *ngIf="isLoading == true" class="container d-flex justify-content-center rounded-0 my-2">
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
 </mat-card>
 
 <section class="flight-search pt-0 pt-sm-2" *ngIf="isLoading == false">
 
-  <!-- current search for mobile -->
-  <!-- <div class="current-flight-search d-block d-sm-none mb-3">
+    <!-- current search for mobile -->
+    <!-- <div class="current-flight-search d-block d-sm-none mb-3">
       <div class="current-search-sector row d-flex align-items-center pb-2">
         <div class="col px-0">
           <p>{{hotelDetails.name}}</p>
@@ -25,92 +25,92 @@
         </div>
       </div>
     </div> -->
-  <!-- / -->
+    <!-- / -->
 
-  <div class="container">
+    <div class="container">
 
-    <!-- <mat-card class="custom-material-form mt-2 mb-3 rounded-0">
+        <!-- <mat-card class="custom-material-form mt-2 mb-3 rounded-0">
         <app-hotel-search-form (searchEvent)="getSearchResults($event)"></app-hotel-search-form>
       </mat-card> -->
 
-    <div class="row">
-      <div class="col-sm-4">
-        <mat-card class="rounded-0 mt-2 mb-3">
-          <h3 class="sidebar-title text-primary">Your Booking Details</h3>
-          <b>Check In</b>
-          <p>{{checkInDate | date:fullDate}}</p>
-          <b>Check Out</b>
-          <p>{{checkOutDate | date:fullDate}}</p>
-          <b>Total Nights Stay</b>
-          <p>{{totalNights}} Nights</p>
-          <a href="">Travelling on different dates?</a>
-          <div class="list-divider"></div>
-          <b>Your Group</b>
-          <p>{{searchQuery.adults}} Adults
-            <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
+        <div class="row">
+            <div class="col-sm-4">
+                <mat-card class="rounded-0 mt-2 mb-3">
+                    <h3 class="sidebar-title text-primary">Your Booking Details</h3>
+                    <b>Check In</b>
+                    <p>{{checkInDate | date:fullDate}}</p>
+                    <b>Check Out</b>
+                    <p>{{checkOutDate | date:fullDate}}</p>
+                    <b>Total Nights Stay</b>
+                    <p>{{totalNights}} Nights</p>
+                    <a href="">Travelling on different dates?</a>
+                    <div class="list-divider"></div>
+                    <b>Your Group</b>
+                    <p>{{searchQuery.adults}} Adults
+                        <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
             <span *ngFor="let age of searchQuery.childrenAges; let last = last">
               <span *ngIf="last"> and </span>{{age.childAge}}
-              <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
-            </span> Years Old )</span>
-          </p>
-          <div class="list-divider"></div>
-          <b>You Selected</b>
-          <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
-            <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
-            <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
-              <i-x-circle></i-x-circle>
-            </a>
-          </div>
-        </mat-card>
-        <mat-card class="rounded-0 mt-2 mb-3">
-            <h3 class="sidebar-title text-primary">Price</h3>
-            <div class="d-flex justify-content-between align-items-center">
-                <b>Total Price :</b><b>{{totalPrice}}</b>
-            </div>
-            <small>For {{searchQuery.adults + searchQuery.children}} Guests</small>
-          </mat-card>
-        <mat-card class="rounded-0 mt-2 mb-3">
-          <h3 class="sidebar-title text-primary">Your Booking Includes</h3>
-          <span *ngIf="hotelDetails.parking_availability == 'Yes, Free'" class="badge badge-success mr-1">Free Parking</span>
-          <span *ngIf="hotelDetails.internet_availability == 'Yes, Free'" class="badge badge-success mr-1">Free Internet</span>
-          <span *ngIf="hotelDetails.breakfast == 'Yes, Included in Price'" class="badge badge-success mr-1">Free Breakfast</span>
-          <span *ngIf="hotelDetails.parking_location == 'On Site'" class="badge badge-info mr-1">On Site Parking</span>
-          <span *ngIf="hotelDetails.internet_type == 'Wifi'" class="badge badge-info mr-1">WiFi</span>
-        </mat-card>
-      </div>
-      <div class="col-sm-8">
-        <mat-card class="rounded-0 mt-2 mb-3">
-          <div class="row mb-4 hotel-search-item">
-            <div class="col-sm-4">
-              <!-- gallary -->
-              <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-            </div>
-            <div class="col-sm-8 pl-sm-0">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h5 class="hotel-name mt-0 mb-1">{{hotelDetails.name}}</h5>
-                  <div class="d-flex align-items-center">
-                    <i class="property-type">{{hotelDetails.prperty_name}}</i>
-                    <div class="mx-2">|</div>
-                    <div class="star-rating d-flex align-items-center" *ngFor="let item of createRange(hotelDetails.star_rating); let index">
-                      <i-star class="feather active"></i-star>
+                        <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
+                        </span> Years Old )</span>
+                    </p>
+                    <div class="list-divider"></div>
+                    <b>You Selected</b>
+                    <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
+                        <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
+                        <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                            <i-x-circle></i-x-circle>
+                        </a>
                     </div>
-                    <div class="mx-2">|</div>
-                    <div class="map-view d-flex align-items-center">
-                      <!-- <i-map class="hotel-feather-icon"></i-map> -->
-                      <a class="pl-1" href=""> View On Map</a>
+                </mat-card>
+                <mat-card class="rounded-0 mt-2 mb-3">
+                    <h3 class="sidebar-title text-primary">Price</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <b>Total Price :</b><b>{{totalPrice}}</b>
                     </div>
-                  </div>
-                  <div class="address d-flex align-items-center my-1">
-                    <i-map-pin class="hotel-feather-icon"></i-map-pin>
-                    <p class="ml-1">{{hotelDetails.address}}</p>
-                  </div>
-                  <div class="cancellation d-flex align-items-center text-success my-1">
-                    <i-check class="success hotel-feather-icon"></i-check>
-                    <p class="ml-1">Free Cancellation</p>
-                  </div>
-                </div>
-                <!-- <div class="col-sm-4">
+                    <small>For {{searchQuery.adults + searchQuery.children}} Guests</small>
+                </mat-card>
+                <mat-card class="rounded-0 mt-2 mb-3">
+                    <h3 class="sidebar-title text-primary">Your Booking Includes</h3>
+                    <span *ngIf="hotelDetails.parking_availability == 'Yes, Free'" class="badge badge-success mr-1">Free Parking</span>
+                    <span *ngIf="hotelDetails.internet_availability == 'Yes, Free'" class="badge badge-success mr-1">Free Internet</span>
+                    <span *ngIf="hotelDetails.breakfast == 'Yes, Included in Price'" class="badge badge-success mr-1">Free Breakfast</span>
+                    <span *ngIf="hotelDetails.parking_location == 'On Site'" class="badge badge-info mr-1">On Site Parking</span>
+                    <span *ngIf="hotelDetails.internet_type == 'Wifi'" class="badge badge-info mr-1">WiFi</span>
+                </mat-card>
+            </div>
+            <div class="col-sm-8">
+                <mat-card class="rounded-0 mt-2 mb-3">
+                    <div class="row mb-4 hotel-search-item">
+                        <div class="col-sm-4">
+                            <!-- gallary -->
+                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                        </div>
+                        <div class="col-sm-8 pl-sm-0">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5 class="hotel-name mt-0 mb-1">{{hotelDetails.name}}</h5>
+                                    <div class="d-flex align-items-center">
+                                        <i class="property-type">{{hotelDetails.prperty_name}}</i>
+                                        <div class="mx-2">|</div>
+                                        <div class="star-rating d-flex align-items-center" *ngFor="let item of createRange(hotelDetails.star_rating); let index">
+                                            <i-star class="feather active"></i-star>
+                                        </div>
+                                        <div class="mx-2">|</div>
+                                        <div class="map-view d-flex align-items-center">
+                                            <!-- <i-map class="hotel-feather-icon"></i-map> -->
+                                            <a class="pl-1" href=""> View On Map</a>
+                                        </div>
+                                    </div>
+                                    <div class="address d-flex align-items-center my-1">
+                                        <i-map-pin class="hotel-feather-icon"></i-map-pin>
+                                        <p class="ml-1">{{hotelDetails.address}}</p>
+                                    </div>
+                                    <div class="cancellation d-flex align-items-center text-success my-1">
+                                        <i-check class="success hotel-feather-icon"></i-check>
+                                        <p class="ml-1">Free Cancellation</p>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-4">
                   <div class="hotel-price p-2 d-flex flex-column justify-content-between">
                     <div class="reviews">
                       <strong class="d-block">Excellent</strong>
@@ -118,260 +118,265 @@
                     </div>
                   </div>
                 </div> -->
-              </div>
-            </div>
-          </div>
-          <div class="list-divider"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-divider"></div>
 
-          <p class="d-block d-sm-flex align-items-center">
-            <i-user class="hotel-feather-icon mr-1"></i-user>
-            <a href="">Sign in</a>&nbsp;to book with your saved details or&nbsp;
-            <a href="">register</a>&nbsp;to manage your bookings on the go!
-          </p>
+                    <p class="d-block d-sm-flex align-items-center">
+                        <i-user class="hotel-feather-icon mr-1"></i-user>
+                        <a href="">Sign in</a>&nbsp;to book with your saved details or&nbsp;
+                        <a href="">register</a>&nbsp;to manage your bookings on the go!
+                    </p>
 
-          <mat-horizontal-stepper [linear]="isLinear" #stepper>
-            <mat-step [stepControl]="bookingInfoFrom">
-              <form [formGroup]="bookingInfoFrom" (submit)="guestInfo(bookingInfoFrom.value)" class="custom-material-form">
-                <ng-template matStepLabel>Enter Your Details</ng-template>
-                <div class="form-group row">
-                  <div class="col-sm-2">
-                    <select formControlName="title" class="form-control mb-3 mb-sm-0 rounded-0">
+                    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                        <mat-step [stepControl]="bookingInfoFrom">
+                            <form [formGroup]="bookingInfoFrom" (submit)="guestInfo(bookingInfoFrom.value)" class="custom-material-form">
+                                <ng-template matStepLabel>Enter Your Details</ng-template>
+                                <div class="form-group row">
+                                    <div class="col-sm-2">
+                                        <select formControlName="title" class="form-control mb-3 mb-sm-0 rounded-0">
                       <option value="" disabled>Title</option>
                       <option value="Mr.">Mr.</option>
                       <option value="Miss.">Miss.</option>
                       <option value="Mrs.">Mrs.</option>
                     </select>
-                  </div>
-                  <div class="col-sm-4">
-                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                      <input matInput formControlName="firstName" placeholder="First Name" class="">
-                    </mat-form-field>
-                  </div>
-                  <div class="col-sm-4">
-                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                      <input matInput formControlName="lastName" placeholder="Last Name" class="">
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-4">
-                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                      <input matInput formControlName="email" placeholder="Email" class="">
-                    </mat-form-field>
-                  </div>
-                  <div class="col-sm-4">
-                    <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                      <input matInput formControlName="confirmEmail" placeholder="Conform Email" class="">
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <b class="d-block mb-2">Who are you booking for?</b>
-                    <mat-radio-group aria-label="Select an option" formControlName="bookingFor">
-                      <mat-radio-button class="d-block" value="1">I am the main guest</mat-radio-button>
-                      <mat-radio-button class="d-block" value="2">Booking is for someone else</mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-                </div>
-                <div class="selected-room light-grey-bg p-3 mb-3 position-relative" *ngFor="let room of selectedRooms">
-                    <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
-                      <i-x-circle></i-x-circle>
-                    </a>
-                    <p class="mb-1">
-                      <b>{{room.room_title}}</b>
-                    </p>
-                    <small>Can I cancel? When do I pay?</small>
-                    <div class="form-group row d-flex align-items-center my-2">
-                      <label class="col-sm-1 m-0">Guests</label>
-                      <div class="col-sm-2">
-                        <select class="form-control rounded-0">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="firstName" placeholder="First Name" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="lastName" placeholder="Last Name" class="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="email" placeholder="Email" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="confirmEmail" placeholder="Confirm Email" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="phone" placeholder="Phone" class="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <b class="d-block mb-2">Who are you booking for?</b>
+                                        <mat-radio-group aria-label="Select an option" formControlName="bookingFor">
+                                            <mat-radio-button class="d-block" value="1">I am the main guest</mat-radio-button>
+                                            <mat-radio-button class="d-block" value="2">Booking is for someone else</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+                                <div class="selected-room light-grey-bg p-3 mb-3 position-relative" *ngFor="let room of selectedRooms">
+                                    <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                                        <i-x-circle></i-x-circle>
+                                    </a>
+                                    <p class="mb-1">
+                                        <b>{{room.room_title}}</b>
+                                    </p>
+                                    <small>Can I cancel? When do I pay?</small>
+                                    <div class="form-group row d-flex align-items-center my-2">
+                                        <label class="col-sm-1 m-0">Guests</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control rounded-0">
                           <option *ngFor="let item of createRange(room.no_of_guest);  let last = last" [attr.selected]="last" [value]="item">{{item}}</option>
                         </select>
-                      </div>
-                      <div class="col-sm-4">
-                        Non Smooking
-                      </div>
-                    </div>
-                    <div class="list-divider"></div>
-                    <div class="form-group row mb-0">
-                      <div class="col-sm-5">
-                        <label for="">Full Guest Name</label>
-                        <input type="text" class="form-control">
-                      </div>
-                    </div>
-        
-                  </div>
-        
-                  <div class="form-group">
-                    <mat-checkbox class="d-block" formControlName="rentACar">
-                      I'm interested in renting a car
-                    </mat-checkbox>
-                    <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
-                  </div>
-                <div>
-                  <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
-                  <small class="form-error" *ngIf="bookingInfoFrom.invalid">{{bookingErrorMsg}}</small>
-                </div>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="paymentInfoForm">
-              <form [formGroup]="paymentInfoForm" (submit)="paymentInfo(paymentInfoForm.value)"  class="custom-material-form">
-                <ng-template matStepLabel>Payment Details</ng-template>
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                      <mat-radio-group aria-label="Select an option" formControlName="cardType">
-                        <mat-radio-button value="1" class="mr-4">Master</mat-radio-button>
-                        <mat-radio-button value="2">Visa</mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                      <div class="col-sm-6">
-                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                          <input matInput formControlName="cardNumber" placeholder="Card Number" class="">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-sm-2">
-                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                          <input matInput formControlName="cvn" placeholder="CVN" class="">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                          <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                            <input matInput formControlName="cardHolderFirstName" placeholder="Card Holder First Name" class="">
-                          </mat-form-field>
-                        </div>
-                        <div class="col-sm-4">
-                          <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                            <input matInput formControlName="cardholderLastName" placeholder="cardholderLastName" class="">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                          <div class="col-sm-3">
-                            <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                              <input matInput formControlName="expiryMonth" placeholder="Expiry Month" class="">
-                            </mat-form-field>
-                          </div>
-                          <div class="col-sm-3">
-                            <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                              <input matInput formControlName="expiryYear" placeholder="Expiry Year" class="">
-                            </mat-form-field>
-                          </div>
-                          <div class="col-sm-3">
-                              <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                <input matInput formControlName="email" placeholder="Email" class="">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                              <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                <input matInput formControlName="phone" placeholder="Phone" class="">
-                              </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-8">
-                              <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                <input matInput formControlName="address" placeholder="Address" class="">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                <div>
-                    <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2">Back</button>
-                    <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
-                    <small class="form-error" *ngIf="paymentInfoForm.invalid">{{paymentErrorMsg}}</small>
-                  </div>
-              </form>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            Non Smooking
+                                        </div>
+                                    </div>
+                                    <div class="list-divider"></div>
+                                    <div class="form-group row mb-0">
+                                        <div class="col-sm-5">
+                                            <label for="">Full Guest Name</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
 
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel>Review Your Booking</ng-template>
-                <h4 class="text-center">Review Your Booking</h4>
-                <table class="table" *ngIf="bookingComplete == true">
-                  <tr>
-                    <td>Hotel</td>
-                    <td><b>{{hotelDetails.name}}</b></td>
-                  </tr>
-                  <tr>
-                      <td>Check In</td>
-                      <td><b>{{checkInDate | date:fullDate}}</b></td>
-                    </tr>
-                    <tr>
-                        <td>Check Out</td>
-                        <td><b>{{checkOutDate | date:fullDate}}</b></td>
-                      </tr>
-                      <tr>
-                          <td>Total Nights</td>
-                          <td><b>{{totalNights}}</b></td>
-                        </tr>
-                        <tr>
-                            <td>Guests</td>
-                            <td><b>{{searchQuery.adults}} Adults
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-checkbox class="d-block" formControlName="rentACar">
+                                        I'm interested in renting a car
+                                    </mat-checkbox>
+                                    <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
+                                </div>
+                                <div>
+                                    <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                                    <small class="form-error" *ngIf="bookingInfoFrom.invalid">{{bookingErrorMsg}}</small>
+                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step [stepControl]="paymentInfoForm">
+                            <form [formGroup]="paymentInfoForm" (submit)="paymentInfo(paymentInfoForm.value)" class="custom-material-form">
+                                <ng-template matStepLabel>Payment Details</ng-template>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <mat-radio-group aria-label="Select an option" formControlName="cardType">
+                                            <mat-radio-button value="1" class="mr-4">Master</mat-radio-button>
+                                            <mat-radio-button value="2">Visa</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="cardNumber" placeholder="Card Number" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="cvn" placeholder="CVN" class="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="cardHolderFirstName" placeholder="Card Holder First Name" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="cardHolderLastName" placeholder="cardholderLastName" class="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="expiryMonth" placeholder="Expiry Month" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="expiryYear" placeholder="Expiry Year" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="email" placeholder="Email" class="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="phone" placeholder="Phone" class="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-8">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="address" placeholder="Address" class="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2">Back</button>
+                                    <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                                    <small class="form-error" *ngIf="paymentInfoForm.invalid">{{paymentErrorMsg}}</small>
+                                </div>
+                            </form>
+
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Review Your Booking</ng-template>
+                            <h4 class="text-center">Review Your Booking</h4>
+                            <table class="table" *ngIf="bookingComplete == true">
+                                <tr>
+                                    <td>Hotel</td>
+                                    <td><b>{{hotelDetails.name}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Check In</td>
+                                    <td><b>{{checkInDate | date:fullDate}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Check Out</td>
+                                    <td><b>{{checkOutDate | date:fullDate}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Nights</td>
+                                    <td><b>{{totalNights}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Guests</td>
+                                    <td><b>{{searchQuery.adults}} Adults
                                 <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
                                 <span *ngFor="let age of searchQuery.childrenAges; let last = last">
                                   <span *ngIf="last"> and </span>{{age.childAge}}
                                   <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
                                 </span> Years Old )</span></b></td>
-                          </tr>
-                          <tr>
-                              <td>Total Price (PKR)</td>
-                              <td><b>{{totalPrice}}/-</b></td>
-                            </tr>
+                                </tr>
+                                <tr>
+                                    <td>Total Price (PKR)</td>
+                                    <td><b>{{totalPrice}}/-</b></td>
+                                </tr>
 
-                            <tr>
-                                <td>Rooms</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
-                                        <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
-                                        <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
-                                          <i-x-circle></i-x-circle>
-                                        </a>
-                                      </div>
-                                </td>
-                              </tr>  
+                                <tr>
+                                    <td>Rooms</td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
+                                            <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
+                                            <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                                                <i-x-circle></i-x-circle>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
 
 
-                  <tr>
-                      <td>Full Guest Name</td>
-                      <td><b>{{guestFormInfo.firstName}} {{guestFormInfo.lastName}}</b></td>
-                    </tr>
-                    <tr>
-                        <td>Email Address</td>
-                        <td><b>{{guestFormInfo.email}}</b></td>
-                      </tr>
-                      <tr>
-                          <td>Phone No</td>
-                          <td><b>{{paymentFormInfo.phone}}</b></td>
-                        </tr>
-                        <!-- <tr>
+                                <tr>
+                                    <td>Full Guest Name</td>
+                                    <td><b>{{guestFormInfo.firstName}} {{guestFormInfo.lastName}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Email Address</td>
+                                    <td><b>{{guestFormInfo.email}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone No</td>
+                                    <td><b>{{paymentFormInfo.phone}}</b></td>
+                                </tr>
+                                <!-- <tr>
                             <td>Card Type</td>
                             <td><b *ngIf"paymentFormInfo.cardType == 1">Master</b>
                               <b *ngIf"paymentFormInfo.cardType == 2">Visa</b></td>
                           </tr> -->
-                          <tr>
-                              <td>Card Holder Name</td>
-                              <td><b>{{paymentFormInfo.cardHolderFirstName}} {{paymentFormInfo.cardHolderLastName}}</b></td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-                                <td><b>{{paymentFormInfo.address}}</b></td>
-                              </tr>
-                </table>
-              <div>
-                <button class="btn btn-default rounded-0 shadow-sm" matStepperPrevious>Back</button>
-                <button class="btn btn-default rounded-0 shadow-sm" (click)="stepper.reset()">Reset</button>
-                <button class="btn btn-success rounded-0 shadow-sm w-40" (click)="conformBooking()">Confirm Booking</button>
-              </div>
-            </mat-step>
-          </mat-horizontal-stepper>
-        </mat-card>
-      </div>
-    </div>
+                                <tr>
+                                    <td>Card Holder Name</td>
+                                    <td><b>{{paymentFormInfo.cardHolderFirstName}} {{paymentFormInfo.cardHolderLastName}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td><b>{{paymentFormInfo.address}}</b></td>
+                                </tr>
+                            </table>
+                            <div>
+                                <button class="btn btn-default rounded-0 shadow-sm" matStepperPrevious>Back</button>
+                                <button class="btn btn-default rounded-0 shadow-sm" (click)="stepper.reset()">Reset</button>
+                                <button class="btn btn-success rounded-0 shadow-sm w-40" (click)="conformBooking()">Confirm Booking</button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </mat-card>
+            </div>
+        </div>
 
-  </div>
+    </div>
 </section>
 
 <app-footer></app-footer>
