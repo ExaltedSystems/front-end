@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
-   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule} from '@angular/material';
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule, MatIconModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -62,6 +62,8 @@ import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.comp
 import { FilterVisaByNamePipe } from './pipes/filter-visa-by-name.pipe';
 import { SubscribeComponent } from './components/subscribe/subscribe.component';
 import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
+import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-voucher.component';
+import { HotelSubscribeComponent } from './components/hotels/hotel-subscribe/hotel-subscribe.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import { GeneralPagesComponent } from './components/general-pages/general-pages.
     VisaListsComponent,
     FilterVisaByNamePipe,
     SubscribeComponent,
-    GeneralPagesComponent
+    GeneralPagesComponent,
+    HotelVoucherComponent,
+    HotelSubscribeComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +128,8 @@ import { GeneralPagesComponent } from './components/general-pages/general-pages.
     MatCheckboxModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatSelectModule,
+    MatSelectModule,    
+    MatIconModule,
     IconsModule,
     MatSidenavModule,
     MatProgressBarModule,

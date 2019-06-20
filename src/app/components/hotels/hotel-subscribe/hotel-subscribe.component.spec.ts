@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubscribeComponent } from './subscribe.component';
+import { SubscribeComponent } from './hotel-subscribe.component';
 
 describe('SubscribeComponent', () => {
   let component: SubscribeComponent;

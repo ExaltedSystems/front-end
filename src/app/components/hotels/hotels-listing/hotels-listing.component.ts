@@ -35,7 +35,7 @@ export class HotelsListingComponent implements OnInit {
 
     min = 0;
     max = 0;
-    range = [0, 0];
+    range = [];
     propertyTypes: any[] = [];
     starRating;
     popularFacilities;
@@ -54,8 +54,11 @@ export class HotelsListingComponent implements OnInit {
 
     userFilter: any = { star_rating: '', price: '' };
 
-    constructor(private _ms: MainService, private _cookieService: CookieService, private _router: Router, private deviceService: DeviceDetectorService) {
+    constructor(private _ms: MainService, private _cookieService: CookieService, private __router: Router, private deviceService: DeviceDetectorService) {
         this.epicFunction();
+		this.__router.routeReuseStrategy.shouldReuseRoute = function () {
+			return false;
+		}
     }
 
     ngOnInit(): void {
@@ -187,14 +190,15 @@ export class HotelsListingComponent implements OnInit {
     }
 
     getFiltersList = (arr) => {
+        console.log("arr:", arr)
         arr.forEach((element) => {
             // console.log('element',element.price)
             // get property list array
             this.propertyTypes.push({ value: element.prperty_name, title: element.prperty_name, slelcted: false });
 
-            if (element.breakfast_type.length > 0) {
+            if (element.breakfast_type && element.breakfast_type.length > 0) {
                 element.breakfast_type.forEach((ele) => {
-                    this.breakfastTypes.push({ value: ele.id, title: ele.name, slelcted: false });
+                    this.breakfastTypes.push({ value: ele.name, title: ele.name, slelcted: false });
                 });
             }
             // get price array
@@ -206,10 +210,11 @@ export class HotelsListingComponent implements OnInit {
 
         // get unique breakfast types form list
         this.breakfastTypes = _.uniqBy(this.breakfastTypes, 'value');
+        console.log(this.breakfastTypes);
 
         // get min and max price value for range slider
-        this.max = Math.max.apply(null, this.priceList)
         this.min = Math.min.apply(null, this.priceList)
+        this.max = Math.max.apply(null, this.priceList)
         this.range = [this.min, this.max];
     }
 
@@ -259,14 +264,16 @@ export class HotelsListingComponent implements OnInit {
     }
 
     public getSearchResults = ($event) => {
+        console.log('evt:', $event)
         this.isLoading = true;
         this.hotelsSearchResult = $event;
         this.isLoading = false;
+        this.ngOnInit();
     }
 
     public selectHotel = (id) => {
         this._cookieService.set('hotelId', id);
-        this._router.navigate(['/hotel-details']);
+        this.__router.navigate(['/hotel-details']);
     }
 
     public orderBy = (value) => {

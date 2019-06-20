@@ -1,0 +1,108 @@
+<app-header></app-header>
+<mat-card *ngIf="isLoading == true" class="container d-flex justify-content-center rounded-0 my-2">
+    <mat-spinner></mat-spinner>
+</mat-card>
+
+<section class="flight-search pt-0 pt-sm-2">
+    <div class="container">
+        <mat-card class="rounded-0 mt-2 mb-3">
+            <div id="invoice" *ngIf="bookingDetails">
+
+                <div class="toolbar hidden-print">
+                    <div class="text-right">
+                        <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                    </div>
+                    <hr>
+                </div>
+                <div class="invoice overflow-auto">
+                    <div style="min-width: 600px">
+                        <header>
+                            <div class="row">
+                                <div class="col">
+                                    <a target="_blank" href="https://www.cheapfly.pk">
+                                        <img src="assets/img/logo-drk-blue.png" data-holder-rendered="true" />
+                                    </a>
+                                </div>
+                                <div class="col company-details">
+                                    <h2 class="name">
+                                        <!-- <a target="_blank" href="https://lobianijs.com"> -->
+                                        {{bookingDetails.hotelDetail.name}}
+                                        <!-- </a> -->
+                                    </h2>
+                                    <div> {{bookingDetails.hotelDetail.address}}</div>
+                                    <div> {{bookingDetails.hotelDetail.phone_no}}</div>
+                                    <div> {{bookingDetails.hotelDetail.phone_no}}</div>
+                                </div>
+                            </div>
+                        </header>
+                        <main>
+                            <div class="row contacts">
+                                <div class="col invoice-to">
+                                    <div class="text-gray-light">INVOICE TO:</div>
+                                    <h2 class="to">{{bookingDetails.title}} {{bookingDetails.firstName}} {{bookingDetails.lastName}}</h2>
+                                    <div class="address">{{bookingDetails.ccAddress}}</div>
+                                    <div class="email"><a href="mailto:{{bookingDetails.email}}">{{bookingDetails.email}}</a></div>
+                                </div>
+                                <div class="col invoice-details">
+                                    <h1 class="invoice-id">INVOICE 3-2-1</h1>
+                                    <div class="date">Date of Invoice: {{bookingDetails.bookingDate | date: 'mediumDate'}}</div>
+                                    <div class="date">Due Date: 30/10/2018</div>
+                                </div>
+                            </div>
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th class="text-left">ROOM DESCRIPTION</th>
+                                        <th class="text-right">NO. OF GUESTS</th>
+                                        <th class="text-right">PRICE</th>
+                                        <th class="text-right">NO. OF ROOMS</th>
+                                        <th class="text-right">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let room of bookingDetails.rooms;let i=index">
+                                        <td class="no">{{(i+1)}}</td>
+                                        <td class="text-left">
+                                            <h3>{{room.name}}</h3>{{bookingDetails.hotelDetail.breakfast_type}}</td>
+                                        <td class="no">{{room.roomGuests}}</td>
+                                        <td class="unit">{{room.roomPrice}}</td>
+                                        <td class="qty">{{room.roomsCount}}</td>
+                                        <td class="total">{{room.roomPrice}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <!-- <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">SUBTOTAL</td>
+                                        <td>$5,200.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">TAX 25%</td>
+                                        <td>$1,300.00</td>
+                                    </tr> -->
+                                    <tr>
+                                        <td align="right" colspan="5">GRAND TOTAL</td>
+                                        <td>{{bookingDetails.totalCharges}}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <h3>Thank you!</h3>
+                            <div class="notices">
+                                <div>NOTICE:</div>
+                                <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                            </div>
+                        </main>
+                        <footer>
+                            Invoice was created on a computer and is valid without the signature and seal.
+                        </footer>
+                    </div>
+                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                    <div></div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</section>
+<app-footer></app-footer>
