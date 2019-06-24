@@ -56,7 +56,9 @@ export class HotelBookingComponent implements OnInit {
   bookingComplete: boolean = false;
 
   constructor(private _ms: MainService, private _cookieService: CookieService, private __fb: FormBuilder,
-    private __router: Router) { }
+    private __router: Router) {
+      window.scroll(0, 300);
+    }
 
   ngOnInit() {
     // get search query

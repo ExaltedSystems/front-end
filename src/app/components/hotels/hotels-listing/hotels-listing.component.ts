@@ -56,6 +56,7 @@ export class HotelsListingComponent implements OnInit {
 
     constructor(private _ms: MainService, private _cookieService: CookieService, private __router: Router, private deviceService: DeviceDetectorService) {
         this.epicFunction();
+        window.scroll(0, 300);
 		this.__router.routeReuseStrategy.shouldReuseRoute = function () {
 			return false;
 		}

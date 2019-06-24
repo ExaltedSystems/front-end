@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
-   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule, MatIconModule} from '@angular/material';
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -38,17 +38,8 @@ import { HotelInlineSearchFormComponent } from './components/hotels/hotel-inline
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { RangeSliderModule  } from 'ngx-rangeslider-component';
 import { DatePipe } from '@angular/common';
 import { HotelFiltersPipe } from './pipes/hotel-filters.pipe';
-import { OrderByPipe } from './pipes/order-by.pipe';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
-import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
-import { PriceFilterPipe } from './pipes/price-filter.pipe';
-import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
-import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
-import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { ToursComponent } from './components/tours/tours.component';
@@ -64,6 +55,16 @@ import { SubscribeComponent } from './components/subscribe/subscribe.component';
 import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
 import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-voucher.component';
 import { HotelSubscribeComponent } from './components/hotels/hotel-subscribe/hotel-subscribe.component';
+import { RangeSliderModule  } from 'ngx-rangeslider-component';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { StarRatingFilterPipe } from './pipes/star-rating-filter.pipe';
+import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
+import { PriceFilterPipe } from './pipes/price-filter.pipe';
+import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
+import { IframePipe } from './pipes/iframe.pipe';
 
 @NgModule({
   declarations: [
@@ -86,34 +87,35 @@ import { HotelSubscribeComponent } from './components/hotels/hotel-subscribe/hot
     HotelSearchFormComponent,
     HotelsListingComponent,
     HotelDetailsComponent,
+    HotelBookingComponent,
     HotelInlineSearchFormComponent,
-    HotelFiltersPipe,    
+    HotelFiltersPipe,   
     OrderByPipe,    
     StarRatingFilterPipe,    
     BreakfastTypeFilterPipe,    
     PriceFilterPipe,    
     FacilityFilterPipe,    
-    HotelBookingComponent,
     ContactusComponent,    
     AboutusComponent,    
     ToursComponent,    
     DealsComponent,    
     UmrahComponent,    
-    VisaComponent,
-    RequstCallBackFormComponent,
-    PopularAirlineAndHotelsComponent,
-    DetailComponent,
+    VisaComponent,    
+    RequstCallBackFormComponent,    
+    PopularAirlineAndHotelsComponent,    
+    DetailComponent,    
     VisaListsComponent,
     FilterVisaByNamePipe,
     SubscribeComponent,
     GeneralPagesComponent,
     HotelVoucherComponent,
-    HotelSubscribeComponent
+    HotelSubscribeComponent,
+    IframePipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
+    // NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -128,8 +130,7 @@ import { HotelSubscribeComponent } from './components/hotels/hotel-subscribe/hot
     MatCheckboxModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatSelectModule,    
-    MatIconModule,
+    MatSelectModule,
     IconsModule,
     MatSidenavModule,
     MatProgressBarModule,
@@ -146,9 +147,9 @@ import { HotelSubscribeComponent } from './components/hotels/hotel-subscribe/hot
       format: "DD/MM/YYYY",
     }),
     NgxGalleryModule,
+    MatTabsModule,
     RangeSliderModule,
     FilterPipeModule,
-    MatTabsModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [MainService, CookieService, DatePipe],

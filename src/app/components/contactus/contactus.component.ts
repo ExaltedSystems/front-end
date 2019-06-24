@@ -23,8 +23,7 @@ export class ContactusComponent implements OnInit {
         this.deviceFullInfo = this.__dd.getDeviceInfo();
         this.browser = this.__dd.browser;
         this.operatingSys = this.__dd.os;
-        // console.log('qP:', window.location.search)
-        // console.log(this.__router.url);
+        window.scroll(0, 300);
     }
 
     ngOnInit() {

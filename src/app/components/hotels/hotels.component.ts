@@ -9,7 +9,9 @@ import { MainService } from  "src/app/services/main.service";
 export class HotelsComponent implements OnInit {
   page_info:any = {name:'', description:''};
 
-  constructor(private __ms:MainService) { }
+  constructor(private __ms:MainService) {
+    window.scroll(0, 300);
+  }
 
   ngOnInit() {
     this.getPageData();

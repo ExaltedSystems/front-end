@@ -51,7 +51,9 @@ export class HotelDetailsComponent implements OnInit {
     hotelPaymentDetails: any;
 
     constructor(private _ms: MainService, private _date: DatePipe, private __fb: FormBuilder,private _router: Router,
-         private _cookieService: CookieService) { }
+         private _cookieService: CookieService) {
+            window.scroll(0, 300);
+        }
 
     ngOnInit(): void {
         window.scroll(0,0);

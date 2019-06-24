@@ -10,7 +10,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class HotelVoucherComponent implements OnInit {
   bookingDetails: object;  
   isLoading: boolean = true;
-  constructor(private __ms: MainService, private __cookie: CookieService) { }
+  constructor(private __ms: MainService, private __cookie: CookieService) {
+    window.scroll(0, 300);
+  }
 
   ngOnInit() {
     this.getHotelBookingDetails();

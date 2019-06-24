@@ -18,7 +18,7 @@
                     <h3 class="sidebar-title">Amazing Visa Offers</h3>
                     <ul>
                         <li *ngFor="let item of popularVisa;"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }}
-								<span class="float-right">{{item.validityId}}</span></a></li>
+								<span class="float-right">{{item.durationId}}</span></a></li>
                     </ul>
                     <a routerLink="/visa" class="view-all">View All</a>
                 </div>
@@ -46,10 +46,10 @@
                     <div class="col-sm-4" *ngFor="let item of page_info; let i=index;">
                         <div class="visa-type-card mx-0 card shadow mb-4">
                             <div class="duration d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">{{ item.durationId }}</h5> &nbsp;&nbsp; {{ page_info[0].countryName }}
+                                <h5 class="mb-0">{{ item.durationId }}</h5>
                                 <small>{{ item.numEntries }}</small>
                             </div>
-                            <div class="visa-type-price d-flex bd-highlight align-items-stretch justify-content-between">
+                            <!-- <div class="visa-type-price d-flex bd-highlight align-items-stretch justify-content-between">
                                 <div class="visa-type text-center w-100" style="font-size: 25px; text-align: center;">
                                     <p style="margin-top:10px;">{{ item.visaTypeId }}</p>
                                 </div>
@@ -57,6 +57,14 @@
                                     <p class="mb-0" style="font-size: 25px;">{{ item.currencyCode }} {{ item.visaPrice }}
                                     </p>
                                     <small class="d-block text-center">Per Person</small>
+                                </div>
+                            </div> -->
+                            <div _ngcontent-c34="" class="visa-type-price d-flex bd-highlight align-items-stretch justify-content-between">
+                                <div _ngcontent-c34="" class="visa-type text-center w-100">{{ item.visaTypeId }}</div>
+                                <div _ngcontent-c34="" class="visa-card-price text-center w-100">
+                                    <p _ngcontent-c34="" class="mb-0">{{ item.currencyCode }} {{ item.visaPrice }}
+                                        <small _ngcontent-c34="" class="d-block text-center">Per Person</small>
+                                    </p>
                                 </div>
                             </div>
                             <div class="visa-includes pt-0">
@@ -70,7 +78,7 @@
                     </div>
                 </div>
                 <!--listing end-->
-                <div [innerHTML]="page_info[0].details"></div>
+                <div class="ck-editor-data" [innerHTML]="page_info[0].details"></div>
             </div>
         </div>
     </div>

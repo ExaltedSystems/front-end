@@ -28,7 +28,9 @@ export class PnrViewComponent implements OnInit {
   pnrTotalFare:number = 0;
   pnrReceivedFrom;
   specialServices = [];
-  constructor(private __actRouter: ActivatedRoute, private __ms: MainService) { }
+  constructor(private __actRouter: ActivatedRoute, private __ms: MainService) {
+    window.scroll(0, 300);
+  }
 
   ngOnInit() {
     this.queryParams = this.__actRouter.snapshot.queryParams;

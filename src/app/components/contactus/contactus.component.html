@@ -12,83 +12,84 @@
 </div>
 <section class="visa-contents">
     <div class="container sidebar">
-        <h1>{{ page_info.name }}</h1>
+        <h1 *ngIf="page_info">{{ page_info.name }}</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                <li class="breadcrumb-item active">{{ page_info.name }}</li>
+                <li class="breadcrumb-item active" *ngIf="page_info">{{ page_info.name }}</li>
             </ol>
         </nav>
-        <div [innerHTML]="page_info.description"></div>
+        <div *ngIf="page_info" [innerHTML]="page_info.description"></div>
         <div class="row">
             <div class="col-sm-6">
-                    <form class="main-search-form position-relative" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
-                        <div class="form-group row mb-1">
-                            <div class="col-sm-12">
-                                <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Name" class="rounded-5" formControlName="name" matInput required>
-                                    <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('name').value" (click)="this.contactForm.get('name').setValue('')"></i-x-circle>
-                                </mat-form-field>
-                                <div class="form-error" *ngIf="contactForm.controls['name'].hasError('required') && contactForm.controls['name'].touched">
-                                    Name required.
-                                </div>
+                <form class="main-search-form position-relative" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <mat-form-field class="form-control material-input mb-3 shadow">
+                                <input matInput placeholder="Name" class="rounded-5" formControlName="name" matInput required>
+                                <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('name').value" (click)="this.contactForm.get('name').setValue('')"></i-x-circle>
+                            </mat-form-field>
+                            <div class="form-error" *ngIf="contactForm.controls['name'].hasError('required') && contactForm.controls['name'].touched">
+                                Name required.
                             </div>
                         </div>
-                        <div class="form-group row mb-1">
-                            <div class="col-sm-12">
-                                <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Email" class="rounded-5" formControlName="email" matInput required>
-                                    <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('email').value" (click)="this.contactForm.get('email').setValue('')"></i-x-circle>
-                                </mat-form-field>
-                                <div class="form-error" *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
-                                    Email address required.
-                                </div>
-                                <div class="form-error" *ngIf="contactForm.controls['email'].invalid && contactForm.controls['email'].touched">
-                                    Email address not valid.
-                                </div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <mat-form-field class="form-control material-input mb-3 shadow">
+                                <input matInput placeholder="Email" class="rounded-5" formControlName="email" matInput required>
+                                <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('email').value" (click)="this.contactForm.get('email').setValue('')"></i-x-circle>
+                            </mat-form-field>
+                            <div class="form-error" *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
+                                Email address required.
+                            </div>
+                            <div class="form-error" *ngIf="contactForm.controls['email'].invalid && contactForm.controls['email'].touched">
+                                Email address not valid.
                             </div>
                         </div>
-                        <div class="form-group row mb-1">
-                            <div class="col-sm-12">
-                                <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Phone" class="rounded-5" formControlName="phone" matInput required>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <mat-form-field class="form-control material-input mb-3 shadow">
+                                <input matInput placeholder="Phone" class="rounded-5" formControlName="phone" matInput required>
 
-                                    <!-- <button mat-button *ngIf="contactusPhone" matSuffix mat-icon-button aria-label="Clear" (click)="contactusPhone=''"> -->
-                                    <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('phone').value" (click)="this.contactForm.get('phone').setValue('')"></i-x-circle>
-                                    <!-- </button> -->
-                                </mat-form-field>
+                                <!-- <button mat-button *ngIf="contactusPhone" matSuffix mat-icon-button aria-label="Clear" (click)="contactusPhone=''"> -->
+                                <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('phone').value" (click)="this.contactForm.get('phone').setValue('')"></i-x-circle>
+                                <!-- </button> -->
+                            </mat-form-field>
 
-                                <div class="form-error" *ngIf="contactForm.controls['phone'].hasError('required') && contactForm.controls['phone'].touched">
-                                    Phone number required.
-                                </div>
-                                <div class="form-error" *ngIf="contactForm.controls['phone'].invalid && contactForm.controls['phone'].touched">
-                                    Invalid Phone Number.
-                                </div>
+                            <div class="form-error" *ngIf="contactForm.controls['phone'].hasError('required') && contactForm.controls['phone'].touched">
+                                Phone number required.
+                            </div>
+                            <div class="form-error" *ngIf="contactForm.controls['phone'].invalid && contactForm.controls['phone'].touched">
+                                Invalid Phone Number.
                             </div>
                         </div>
-                        <div class="form-group row mb-1">
-                            <div class="col-sm-12">
-                                <mat-form-field class="form-control mb-3 shadow">
-                                    <textarea matInput placeholder="Message" class="rounded-5" formControlName="emailMessage" matInput required></textarea>
-                                    <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('emailMessage').value" (click)="this.contactForm.get('emailMessage').setValue('')"></i-x-circle>
-                                </mat-form-field>
-                                <div class="form-error" *ngIf="contactForm.controls['emailMessage'].hasError('required') && contactForm.controls['emailMessage'].touched">
-                                    Email message required.
-                                </div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <mat-form-field class="form-control mb-3 shadow">
+                                <textarea matInput placeholder="Message" class="rounded-5" formControlName="emailMessage" matInput required></textarea>
+                                <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('emailMessage').value" (click)="this.contactForm.get('emailMessage').setValue('')"></i-x-circle>
+                            </mat-form-field>
+                            <div class="form-error" *ngIf="contactForm.controls['emailMessage'].hasError('required') && contactForm.controls['emailMessage'].touched">
+                                Email message required.
                             </div>
                         </div>
-                        <div class="form-group row mb-1">
-                            <div class="col-sm-12">
-                                <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!contactForm.valid" type="submit">Submit Query</button>
-                            </div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!contactForm.valid" type="submit">Submit Query</button>
                         </div>
-                    </form>
+                    </div>
+                </form>
             </div>
             <div class="col-sm-6">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015.7408251264478!2d72.98214914618187!3d33.701736211021064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbd0a6f2774bb%3A0x500276f001870a05!2sRehman+Travel+Head+office!5e1!3m2!1sen!2s!4v1547446165137" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015.7408251264478!2d72.98214914618187!3d33.701736211021064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbd0a6f2774bb%3A0x500276f001870a05!2sRehman+Travel+Head+office!5e1!3m2!1sen!2s!4v1547446165137"
+                    width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
             </div>
         </div>
-       <!--  <div class="row">
+        <!--  <div class="row">
             <div class="col-sm-3 order-last order-sm-first">
                 <div class="sidebar-list">
                     <app-requst-call-back-form></app-requst-call-back-form>

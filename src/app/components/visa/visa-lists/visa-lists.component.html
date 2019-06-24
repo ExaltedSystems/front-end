@@ -41,7 +41,7 @@
                     <h3 class="sidebar-title">Amazing Visa Offers</h3>
                     <ul>
                         <li *ngFor="let item of popularVisa | filterVisaByName: visaName"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }}
-                                <span class="float-right">{{item.validityId}}</span></a></li>
+                                <span class="float-right">{{item.durationId}}</span></a></li>
                         <!-- <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
 						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
 						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li> -->

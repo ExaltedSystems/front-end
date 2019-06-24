@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class SubscribeComponent implements OnInit {
   subscribeForm: FormGroup;
-  subscriberMsg: string;
+  subscriberSuccessMsg: string;
+  subscriberErrorMsg: string;
+  isLoad: boolean = false;
   constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router) { }
 
   ngOnInit() {
@@ -20,13 +22,27 @@ export class SubscribeComponent implements OnInit {
   }
 
   subscribeNow(inputs) {
-    Object.assign(inputs, {
-      ipAddress: this.__ms.ipAddress,
-      pageUrl: this.__router.url,
-    });
-    this.__ms.postData(this.__ms.backEndUrl + 'cms/addSubscriber', inputs).subscribe(result => {
-      this.subscriberMsg = result.message;
-    });
+    if(this.subscribeForm.valid) {
+      this.isLoad = true;
+      Object.assign(inputs, {
+        ipAddress: this.__ms.ipAddress,
+        pageUrl: this.__router.url,
+      });
+      this.__ms.postData(this.__ms.backEndUrl + 'cms/addSubscriber', inputs).subscribe(result => {
+        if(result.status){
+          this.subscriberSuccessMsg = result.message;
+        } else {
+          this.subscriberErrorMsg = result.message;
+        }
+        window.setTimeout(()=>{
+          this.subscribeForm.get('email').setValue('');
+          this.subscribeForm.controls['email'].markAsUntouched(); 
+          this.subscriberSuccessMsg = '';
+          this.subscriberErrorMsg = '';
+        }, 10000)
+        this.isLoad = false;
+      });
+    }
   }
 
 }
