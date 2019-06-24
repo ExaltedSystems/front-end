@@ -29,7 +29,9 @@
                             "./node_modules/jquery/dist/jquery.min.js",
                             "src/assets/js/popper.min.js",
                             "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-                            "src/assets/js/feather.min.js"
+                            "./node_modules/moment/min/moment.min.js",
+                            "src/assets/js/feather.min.js",
+                            "src/assets/js/jquery.daterangepicker.min.js"
                         ]
                     },
                     "configurations": {
