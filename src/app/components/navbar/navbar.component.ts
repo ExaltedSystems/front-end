@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
   getNavBar(){
   	this.__ms.getData(this.__ms.backEndUrl+'Cms/navbarTopmenuLinks').subscribe(res => {
       this.nav = res.data;
-      console.log(this.nav);
     });
   }
 }

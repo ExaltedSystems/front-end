@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MainService } from '../../services/main.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router, RouterState, ActivatedRoute } from '@angular/router';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-requst-call-back-form',
@@ -21,12 +19,11 @@ export class RequstCallBackFormComponent implements OnInit {
   isLoad:boolean = false;
 
   constructor(private __ms: MainService, private __fb: FormBuilder, private __dd: DeviceDetectorService,
-    private __router: Router, private __actRoute: ActivatedRoute, private __ngZone: NgZone) {
+    private __router: Router, private __actRoute: ActivatedRoute) {
     this.deviceFullInfo = this.__dd.getDeviceInfo();
     this.browser = this.__dd.browser;
     this.operatingSys = this.__dd.os;
   }
-@ViewChild('autosize', {static: false}) autosize: CdkTextareaAutosize;
 
   ngOnInit() {
     this.contactForm = this.__fb.group({
@@ -35,11 +32,6 @@ export class RequstCallBackFormComponent implements OnInit {
       phone: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
       emailMessage: ["", Validators.required],
     });
-  }
-  triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.__ngZone.onStable.pipe(take(1))
-        .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   onSubmit(inputs) {
     if (this.contactForm.valid) {

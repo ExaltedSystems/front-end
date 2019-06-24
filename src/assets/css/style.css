@@ -366,7 +366,8 @@ header {
 }
 
 form .btn {
-    padding: .76rem .75rem
+    /* padding: .76rem .75rem */
+    padding: 0.8rem .75rem
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active,
