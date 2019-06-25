@@ -84,15 +84,13 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container loading-container">
 
-        <!-- <mat-card class="custom-material-form mt-2 mb-3 rounded-0 d-none d-sm-block">
-           <app-hotel-search-form (searchEvent)="getSearchResults($event)"></app-hotel-search-form>
-        </mat-card>-->
 
         <div class="row mt-3">
           <div class="col-sm-3 d-none d-sm-block">
-            <div class="side-search-form custom-material-form p-2 mb-5">
+            <!-- <input type="text" value="" id="date-range1"> -->
+            <div class="side-search-form custom-material-form p-2 mb-5 d-none d-sm-block">
                 <app-hotel-search-form (searchEvent)="getSearchResults($event)" [sideForm]="sideForm"></app-hotel-search-form>
             </div>
             <div class="sidebar-list">
@@ -174,7 +172,7 @@
             </div>
 
             <div class="mb-3 p-0">
-              <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block">
+              <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block" style="background:#57a5f9;color:#fff;">
                 <b class="d-inline-block mr-4">Sort:</b>
                 <div class="d-inline-flex justify-content-between">
                   <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>

@@ -25,12 +25,12 @@
       <div class="input-group flex-nowrap mb-4 mb-sm-0">
           <div class="input-group-prepend">
               <span class="input-group-text rounded-0">
-                <i-calendar (click)="openDatePicker()"></i-calendar>
+                <i-calendar></i-calendar>
               </span>
             </div>
-            <input type="text" id="date-range" (focus)="openDatePicker()" autocomplete="off" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut"/>
+            <!-- <input type="text" id="date-range" autocomplete="off" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut"/> -->
+            <input type="text" [autoApply]="true" class="form-control material-input rounded-0 pl-0" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/>
             <!-- <mat-form-field class="form-control material-input rounded-0 pl-0">
-                <input matInput type="text" [autoApply]="true" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/>
             </mat-form-field> -->
       </div>
       <!-- <div class="input-group">

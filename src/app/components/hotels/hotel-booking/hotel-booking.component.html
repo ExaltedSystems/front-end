@@ -57,9 +57,9 @@
           <b>You Selected</b>
           <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
             <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
-            <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+            <!-- <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
               <i-x-circle></i-x-circle>
-            </a>
+            </a> -->
           </div>
         </mat-card>
         <mat-card class="rounded-0 mt-2 mb-3">
@@ -139,7 +139,7 @@
                     <mat-form-field class="form-control mb-3 mb-sm-0 material-input material-select rounded-0">
                         <mat-label>Title</mat-label>
                         <mat-select formControlName="title">
-                          <mat-option value="Mr">Mr</mat-option>
+                          <mat-option selected value="Mr">Mr</mat-option>
                           <mat-option value="Mrs">Mrs</mat-option>
                           <mat-option value="Miss">Miss</mat-option>
                         </mat-select>
@@ -186,9 +186,9 @@
                       </span>
                 </div>
                 <div class="selected-room light-grey-bg p-3 mb-3 position-relative" *ngFor="let room of selectedRooms">
-                  <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                  <!-- <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
                     <i-x-circle></i-x-circle>
-                  </a>
+                  </a> -->
                   <p class="mb-1">
                     <b>{{room.room_title}}</b>
                   </p>
@@ -201,16 +201,16 @@
                       </select>
                     </div>
                     <div class="col-sm-4">
-                      Non Smooking
+                      Smooking: Non Smooking
                     </div>
                   </div>
-                  <div class="list-divider"></div>
+                  <!-- <div class="list-divider"></div>
                   <div class="form-group row mb-0">
                     <div class="col-sm-5">
                       <label for="">Full Guest Name</label>
                       <input type="text" class="form-control">
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
 
@@ -221,7 +221,7 @@
                   <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
                 </div>
                 <div>
-                  <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                  <button type="submit" matStepperNext class="btn btn-success rounded-0 shadow-sm px-4" style="width:20%">Next</button>
                   <small class="form-error" *ngIf="bookingInfoFrom.invalid">{{bookingErrorMsg}}</small>
                 </div>
               </form>
@@ -230,12 +230,12 @@
               <form [formGroup]="paymentInfoForm" (submit)="paymentInfo(paymentInfoForm.value)" class="custom-material-form">
                 <ng-template matStepLabel>Payment Details</ng-template>
                 <div class="form-group row">
-                  <div class="col-sm-12">
+                  <!-- <div class="col-sm-12">
                     <mat-radio-group aria-label="Select an option" formControlName="cardType">
                       <mat-radio-button value="1" class="mr-4">Master</mat-radio-button>
                       <mat-radio-button value="2">Visa</mat-radio-button>
                     </mat-radio-group>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6">
@@ -296,8 +296,8 @@
                   </div>
                 </div>
                 <div>
-                  <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2">Back</button>
-                  <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                  <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2" style="width:20%">Back</button>
+                  <button type="submit" matStepperNext class="btn btn-success rounded-0 shadow-sm w-30" style="width:20%">Next</button>
                   <small class="form-error" *ngIf="paymentInfoForm.invalid">{{paymentErrorMsg}}</small>
                 </div>
               </form>
@@ -355,9 +355,9 @@
                   <td>
                     <div class="d-flex align-items-center justify-content-between" *ngFor="let room of selectedRooms">
                       <p class="mb-1">{{room.roomsCount}} x {{room.room_title}}</p>
-                      <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
+                      <!-- <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
                         <i-x-circle></i-x-circle>
-                      </a>
+                      </a> -->
                     </div>
                   </td>
                 </tr>
@@ -402,9 +402,9 @@
                 </tr>
               </table>
               <div>
-                <button class="btn btn-default rounded-0 shadow-sm" matStepperPrevious>Back</button>
-                <button class="btn btn-default rounded-0 shadow-sm" (click)="stepper.reset()">Reset</button>
-                <button class="btn btn-success rounded-0 shadow-sm w-40" (click)="conformBooking()">Confirm Booking</button>
+                <button class="btn btn-default rounded-0 shadow-sm mr-2" matStepperPrevious>Back</button>
+                <button class="btn btn-default rounded-0 shadow-sm mr-2" (click)="stepper.reset()">Reset</button>
+                <button class="btn btn-success rounded-0 shadow-sm mr-2 w-40" style="width:25%" (click)="conformBooking()">Confirm Booking</button>
               </div>
             </mat-step>
           </mat-horizontal-stepper>
@@ -414,5 +414,6 @@
 
   </div>
 </section>
+
 
 <app-footer></app-footer>

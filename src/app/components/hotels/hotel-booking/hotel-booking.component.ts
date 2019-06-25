@@ -111,7 +111,7 @@ export class HotelBookingComponent implements OnInit {
     ];
 
     this.bookingInfoFrom = this.__fb.group({
-      title: ['', Validators.required],
+      title: ['Mr', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', Validators.required],
@@ -121,7 +121,7 @@ export class HotelBookingComponent implements OnInit {
       rentACar: [''],
     });
     this.paymentInfoForm = this.__fb.group({
-      cardType: ['', Validators.required],
+      cardType: [''],
       cardNumber: ['', Validators.required],
       cvn: ['', Validators.required],
       cardHolderFirstName: ['', Validators.required],

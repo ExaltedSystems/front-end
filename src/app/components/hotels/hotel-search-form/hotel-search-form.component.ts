@@ -52,14 +52,18 @@ export class HotelSearchFormComponent implements OnInit {
    }
 
   ngOnInit() {
-    jQuery('#date-range').dateRangePicker(
-      {
-        autoClose: true,
-        format: 'dd DD MMM',
-        separator : ' - ',
-        startDate: new Date()
-      }
-    );
+    // jQuery('#date-range').dateRangePicker(
+    //   {
+    //     autoClose: true,
+    //     format: 'dd DD MMM',
+    //     separator : ' - ',
+    //     startDate: new Date(),
+    //     getValue: function()
+    //     {
+    //       return jQuery(this).val();
+    //     }
+    //   }
+    // );
     // Hotel form
     this.hotelSearch = this.__fb.group({
       destination: ["",Validators.required],
@@ -115,9 +119,9 @@ export class HotelSearchFormComponent implements OnInit {
 
   } // onInit
 
-  openDatePicker(){
-    jQuery('#date-range').data('dateRangePicker').open();
-  }
+  // openDatePicker(){
+  //   jQuery('#date-range').data('dateRangePicker').open();
+  // }
 
   datePickerValue(val){
     console.log('val', val)
@@ -239,17 +243,17 @@ export class HotelSearchFormComponent implements OnInit {
 
   searchHotels(formInputs){
     console.log('forminputs',formInputs);
-    console.log(typeof jQuery('#date-range').val())
-    let date1 = new Date(jQuery('#date-range').val().split('-')[0]);
-    let date2 = new Date(jQuery('#date-range').val().split('-')[1]);
+    // console.log(typeof jQuery('#date-range').val())
+    let date1 = ''; // new Date(jQuery('#date-range').val().split('-')[0]);
+    let date2 = ''; // new Date(jQuery('#date-range').val().split('-')[1]);
     // return;
     if(this.hotelSearch.valid){
       let formObj = {
         destination: formInputs.destination,
-        checkInDate: this._date.transform(date1,'M/d/yy'),
-        checkOutDate: this._date.transform(date2,'M/d/yy'),
+        checkInDate: this._date.transform(formInputs.dates.startDate,'M/d/yy'),
+        checkOutDate: this._date.transform(formInputs.dates.endtDate,'M/d/yy'),
         dates: formInputs.dates,
-        dateRange: jQuery('#date-range').val(),
+        dateRange: '',//jQuery('#date-range').val(),
         rooms: formInputs.rooms,
         adults: formInputs.adults,
         children: formInputs.children,

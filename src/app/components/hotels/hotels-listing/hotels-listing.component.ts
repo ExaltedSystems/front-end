@@ -60,15 +60,15 @@ export class HotelsListingComponent implements OnInit {
         this.epicFunction();
     }
 
-    ngOnInit(): void {
-        jQuery('#date-range').dateRangePicker(
-            {
-              autoClose: true,
-              format: 'dd DD MMM',
-              separator : ' - ',
-              startDate: new Date()
-            }
-          );
+    ngOnInit() {
+        // jQuery('#date-range1').dateRangePicker(
+        //     {
+        //       autoClose: true,
+        //       format: 'dd DD MMM',
+        //       separator : ' - ',
+        //       startDate: new Date()
+        //     }
+        //   );
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
 
         this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search', this.searchQuery).subscribe(result => {
@@ -174,9 +174,9 @@ export class HotelsListingComponent implements OnInit {
 
     } // on init
 
-    openDatePicker(){
-        jQuery('#date-range').data('dateRangePicker').open();
-      }
+    // openDatePicker(){
+    //     jQuery('#date-range').data('dateRangePicker').open();
+    //   }
 
 
     onlyUnique(value, index, self) {
@@ -188,8 +188,6 @@ export class HotelsListingComponent implements OnInit {
         this.isMobile = this.deviceService.isMobile();
         this.isTablet = this.deviceService.isTablet();
         this.isDesktop = this.deviceService.isDesktop();
-        console.log('device', this.deviceInfo);
-        console.log('mobile', this.isMobile);
     }
 
     isJson = (str) => {

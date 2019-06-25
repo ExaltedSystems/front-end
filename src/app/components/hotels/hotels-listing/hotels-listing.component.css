@@ -1,3 +1,9 @@
 .side-search-form{
     background:#57a5f9;
 }
+.hotel-search-item{
+    border: solid 1px #333;
+}
+.hotel-search-item .badge{
+    padding: 0.45em .8em;
+}

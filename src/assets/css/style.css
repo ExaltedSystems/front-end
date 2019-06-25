@@ -1059,6 +1059,11 @@ legend {
 	padding: 5px;
 }
 
+.loading-container{
+	min-height: 670px;
+}
+
+
 .hotel-price{
 	background: #ecebeb;
 	height: 100%
@@ -1085,8 +1090,8 @@ legend {
 	list-style-type: disc !important
 }
 .room-details-table tr td, .room-details-table tr th{
-	padding: 0.50rem !important;
-	font-size: 14px !important;
+	padding: 0.30rem !important;
+	font-size: 12px !important;
 }
 .reservation-options{
 	position: fixed !important;

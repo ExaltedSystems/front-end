@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 @Component({
     selector: 'app-hotel-details',
     templateUrl: './hotel-details.component.html',
@@ -50,6 +51,9 @@ export class HotelDetailsComponent implements OnInit {
     inlineSearchForm: boolean = false;
     hotelPaymentDetails: any;
 
+    sideForm:boolean = true;
+    roomsMsg;
+
     constructor(private _ms: MainService, private _date: DatePipe, private __fb: FormBuilder,private _router: Router,
          private _cookieService: CookieService) { }
 
@@ -74,7 +78,7 @@ export class HotelDetailsComponent implements OnInit {
             this.isLoading = false;
             this.hotelPaymentDetails = JSON.parse(result['payment_mothods']);
             // console.log('payment',this.hotelPaymentDetails)
-            // console.log('hotel data', this.hotelDetails)
+            console.log('hotel data', this.hotelDetails)
         })
 
         this.galleryOptions = [
@@ -269,6 +273,9 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     public getRoomsPrice = (rooms: number, price: number,i,guests,roomId) => {
+        if(rooms > 0){
+            this.roomsMsg = "";
+        }
         this.roomsPrice[i] = 0;
         this.roomsSelected[i] = 0;
         this.roomsGuests[i] = 0;
@@ -326,7 +333,14 @@ export class HotelDetailsComponent implements OnInit {
         this.isLoading = false;
     }
 
-    public continueBooking = () => {
+    public continueBooking = (rooms,guests) => {
+        if(rooms < 1){
+            this.roomsMsg = "Please Select 1 or more Rooms";
+            return false;
+        }
+        if(guests < this.adults){
+            return false;
+        }
         let bookingInfo = {
             roomsInfo: this.selectedRoomsId,
             totalRooms: this.totalRoomsSelected,

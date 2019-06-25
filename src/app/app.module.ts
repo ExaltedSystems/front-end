@@ -129,7 +129,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     RangeSliderModule,
     FilterPipeModule,
     MatProgressSpinnerModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
     
   ],
   providers: [MainService, CookieService, DatePipe],
