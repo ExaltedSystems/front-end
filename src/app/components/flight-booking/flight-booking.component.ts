@@ -380,9 +380,22 @@ export class FlightBookingComponent implements OnInit {
         this.createPnr(res);
       }
     })
-
-    
   } //
+
+  byBank(){
+    let flightInfoObj = {
+      _refrenceNo: this.referenceNo,
+      _token: localStorage.getItem("paxToken")
+    }
+    Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
+    let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
+    this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      // console.log(res);
+      if(res['res_flag'] == true){
+        this.createPnr(res);
+      }
+    })
+  }// end by bank
 
   createPnr(flightInfos){
     let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
