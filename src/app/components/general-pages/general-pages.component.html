@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div *ngIf="page_info.image">
+<div *ngIf="page_info && page_info.image">
     <img class="img-fluid" src="rgtapp/uploads/cms/pages/{{page_info.image}}">
 </div>
 <section class="visa-contents">
@@ -36,7 +36,7 @@
                         <li class="breadcrumb-item active">{{ page_info.name }}</li>
                     </ol>
                 </nav>
-                <div [innerHTML]="page_info.description"></div>
+                <div [innerHTML]="page_info.description | iframe"></div>
             </div>
         </div>
     </div>

@@ -10,17 +10,17 @@ import { Http, Response } from '@angular/http';
 })
 export class MainService {
   public baseUrl = 'http://www.cheapfly.pk/';
-  backEndUrl     : string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
-  // backEndUrl     : string = 'http://localhost/rgtapp/index.php/services/';
-  flightsUrl     : string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
-  byTagUrl       : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
-  revalidateUrl  : string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
-  FlightInfo     :object;
+  backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
+  flightsUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
+  byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
+  revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
+  FlightInfo:object;
   hotelSearchQuery: object;
   public ipAddress: any;
   constructor(private __httpClient: HttpClient, private __http: Http) {
     this.getIpAddress();
   }
+
 
   /**
    * get all data
@@ -47,6 +47,16 @@ export class MainService {
   getAirPorts() {
     return this.__http.get('../../assets/js/locations.json').pipe(map((res:any) => res.json()));
   }
+
+  getBankDetails(){
+    let banksUrl = this.backEndUrl + 'cms/allBankDetails';
+    return this.getJsonData(banksUrl);         
+  }
+
+  getBranchesDetails(){
+    let branchesUrl = this.backEndUrl + 'cms/allBranchesLists';
+    return this.getJsonData(branchesUrl);         
+  }
   /**
     * Get All Client All Informations
     * @param url type any 
@@ -69,12 +79,11 @@ export class MainService {
   postData(url, obj): Observable<response> {
     return this.__httpClient.post<response>(url, obj);
   }
-  
+
   sendPostData(url, obj){
     obj = JSON.stringify(obj)    
     return this.__httpClient.request("POST",url,obj);
   }
-
   putData(url, obj) {
     return this.__httpClient.put(url, obj)
   }
@@ -84,9 +93,9 @@ export class MainService {
   setDateFormat(date, time?) {
     let formatedDate = date;
     if(!time){
-      let newDate  = new Date(date);
-      let month    = (newDate.getMonth() + 1 > 9 ? (newDate.getMonth() + 1) : "0" + (newDate.getMonth() + 1));
-      let day      = (newDate.getDate() > 9 ? newDate.getDate() : "0" + newDate.getDate());
+      let newDate = new Date(date);
+      let month = (newDate.getMonth() + 1 > 9 ? (newDate.getMonth() + 1) : "0" + (newDate.getMonth() + 1));
+      let day = (newDate.getDate() > 9 ? newDate.getDate() : "0" + newDate.getDate());
       formatedDate = newDate.getFullYear() + '-' + month + '-' + day;
     }else{
       let timeOnly = date.split('T');
@@ -214,7 +223,7 @@ export class MainService {
 export interface response {
   status: boolean,
   message: string,
-  data: object[]
+  data: object
 }
 
 export interface list {
@@ -222,12 +231,12 @@ export interface list {
 }
 
 export interface ipInformation {
-  city    : string;
-  country : string;
+  city: string;
+  country: string;
   hostname: string;
-  ip      : string;
-  loc     : string;
-  org     : string;
-  postal  : string;
-  region  : string;
+  ip: string;
+  loc: string;
+  org: string;
+  postal: string;
+  region: string;
 }

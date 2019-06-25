@@ -7,17 +7,18 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { HotelsListingComponent } from 'src/app/components/hotels/hotels-listing/hotels-listing.component';
 import { HotelDetailsComponent } from 'src/app/components/hotels/hotel-details/hotel-details.component';
 import { ContactusComponent } from 'src/app/components/contactus/contactus.component';
-import { FlightsComponent } from	'src/app/components/flights/flights.component';
-import { HotelsComponent } from	'src/app/components/hotels/hotels.component';
-import { VisaListsComponent } from	'src/app/components/visa/visa-lists/visa-lists.component';
-import { VisaComponent } from	'src/app/components/visa/visa.component';
-import { UmrahComponent } from	'src/app/components/umrah/umrah.component';
-import { DealsComponent } from	'src/app/components/deals/deals.component';
-import { ToursComponent } from	'src/app/components/tours/tours.component';
-import { AboutusComponent } from  'src/app/components/aboutus/aboutus.component';
-import  { DetailComponent } from 'src/app/components/popular-airline-and-hotels/detail/detail.component';
+import { FlightsComponent } from 'src/app/components/flights/flights.component';
+import { HotelsComponent } from 'src/app/components/hotels/hotels.component';
+import { VisaListsComponent } from 'src/app/components/visa/visa-lists/visa-lists.component';
+import { VisaComponent } from 'src/app/components/visa/visa.component';
+import { UmrahComponent } from 'src/app/components/umrah/umrah.component';
+import { DealsComponent } from 'src/app/components/deals/deals.component';
+import { ToursComponent } from 'src/app/components/tours/tours.component';
+import { AboutusComponent } from 'src/app/components/aboutus/aboutus.component';
+import { DetailComponent } from 'src/app/components/popular-airline-and-hotels/detail/detail.component';
 import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
 import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
+import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-voucher.component';
 
 export const APP_ROUTES: Routes = [
 	{ path: '', component: HomeComponent },
@@ -35,12 +36,13 @@ export const APP_ROUTES: Routes = [
 	{ path: 'contactUs', component: ContactusComponent },
 	{ path: 'flights-listing', component: FlightsListingComponent },
 	{ path: 'flight-booking', component: FlightBookingComponent },
-  	{ path: 'pnrView', component: PnrViewComponent },
-  	{ path: 'thank-you', component: ThankYouComponent },
+	{ path: 'pnrView', component: PnrViewComponent },
+	{ path: 'thank-you', component: ThankYouComponent },
 	{ path: 'hotels-listing', component: HotelsListingComponent },
 	{ path: 'hotel-details', component: HotelDetailsComponent },
-	{ path: 'airlines/:airline', component : DetailComponent},
-	{ path: 'hotels/:hotel', component : DetailComponent},
+	{ path: 'airlines/:airline', component: DetailComponent },
+	{ path: 'hotels/:hotel', component: DetailComponent },
 	{ path: 'hotel-booking', component: HotelBookingComponent },
+	{ path: 'hotel-voucher', component: HotelVoucherComponent },
 	{ path: '**', component: GeneralPagesComponent }
 ];

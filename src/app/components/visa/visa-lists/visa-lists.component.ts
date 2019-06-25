@@ -17,6 +17,7 @@ export class VisaListsComponent implements OnInit {
 	searchVisaByNameForm: FormGroup;
 	constructor(private __ms: MainService, private __meta: Meta, private __title: Title,
 		private __device: DeviceDetectorService, private __fb: FormBuilder) {
+			window.scroll(0, 300);
 		this.baseUrl = this.__ms.baseUrl;
 		if (this.__device.isDesktop()) {
 			window.scrollTo(0, 400);

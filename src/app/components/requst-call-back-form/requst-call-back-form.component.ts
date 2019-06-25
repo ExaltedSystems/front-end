@@ -9,12 +9,14 @@ import { Router, RouterState, ActivatedRoute } from '@angular/router';
   templateUrl: './requst-call-back-form.component.html',
   styleUrls: ['./requst-call-back-form.component.css']
 })
+
 export class RequstCallBackFormComponent implements OnInit {
   page_info: any;
   contactForm: FormGroup;
   deviceFullInfo = null;
   browser = null;
   operatingSys = null;
+  isLoad:boolean = false;
 
   constructor(private __ms: MainService, private __fb: FormBuilder, private __dd: DeviceDetectorService,
     private __router: Router, private __actRoute: ActivatedRoute) {
@@ -33,6 +35,7 @@ export class RequstCallBackFormComponent implements OnInit {
   }
   onSubmit(inputs) {
     if (this.contactForm.valid) {
+      this.isLoad = true;
       let emailSubject: string;
       let urlStr = this.__actRoute.snapshot.url;
       if (urlStr.length > 1) {
@@ -51,10 +54,10 @@ export class RequstCallBackFormComponent implements OnInit {
       });
       this.__ms.postData(this.__ms.backEndUrl + 'cms/inquiryCallBack', inputs).subscribe(result => {
         if (result.status) {
+          this.isLoad = false;
           this.__router.navigate(['/thank-you']);
         }
       });
-      console.log(this.contactForm.value);
     }
   }
 

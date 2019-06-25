@@ -1,0 +1,20 @@
+<div class="container">
+    <form class="main-search-form position-relative" [formGroup]="hotelSubscribeForm" (ngSubmit)="subscribeNow(hotelSubscribeForm.value)">
+        <div class="form-group row">
+            <mat-form-field class="form-control material-input mb-3 shadow">
+                <input matInput placeholder="Email" class="rounded-5" formControlName="email" matInput required>
+                <i-x-circle class="feather-x-circle" *ngIf="this.hotelSubscribeForm.get('email').value" (click)="this.hotelSubscribeForm.get('email').setValue('');this.hotelSubscribeForm=''"></i-x-circle>
+            </mat-form-field>
+            <div class="form-error" *ngIf="hotelSubscribeForm.controls['email'].hasError('required') && hotelSubscribeForm.controls['email'].touched">
+                Email address required.
+            </div>
+            <div class="form-error" *ngIf="hotelSubscribeForm.controls['email'].invalid && hotelSubscribeForm.controls['email'].touched">
+                Email address not valid.
+            </div>
+        </div>
+        <div class="form-group row">
+            <button class="btn btn-primary btn-lg btn-block shadow rounded-2 hotel-btn" [disabled]="!hotelSubscribeForm.valid" type="submit">Subscribe</button>
+        </div>
+        <h3 *ngIf="subscriberMsg" class="form-error">{{subscriberMsg}}</h3>
+    </form>
+</div>

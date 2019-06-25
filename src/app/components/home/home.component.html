@@ -32,7 +32,7 @@
                                                         </span>
                                                     </div>
                                                     <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm shadow-sm-none">
-                                                        <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (keyup)="filterFlyingFrom($event)">
+                                                        <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (click)="resetMatInput($event)" (keyup)="filterFlyingFrom($event)">
                                                         <mat-autocomplete #flyingFromAuto="matAutocomplete">
                                                             <mat-option *ngFor="let sector of airlineSectors | async" [value]="sector">
                                                                 {{sector}}
@@ -46,7 +46,7 @@
                                                         </span>
                                                     </div>
                                                     <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                                                        <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (keyup)="filterFlyingTo($event)">
+                                                        <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (click)="resetMatInput($event)" (keyup)="filterFlyingTo($event)">
                                                         <mat-autocomplete #flyingToAuto="matAutocomplete">
                                                             <mat-option *ngFor="let sector of flyToSectors | async" [value]="sector">
                                                                 {{sector}}
@@ -178,7 +178,7 @@
         <mat-card class="p-2 p-sm-0 mat-card">
             <div class="row d-block d-sm-flex align-items-center">
                 <div class="col-sm-4">
-                    <img alt="" class="img-fluid mb-3 mb-sm-0" src="assets/img/Subscribe-button.png">
+                    <img alt="Subscribe Image Rehman Travels" class="img-fluid mb-3 mb-sm-0" src="assets/img/Subscribe-button.png">
                 </div>
                 <div class="col-sm-8">
                     <app-subscribe></app-subscribe>

@@ -56,8 +56,10 @@ export class HomeComponent implements OnInit {
   isMobile:boolean;
 
   constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __meta:Meta, 
-    private __activated: ActivatedRoute, private __cookieService: CookieService, private __device: DeviceDetectorService) {
-      this.__meta.updateTag({property:"og:url", content: window.location.href}); 
+    private __activated: ActivatedRoute, private __cookieService: CookieService,
+    private __device: DeviceDetectorService, private __title: Title) {
+      this.__meta.updateTag({property:"og:url", content: window.location.href});
+      this.updateMetaTags();
     }
 
   ngOnInit() {
@@ -336,4 +338,20 @@ export class HomeComponent implements OnInit {
       this.popularVisa = res.data;
     });
   }
+  
+	resetMatInput(evt){
+		let attrName = evt.target.getAttribute('formControlName');
+		this.flightSearch.controls[attrName].setValue('');
+  }
+  // Update Meta Tags for Home Page
+  updateMetaTags() {
+    this.__ms.getData(this.__ms.backEndUrl + 'Cms/pageDetails/?urlLink=/').subscribe(res => {
+      let result = res.data;
+      this.__title.setTitle(result['metaTitle']);
+      this.__meta.updateTag({ name: 'description', content: result['metaDescription'] });
+      this.__meta.updateTag({ property: "og:title", content: result['metaTitle'] });
+      this.__meta.updateTag({ property: "og:description", content: result['metaDescription'] });
+      this.__meta.updateTag({ property: "og:url", content: window.location.href });
+		});
+	}
 }

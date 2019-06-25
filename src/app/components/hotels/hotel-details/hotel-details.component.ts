@@ -51,9 +51,12 @@ export class HotelDetailsComponent implements OnInit {
     hotelPaymentDetails: any;
 
     constructor(private _ms: MainService, private _date: DatePipe, private __fb: FormBuilder,private _router: Router,
-         private _cookieService: CookieService) { }
+         private _cookieService: CookieService) {
+            window.scroll(0, 300);
+        }
 
     ngOnInit(): void {
+        window.scroll(0,0);
         // get search query
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
 
@@ -73,7 +76,7 @@ export class HotelDetailsComponent implements OnInit {
             this.isLoading = false;
             this.hotelPaymentDetails = JSON.parse(result['payment_mothods']);
             // console.log('payment',this.hotelPaymentDetails)
-            // console.log('hotel data', this.hotelDetails)
+            console.log('hotel data', result)
         })
 
         this.galleryOptions = [
@@ -268,6 +271,10 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     public getRoomsPrice = (rooms: number, price: number,i,guests,roomId) => {
+        if(rooms < 1) {
+            this.selectedRoomsId[i] = null;
+            return false;
+        }
         this.roomsPrice[i] = 0;
         this.roomsSelected[i] = 0;
         this.roomsGuests[i] = 0;
@@ -287,11 +294,12 @@ export class HotelDetailsComponent implements OnInit {
         let roomsObj = {
             roomId: roomId,
             roomsCount: this.roomsSelected[i],
-            price: this.roomsPrice[i]
+            price: price,
+            roomGuests:guests
         }
         
         this.selectedRoomsId[i] = roomsObj;
-        console.log('roomsinfo',this.selectedRoomsId);
+        console.log('roomsObj', roomsObj);
         this.totalRoomsPrice = this.roomsPrice.reduce(this.getSum);
         this.totalRoomsSelected = this.roomsSelected.reduce(this.getSum);
         this.totalRoomsGuests = this.roomsGuests.reduce(this.getSum);

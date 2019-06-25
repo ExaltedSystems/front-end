@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="banner d-flex align-items-center" *ngIf="page_info.image">
+<div class="banner d-flex align-items-center" *ngIf="page_info && page_info.image">
     <img class="img-fluid" src="{{ baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image }}">
 
     <!-- <div class="page-search">

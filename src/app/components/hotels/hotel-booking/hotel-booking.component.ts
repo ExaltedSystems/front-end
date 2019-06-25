@@ -4,6 +4,8 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
 import { MainService } from 'src/app/services/main.service';
 import { CookieService } from 'ngx-cookie-service';
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
+import { isObject } from 'util';
 
 @Component({
   selector: 'app-hotel-booking',
@@ -34,6 +36,12 @@ export class HotelBookingComponent implements OnInit {
   totalPrice;
   totalGuests;
 
+  currentYear = new Date().getFullYear();
+  currentMonth = new Date().getMonth();
+  monthsNames = [{"name": "January", "value": 0}, {"name": "February", "value": 1}, {"name": "March", "value": 2}, {"name": "April", "value": 3}, {"name": "May", "value": 4}, {"name": "June", "value": 5}, {"name": "July", "value": 6}, {"name": "August", "value": 7}, {"name": "September", "value": 8}, {"name": "October", "value": 9}, {"name": "November", "value": 10}, {"name": "December", "value": 11}];
+  monthItems = [];
+  yearItems = [];
+
   myRooms: any;
 
   isLinear = true;
@@ -47,7 +55,10 @@ export class HotelBookingComponent implements OnInit {
 
   bookingComplete: boolean = false;
 
-  constructor(private _ms: MainService, private _cookieService: CookieService, private __fb: FormBuilder) { }
+  constructor(private _ms: MainService, private _cookieService: CookieService, private __fb: FormBuilder,
+    private __router: Router) {
+      window.scroll(0, 300);
+    }
 
   ngOnInit() {
     // get search query
@@ -108,10 +119,11 @@ export class HotelBookingComponent implements OnInit {
       title: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', Validators.required],
       confirmEmail: ['', Validators.required],
       bookingFor: ['', Validators.required],
-      phone: ['', Validators.required],
+      // phone: ['', Validators.required],
       rentACar: [''],
       
     });
@@ -128,13 +140,27 @@ export class HotelBookingComponent implements OnInit {
       address: ['', Validators.required],
     });
 
+    // years list
+    for (let i = 0; i < 10; i++) {      
+      this.yearItems.push({"value": this.currentYear + i});
+    }
+    // months list
+    for (let j = 0; j < this.monthsNames.length; j++) {
+      if(j >= this.currentMonth){
+        this.monthItems.push(this.monthsNames[j]);
+      }
+    }
+
   } //
 
   getSelectedRooms = () => {
     this.roomsInfo = this.bookingInfo['roomsInfo'];
+    console.log('rommsInfo:', this.roomsInfo)
     for (let i = 0; i < this.roomsInfo.length; i++) {
-      let id = this.roomsInfo[i].roomId;
-      this.room_ids.push(id);
+      if(isObject(this.roomsInfo[i])) {
+        let id = this.roomsInfo[i].roomId;
+        this.room_ids.push(id);
+      }
     }
     let reservedRooms = {
       hotel_id: this.hotelId,
@@ -192,6 +218,7 @@ export class HotelBookingComponent implements OnInit {
     }
     else{
       this.bookingErrorMsg = "Please Fill All Required Fields";
+      this.bookingInfoFrom.controls['bookingFor'].markAsTouched();
     }
   }
 
@@ -225,7 +252,8 @@ export class HotelBookingComponent implements OnInit {
 
     console.log('confirm', bookingObj)
     this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/bookingRequest', bookingObj).subscribe(result => {
-      console.log('responce',result)
+      this._cookieService.set('bookingId', JSON.stringify(result));
+      this.__router.navigate(['/hotel-voucher']);
     })
     
   }

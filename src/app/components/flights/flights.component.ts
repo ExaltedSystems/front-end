@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class FlightsComponent implements OnInit {
   page_info: any = { name: '', description: '' };
-  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) { }
+  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) {
+    window.scroll(0, 300);
+  }
 
   ngOnInit() {
     console.log(this.__router)

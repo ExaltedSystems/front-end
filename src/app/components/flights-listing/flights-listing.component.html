@@ -25,223 +25,13 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-primary btn-sm rounded-0 shadow" (click)="mChangeSearch = true">Change Search</button>
+                    <button class="btn btn-primary btn-sm rounded-0 shadow" (click)="mChangeSearch = true">Change
+                        Search</button>
                 </div>
             </div>
 
         </sticky>
 
-        <mat-sidenav-container class="example-container">
-            <mat-sidenav mode="side" opened="{{mChangeSearch}}">
-                <h3 class="sidebar-title">
-                    Modify Your Search
-                    <i-x-circle class="dropdown-feather" (click)="mChangeSearch = false"></i-x-circle>
-                </h3>
-
-                <form [formGroup]="flightSearch" class="flight-search-form" (submit)="searchFlights(flightSearch.value)">
-                    <mat-radio-group class="d-block my-2" formControlName="flightType" (change)="setFlightType($event)">
-                        <mat-radio-button class="mr-3" value="Return"> Return</mat-radio-button>
-                        <mat-radio-button value="OneWay"> One Way</mat-radio-button>
-                    </mat-radio-group>
-                    <div class="form-group mobile-form-group">
-                        <div class="input-group shadow shadow-xs-none">
-                            <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
-                                <span class="input-group-text rounded-0">
-                  <i-map-pin></i-map-pin>
-                </span>
-                            </div>
-                            <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                                <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (keyup)="filterFlyingFrom($event)">
-                                <mat-autocomplete #flyingFromAuto="matAutocomplete">
-                                    <mat-option *ngFor="let sector of flyingFromSectors | async" [value]="sector">
-                                        {{sector}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingFrom').value" (click)="flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
-                            </mat-form-field>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group mobile-form-group">
-                        <div class="input-group shadow shadow-xs-none">
-                            <div class="input-group-prepend mb-4 mb-sm-0 shadow shadow-sm-none">
-                                <span class="input-group-text rounded-0">
-                    <i-map-pin></i-map-pin>
-                  </span>
-                            </div>
-                            <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                                <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (keyup)="filterFlyingTo($event)">
-                                <mat-autocomplete #flyingToAuto="matAutocomplete">
-                                    <mat-option *ngFor="let sector of flyingToSectors | async" [value]="sector">
-                                        {{sector}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group shadow">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text rounded-0">
-                  <i-calendar (click)="departureDate.open()"></i-calendar>
-                </span>
-                            </div>
-                            <mat-form-field class="form-control material-input">
-                                <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open()" class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
-                                <mat-datepicker touchUi #departureDate></mat-datepicker>
-                            </mat-form-field>
-
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group shadow">
-
-                            <div class="input-group-prepend" (click)="returnDate.open()" [hidden]="!isReturn">
-                                <span class="input-group-text rounded-0">
-                    <i-calendar></i-calendar>
-                  </span>
-                            </div>
-                            <mat-form-field class="form-control material-input" [hidden]="!isReturn">
-                                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open()" class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
-                                <mat-datepicker touchUi #returnDate></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="form-group mobile-form-group">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="input-group dropdown shadow mb-4 mb-sm-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text rounded-0">
-                      <i-users></i-users>
-                    </span>
-                                    </div>
-                                    <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
-                    <small class="d-block">No of Passenger</small>
-                    <p class="d-inline-block mb-0">{{adults}} Adult, {{children}} Child, {{infant}} Infant</p>
-                    <i-chevron-down class="dropdown-feather"></i-chevron-down>
-                  </button>
-                                    <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
-                                        <div class="form-group">
-                                            <div class="input-group mb-3 text-center">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('adults')">
-                            <i-minus class="dropdown-feather"></i-minus>
-                          </button>
-                                                </div>
-                                                <span class="form-control">{{adults}} Adults</span>
-                                                <input formControlName="adults" type="hidden" value="{{adults}}">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('adults')">
-                            <i-plus class="dropdown-feather"></i-plus>
-                          </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group mb-3 text-center">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('children')">
-                            <i-minus class="dropdown-feather"></i-minus>
-                          </button>
-                                                </div>
-                                                <span class="form-control">{{children}} Children</span>
-                                                <input formControlName="children" type="hidden" value="0">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('children')">
-                            <i-plus class="dropdown-feather"></i-plus>
-                          </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group mb-3 text-center">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('infant')">
-                            <i-minus class="dropdown-feather"></i-minus>
-                          </button>
-                                                </div>
-                                                <span class="form-control">{{infant}} Infant</span>
-                                                <input formControlName="infant" type="hidden" value="0">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('infant')">
-                            <i-plus class="dropdown-feather"></i-plus>
-                          </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="float-right" (click)="closeDropDown($event)">
-                                            <i-check class="dropdown-feather text-success float-left m-1"></i-check>
-                                            <span class="float-right">Done</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="input-group dropdown shadow mb-4 mb-sm-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text rounded-0">
-                      <i-plus></i-plus>
-                    </span>
-                                    </div>
-                                    <!-- <input type="text" class="form-control border-left-0 rounded-0" placeholder="More Options"> -->
-                                    <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown">More Options
-                    <i-chevron-down class="dropdown-feather"></i-chevron-down>
-                  </button>
-                                    <div class="dropdown-menu shadow rounded-0 p-3 pb-0" aria-labelledby="dropdownMenuLink" (click)="$event.stopPropagation()">
-                                        <div class="form-group">
-                                            <div class="input-group mb-3 text-center">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text rounded-0">
-                            <i-send></i-send>
-                          </span>
-
-                                                </div>
-
-                                                <input type="text" class="form-control border-left-0 rounded-0" formControlName="PreferredAirline" placeholder="Prefered Airline" [matAutocomplete]="airlinesAutoComplete" (keyup)="filterAirlines($event)">
-
-                                                <mat-autocomplete #airlinesAutoComplete="matAutocomplete">
-                                                    <mat-option *ngFor="let airline of prefAirline | async" [value]="airline">
-                                                        {{airline}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('PreferredAirline').value" (click)="flightSearch.get('PreferredAirline').setValue('')"></i-x-circle>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group mb-3 text-center">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text rounded-0">
-                            <i-award></i-award>
-                          </span>
-                                                </div>
-                                                <mat-form-field class="form-control border-left-0 rounded-0">
-                                                    <mat-select formControlName="preferredClass" placeholder="Preferred Class">
-                                                        <mat-option *ngFor="let option of cabin" [value]="option.value">
-                                                            {{option.label}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                                <!-- <input type="text" class="form-control border-left-0 rounded-0" placeholder="Prefered Class"> -->
-                                            </div>
-                                        </div>
-                                        <!-- <div class="dropdown-divider"></div>
-            <button class="btn btn-primary btn-sm float-right rounded-0 shadow">Done</button> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary shadow rounded-0 search-flight-btn">Search Flights</button>
-                </form>
-            </mat-sidenav>
-        </mat-sidenav-container>
 
         <mat-sidenav-container class="example-container">
             <mat-sidenav mode="side" opened="{{msideNav}}">
@@ -310,7 +100,8 @@
                                             <i-map-pin class="feather"></i-map-pin>
                                         </div>
                                         <div>
-                                            <p class="mb-0">{{Segment.DepartureAirport.LocationCode | airPorts: '1'}}</p>
+                                            <p class="mb-0">{{Segment.DepartureAirport.LocationCode | airPorts: '1'}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -322,8 +113,9 @@
                                 <div class="col-8 pl-0 d-flex justify-content-between align-items-center">
                                     <div>
                                         <small class="text-muted d-flex align-items-center">
-                      <i-clock class="feather"></i-clock> &nbsp;{{Segment.ElapsedTime | secondsPipe}}
-                    </small>
+                                            <i-clock class="feather"></i-clock>
+                                            &nbsp;{{Segment.ElapsedTime | secondsPipe}}
+                                        </small>
                                     </div>
                                     <div>
                                         <p class="mb-0 text-primary">{{Segment.StopQuantity}} Stop</p>
@@ -384,143 +176,7 @@
                     <h1>Flight Search</h1>
                 </div>
 
-                <form [formGroup]="flightSearch" class="home-flight-search-form" (submit)="changeSearch(flightSearch.value)">
-                    <div class="current-flight-search shadow d-none d-sm-flex justify-content-between align-items-center mb-3" (click)="editMode=true">
-                        <!-- <div class="" *ngIf="editMode">
-                            <mat-radio-group class="d-block my-2" formControlName="flightType" (change)="setFlightType($event)">
-                                <mat-radio-button class="mr-3" value="Return"> Return</mat-radio-button>
-                                <mat-radio-button value="OneWay"> One Way</mat-radio-button>
-                            </mat-radio-group>
-                        </div> -->
-                        <div class="w-100 current-search-sector d-flex align-items-center">
-
-                            <div class="col-sm-6 col-5 pr-0">
-                                <p>{{oLocation | airPorts}}</p>
-                                <!-- <span *ngIf="editMode">
-                  <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                    <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto"
-                      (keyup)="filterFlyingFrom($event)">
-                    <mat-autocomplete #flyingFromAuto="matAutocomplete">
-                      <mat-option *ngFor="let sector of flyingFromSectors | async" [value]="sector">
-                        {{sector}}
-                      </mat-option>
-                    </mat-autocomplete>
-                    <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingFrom').value" (click)="flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
-                  </mat-form-field>
-                </span> -->
-                            </div>
-                            <div class="col-sm-2 col-2 text-center">
-                                <i-arrow-right class="feather mt-2"></i-arrow-right>
-                            </div>
-                            <div class="col-sm-6 col-5 pl-0">
-                                <p>{{dLocation | airPorts}}</p>
-                                <!-- <span *ngIf="editMode">
-                  <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                    <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto"
-                      (keyup)="filterFlyingTo($event)">
-                    <mat-autocomplete #flyingToAuto="matAutocomplete">
-                      <mat-option *ngFor="let sector of flyingToSectors | async" [value]="sector">
-                        {{sector}}
-                      </mat-option>
-                    </mat-autocomplete>
-                    <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
-                  </mat-form-field>
-                </span> -->
-                            </div>
-                        </div>
-                        <div class="col-sm-3 w-50 d-flex justify-content-center align-items-center">
-                            <div class="current-search-dates d-flex align-items-center">
-                                <i-calendar class="feather" _nghost-c13=""></i-calendar>
-                                <p class="mr-3">{{dptDate | date}}</p>
-                                <!-- <span *ngIf="editMode">
-                  <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
-                    <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open()"
-                      class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
-                    <mat-datepicker touchUi #departureDate></mat-datepicker>
-                  </mat-form-field>
-                </span> -->
-                            </div>
-                        </div>
-                        <div *ngIf="isReturn" class="w-50 d-flex justify-content-center align-items-center">
-                            <div class="current-search-dates d-flex align-items-center">
-                                <i-calendar class="feather" _nghost-c13=""></i-calendar>
-                                <p class="mr-3">{{rtnDate | date}}</p>
-                                <!-- <span *ngIf="editMode">
-                  <mat-form-field class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none"
-                    [hidden]="!isReturn">
-                    <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open()"
-                      class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
-                    <mat-datepicker touchUi #returnDate></mat-datepicker>
-                  </mat-form-field>
-                </span> -->
-                                <p></p>
-                            </div>
-                        </div>
-                        <div class="w-50">
-                            <p class="current-search-passenger text-center" data-toggle="dropdown" id="flightPaxDropdownMenu">{{adtQty}} Adult(s), {{cnnQty}} Child, {{infQty}} Infant</p>
-                            <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
-                                <div class="form-group">
-                                    <div class="input-group mb-3 text-center">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('adults')">
-                        <i-minus class="dropdown-feather"></i-minus>
-                      </button>
-                                        </div>
-                                        <span class="form-control">{{adtQty}} Adults</span>
-                                        <input formControlName="adults" type="hidden" value="{{adtQty}}">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('adults')">
-                        <i-plus class="dropdown-feather"></i-plus>
-                      </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group mb-3 text-center">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('children')">
-                        <i-minus class="dropdown-feather"></i-minus>
-                      </button>
-                                        </div>
-                                        <span class="form-control">{{cnnQty}} Children</span>
-                                        <input formControlName="children" type="hidden" value="cnnQty">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('children')">
-                        <i-plus class="dropdown-feather"></i-plus>
-                      </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group mb-3 text-center">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('infant')">
-                        <i-minus class="dropdown-feather"></i-minus>
-                      </button>
-                                        </div>
-                                        <span class="form-control">{{infQty}} Infant</span>
-                                        <input formControlName="infant" type="hidden" value="infQty">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('infant')">
-                        <i-plus class="dropdown-feather"></i-plus>
-                      </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <a class="float-right" (click)="closeDropDown($event)">
-                                    <i-check class="dropdown-feather text-success float-left m-1"></i-check>
-                                    <span class="float-right">Done</span>
-                                </a>
-                            </div>
-
-                        </div>
-                        <!-- <div class="">
-                            <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
-                        </div> -->
-                    </div>
-                </form>
-
+                <app-flights-search></app-flights-search>
                 <div class="row">
                     <div class="col-sm-3 d-none d-sm-block">
                         <div class="sidebar-list">
@@ -574,31 +230,36 @@
                                                     </div>
                                                     <div class="col-sm-3 px-2">
                                                         <h5><span *ngFor="let flgtSegment of Segment.FlightSegment">{{flgtSegment.DepartureAirport.LocationCode}}
-                                - </span>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode}}
+                                                                -
+                                                            </span>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode}}
                                                         </h5>
                                                         <small class="text-muted d-flex align-items-center">
-                              <i-clock class="feather"></i-clock> &nbsp;{{Segment.ElapsedTime | secondsPipe}}
-                            </small>
+                                                            <i-clock class="feather"></i-clock>
+                                                            &nbsp;{{Segment.ElapsedTime | secondsPipe}}
+                                                        </small>
                                                     </div>
 
                                                     <div class="col-sm-3 px-2 d-flex align-items-start">
 
 
                                                         <div class="d-inline-block">
-                                                            <p>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts}}</p>
+                                                            <p>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts}}
+                                                            </p>
                                                             <small>{{Segment.FlightSegment[0].DepartureDateTime.replace('T', ' ') | date : 'medium'}}</small>
                                                         </div>
 
                                                     </div>
                                                     <div class="col-sm-2 px-2 text-center">
                                                         <img alt="" class="d-inline-block pt-1 pr-2" src="assets/img/icons/flight_to-ic.png">
-                                                        <p class="text-primary">{{Segment.FlightSegment[0].StopQuantity}} Stop</p>
+                                                        <p class="text-primary">
+                                                            {{Segment.FlightSegment[0].StopQuantity}} Stop</p>
                                                     </div>
 
                                                     <div class="col-sm-3 px-2  d-flex align-items-start">
 
                                                         <div class="d-inline-block">
-                                                            <p>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts}}</p>
+                                                            <p>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts}}
+                                                            </p>
                                                             <small>{{Segment.FlightSegment[(Segment.FlightSegment.length -
                                 1)].ArrivalDateTime.replace('T', ' ') | date : 'medium'}}</small>
                                                         </div>
@@ -624,19 +285,20 @@
                                         <div class="book-details d-flex">
                                             <a class="d-flex align-items-center" (click)="flightDetailsToggle($event)" data-toggle="collapse" href="#showFlightDetails-{{i}}" role="button">
                                                 <span id="plus_{{i}}">
-                          <i-plus-circle></i-plus-circle>&nbsp;View Details
-                        </span>
+                                                    <i-plus-circle></i-plus-circle>&nbsp;View Details
+                                                </span>
                                                 <span id="minus_{{i}}" style="display:none">
-                          <i-minus-circle></i-minus-circle>&nbsp;Hide Details
-                        </span>
+                                                    <i-minus-circle></i-minus-circle>&nbsp;Hide Details
+                                                </span>
                                             </a>
                                             <button class="flight-select-btn d-flex btn btn-primary rounded-0 border-0 px-5 py-2 ml-2" (click)="airByTag(Itinerary.TPA_Extensions.TagID, i)">Select
-                        <i-arrow-right class="feather"></i-arrow-right>
-                      </button>
+                                                <i-arrow-right class="feather"></i-arrow-right>
+                                            </button>
                                             <b class="price font-weight-bold d-flex pl-3 pr-3 align-items-center">
-                        {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
-                        {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}} /-
-                      </b>
+                                                {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
+                                                {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}}
+                                                /-
+                                            </b>
                                         </div>
                                     </div>
 
@@ -658,7 +320,8 @@
                                                     <div class="col-sm-2">
                                                         <div class="d-inline-block text-center">
                                                             <img class="img-fluid" src="https://www.rehmantravel.com/application/modules/RT-agent/AirlineLogos/{{eachSegment.OperatingAirline.Code}}.png" alt="EY Logo">
-                                                            <p class="mb-0">{{eachSegment.OperatingAirline.Code}} {{eachSegment.FlightNumber}}</p>
+                                                            <p class="mb-0">{{eachSegment.OperatingAirline.Code}} {{eachSegment.FlightNumber}}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
@@ -667,7 +330,9 @@
                                                                 <i-map-pin class="feather"></i-map-pin>
                                                             </div>
                                                             <div>
-                                                                <p class="mb-0">{{eachSegment.DepartureAirport.LocationCode | airPorts}}</p>
+                                                                <p class="mb-0">
+                                                                    {{eachSegment.DepartureAirport.LocationCode | airPorts}}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div class="d-flex justify-contents-between">
@@ -691,14 +356,17 @@
                                                                 <i-map-pin class="feather"></i-map-pin>
                                                             </div>
                                                             <div>
-                                                                <p class="mb-0">{{eachSegment.DepartureAirport.LocationCode | airPorts: '1'}}</p>
+                                                                <p class="mb-0">
+                                                                    {{eachSegment.DepartureAirport.LocationCode | airPorts: '1'}}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <small class="text-muted d-flex align-items-center">
-                              <i-clock class="feather"></i-clock> &nbsp;{{eachSegment.ElapsedTime | secondsPipe}}
-                            </small>
+                                                            <i-clock class="feather"></i-clock>
+                                                            &nbsp;{{eachSegment.ElapsedTime | secondsPipe}}
+                                                        </small>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="d-flex justify-contents-between">
@@ -706,7 +374,9 @@
                                                                 <i-map-pin class="feather"></i-map-pin>
                                                             </div>
                                                             <div>
-                                                                <p class="mb-0">{{eachSegment.ArrivalAirport.LocationCode | airPorts}}</p>
+                                                                <p class="mb-0">
+                                                                    {{eachSegment.ArrivalAirport.LocationCode | airPorts}}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div class="d-flex justify-contents-between">
@@ -730,7 +400,9 @@
                                                                 <i-map-pin class="feather"></i-map-pin>
                                                             </div>
                                                             <div>
-                                                                <p class="mb-0">{{eachSegment.ArrivalAirport.LocationCode | airPorts: '1'}}</p>
+                                                                <p class="mb-0">
+                                                                    {{eachSegment.ArrivalAirport.LocationCode | airPorts: '1'}}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -738,7 +410,8 @@
                                                         <p class="text-primary">{{eachSegment.StopQuantity}} Stop</p>
                                                     </div>
                                                 </div>
-                                                <div *ngIf="eachSegment.StopQuantity > 0" class="stop_{{eachSegment.StopQuantity}}" style="display:none;">&nbsp;</div>
+                                                <div *ngIf="eachSegment.StopQuantity > 0" class="stop_{{eachSegment.StopQuantity}}" style="display:none;">
+                                                    &nbsp;</div>
                                             </div>
                                         </div>
                                     </div>
@@ -763,18 +436,21 @@
                                                             </div>
                                                             <div class="col-sm-3 px-2">
                                                                 <h5><span *ngFor="let flgtSegment of Segment.FlightSegment">{{flgtSegment.DepartureAirport.LocationCode}}
-                                    - </span>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode}}
+                                                                        -
+                                                                    </span>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode}}
                                                                 </h5>
                                                                 <small class="text-muted d-flex align-items-center">
-                                  <i-clock class="feather"></i-clock> &nbsp;{{Segment.ElapsedTime | secondsPipe}}
-                                </small>
+                                                                    <i-clock class="feather"></i-clock>
+                                                                    &nbsp;{{Segment.ElapsedTime | secondsPipe}}
+                                                                </small>
                                                             </div>
 
                                                             <div class="col-sm-3 px-2 d-flex align-items-start">
 
 
                                                                 <div class="d-inline-block">
-                                                                    <p>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts}}</p>
+                                                                    <p>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts}}
+                                                                    </p>
                                                                     <small>{{Segment.FlightSegment[0].DepartureDateTime.replace('T', ' ') | date :
                                     'medium'}}</small>
                                                                 </div>
@@ -782,13 +458,15 @@
                                                             </div>
                                                             <div class="col-sm-2 px-2 text-center">
                                                                 <img alt="" class="d-inline-block pt-1 pr-2" src="assets/img/icons/flight_to-ic.png">
-                                                                <p class="text-primary">{{Segment.FlightSegment[0].StopQuantity}} Stop</p>
+                                                                <p class="text-primary">
+                                                                    {{Segment.FlightSegment[0].StopQuantity}} Stop</p>
                                                             </div>
 
                                                             <div class="col-sm-3 px-2  d-flex align-items-start">
 
                                                                 <div class="d-inline-block">
-                                                                    <p>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts}}</p>
+                                                                    <p>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts}}
+                                                                    </p>
                                                                     <small>{{Segment.FlightSegment[(Segment.FlightSegment.length -
                                     1)].ArrivalDateTime.replace('T', ' ') | date : 'medium'}}</small>
                                                                 </div>
@@ -813,19 +491,20 @@
                                                 <div class="book-details d-flex">
                                                     <a class="d-flex align-items-center" (click)="flightDetailsToggle($event)" data-toggle="collapse" href="#showFlightDetails-{{k + Offset}}" role="button">
                                                         <span id="plus_{{k + Offset}}">
-                              <i-plus-circle></i-plus-circle>&nbsp;View Details
-                            </span>
+                                                            <i-plus-circle></i-plus-circle>&nbsp;View Details
+                                                        </span>
                                                         <span id="minus_{{k + Offset}}" style="display:none">
-                              <i-minus-circle></i-minus-circle>&nbsp;Hide Details
-                            </span>
+                                                            <i-minus-circle></i-minus-circle>&nbsp;Hide Details
+                                                        </span>
                                                     </a>
                                                     <button class="flight-select-btn d-flex btn btn-primary rounded-0 border-0 px-5 py-2 ml-2" (click)="airByTag(Itinerary.TPA_Extensions.TagID, (k + Offset))">Select
-                            <i-arrow-right class="feather"></i-arrow-right>
-                          </button>
+                                                        <i-arrow-right class="feather"></i-arrow-right>
+                                                    </button>
                                                     <b class="price font-weight-bold d-flex pl-3 pr-3 align-items-center">
-                            {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
-                            {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}} /-
-                          </b>
+                                                        {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
+                                                        {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}}
+                                                        /-
+                                                    </b>
                                                 </div>
                                             </div>
 
@@ -847,7 +526,9 @@
                                                             <div class="col-sm-2">
                                                                 <div class="d-inline-block text-center">
                                                                     <img class="img-fluid" src="https://www.rehmantravel.com/application/modules/RT-agent/AirlineLogos/{{eachSegment.OperatingAirline.Code}}.png" alt="EY Logo">
-                                                                    <p class="mb-0">{{eachSegment.OperatingAirline.Code}} {{eachSegment.FlightNumber}}</p>
+                                                                    <p class="mb-0">
+                                                                        {{eachSegment.OperatingAirline.Code}} {{eachSegment.FlightNumber}}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-3">
@@ -856,7 +537,9 @@
                                                                         <i-map-pin class="feather"></i-map-pin>
                                                                     </div>
                                                                     <div>
-                                                                        <p class="mb-0">{{eachSegment.DepartureAirport.LocationCode | airPorts}}</p>
+                                                                        <p class="mb-0">
+                                                                            {{eachSegment.DepartureAirport.LocationCode | airPorts}}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex justify-contents-between">
@@ -880,14 +563,17 @@
                                                                         <i-map-pin class="feather"></i-map-pin>
                                                                     </div>
                                                                     <div>
-                                                                        <p class="mb-0">{{eachSegment.DepartureAirport.LocationCode | airPorts: '1'}}</p>
+                                                                        <p class="mb-0">
+                                                                            {{eachSegment.DepartureAirport.LocationCode | airPorts: '1'}}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <small class="text-muted d-flex align-items-center">
-                                  <i-clock class="feather"></i-clock> &nbsp;{{eachSegment.ElapsedTime | secondsPipe}}
-                                </small>
+                                                                    <i-clock class="feather"></i-clock>
+                                                                    &nbsp;{{eachSegment.ElapsedTime | secondsPipe}}
+                                                                </small>
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="d-flex justify-contents-between">
@@ -895,7 +581,9 @@
                                                                         <i-map-pin class="feather"></i-map-pin>
                                                                     </div>
                                                                     <div>
-                                                                        <p class="mb-0">{{eachSegment.ArrivalAirport.LocationCode | airPorts}}</p>
+                                                                        <p class="mb-0">
+                                                                            {{eachSegment.ArrivalAirport.LocationCode | airPorts}}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex justify-contents-between">
@@ -919,12 +607,15 @@
                                                                         <i-map-pin class="feather"></i-map-pin>
                                                                     </div>
                                                                     <div>
-                                                                        <p class="mb-0">{{eachSegment.ArrivalAirport.LocationCode | airPorts: '1'}}</p>
+                                                                        <p class="mb-0">
+                                                                            {{eachSegment.ArrivalAirport.LocationCode | airPorts: '1'}}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <p class="text-primary">{{eachSegment.StopQuantity}} Stop</p>
+                                                                <p class="text-primary">{{eachSegment.StopQuantity}} Stop
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div *ngIf="eachSegment.StopQuantity > 0" class="stop_{{eachSegment.StopQuantity}}" style="display:none;">&nbsp;</div>
@@ -937,9 +628,9 @@
                                 </div>
                             </div>
                             <!-- desktop listing end -->
-                            <div class="loadingMore center" style="display:none;">
+                            <!-- <div class="loadingMore center" style="display:none;">
                                 <h4>Loading More Flights . . .</h4>
-                            </div>
+                            </div> -->
 
                             <!-- mobile listing start -->
                             <div class="d-block d-sm-none" *ngFor="let Itinerary of availableFlights; let i=index;">
@@ -969,7 +660,8 @@
                                         <div class="d-flex row align-items-center pb-2 px-3" *ngFor="let Segment of Itinerary.AirItinerary.OriginDestinationOptions.OriginDestinationOption; let l=last">
 
                                             <div class="col-5">
-                                                <h5>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts: '2'}}</h5>
+                                                <h5>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts: '2'}}
+                                                </h5>
                                                 <small class="d-block">{{Segment.FlightSegment[0].DepartureDateTime.replace('T', ' ') | date :
                           'medium'}}</small>
                                                 <!-- <small class="d-block">7:05 AM</small> -->
@@ -977,18 +669,21 @@
                                             <div class="text-center col-2 px-0">
                                                 <div class="text-center">
                                                     <small class="text-muted d-flex align-items-center" style="font-size:10px;">
-                            <i-clock class="feather"></i-clock>{{Segment.ElapsedTime | secondsPipe}}
-                          </small>
+                                                        <i-clock class="feather"></i-clock>
+                                                        {{Segment.ElapsedTime | secondsPipe}}
+                                                    </small>
                                                 </div>
                                                 <div class="text-center">
                                                     <img alt="Flight Sector Icon" class="img-fluid" src="assets/img/icons/flight_to-ic.png">
                                                 </div>
                                                 <div class="text-center">
-                                                    <p class="text-primary">{{Segment.FlightSegment[0].StopQuantity}} Stop</p>
+                                                    <p class="text-primary">{{Segment.FlightSegment[0].StopQuantity}} Stop
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="col-5">
-                                                <h5>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts: '2'}}</h5>
+                                                <h5>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts: '2'}}
+                                                </h5>
                                                 <small class="d-block">{{Segment.FlightSegment[(Segment.FlightSegment.length -
                           1)].DepartureDateTime.replace('T', ' ') | date : 'medium'}}</small>
                                                 <!-- <small class="d-block">4:10 PM</small> -->
@@ -1010,12 +705,13 @@
                                                     <i-plus-circle></i-plus-circle>&nbsp;Details
                                                 </a>
                                                 <button class="flight-select-btn d-flex btn btn-primary rounded-0 border-0 p-2 px-4 ml-2" (click)="airByTag(Itinerary.TPA_Extensions.TagID, i, 'MS')">Select
-                          <i-arrow-right class="feather"></i-arrow-right>
-                        </button>
+                                                    <i-arrow-right class="feather"></i-arrow-right>
+                                                </button>
                                                 <!----><b class="price font-weight-bold d-flex align-items-center pl-3 pr-3">
-                          {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
-                          {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}} /-
-                        </b>
+                                                    {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
+                                                    {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}}
+                                                    /-
+                                                </b>
                                             </div>
                                         </div>
 
@@ -1052,7 +748,8 @@
                                                 <div class="d-flex row align-items-center pb-2 px-3" *ngFor="let Segment of Itinerary.AirItinerary.OriginDestinationOptions.OriginDestinationOption; let l=last">
 
                                                     <div class="col-5">
-                                                        <h5>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts: '2'}}</h5>
+                                                        <h5>{{Segment.FlightSegment[0].DepartureAirport.LocationCode | airPorts: '2'}}
+                                                        </h5>
                                                         <small class="d-block">{{Segment.FlightSegment[0].DepartureDateTime.replace('T', ' ') | date :
                               'medium'}}</small>
                                                         <!-- <small class="d-block">7:05 AM</small> -->
@@ -1060,18 +757,21 @@
                                                     <div class="text-center col-2 px-0">
                                                         <div class="text-center">
                                                             <small class="text-muted d-flex align-items-center" style="font-size:10px;">
-                                <i-clock class="feather"></i-clock>{{Segment.ElapsedTime | secondsPipe}}
-                              </small>
+                                                                <i-clock class="feather"></i-clock>
+                                                                {{Segment.ElapsedTime | secondsPipe}}
+                                                            </small>
                                                         </div>
                                                         <div class="text-center">
                                                             <img alt="Flight Sector Icon" class="img-fluid" src="assets/img/icons/flight_to-ic.png">
                                                         </div>
                                                         <div class="text-center">
-                                                            <p class="text-primary">{{Segment.FlightSegment[0].StopQuantity}} Stop</p>
+                                                            <p class="text-primary">
+                                                                {{Segment.FlightSegment[0].StopQuantity}} Stop</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-5">
-                                                        <h5>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts: '2'}}</h5>
+                                                        <h5>{{Segment.FlightSegment[(Segment.FlightSegment.length - 1)].ArrivalAirport.LocationCode | airPorts: '2'}}
+                                                        </h5>
                                                         <small class="d-block">{{Segment.FlightSegment[(Segment.FlightSegment.length -
                               1)].DepartureDateTime.replace('T', ' ') | date : 'medium'}}</small>
                                                         <!-- <small class="d-block">4:10 PM</small> -->
@@ -1081,7 +781,8 @@
                                                 <!---->
 
                                                 <div id="isValidatingM_{{j + Offset}}" style="display:none" class="center">
-                                                    <span id="isValidatingMsgM_{{j + Offset}}">Checking Information</span>
+                                                    <span id="isValidatingMsgM_{{j + Offset}}">Checking
+                                                        Information</span>
                                                     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                                                 </div>
                                                 <div class="segment-footer pl-3 d-flex justify-content-between align-items-center">
@@ -1093,12 +794,13 @@
                                                             <i-plus-circle></i-plus-circle>&nbsp;Details
                                                         </a>
                                                         <button class="flight-select-btn d-flex btn btn-primary rounded-0 border-0 p-2 px-4 ml-2" (click)="airByTag(Itinerary.TPA_Extensions.TagID, (j + Offset), 'MS')">Select
-                              <i-arrow-right class="feather"></i-arrow-right>
-                            </button>
+                                                            <i-arrow-right class="feather"></i-arrow-right>
+                                                        </button>
                                                         <!----><b class="price font-weight-bold d-flex align-items-center pl-3 pr-3">
-                              {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
-                              {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}} /-
-                            </b>
+                                                            {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
+                                                            {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}}
+                                                            /-
+                                                        </b>
                                                     </div>
                                                 </div>
 

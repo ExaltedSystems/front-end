@@ -44,6 +44,11 @@ export class FlightBookingComponent implements OnInit {
   cnnStart:number = 1;
   infStart:number = 1;
 
+  bankDetails: any;
+  branchesDetails: any;
+  // Set Document Type For Ticket (i.e. P if Number is < 10 else F)
+  selectedDocType:string;
+
   isLinear = true;
   @Input('form') form: NgForm;
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
@@ -70,16 +75,23 @@ export class FlightBookingComponent implements OnInit {
   segmentInfoArr = [];
   referenceNo:string;
   currDate = new Date();
+  
+  // dt = new Date();
+  // minDocExpiryDate = new Date(this.dt.setDate(this.dt.getDate() + 180 ));
+  minDocExpiryDate = new Date();
+
   maxPickerDate = [];
   minPickerDate = [];
   
   validatingCarrier:string;
   postPsgrs;
   fareRules = null;
-  constructor(private __fb: FormBuilder, private __actRouter:ActivatedRoute, private __router: Router, private __ms:MainService, private __datepipe: DatePipe) { }
+  constructor(private __fb: FormBuilder, private __actRouter:ActivatedRoute, private __router: Router, 
+    private __ms:MainService, private __datepipe: DatePipe) {
+      window.scroll(0, 300);
+    }
 
   ngOnInit() {
-    // console.log(this.currentYear)
     // this.flightInfo = this.__ms.FlightInfo;
     this.flightInfo = JSON.parse(localStorage.getItem('flightInfo'));
     this.adtQty = Number(this.flightInfo.adults);
@@ -224,8 +236,14 @@ export class FlightBookingComponent implements OnInit {
         this.monthItems.push(this.monthsNames[j]);
       }
     }
-    
-  }
+    this.__ms.getBankDetails().subscribe(res => {
+      this.bankDetails = res.data;
+    });
+
+    this.__ms.getBranchesDetails().subscribe(res => {
+      this.branchesDetails = res.data;      
+    });
+  }// end oninit
 
   getValidDobDate = function(t) {
     var n = new Date(this.flightInfo.dptDate),
@@ -234,13 +252,19 @@ export class FlightBookingComponent implements OnInit {
   }
 
   changeDocType(ev){
-    if(ev.value == 'P'){
-      this.docNumPlaceholder = 'Passport #';
-      this.docExpPlaceholder = 'Passport Expiry Date';
-    }else if(ev.value == 'F'){
-      this.docNumPlaceholder = 'CNIC #';
-      this.docExpPlaceholder = 'CNIC Expiry Date';
+    let docValue = ev.target.value;
+    if(docValue.length < 10){
+      this.selectedDocType = "P";
+    } else {
+      this.selectedDocType = "F";
     }
+    // if(ev.value == 'P'){
+    //   this.docNumPlaceholder = 'Passport #';
+    //   this.docExpPlaceholder = 'Passport Expiry Date';
+    // }else if(ev.value == 'F'){
+    //   this.docNumPlaceholder = 'CNIC #';
+    //   this.docExpPlaceholder = 'CNIC Expiry Date';
+    // }
   }
 
   airRevalidate(byTagRes){
@@ -324,12 +348,12 @@ export class FlightBookingComponent implements OnInit {
       localStorage.setItem("paxToken", res['jwt']);
       this.referenceNo = res['ref_no'];
     })
-    this.referenceNo = 'RT-000095';
+    // this.referenceNo = 'RT-000095';
     return true;
   }
 
   creditCardPost(formInputs){
-    let creditCardUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/creditCard';
+    let creditCardUrl = this.__ms.backEndUrl+'Ticket/creditCard';
     let reservationObj = Object.assign(formInputs, this.travellersObj, this.segmentInfoArr, {refrenceNo: this.referenceNo});
     this.__ms.postData(creditCardUrl, reservationObj).subscribe(res => {
       console.log(res)
@@ -349,7 +373,7 @@ export class FlightBookingComponent implements OnInit {
       _token: localStorage.getItem("paxToken")
     }
     Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
-    let flightInfoUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retFlightInfo';
+    let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
     this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
       // console.log(res);
       if(res['res_flag'] == true){
@@ -391,7 +415,7 @@ export class FlightBookingComponent implements OnInit {
   } // 
 
   pnrCreated(pnr){
-    let pnrSaveUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/pnrCreated';
+    let pnrSaveUrl = this.__ms.backEndUrl+'Ticket/pnrCreated';
     let pnrSaveObj = {
       pnr: pnr,
       _token: localStorage.getItem("paxToken")

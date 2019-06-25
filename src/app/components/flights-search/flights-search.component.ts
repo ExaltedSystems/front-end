@@ -8,9 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
 declare var jQuery;
 
 @Component({
-  selector: 'app-flights-search',
-  templateUrl: './flights-search.component.html',
-  styleUrls: ['./flights-search.component.css']
+	selector: 'app-flights-search',
+	templateUrl: './flights-search.component.html',
+	styleUrls: ['./flights-search.component.css']
 })
 export class FlightsSearchComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class FlightsSearchComponent implements OnInit {
 	@ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
 	flightSearch: FormGroup;
 
-	flightType: string;
+	flightType: string = "Return";
 	flyingFrom: string = 'ISB,Islamabad,Pakistan';
 	flyingTo: string = 'LHR,London,United Kingdom';
 	departureDate;
@@ -46,12 +46,26 @@ export class FlightsSearchComponent implements OnInit {
 	];
 	frmObj: any;
 	cookieObj;
-	constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute, 
-    private __cookieService: CookieService) { }
+	constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute,
+		private __cookieService: CookieService) { }
 
 	ngOnInit() {
+		if (this.__cookieService.get('srchCookies')) {
+			let cookiesData = JSON.parse(this.__cookieService.get('srchCookies'))
+			this.flightType = cookiesData[0].value;
+			if(cookiesData[0].value == 'OneWay') {this.isReturn = false;}
+			this.flyingFrom = cookiesData[1].value;
+			this.flyingTo = cookiesData[2].value;
+			this.departureDate = cookiesData[3].value;
+			this.returnDate = cookiesData[4].value;
+			this.adults = cookiesData[5].value;
+			this.children = cookiesData[6].value;
+			this.infant = cookiesData[7].value;
+			this.preferredClass = cookiesData[8].value;
+			this.preferredAirline = cookiesData[9].value;
+		}
 		this.flightSearch = this.__fb.group({
-			flightType: ["Return"],
+			flightType: [this.flightType],
 			flyingFrom: ["", Validators.required],
 			flyingTo: ["", Validators.required],
 			departureDate: ["", Validators.required],
@@ -89,7 +103,7 @@ export class FlightsSearchComponent implements OnInit {
 
 	filterFlyingFrom(ev) {
 		this.airlineSectors = this.__ms.locationsJson().pipe(
-		map(sectors => this.__ms.__filterFlyFrom(sectors, ev.target.value)),);
+			map(sectors => this.__ms.__filterFlyFrom(sectors, ev.target.value)));
 	}
 	__filterFlyFrom(sectors, val) {
 		if (val.length > 3) {
@@ -100,7 +114,7 @@ export class FlightsSearchComponent implements OnInit {
 	}
 	filterFlyingTo(ev) {
 		this.flyToSectors = this.__ms.getJsonData('../../assets/js/locations.json')
-		.pipe(map(sectors => this.__filterFlyTo(sectors, ev.target.value)),);
+			.pipe(map(sectors => this.__filterFlyTo(sectors, ev.target.value)));
 	}
 	__filterFlyTo(sectors, val) {
 		if (val.length > 3) {
@@ -112,7 +126,7 @@ export class FlightsSearchComponent implements OnInit {
 
 	filterAirlines(ev) {
 		this.airlinesAuto = this.__ms.getJsonData('../../assets/js/airlines.json').pipe(
-		map(airlines => this.__filterAirlines(airlines, ev.target.value)),
+			map(airlines => this.__filterAirlines(airlines, ev.target.value)),
 		);
 	}
 	__filterAirlines(airlines, val) {
@@ -241,13 +255,17 @@ export class FlightsSearchComponent implements OnInit {
 					cabin: cabin,
 					prefAirline: prefAirline
 				}
-			});     
+			});
 		}
 	}
 
 	closeDropDown(ev) {
 		jQuery(ev.path[2]).removeClass('show');
 		jQuery(ev.path[3]).removeClass('show');
+	}
+	resetMatInput(evt){
+		let attrName = evt.target.getAttribute('formControlName');
+		this.flightSearch.controls[attrName].setValue('');
 	}
 
 }

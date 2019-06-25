@@ -11,7 +11,9 @@ export class ThankYouComponent implements OnInit {
 
   thankYouMsg: string = '';
   queryParams;
-  constructor(private __ms:MainService, private __actRouter:ActivatedRoute) { }
+  constructor(private __ms:MainService, private __actRouter:ActivatedRoute) {
+    window.scroll(0, 300);
+  }
 
   ngOnInit() {
     this.queryParams = this.__actRouter.snapshot.queryParams;

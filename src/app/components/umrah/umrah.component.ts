@@ -10,6 +10,7 @@ import { Meta, Title } from '@angular/platform-browser';
 export class UmrahComponent implements OnInit {
 	page_info: any;
 	constructor(private _ms: MainService, private router: Router, private __meta: Meta, private __title: Title) {
+        window.scroll(0, 300);
 		this.router.routeReuseStrategy.shouldReuseRoute = function () {
 			return false;
 		}

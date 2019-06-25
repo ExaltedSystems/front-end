@@ -11,7 +11,9 @@ export class AboutusComponent implements OnInit {
   page_info: any;
   bankDetails: object;
   aboutUsPdf:string = "http://www.cheapfly.pk/doc/profile-book-version-02April.pdf";
-  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) { }
+  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) {
+    window.scroll(0, 300);    
+  }
 
   ngOnInit() {
     if (this.__router.url != '/bank-details') {
