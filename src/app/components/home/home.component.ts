@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 	@ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
   flightSearch: FormGroup;
   hotelSearch: FormGroup;
-  flightType: string;
+  flightType: string = 'Return';
   flyingFrom: string = 'ISB,Islamabad,Pakistan';
   flyingTo: string = 'LHR,London,United Kingdom';
   departureDate;

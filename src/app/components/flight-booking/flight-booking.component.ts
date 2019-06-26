@@ -47,7 +47,7 @@ export class FlightBookingComponent implements OnInit {
   bankDetails: any;
   branchesDetails: any;
   // Set Document Type For Ticket (i.e. P if Number is < 10 else F)
-  selectedDocType:string;
+  selectedDocType:string = "P";
 
   isLinear = true;
   @Input('form') form: NgForm;
@@ -285,7 +285,7 @@ export class FlightBookingComponent implements OnInit {
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
       dob: ["", Validators.required],
-      docType: ["", Validators.required],
+      docType: [""],
       cnic: ["", Validators.required],
       cnicExp: ["", Validators.required],
       issuingCountry: ["", Validators.required],
