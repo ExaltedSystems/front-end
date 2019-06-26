@@ -10,11 +10,11 @@
   <mat-sidenav-content>
 
     <app-header></app-header>
-    <mat-card *ngIf="isLoading == true" class="container d-flex justify-content-center rounded-0 my-2 loading-container">
+    <mat-card *ngIf="isLoading == true && hotelDetails == undefined" class="container d-flex justify-content-center rounded-0 my-2 loading-container">
       <mat-spinner></mat-spinner>
     </mat-card>
 
-    <section class="flight-search pt-0 pt-sm-2" *ngIf="isLoading == false">
+    <section class="flight-search pt-0 pt-sm-2" *ngIf="isLoading == false && hotelDetails != undefined">
 
       <!-- current search for mobile -->
       <div class="current-flight-search d-block d-sm-none mb-3">
@@ -93,11 +93,11 @@
                   <div class="d-none d-sm-flex align-items-center justify-content-around" *ngIf="inlineSearchForm == false">
                     <div class="checkIn">
                       <b>Check In Date</b>
-                      <p class="text-primary m-0">{{searchQuery.dates.startDate | date:mediumDate}}</p>
+                      <p class="text-primary m-0">{{checkInDate | date:mediumDate}}</p>
                     </div>
                     <div class="checkIn">
                       <b>Check In Date</b>
-                      <p class="text-primary m-0">{{searchQuery.dates.endDate | date:mediumDate}}</p>
+                      <p class="text-primary m-0">{{checkOutDate | date:mediumDate}}</p>
                     </div>
                     <div>
                       <p class="m-0">{{totalNights}} Night Stay</p>
@@ -116,11 +116,11 @@
                     <div class="d-flex align-items-center justify-content-between mb-2">
                       <div class="checkIn">
                         <b>Check In Date</b>
-                        <p class="text-primary m-0">{{searchQuery.dates.startDate | date:mediumDate}}</p>
+                        <p class="text-primary m-0">{{checkInDate | date:mediumDate}}</p>
                       </div>
                       <div class="checkIn">
                         <b>Check In Date</b>
-                        <p class="text-primary m-0">{{searchQuery.dates.endDate | date:mediumDate}}</p>
+                        <p class="text-primary m-0">{{checkOutDate | date:mediumDate}}</p>
                       </div>
                     </div>
         
@@ -143,17 +143,18 @@
                   <form [formGroup]="UpdateHotelSearch" [hidden]="inlineSearchForm == false" (submit)="updateInlineSearch(UpdateHotelSearch.value)"
                     class="custom-material-form">
                     <div class="form-group row mb-0 d-flex align-items-center">
-                      <div class="col-sm-5">
+                      <div class="col-sm-3">
                         <div class="input-group mb-4 mb-sm-0">
-                          <div class="input-group-prepend">
+                          <!-- <div class="input-group-prepend">
                             <span class="input-group-text rounded-0">
                               <i-calendar (click)="checkInDate.open()"></i-calendar>
                             </span>
-                          </div>
-                          <mat-form-field class="form-control material-input rounded-0">
+                          </div> -->
+                          <input type="text" id="date-range1" autocomplete="off" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut"/>
+                          <!-- <mat-form-field class="form-control material-input rounded-0">
                             <input matInput type="text" [autoApply]="true" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates"
                               ngxDaterangepickerMd placeholder="CheckIn - CheckOut" />
-                          </mat-form-field>
+                          </mat-form-field> -->
                         </div>
                         <!-- <div class="input-group">
                           <div class="input-group-prepend">
@@ -181,16 +182,16 @@
                           </mat-form-field>
                         </div> -->
                       </div>
-                      <div class="col-sm-1 text-center mb-4 mb-sm-0">
+                      <div class="col-sm-2 text-center mb-4 mb-sm-0">
                         {{totalNights}} Nights
                       </div>
                       <div class="col-sm-4">
                         <div class="input-group dropdown mb-4 mb-sm-0">
-                          <div class="input-group-prepend">
+                          <!-- <div class="input-group-prepend">
                             <span class="input-group-text rounded-0">
                               <i-users></i-users>
                             </span>
-                          </div>
+                          </div> -->
                           <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu"
                             type="button">
                             <small class="d-block">No of Guests</small>
@@ -261,7 +262,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                         <button type="submit" class="btn btn-primary rounded-0 shadow-sm mr-2">Update</button>
                         <button type="button" class="btn btn-default shadow-sm rounded-0" (click)="toggleInlineSearch(false)">Cancel</button>
                       </div>
@@ -331,7 +332,7 @@
                           </table>
                         </td>
                         <td valign="top" class="col-sm-3" style="padding:0 !important">
-                          <sticky sticky-start="20">
+                          <sticky sticky-start="20" class="d-none d-sm-flex">
                             <table class="table" width="100%">
                               <tr>
                                 <th class="border-0">&nbsp;</th>

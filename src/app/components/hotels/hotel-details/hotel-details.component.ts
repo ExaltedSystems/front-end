@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+declare var jQuery;
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HotelDetailsComponent implements OnInit {
     galleryImages: NgxGalleryImage[];
 
     hotelData: any;
-    hotelDetails: any;
+    hotelDetails: object;
     hotelId;
     hotelObj: object;
     searchQuery: object;
@@ -57,13 +58,14 @@ export class HotelDetailsComponent implements OnInit {
     constructor(private _ms: MainService, private _date: DatePipe, private __fb: FormBuilder,private _router: Router,
          private _cookieService: CookieService) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
+        
         window.scroll(0,0);
         // get search query
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
-
-        this.checkInDate = this.searchQuery['dates']['startDate'];
-        this.checkOutDate = this.searchQuery['dates']['endDate'];
+        console.log('search',this.searchQuery)
+        this.checkInDate = this.searchQuery['checkInDate']; //this.searchQuery['dates']['startDate'];
+        this.checkOutDate = this.searchQuery['checkOutDate']; //this.searchQuery['dates']['endDate'];
         this.totalNights = this.calculateDate(this.checkInDate, this.checkOutDate)
         // console.log('nights', this.totalNights)
 
@@ -74,11 +76,11 @@ export class HotelDetailsComponent implements OnInit {
 
         this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/hotelDetails', this.hotelObj).subscribe(result => {
             this.hotelDetails = result;
+            console.log(typeof result)
             this.galleryImages = result['images'];
-            this.isLoading = false;
             this.hotelPaymentDetails = JSON.parse(result['payment_mothods']);
-            // console.log('payment',this.hotelPaymentDetails)
             console.log('hotel data', this.hotelDetails)
+            this.isLoading = false;
         })
 
         this.galleryOptions = [
@@ -122,6 +124,7 @@ export class HotelDetailsComponent implements OnInit {
             checkInDate: [""],
             checkOutDate: [""],
             dates: [""],
+            dateRange: [""],
             rooms: ["1"],
             adults: ["1"],
             children: [""],
@@ -133,9 +136,12 @@ export class HotelDetailsComponent implements OnInit {
         if (this.cookieExists == true) {
             let searchCookie = this._cookieService.get('hotelQuery');
             this.currentSearch = JSON.parse(searchCookie);
-            this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.dates.startDate);
-            this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.dates.endDate);
+            // this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.dates.startDate);
+            // this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.dates.endDate);
+            this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.checkInDate);
+            this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.checkOutDate);
             this.UpdateHotelSearch.controls['dates'].setValue(this.currentSearch.dates);
+            this.UpdateHotelSearch.controls['dateRange'].setValue(this.currentSearch.dateRange);
             this.UpdateHotelSearch.controls['rooms'].setValue(this.currentSearch.rooms);
             this.UpdateHotelSearch.controls['adults'].setValue(this.currentSearch.adults);
             this.UpdateHotelSearch.controls['children'].setValue(this.currentSearch.children);
@@ -222,17 +228,30 @@ export class HotelDetailsComponent implements OnInit {
     }
 
     toggleInlineSearch = (value) => {
-        this.inlineSearchForm = value
+        this.inlineSearchForm = value;
+        console.log('test',jQuery('#date-range1').val());
+        if(value == true)
+        jQuery('#date-range1').dateRangePicker(
+            {
+              autoClose: true,
+              format: 'DD MMM YYYY',
+              separator : ' - ',
+              startDate: new Date()
+            }
+          );
     }
 
     updateInlineSearch = (formInputs) => {
         // console.log('forminputs',formInputs);
+        let date1 = new Date(jQuery('#date-range1').val().split('-')[0]);
+    let date2 = new Date(jQuery('#date-range1').val().split('-')[1]);
         if(this.UpdateHotelSearch.valid){
           let formObj = {
             destination: this.currentSearch.destination,
-            checkInDate: this._date.transform(formInputs.checkInDate,'M/d/yy'),
-            checkOutDate: this._date.transform(formInputs.checkOutDate,'M/d/yy'),
+            checkInDate: this._date.transform(date1,'M/d/yy'),
+            checkOutDate: this._date.transform(date2,'M/d/yy'),
             dates: formInputs.dates,
+            dateRange: jQuery('#date-range1').val(),
             rooms: formInputs.rooms,
             adults: formInputs.adults,
             children: formInputs.children,

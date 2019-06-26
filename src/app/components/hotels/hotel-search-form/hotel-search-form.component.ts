@@ -40,7 +40,8 @@ export class HotelSearchFormComponent implements OnInit {
 
   hotelSearchResult:any;
 
-  childrenAges: FormArray
+  childrenAges: FormArray;
+  desMsg = '';
 
   @Output()
   dateChange: EventEmitter<MatDatepickerInputEvent<Date>>
@@ -52,18 +53,18 @@ export class HotelSearchFormComponent implements OnInit {
    }
 
   ngOnInit() {
-    // jQuery('#date-range').dateRangePicker(
-    //   {
-    //     autoClose: true,
-    //     format: 'dd DD MMM',
-    //     separator : ' - ',
-    //     startDate: new Date(),
-    //     getValue: function()
-    //     {
-    //       return jQuery(this).val();
-    //     }
-    //   }
-    // );
+    jQuery('#date-range').dateRangePicker(
+      {
+        autoClose: true,
+        format: 'DD MMM YYYY',
+        separator : ' - ',
+        startDate: new Date(),
+        setValue: function(s)
+        {
+          jQuery(this).val(s);
+        }
+      }
+    );
     // Hotel form
     this.hotelSearch = this.__fb.group({
       destination: ["",Validators.required],
@@ -85,6 +86,7 @@ export class HotelSearchFormComponent implements OnInit {
     if(this.cookieExists == true){
       let searchCookie = this._cookieService.get('hotelQuery');
       let currentSearch = JSON.parse(searchCookie);
+      console.log('current',currentSearch)
       // let options = this._auto.autocomplete.options.toArray()
     // this.myControl.setValue(options[1].value)
       this.hotelsAutocomplete.setValue(currentSearch.destination);
@@ -119,9 +121,13 @@ export class HotelSearchFormComponent implements OnInit {
 
   } // onInit
 
-  // openDatePicker(){
-  //   jQuery('#date-range').data('dateRangePicker').open();
-  // }
+  checkHotelName = (value) => {
+    console.log('val',value)
+  }
+
+  openDatePicker(){
+    jQuery('#date-range').data('dateRangePicker').open();
+  }
 
   datePickerValue(val){
     console.log('val', val)
@@ -162,7 +168,14 @@ export class HotelSearchFormComponent implements OnInit {
   private _filter(value: string): string[] {
     if(value.length > 2) {
       const filterValue = value.toLowerCase();
-      return this.hotelsList.filter(option => option.toLowerCase().includes(filterValue));
+      let filterResult = this.hotelsList.filter(option => option.toLowerCase().includes(filterValue));
+      if(filterResult.length > 0){
+        this.desMsg = '';
+        return filterResult;
+      } else {
+        this.desMsg = 'Please Select form List!';
+        this.hotelSearch.controls['destination'].markAsDirty();
+      }
     } 
   }
 
@@ -243,17 +256,17 @@ export class HotelSearchFormComponent implements OnInit {
 
   searchHotels(formInputs){
     console.log('forminputs',formInputs);
-    // console.log(typeof jQuery('#date-range').val())
-    let date1 = ''; // new Date(jQuery('#date-range').val().split('-')[0]);
-    let date2 = ''; // new Date(jQuery('#date-range').val().split('-')[1]);
+    console.log('date', jQuery('#date-range').val());
+    let date1 = new Date(jQuery('#date-range').val().split('-')[0]);
+    let date2 = new Date(jQuery('#date-range').val().split('-')[1]);
     // return;
     if(this.hotelSearch.valid){
       let formObj = {
         destination: formInputs.destination,
-        checkInDate: this._date.transform(formInputs.dates.startDate,'M/d/yy'),
-        checkOutDate: this._date.transform(formInputs.dates.endtDate,'M/d/yy'),
+        checkInDate: this._date.transform(date1,'M/d/yy'),
+        checkOutDate: this._date.transform(date2,'M/d/yy'),
         dates: formInputs.dates,
-        dateRange: '',//jQuery('#date-range').val(),
+        dateRange: jQuery('#date-range').val(),
         rooms: formInputs.rooms,
         adults: formInputs.adults,
         children: formInputs.children,
