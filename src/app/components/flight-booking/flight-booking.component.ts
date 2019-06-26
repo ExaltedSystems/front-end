@@ -342,13 +342,13 @@ export class FlightBookingComponent implements OnInit {
     }
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     // console.log('postData',this.travellersObj)
-    let step1Url = this.__ms.backEndUrl+'Ticket/retRefNo';
-    // this.__ms.postData(step1Url, this.travellersObj).subscribe(res => {
-    //   console.log(res)
-    //   localStorage.setItem("paxToken", res['jwt']);
-    //   this.referenceNo = res['ref_no'];
-    // })
-    this.referenceNo = 'RT-000095';
+    let step1Url = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retRefNo';
+    this.__ms.postData(step1Url, this.travellersObj).subscribe(res => {
+      console.log(res)
+      localStorage.setItem("paxToken", res['jwt']);
+      this.referenceNo = res['ref_no'];
+    })
+    // this.referenceNo = 'RT-000095';
     return true;
   }
 
@@ -375,14 +375,27 @@ export class FlightBookingComponent implements OnInit {
     Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
     this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       if(res['res_flag'] == true){
         this.createPnr(res);
       }
     })
-
-    
   } //
+
+  byBank(){
+    let flightInfoObj = {
+      _refrenceNo: this.referenceNo,
+      _token: localStorage.getItem("paxToken")
+    }
+    Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
+    let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
+    this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      // console.log(res);
+      if(res['res_flag'] == true){
+        this.createPnr(res);
+      }
+    })
+  }// end by bank
 
   createPnr(flightInfos){
     let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
@@ -406,13 +419,11 @@ export class FlightBookingComponent implements OnInit {
       __isTravellers: flightInfos.travellers
     } //  end pnr obj
     // console.log(pnrObj)
-    let pnr = 'DSYHLZ'; 
-    this.pnrCreated(pnr);
-    // this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
+    this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
       // console.log(resp)
-    // let pnr = 'JFLWVB'; // res['__isPnr'];
-    // this.pnrCreated(pnr);
-    // })
+    let pnr = resp['__isPnr']; // res['__isPnr'];
+    this.pnrCreated(pnr);
+    })
     // JFLWVB
   } // 
 
