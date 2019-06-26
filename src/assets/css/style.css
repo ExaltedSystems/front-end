@@ -89,13 +89,15 @@ header {
     padding-left: .75rem!important
 }
 
-.input-group {
+
+/* .input-group {
     border: 1px solid #000;
-}
+} */
 
 .custom-material-form .input-group .material-input,
 .main-search-form .input-group .material-input {
     padding: 0 .75rem;
+    border: 1px solid #000;
     border-left: none!important;
     color: #000;
     font-weight: 500
@@ -344,6 +346,10 @@ header {
     color: #fff
 }
 
+.input-group-prepend {
+    border: 1px solid #000;
+}
+
 .dropdown-menu .dropdown-feather {
     margin: 0
 }
@@ -386,7 +392,8 @@ a.btn-primary {
 }
 
 .form-dropdown-btn {
-    line-height: 0!important
+    line-height: 0!important;
+    border: 1px solid #000;
 }
 
 .form-dropdown-btn small {

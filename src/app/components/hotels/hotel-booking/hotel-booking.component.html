@@ -48,8 +48,8 @@
                     <b>Your Group</b>
                     <p>{{searchQuery.adults}} Adults
                         <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
-              <span *ngFor="let age of searchQuery.childrenAges; let last = last">
-                <span *ngIf="last"> and </span>{{age.childAge}}
+                            <span *ngFor="let age of searchQuery.childrenAges; let last = last">
+                                <span *ngIf="last"> and </span>{{age.childAge}}
                         <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
                         </span> Years Old )</span>
                     </p>
@@ -72,12 +72,13 @@
                 <mat-card class="rounded-0 mt-2 mb-3">
                     <h3 class="sidebar-title text-primary">Your Booking Includes</h3>
                     <span *ngIf="hotelDetails.parking_availability == 'Yes, Free'" class="badge badge-success mr-1">Free
-            Parking</span>
+                        Parking</span>
                     <span *ngIf="hotelDetails.internet_availability == 'Yes, Free'" class="badge badge-success mr-1">Free
-            Internet</span>
+                        Internet</span>
                     <span *ngIf="hotelDetails.breakfast == 'Yes, Included in Price'" class="badge badge-success mr-1">Free
-            Breakfast</span>
-                    <span *ngIf="hotelDetails.parking_location == 'On Site'" class="badge badge-info mr-1">On Site Parking</span>
+                        Breakfast</span>
+                    <span *ngIf="hotelDetails.parking_location == 'On Site'" class="badge badge-info mr-1">On Site
+                        Parking</span>
                     <span *ngIf="hotelDetails.internet_type == 'Wifi'" class="badge badge-info mr-1">WiFi</span>
                 </mat-card>
             </div>
@@ -149,7 +150,7 @@
                                     </div>
                                     <div class="col-sm-5">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="firstName" placeholder="First Name" class="">
+                                            <input matInput formControlName="firstName" placeholder="First Name">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-sm-5">
@@ -171,7 +172,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="confirmEmail" placeholder="Conform Email" class="">
+                                            <input matInput formControlName="confirmEmail" placeholder="Confirm Email">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -179,13 +180,15 @@
                                     <div class="col-sm-12">
                                         <b class="d-block mb-2">Who are you booking for?</b>
                                         <mat-radio-group aria-label="Select an option" formControlName="bookingFor">
-                                            <mat-radio-button class="d-block" value="1">I am the main guest</mat-radio-button>
-                                            <mat-radio-button class="d-block" value="2">Booking is for someone else</mat-radio-button>
+                                            <mat-radio-button class="d-block" value="1">I am the main guest
+                                            </mat-radio-button>
+                                            <mat-radio-button class="d-block" value="2">Booking is for someone else
+                                            </mat-radio-button>
                                         </mat-radio-group>
                                     </div>
                                     <span class="form-error ml-3" *ngIf="bookingInfoFrom.controls['bookingFor'].hasError('required') && bookingInfoFrom.controls['bookingFor'].touched ">
-                    Please select an option
-                  </span>
+                                        Please select an option
+                                    </span>
                                 </div>
                                 <div class="selected-room light-grey-bg p-3 mb-3 position-relative" *ngFor="let room of selectedRooms">
                                     <a class="remove-hotel-icon" *ngIf="selectedRooms.length > 1" (click)="removeSelectedRoom(room.id)">
@@ -199,9 +202,10 @@
                                         <label class="col-sm-1 m-0">Guests</label>
                                         <div class="col-sm-2">
                                             <select class="form-control rounded-0">
-                        <option *ngFor="let item of createRange(room.no_of_guest);  let last = last"
-                          [attr.selected]="last" [value]="item">{{item}}</option>
-                      </select>
+                                                <option
+                                                    *ngFor="let item of createRange(room.no_of_guest);  let last = last"
+                                                    [attr.selected]="last" [value]="item">{{item}}</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-4">
                                             Non Smooking
@@ -221,10 +225,11 @@
                                     <mat-checkbox class="d-block" formControlName="rentACar">
                                         I'm interested in renting a car
                                     </mat-checkbox>
-                                    <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
+                                    <small> Make the most out of your trip and check car hire options in your booking
+                                        confirmation</small>
                                 </div>
                                 <div>
-                                    <button type="submit" matStepperNext class="btn btn-primary rounded-0 shadow-sm w-30">Next</button>
+                                    <button type="submit" matStepperNext class="btn btn-primary btn-block rounded-0 shadow-sm w-30">Next</button>
                                     <small class="form-error" *ngIf="bookingInfoFrom.invalid">{{bookingErrorMsg}}</small>
                                 </div>
                             </form>
@@ -243,7 +248,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="cardNumber" placeholder="Card Number" class="">
+                                            <input matInput formControlName="cardNumber" placeholder="Card Number">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-sm-2">
@@ -268,7 +273,8 @@
                                     <div class="col-sm-3">
                                         <mat-form-field class="form-control  mb-3 mb-sm-0 material-input rounded-0">
                                             <mat-select formControlName='expiryMonth' placeholder="Expiry Month">
-                                                <mat-option *ngFor="let month of monthItems" value="{{month.value}}">{{month.name}}</mat-option>
+                                                <mat-option *ngFor="let month of monthItems" value="{{month.value}}">
+                                                    {{month.name}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
@@ -276,7 +282,8 @@
                                     <div class="col-sm-3">
                                         <mat-form-field class="form-control  mb-3 mb-sm-0 material-input rounded-0">
                                             <mat-select formControlName='expiryYear' placeholder="Expiry Year">
-                                                <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
+                                                <mat-option *ngFor="let year of yearItems" value="{{year.value}}">
+                                                    {{year.value}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
@@ -338,12 +345,12 @@
                                     <td>Guests</td>
                                     <td>
                                         <b>{{searchQuery.adults}} Adults
-                      <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
-                        <span *ngFor="let age of searchQuery.childrenAges; let last = last">
-                          <span *ngIf="last"> and </span>{{age.childAge}}
-                          <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
-                        </span> Years Old )</span>
-                    </b>
+                                            <span *ngIf="searchQuery.children > 0">, {{searchQuery.children}} Children (
+                                                <span *ngFor="let age of searchQuery.childrenAges; let last = last">
+                                                    <span *ngIf="last"> and </span>{{age.childAge}}
+                                                    <span *ngIf="searchQuery.childrenAges.length > 2 && !last">,</span>
+                                                </span> Years Old )</span>
+                                        </b>
                                     </td>
                                 </tr>
                                 <tr>
@@ -394,7 +401,8 @@
                                 <tr>
                                     <td>Card Holder Name</td>
                                     <td>
-                                        <b>{{paymentFormInfo.cardHolderFirstName}} {{paymentFormInfo.cardHolderLastName}}</b>
+                                        <b>{{paymentFormInfo.cardHolderFirstName}}
+                                            {{paymentFormInfo.cardHolderLastName}}</b>
                                     </td>
                                 </tr>
                                 <tr>
@@ -408,7 +416,7 @@
                                 <button class="btn btn-default rounded-0 mr-2 shadow-sm" matStepperPrevious>Back</button>
                                 <button class="btn btn-default rounded-0 mr-2 shadow-sm" (click)="stepper.reset()">Reset</button>
                                 <button class="btn btn-success rounded-0 shadow-sm w-40" (click)="conformBooking()">Confirm
-                  Booking</button>
+                                    Booking</button>
                             </div>
                         </mat-step>
                     </mat-horizontal-stepper>

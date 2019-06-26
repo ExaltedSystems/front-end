@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from './../../../services/main.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { VisaListingPipe } from 'src/app/pipes/visa-listing.pipe ';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-visa-lists',
-	templateUrl: './visa-lists.component.html',
+  templateUrl: './visa-lists.component.html',
+  providers: [VisaListingPipe],
 	styleUrls: ['./visa-lists.component.css']
 })
 export class VisaListsComponent implements OnInit {
 	allVisas: any;
 	baseUrl: string;
 	popularVisa: any;
-	visaName: string;
+  visaName: string;
+  searchVisa: any;
 	searchVisaByNameForm: FormGroup;
 	constructor(private __ms: MainService, private __meta: Meta, private __title: Title,
 		private __device: DeviceDetectorService, private __fb: FormBuilder) {
@@ -46,11 +49,13 @@ export class VisaListsComponent implements OnInit {
 	}
 	searchVisaByName(inputs) {
 		if (this.searchVisaByNameForm.valid) {
-			this.visaName = inputs.visaName;
-		// 	console.log(inputs)
-		// 	this.allVisas = this.allVisas.filter(it => {
-		// 		return it.toLowerCase().includes(inputs.visaName);
-		// 	});
+			// this.visaName = inputs.visaName;
+      // console.log(inputs.visaName);
+			// this.allVisas = this.allVisas.filter(it => {
+      //   console.log(it.countryName);
+      //   return it.countryName.toLowerCase().includes(inputs.visaName);
+      // });
+      // console.log("end test");
 		}
 		// this.allVisas = this.allVisas
 	}

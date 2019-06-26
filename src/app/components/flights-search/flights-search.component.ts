@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MainService } from './../../services/main.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton } from '@angular/material';
-import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange } from '@angular/material';
+import { map, startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import allAirlinesList from '../../../assets/js/locations.json';
+import { isObject } from 'util';
 declare var jQuery;
 
 @Component({
@@ -16,6 +19,7 @@ export class FlightsSearchComponent implements OnInit {
 
 	@Input()
 	@ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
+	@ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
 	flightSearch: FormGroup;
 
 	flightType: string = "Return";
@@ -46,8 +50,20 @@ export class FlightsSearchComponent implements OnInit {
 	];
 	frmObj: any;
 	cookieObj;
+	// For Autocomplete with Arrow Keys and Enter Key Selection
+	filteredFlyingFromList:Observable<string[]>;
+	flyingFromAutocomplete = new FormControl();
+	flyingFromLists: string[] = [];
+	filteredFlyingToList:Observable<string[]>;
+	flyingToAutocomplete = new FormControl();
+	flyingToLists: string[] = [];
+
+
 	constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute,
-		private __cookieService: CookieService) { }
+		private __cookieService: CookieService) {
+			this.flyingFromLists = allAirlinesList;
+			this.flyingToLists = allAirlinesList;
+		}
 
 	ngOnInit() {
 		if (this.__cookieService.get('srchCookies')) {
@@ -91,6 +107,33 @@ export class FlightsSearchComponent implements OnInit {
 		}
 		this.flightSearch.controls['returnDate'].setValue(defaultRtnDate);
 		this.flightSearch.controls['preferredClass'].setValue(this.preferredClass);
+		// Filter Flying From / To
+		this.flyingFromAutocomplete.setValue(this.flyingFrom)
+		this.flyingToAutocomplete.setValue(this.flyingTo)
+		this.filteredFlyingFromList = this.flyingFromAutocomplete.valueChanges.pipe(
+		  startWith(''),
+		  map(value => this.__filterFlyFromAutocomplete(value))
+		);
+		this.filteredFlyingToList = this.flyingToAutocomplete.valueChanges.pipe(
+			startWith(''),
+			map(value => this.__filterFlyToAutocomplete(value))
+		);
+	}
+	private __filterFlyFromAutocomplete(value: string): string[] {
+	  if(value.length > 2) {
+		const filterValue = value.toLowerCase();
+		let filteredVal = this.flyingFromLists.filter(option => option.toLowerCase().includes(filterValue));
+		// this.flightSearch.controls['flyingFrom'].setValue(filteredVal[0]);
+		return filteredVal;
+	  } 
+	}
+	private __filterFlyToAutocomplete(value: string): string[] {
+	  if(value.length > 2) {
+		const filterValue = value.toLowerCase();
+		let filteredVal = this.flyingToLists.filter(option => option.toLowerCase().includes(filterValue));
+		// this.flightSearch.controls['flyingTo'].setValue(filteredVal[0]);
+		return filteredVal;
+	  } 
 	}
 	addDays = function (days, dptDate?) {
 		let date = new Date();
@@ -266,6 +309,34 @@ export class FlightsSearchComponent implements OnInit {
 	resetMatInput(evt){
 		let attrName = evt.target.getAttribute('formControlName');
 		this.flightSearch.controls[attrName].setValue('');
+		if(attrName == 'flyingFrom'){
+			this.flyingFromAutocomplete.setValue('');
+		}
+		if(attrName == 'flyingTo'){
+			this.flyingToAutocomplete.setValue('');
+		}
+	}
+	setSelectedValue(evt: MatOptionSelectionChange, attrName:string){
+		let val = evt.source.value;
+		if(attrName == 'flyingFrom'){
+			this.flightSearch.controls['flyingFrom'].setValue(val);
+			this.flyingFromAutocomplete.setValue(val);
+		}
+		if(attrName == 'flyingTo'){
+			this.flightSearch.controls['flyingTo'].setValue(val);
+			this.flyingToAutocomplete.setValue(val);
+		}
+	}
+	setDatepickerTitle(evt){
+		let placeHolder = '';
+		if(isObject(evt)){
+			placeHolder = evt.target.getAttribute('placeholder');
+		} else {
+			placeHolder = evt;
+		}
+		window.setTimeout(()=> {
+			jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">'+placeHolder+'</h3>');
+		}, 500);
 	}
 
 }

@@ -1,1 +1,20 @@
 /* Visa List Inline CSS */
+.flag-list {
+  list-style-type: none;
+  margin-left: 0px;
+  padding-left: 0px;
+  display: inline-block;
+  list-style: none;
+}
+
+.flag-list img {
+  float: left;
+  /* padding-top: 2px; */
+  padding-right: 5px;
+}
+
+.flag-list p {
+  text-align: right;
+  display: inline-block;
+  padding-top: 5px;
+}

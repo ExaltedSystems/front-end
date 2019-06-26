@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule, 
+import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule,
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
    MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -65,6 +65,7 @@ import { BreakfastTypeFilterPipe } from './pipes/breakfast-type-filter.pipe';
 import { PriceFilterPipe } from './pipes/price-filter.pipe';
 import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
 import { IframePipe } from './pipes/iframe.pipe';
+import { VisaListingPipe } from './pipes/visa-listing.pipe ';
 
 @NgModule({
   declarations: [
@@ -89,28 +90,29 @@ import { IframePipe } from './pipes/iframe.pipe';
     HotelDetailsComponent,
     HotelBookingComponent,
     HotelInlineSearchFormComponent,
-    HotelFiltersPipe,   
-    OrderByPipe,    
-    StarRatingFilterPipe,    
-    BreakfastTypeFilterPipe,    
-    PriceFilterPipe,    
-    FacilityFilterPipe,    
-    ContactusComponent,    
-    AboutusComponent,    
-    ToursComponent,    
-    DealsComponent,    
-    UmrahComponent,    
-    VisaComponent,    
-    RequstCallBackFormComponent,    
-    PopularAirlineAndHotelsComponent,    
-    DetailComponent,    
+    HotelFiltersPipe,
+    OrderByPipe,
+    StarRatingFilterPipe,
+    BreakfastTypeFilterPipe,
+    PriceFilterPipe,
+    FacilityFilterPipe,
+    ContactusComponent,
+    AboutusComponent,
+    ToursComponent,
+    DealsComponent,
+    UmrahComponent,
+    VisaComponent,
+    RequstCallBackFormComponent,
+    PopularAirlineAndHotelsComponent,
+    DetailComponent,
     VisaListsComponent,
     FilterVisaByNamePipe,
     SubscribeComponent,
     GeneralPagesComponent,
     HotelVoucherComponent,
     HotelSubscribeComponent,
-    IframePipe
+    IframePipe,
+    VisaListingPipe
   ],
   imports: [
     BrowserModule,
@@ -143,7 +145,7 @@ import { IframePipe } from './pipes/iframe.pipe';
     StickyModule,
     RouterModule.forRoot(APP_ROUTES),
     NgxDaterangepickerMd.forRoot({
-      separator: '  -  ', 
+      separator: '  -  ',
       format: "DD/MM/YYYY",
     }),
     NgxGalleryModule,

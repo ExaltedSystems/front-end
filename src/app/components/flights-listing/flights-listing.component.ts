@@ -51,9 +51,9 @@ export class FlightsListingComponent implements OnInit {
   flyingToSectors: any;
 
   stopFilteritems = [
-    {checked: !1, value: 0, text: "Non Stop"},
-    {checked: !1, value: 1, text: "1 Stop"},
-    {checked: !1, value: 2, text: "2 Stops"}
+    { checked: !1, value: 0, text: "Non Stop" },
+    { checked: !1, value: 1, text: "1 Stop" },
+    { checked: !1, value: 2, text: "2 Stops" }
   ];
   preferredClasses: object = [
     { value: "Y", label: "Economy" },
@@ -84,11 +84,21 @@ export class FlightsListingComponent implements OnInit {
   currDate: Date = new Date();
   cookieObj;
 
-  constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router, private __fb: FormBuilder,
-    private __hm: HomeComponent, private __cookieService: CookieService) {
-      window.scroll(0, 300);
-    }
-
+  constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router,
+    private __fb: FormBuilder, private __hm: HomeComponent, private __cookieService: CookieService) {
+    window.scroll(0, 300);
+    this.__router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    __actRouter.params.subscribe(val => {
+      // put the code from `ngOnInit` here
+      console.log(val)
+      console.log('Here again')
+    });
+  }
+  ngAfterViewInit() {
+    this.ngOnInit();
+  }
   ngOnInit() {
     this.queryParams = this.__actRouter.snapshot.queryParams;
     this.flightsUrl = this.__ms.flightsUrl;

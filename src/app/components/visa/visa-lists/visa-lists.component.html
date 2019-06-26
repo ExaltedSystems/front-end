@@ -14,7 +14,10 @@
                                 <i-map-pin class="feather"></i-map-pin>
                                 </span>
                             </div>
-                            <input type="text" formControlName="visaName" class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none" placeholder="Visa You Looking For">
+                            <input type="text" formControlName="visaName" [(ngModel)]="searchVisa"
+                              (keyup)="searchVisaByName(searchVisaByNameForm.value)"
+                              class="form-control border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none"
+                              placeholder="Visa You Looking For">
                             <div class="input-group-append">
                                 <button type="submit" [disabled]="!searchVisaByNameForm.valid" class="btn btn-primary rounded-0">GO</button>
                             </div>
@@ -37,16 +40,19 @@
                 <div class="sidebar-list">
                     <app-requst-call-back-form></app-requst-call-back-form>
                 </div>
-                <div class="sidebar-list mt-4" *ngIf="popularVisa">
+                <div class="sidebar-list mt-4" *ngIf="allVisas">
                     <h3 class="sidebar-title">Amazing Visa Offers</h3>
-                    <ul>
-                        <li *ngFor="let item of popularVisa | filterVisaByName: visaName"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }}
-                                <span class="float-right">{{item.durationId}}</span></a></li>
+                    <ul class="flag-list">
+                        <li *ngFor="let item of allVisas | filterVisaByName: visaName"> <a
+                            routerLink="/{{ item.visaUrl }}"> <img
+                                src="{{ baseUrl+'rgtapp/assets/flags/'+(item.countryName.split(' ').join('-') | lowercase)+'-flag.png' }}">
+                                <p>{{ item.countryName }}</p>
+                                <p class="float-right">{{item.durationId}}</p></a></li>
                         <!-- <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
 						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
 						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li> -->
                     </ul>
-                    <a routerLink="/visa" class="view-all">View All</a>
+                    <!-- <a routerLink="/visa" class="view-all">View All</a> -->
                 </div>
                 <!-- <div class="sidebar-list">
 					<h3 class="sidebar-title">Top Exiciting Offers</h3>
@@ -66,8 +72,11 @@
 				</div> -->
             </div>
             <div class="col-sm-9 order-1 order-sm-12">
-                <div class="card-deck">
-                    <div class="col-sm-4" *ngFor="let item of allVisas;">
+                <div class="card-deck" *ngIf="allVisas">
+                  <div *ngIf="(allVisas | VisaListingPipe:searchVisa).length === 0" class="form-error">
+                    No record found.
+                  </div>
+                    <div class="col-sm-4" *ngFor="let item of allVisas | VisaListingPipe:searchVisa;">
                         <div class="visa-card card shadow">
                             <img class="card-img-top img-fluid" src="{{ item.visaThumbnail != null ? baseUrl+item.visaThumbnail : baseUrl+'rgtapp/uploads/no-image-default.png' }}" alt="{{ item.countryName }} Rehman Travels">
                             <div class="card-body">
@@ -81,6 +90,7 @@
                         </div>
                         <div class="w-100 m-3"></div>
                     </div>
+                    <div *ngIf="allVisas.length < 1" class="form-error">No record found.</div>
                 </div>
             </div>
         </div>

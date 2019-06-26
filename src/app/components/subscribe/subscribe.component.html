@@ -9,7 +9,7 @@
                 <div class="form-error" *ngIf="subscribeForm.controls['email'].hasError('required') && subscribeForm.controls['email'].touched">
                     Email address required.
                 </div>
-                <div class="form-error" *ngIf="subscribeForm.controls['email'].invalid && subscribeForm.controls['email'].touched">
+                <div class="form-error" *ngIf="subscribeForm.controls['email'].invalid && subscribeForm.controls['email'].value != ''">
                     Email address not valid.
                 </div>
                 <mat-progress-bar mode="indeterminate" *ngIf="isLoad"></mat-progress-bar>
