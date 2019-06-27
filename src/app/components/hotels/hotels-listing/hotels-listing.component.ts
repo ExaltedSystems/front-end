@@ -65,14 +65,6 @@ export class HotelsListingComponent implements OnInit {
     }
 
     ngOnInit() {
-        // jQuery('#date-range1').dateRangePicker(
-        //     {
-        //       autoClose: true,
-        //       format: 'dd DD MMM',
-        //       separator : ' - ',
-        //       startDate: new Date()
-        //     }
-        //   );
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
 
         this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search', this.searchQuery).subscribe(result => {
@@ -211,7 +203,7 @@ export class HotelsListingComponent implements OnInit {
             this.propertyTypes.push({ value: element.prperty_name, title: element.prperty_name, slelcted: false });
             
             // get breakfast types array
-            if(this.isJson(element.breakfast_type) == true && element.breakfast_type != null){
+            if(element.breakfast_type != null){
                 if (element.breakfast_type.length > 0) {
                     element.breakfast_type.forEach((ele) => {
                         this.breakfastTypes.push({ value: ele.name, title: ele.name, slelcted: false });

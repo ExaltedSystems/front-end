@@ -6,8 +6,8 @@
             <div class="input-group flex-nowrap">
                 <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm-none" [hidden]="sideForm">
                     <span class="input-group-text rounded-0">
-            <i-map-pin></i-map-pin>
-          </span>
+              <i-map-pin></i-map-pin>
+            </span>
                 </div>
                 <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm-none" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'">
                     <input matInput formControlName="destination" [(ngModel)]="destValu" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" [matAutocomplete]="destinationAutocomplet">
@@ -19,69 +19,71 @@
                     <i-x-circle class="feather-x-circle" *ngIf="destValu" (click)="destValu=''"></i-x-circle>
                 </mat-form-field>
             </div>
+            <b class="form-error">{{desMsg}}</b>
         </div>
-        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15bx' : '0'}">
             <div class="input-group flex-nowrap mb-4 mb-sm-0">
                 <div class="input-group-prepend">
-                    <span class="input-group-text rounded-0">
-                <i-calendar></i-calendar>
-              </span>
+                    <span class="input-group-text rounded-0" (click)="openDatePicker()">
+                  <i-calendar></i-calendar>
+                </span>
                 </div>
-                <!-- <input type="text" id="date-range" autocomplete="off" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut"/> -->
-                <input type="text" [autoApply]="true" class="form-control material-input rounded-0 pl-0" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut" />
+                <input type="text" id="date-range" autocomplete="off" (focus)="openDatePicker()" readonly="readonly" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut" />
+                <!-- <span id="date-range" class="form-control material-input rounded-0 pl-0">CheckIn - CheckOut</span> -->
+                <!-- <input type="text" [autoApply]="true" class="form-control material-input rounded-0 pl-0" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/> -->
                 <!-- <mat-form-field class="form-control material-input rounded-0 pl-0">
-            </mat-form-field> -->
+              </mat-form-field> -->
             </div>
             <!-- <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text rounded-0">
-            <i-calendar (click)="checkInDate.open()"></i-calendar>
-          </span>
-        </div>
-        <mat-form-field class="form-control material-input">
-          <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0"
-            placeholder="CheckIn Date" [min]="currDate">
-          <mat-datepicker touchUi #checkInDate></mat-datepicker>
-        </mat-form-field>
-
-        <div class="input-group-prepend" (click)="checkOutDate.open()">
-          <span class="input-group-text rounded-0">
-            <i-calendar></i-calendar>
-          </span>
-        </div>
-        <mat-form-field class="form-control rounded-0 material-input">
-          <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (focus)="checkOutDate.open()"  (click)="checkOutDate.open()" class="border-left-0 rounded-0"
-            placeholder="Checkout Date" [min]="hotelSearch.get('checkInDate').value">
-          <mat-datepicker touchUi #checkOutDate></mat-datepicker>
-        </mat-form-field>
-      </div> -->
+          <div class="input-group-prepend">
+            <span class="input-group-text rounded-0">
+              <i-calendar (click)="checkInDate.open()"></i-calendar>
+            </span>
+          </div>
+          <mat-form-field class="form-control material-input">
+            <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0"
+              placeholder="CheckIn Date" [min]="currDate">
+            <mat-datepicker touchUi #checkInDate></mat-datepicker>
+          </mat-form-field>
+  
+          <div class="input-group-prepend" (click)="checkOutDate.open()">
+            <span class="input-group-text rounded-0">
+              <i-calendar></i-calendar>
+            </span>
+          </div>
+          <mat-form-field class="form-control rounded-0 material-input">
+            <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (focus)="checkOutDate.open()"  (click)="checkOutDate.open()" class="border-left-0 rounded-0"
+              placeholder="Checkout Date" [min]="hotelSearch.get('checkInDate').value">
+            <mat-datepicker touchUi #checkOutDate></mat-datepicker>
+          </mat-form-field>
+        </div> -->
         </div>
         <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
             <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0">
                 <div class="input-group-prepend" [hidden]="sideForm">
                     <span class="input-group-text rounded-0">
-            <i-users></i-users>
-          </span>
+              <i-users></i-users>
+            </span>
                 </div>
                 <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
-          <small class="d-block">No of Passenger</small>
-          <p class="d-inline-block mb-0">{{rooms}} Rooms - {{adults}} Adult - {{children}} Child</p>
-          <i-chevron-down class="dropdown-feather"></i-chevron-down>
-        </button>
+            <small class="d-block">No of Passenger</small>
+            <p class="d-inline-block mb-0">{{rooms}} Rooms - {{adults}} Adult - {{children}} Child</p>
+            <i-chevron-down class="dropdown-feather"></i-chevron-down>
+          </button>
                 <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
                     <div class="form-group">
                         <div class="input-group mb-3 text-center">
                             <div class="input-group-prepend">
                                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('rooms')">
-                  <i-minus class="dropdown-feather"></i-minus>
-                </button>
+                    <i-minus class="dropdown-feather"></i-minus>
+                  </button>
                             </div>
                             <span class="form-control">{{rooms}} Rooms</span>
                             <input formControlName="rooms" type="hidden" value="{{rooms}}">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('rooms')">
-                  <i-plus class="dropdown-feather"></i-plus>
-                </button>
+                    <i-plus class="dropdown-feather"></i-plus>
+                  </button>
                             </div>
                         </div>
                     </div>
@@ -89,15 +91,15 @@
                         <div class="input-group mb-3 text-center">
                             <div class="input-group-prepend">
                                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('adults')">
-                  <i-minus class="dropdown-feather"></i-minus>
-                </button>
+                    <i-minus class="dropdown-feather"></i-minus>
+                  </button>
                             </div>
                             <span class="form-control">{{adults}} Adults</span>
                             <input formControlName="adults" type="hidden" value="{{adults}}">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('adults')">
-                  <i-plus class="dropdown-feather"></i-plus>
-                </button>
+                    <i-plus class="dropdown-feather"></i-plus>
+                  </button>
                             </div>
                         </div>
                     </div>
@@ -105,15 +107,15 @@
                         <div class="input-group mb-3 text-center">
                             <div class="input-group-prepend">
                                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('children')">
-                  <i-minus class="dropdown-feather"></i-minus>
-                </button>
+                    <i-minus class="dropdown-feather"></i-minus>
+                  </button>
                             </div>
                             <span class="form-control">{{children}} Children</span>
                             <input formControlName="children" type="hidden" value="{{children}}">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
-                  <i-plus class="dropdown-feather"></i-plus>
-                </button>
+                    <i-plus class="dropdown-feather"></i-plus>
+                  </button>
                             </div>
                         </div>
                     </div>
@@ -122,29 +124,29 @@
                         <div class="d-inline-block" formArrayName="childrenAges" *ngFor="let item of hotelSearch.get('childrenAges').controls; let i = index;">
                             <div formGroupName="{{i}}">
                                 <select formControlName="childAge" class="form-control child-age-select">
-                      <option value="-1>" selected="selected">< 1</option>
-                      <option *ngFor="let item of createRange(17)" [value]="item">{{item}}</option>
-                    </select>
+                        <option value="-1>" selected="selected">< 1</option>
+                        <option *ngFor="let item of createRange(17)" [value]="item">{{item}}</option>
+                      </select>
                             </div>
                         </div>
 
                     </div>
 
                     <!-- <div class="dropdown-divider"></div>
-          <a class="float-right" (click)="closeDropDown($event)">
-            <i-check class="dropdown-feather text-success float-left m-1"></i-check>
-            <span class="float-right">Done</span>
-          </a> -->
+            <a class="float-right" (click)="closeDropDown($event)">
+              <i-check class="dropdown-feather text-success float-left m-1"></i-check>
+              <span class="float-right">Done</span>
+            </a> -->
                 </div>
             </div>
         </div>
         <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-2'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
-            <button class="btn btn-block rounded-0 search-flight-btn" [ngClass]="sideForm == true ? 'btn-success' : 'btn-primary'" type="submit">{{searchBtn}}</button>
+            <button class="btn btn-block rounded-0 search-flight-btn" [disabled]="desMsg != ''" [ngClass]="sideForm == true ? 'btn-success' : 'btn-success'" type="submit">{{searchBtn}}</button>
         </div>
     </div>
     <p class="form-error mb-0"></p>
     <!---->
     <!-- <div class="text-right">
-    
-  </div> -->
+      
+    </div> -->
 </form>

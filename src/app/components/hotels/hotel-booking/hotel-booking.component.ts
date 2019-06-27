@@ -64,8 +64,8 @@ export class HotelBookingComponent implements OnInit {
     // get search query
     this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
 
-    this.checkInDate = this.searchQuery['dates']['startDate'];
-    this.checkOutDate = this.searchQuery['dates']['endDate'];
+    this.checkInDate = this.searchQuery['checkInDate']; //this.searchQuery['dates']['startDate'];
+    this.checkOutDate = this.searchQuery['checkOutDate']; //this.searchQuery['dates']['endDate'];
     this.totalNights = this.calculateDate(this.checkInDate, this.checkOutDate);
 
     this.bookingInfo = JSON.parse(this._cookieService.get('bookingInfo'));

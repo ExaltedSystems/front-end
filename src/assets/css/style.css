@@ -1114,8 +1114,8 @@ legend {
     padding: 5px
 }
 
-.loading-container {
-    min-height: 670px;
+.date-picker-wrapper {
+    z-index: 999999 !important;
 }
 
 .hotel-price {
