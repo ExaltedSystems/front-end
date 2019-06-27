@@ -209,7 +209,7 @@ export class FlightBookingComponent implements OnInit {
       this.postPsgrs.push({__isType: 'INF',
       __isValue: this.infQty})
     }
-    console.log('passengersArr', this.travellersForm.get('passengersArr'))
+    // console.log('passengersArr', this.travellersForm.get('passengersArr'))
 
     this.paymentForm = this.__fb.group({
       cardType: ["visa", Validators.required],
@@ -342,7 +342,7 @@ export class FlightBookingComponent implements OnInit {
     }
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     // console.log('postData',this.travellersObj)
-    let step1Url = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retRefNo';
+    let step1Url = this.__ms.backEndUrl+'Ticket/retRefNo';
     this.__ms.postData(step1Url, this.travellersObj).subscribe(res => {
       console.log(res)
       localStorage.setItem("paxToken", res['jwt']);

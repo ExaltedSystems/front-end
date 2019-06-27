@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 	@ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
   flightSearch: FormGroup;
   hotelSearch: FormGroup;
-  flightType: string;
+  flightType: string = 'Return';
   flyingFrom: string = 'ISB,Islamabad,Pakistan';
   flyingTo: string = 'LHR,London,United Kingdom';
   departureDate;
@@ -94,6 +94,7 @@ export class HomeComponent implements OnInit {
     if(this.__cookieService.get('srchCookies')){
       let cookiesData       = JSON.parse(this.__cookieService.get('srchCookies'))
       this.flightType       = cookiesData[0].value;
+      console.log(cookiesData[0].value)
 			if(cookiesData[0].value == 'OneWay') {this.isReturn = false;}
       this.flyingFrom       = cookiesData[1].value;
       this.flyingTo         = cookiesData[2].value;

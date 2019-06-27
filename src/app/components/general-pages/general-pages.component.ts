@@ -22,6 +22,7 @@ export class GeneralPagesComponent implements OnInit {
     }
   }
   ngOnInit() {
+    // console.log("general pages called");
     this.getPageData();
     this.popularVisas();
   }

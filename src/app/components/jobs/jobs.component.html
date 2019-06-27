@@ -1,0 +1,130 @@
+<app-header></app-header>
+
+<section class="visa-contents">
+    <div class="container sidebar">
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="personalInfoForm">
+                <form [formGroup]="personalInfoForm" class="custom-material-form">
+                    <ng-template matStepLabel>Personal Info</ng-template>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Apply For" formControlName="firstCtrl" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Username">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Email address" type="email">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Fist Name" type="text">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Last Name" type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Adress" type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="City" type="text">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Country" type="text">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="form-control material-input">
+                                <input matInput placeholder="Postal Code" type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="form-control material-input">
+                                <textarea matInput placeholder="About Me"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                </form>
+
+            </mat-step>
+            <mat-step [stepControl]="familyInfoForm">
+                <form [formGroup]="familyInfoForm">
+                    <ng-template matStepLabel>Family Info</ng-template>
+                    <mat-form-field>
+                        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Education </ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Courses / Trainings</ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Work Experience</ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Refrences</ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Guaranters</ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>International Traveling</ng-template>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</section>
+<app-footer></app-footer>

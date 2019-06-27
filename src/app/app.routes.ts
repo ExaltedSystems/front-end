@@ -19,6 +19,9 @@ import { DetailComponent } from 'src/app/components/popular-airline-and-hotels/d
 import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
 import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
 import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-voucher.component';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { FranchiseComponent } from './components/franchise/franchise.component';
+
 
 export const APP_ROUTES: Routes = [
 	{ path: '', component: HomeComponent },
@@ -44,5 +47,7 @@ export const APP_ROUTES: Routes = [
 	{ path: 'hotels/:hotel', component: DetailComponent },
 	{ path: 'hotel-booking', component: HotelBookingComponent },
 	{ path: 'hotel-voucher', component: HotelVoucherComponent },
+  { path: 'jobs', component: JobsComponent },
+  { path: 'franchise-reg', component: FranchiseComponent },
 	{ path: '**', component: GeneralPagesComponent }
 ];

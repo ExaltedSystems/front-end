@@ -14,7 +14,100 @@
                     </div>
                     <hr>
                 </div>
-                <div class="invoice overflow-auto">
+
+                <div class="booking-preview">
+                    <div class="row">
+                        <div class="col-sm-1 text-center">
+                            <i-check class="success"></i-check>
+                        </div>
+                        <div class="col-sm-11">
+                            <p class="m-0">Thanks, Nadeem</p>
+                            <h3 class="my-1">
+                                Your booking in Lahore is confirmed.
+                            </h3>
+                            <p><b>"The Nishat Hotel Johar Town"</b> is expecting you on <b>"June 22"</b> </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1 text-center">
+                            <i-check class="success"></i-check>
+                        </div>
+                        <div class="col-sm-11">
+                            <p class="m-0">Your payment will be handled by The Nishat Hotel Johar Town. The "Payment" section below has more details</p>
+                            <p class="m-0">
+                                Make changes to your booking or ask the property a question in just a few clicks
+                            </p>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center my-5">
+                        <button class="btn btn-primary rounded-0 p-3 mr-2">Make changes to your booking </button>
+                        <button class="btn btn-default rounded-0 p-3">Manage your booking in the app </button>
+                    </div>
+                    <div>
+                        <h3 class="my-2">
+                            <a href="">The Nishat Hotel Johar Town</a>
+                        </h3>
+                        <p class="m-0">Abdul Haque Road, Lahore, 54600, Pakistan -</p>
+                        <p class="m-0"><b>Phone:</b> +92042111646835</p>
+                        <a href="">Email property</a>
+                    </div>
+                    <div class="text-center">
+                        <img src="" alt="">
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td width="30%"><b>Your reservation</b></td>
+                            <td>2 nights, 1 room</td>
+                        </tr>
+                        <tr>
+                            <td><b>Check-in</b></td>
+                            <td>Saturday, June 22, 2019 (from 14:00)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Check-out</b></td>
+                            <td>Monday, June 24, 2019 (until 12:00)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Prepayment</b></td>
+                            <td>You don’t have to pre-pay, but the property might take a deposit from the card you booked with. This is a routine procedure to verify the card is valid and hasn't been lost or stolen. The charge is temporary and will be returned
+                                to you in full.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Cancellation cost</b></td>
+                            <td>From June 22, 2019 12:43 PM [PKT]: PKR 16,000</td>
+                        </tr>
+                    </table>
+                    <div class="text-center">
+                        <button class="btn btn-primary rounded-0 p-3 mr-2">Cancel Booking</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 offset-sm-2">
+                            <div class="price-info-desc mt-5" style="background:#ccc">
+                                <table class="table">
+                                    <tr>
+                                        <td><b>Executive Room</b></td>
+                                        <td align="right"><b>PKR 32,000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4 class="m-0">Price</h4>
+                                        </td>
+                                        <td align="right">
+                                            <h4 class="m-0">PKR 32,000</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p class="mt-3 p-4">
+                                    You'll pay when you stay at The Nishat Hotel Johar Town As a standard procedure, the property might charge a temporary deposit to make sure the card used to book isn't lost or stolen and to guarantee your booking. You'll pay the hotel in the hotel’s local
+                                    currency (PKR) at the exchange rate on day of payment. 16 % TAX is excluded. Please note: additional supplements (e.g. extra bed) are not added to this total. The total price shown is the amount you'll pay to the property.
+                                    Booking.com doesn't charge any reservation, administration, or other fees. If you don't show up or cancel, applicable taxes may still be charged by the property.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="invoice overflow-auto">
                     <div style="min-width: 600px">
                         <header>
                             <div class="row">
@@ -25,9 +118,7 @@
                                 </div>
                                 <div class="col company-details">
                                     <h2 class="name">
-                                        <!-- <a target="_blank" href="https://lobianijs.com"> -->
                                         {{bookingDetails.hotelDetail.name}}
-                                        <!-- </a> -->
                                     </h2>
                                     <div> {{bookingDetails.hotelDetail.address}}</div>
                                     <div> {{bookingDetails.hotelDetail.phone_no}}</div>
@@ -72,16 +163,6 @@
                                     </tr>
                                 </tbody>
                                 <tfoot>
-                                    <!-- <tr>
-                                        <td colspan="2"></td>
-                                        <td colspan="2">SUBTOTAL</td>
-                                        <td>$5,200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"></td>
-                                        <td colspan="2">TAX 25%</td>
-                                        <td>$1,300.00</td>
-                                    </tr> -->
                                     <tr>
                                         <td align="right" colspan="5">GRAND TOTAL</td>
                                         <td>{{bookingDetails.totalCharges}}</td>
@@ -98,9 +179,8 @@
                             Invoice was created on a computer and is valid without the signature and seal.
                         </footer>
                     </div>
-                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
                     <div></div>
-                </div>
+                </div> -->
             </div>
         </mat-card>
     </div>

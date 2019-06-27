@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule,
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
-   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule} from '@angular/material';
+   MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule, MatIconModule} from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -66,6 +66,10 @@ import { PriceFilterPipe } from './pipes/price-filter.pipe';
 import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
 import { IframePipe } from './pipes/iframe.pipe';
 import { VisaListingPipe } from './pipes/visa-listing.pipe ';
+import {NgxMaskModule} from 'ngx-mask';
+import { FranchiseComponent } from './components/franchise/franchise.component';
+import { TravelAgentsComponent } from './components/franchise/travel-agents/travel-agents.component';
+import { JobsComponent } from './components/jobs/jobs.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +116,10 @@ import { VisaListingPipe } from './pipes/visa-listing.pipe ';
     HotelVoucherComponent,
     HotelSubscribeComponent,
     IframePipe,
-    VisaListingPipe
+    VisaListingPipe,
+    FranchiseComponent,
+    TravelAgentsComponent,
+    JobsComponent
   ],
   imports: [
     BrowserModule,
@@ -133,6 +140,7 @@ import { VisaListingPipe } from './pipes/visa-listing.pipe ';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatIconModule,
     IconsModule,
     MatSidenavModule,
     MatProgressBarModule,
@@ -149,6 +157,7 @@ import { VisaListingPipe } from './pipes/visa-listing.pipe ';
       format: "DD/MM/YYYY",
     }),
     NgxGalleryModule,
+    NgxMaskModule.forRoot(),
     MatTabsModule,
     RangeSliderModule,
     FilterPipeModule,

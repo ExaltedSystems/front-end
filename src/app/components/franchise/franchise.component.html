@@ -1,0 +1,136 @@
+<app-header></app-header>
+<!-- <div class="banner d-none d-sm-flex align-items-center">
+  <img src="assets/img/visa-background-image.jpg" class="img-fluid">
+</div> -->
+<section class="visa-contents">
+    <div class="container sidebar">
+        <div class="section-title">
+            <h1>Franchise Registration</h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+        </div>
+        <div class="row">
+            <div class="col-sm-3 order-12 order-sm-1">
+                <div class="sidebar-list">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+            </div>
+            <div class="col-sm-9 order-1 order-sm-12">
+                <div class="card-deck">
+                    <form class="main-search-form position-relative" [formGroup]="franchiseForm" (submit)="onSubmit(franchiseForm.value)">
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Name" class="rounded-5" formControlName="name" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('name').value" (click)="this.franchiseForm.get('name').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['name'].hasError('required') && franchiseForm.controls['name'].touched">
+                                    Name required.
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Email " class="rounded-5" formControlName="email" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('email').value" (click)="this.franchiseForm.get('email').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['email'].hasError('required') &&
+                   franchiseForm.controls['email'].touched">
+                                    Email required.
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Tel No " class="rounded-5" formControlName="tel_no" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('tel_no').value" (click)="this.franchiseForm.get('tel_no').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['tel_no'].hasError('required') &&
+                   franchiseForm.controls['tel_no'].touched">
+                                    Tel No required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Mobile No" class="rounded-5" formControlName="mobile_no" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('mobile_no').value" (click)="this.franchiseForm.get('mobile_no').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['mobile_no'].hasError('required') && franchiseForm.controls['mobile_no'].touched">
+                                    Mobile No required.
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Investment " class="rounded-5" formControlName="investment" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('investment').value" (click)="this.franchiseForm.get('investment').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['investment'].hasError('required') &&
+                   franchiseForm.controls['investment'].touched">
+                                    Investment required.
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="City" class="rounded-5" formControlName="city" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('city').value" (click)="this.franchiseForm.get('city').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['city'].hasError('required') &&
+                   franchiseForm.controls['city'].touched">
+                                    City required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Address" class="rounded-5" formControlName="address" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('address').value" (click)="this.franchiseForm.get('address').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['address'].hasError('required') && franchiseForm.controls['address'].touched">
+                                    Address required.
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Education " class="rounded-5" formControlName="education" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('education').value" (click)="this.franchiseForm.get('education').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['education'].hasError('required') &&
+                   franchiseForm.controls['education'].touched">
+                                    Education required.
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="CNIC" class="rounded-5" formControlName="cnic" matInput required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('cnic').value" (click)="this.franchiseForm.get('cnic').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['cnic'].hasError('required') &&
+                   franchiseForm.controls['cnic'].touched">
+                                    CNIC required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-12">
+                                <mat-form-field class="form-control mb-3 shadow">
+                                    <textarea matInput placeholder="Details" class="rounded-5" formControlName="details" matInput required></textarea>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('details').value" (click)="this.franchiseForm.get('details').setValue('')"></i-x-circle>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['details'].hasError('required') && franchiseForm.controls['details'].touched">
+                                    Details required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!franchiseForm.valid" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

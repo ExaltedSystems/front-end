@@ -7,6 +7,7 @@ import {map, startWith} from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+declare var jQuery;
 
 @Component({
   selector: 'app-hotel-search-form',
@@ -16,6 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class HotelSearchFormComponent implements OnInit {
 
   @Output() searchEvent = new EventEmitter<string>();
+  @Input() sideForm: boolean;
 
   hotelSearch: FormGroup;
   adults: number = 1;
@@ -24,6 +26,9 @@ export class HotelSearchFormComponent implements OnInit {
   currDate: Date = new Date();
   searchBtn: string = 'Search';
   destValu: string;
+  dateRangeValue = "Check In  -  Check Out";
+
+  // sideForm: boolean = false;
 
   hotelsAutocomplete = new FormControl();
   hotelsList: string[] = [];
@@ -47,12 +52,25 @@ export class HotelSearchFormComponent implements OnInit {
    }
 
   ngOnInit() {
+    // jQuery('#date-range').dateRangePicker(
+    //   {
+    //     autoClose: true,
+    //     format: 'dd DD MMM',
+    //     separator : ' - ',
+    //     startDate: new Date(),
+    //     getValue: function()
+    //     {
+    //       return jQuery(this).val();
+    //     }
+    //   }
+    // );
     // Hotel form
     this.hotelSearch = this.__fb.group({
       destination: ["",Validators.required],
       checkInDate: [""],
       checkOutDate: [""],
       dates: ["", Validators.required],
+      dateRange: [""],
       rooms: ["1"],
       adults: ["1"],
       children: [""],
@@ -70,9 +88,10 @@ export class HotelSearchFormComponent implements OnInit {
       // let options = this._auto.autocomplete.options.toArray()
     // this.myControl.setValue(options[1].value)
       this.hotelsAutocomplete.setValue(currentSearch.destination);
-      this.hotelSearch.controls['checkInDate'].setValue(this._date.transform(currentSearch.dates.startDate,'M/d/yy'));
-      this.hotelSearch.controls['checkOutDate'].setValue(this._date.transform(currentSearch.dates.endDate,'M/d/yy'));
+      this.hotelSearch.controls['checkInDate'].setValue(this._date.transform(currentSearch.checkInDate,'M/d/yy'));
+      this.hotelSearch.controls['checkOutDate'].setValue(this._date.transform(currentSearch.checkOutDate,'M/d/yy'));
       this.hotelSearch.controls['dates'].setValue(currentSearch.dates);
+      this.hotelSearch.controls['dateRange'].setValue(currentSearch.dateRange);
       this.hotelSearch.controls['rooms'].setValue(currentSearch.rooms);
       this.hotelSearch.controls['adults'].setValue(currentSearch.adults);
       this.hotelSearch.controls['children'].setValue(currentSearch.children);
@@ -81,6 +100,7 @@ export class HotelSearchFormComponent implements OnInit {
       this.children = currentSearch.children;
       this.childrenAges = this.__fb.array([this.createChildForm(currentSearch.childrenAges,currentSearch.children)])
       this.destValu = currentSearch.destination;
+      this.dateRangeValue = currentSearch.dateRange;
       // get search results
       this.hotelSearchResult = this.getSearchResults(currentSearch);
     }
@@ -98,6 +118,14 @@ export class HotelSearchFormComponent implements OnInit {
     );
 
   } // onInit
+
+  // openDatePicker(){
+  //   jQuery('#date-range').data('dateRangePicker').open();
+  // }
+
+  datePickerValue(val){
+    console.log('val', val)
+  }
 
   createChildForm(formData,childrensCount) {
     let chd_arr = this.hotelSearch.controls.childrenAges as FormArray;
@@ -214,13 +242,18 @@ export class HotelSearchFormComponent implements OnInit {
   }
 
   searchHotels(formInputs){
-    // console.log('forminputs',formInputs);
+    console.log('forminputs',formInputs);
+    // console.log(typeof jQuery('#date-range').val())
+    let date1 = ''; // new Date(jQuery('#date-range').val().split('-')[0]);
+    let date2 = ''; // new Date(jQuery('#date-range').val().split('-')[1]);
+    // return;
     if(this.hotelSearch.valid){
       let formObj = {
         destination: formInputs.destination,
-        checkInDate: this._date.transform(formInputs.dates.startDate._d,'M/d/yy'),
-        checkOutDate: this._date.transform(formInputs.dates.endDate._d,'M/d/yy'),
+        checkInDate: this._date.transform(formInputs.dates.startDate,'M/d/yy'),
+        checkOutDate: this._date.transform(formInputs.dates.endtDate,'M/d/yy'),
         dates: formInputs.dates,
+        dateRange: '',//jQuery('#date-range').val(),
         rooms: formInputs.rooms,
         adults: formInputs.adults,
         children: formInputs.children,

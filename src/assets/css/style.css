@@ -51,6 +51,13 @@ header {
 
 .navbar-light .navbar-nav .nav-link {
     color: #000 !important;
+    font-size: 14px;
+}
+
+.navbar-light .navbar-nav a.nav-link:hover {
+    background: #00aeef !important;
+    border-radius: 7px !important;
+    color: #fff !important;
 }
 
 .mobile-nav-toggle {
@@ -183,6 +190,13 @@ header {
 .custom-material-form .dropdown-menu .form-control,
 .main-search-form .dropdown-menu .form-control {
     line-height: 1.4
+}
+
+.reservation-options {
+    position: fixed !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    width: 100%;
 }
 
 .main-search-form-container {
@@ -1100,6 +1114,10 @@ legend {
     padding: 5px
 }
 
+.loading-container {
+    min-height: 670px;
+}
+
 .hotel-price {
     background: #ecebeb;
     height: 100%
@@ -1132,11 +1150,10 @@ legend {
     font-size: 14px!important
 }
 
-.reservation-options {
-    position: fixed!important;
-    bottom: 0!important;
-    z-index: 9999!important;
-    width: 100%
+.room-details-table tr td,
+.room-details-table tr th {
+    padding: 0.30rem !important;
+    font-size: 12px !important;
 }
 
 .form-control {
