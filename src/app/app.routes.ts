@@ -38,6 +38,7 @@ export const APP_ROUTES: Routes = [
 	{ path: 'flight-booking', component: FlightBookingComponent },
 	{ path: 'pnrView', component: PnrViewComponent },
 	{ path: 'thank-you', component: ThankYouComponent },
+	{ path: 'paymentError', component: PaymentErrorComponent },
 	{ path: 'hotels-listing', component: HotelsListingComponent },
 	{ path: 'hotel-details', component: HotelDetailsComponent },
 	{ path: 'airlines/:airline', component: DetailComponent },

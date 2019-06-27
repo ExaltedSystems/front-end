@@ -66,6 +66,7 @@ import { PriceFilterPipe } from './pipes/price-filter.pipe';
 import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
 import { IframePipe } from './pipes/iframe.pipe';
 import { VisaListingPipe } from './pipes/visa-listing.pipe ';
+import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
 
 @NgModule({
   declarations: [
