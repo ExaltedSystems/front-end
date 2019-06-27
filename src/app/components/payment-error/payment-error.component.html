@@ -5,9 +5,12 @@
           <div class="section-title d-none d-sm-block">
             <h1>Payment Error</h1>
           </div>
-          
+
           <div class="col-sm-12">
             <p>Some problem occured while processing your payment request. Please try again later</p>
+            <p *ngIf="referenceNo != ''">
+              Please contact us with reference number <b>{{referenceNo}}</b>
+            </p>
           </div>
         </section>
       <app-footer></app-footer>
