@@ -491,7 +491,7 @@
                               </fieldset>
                               <div class="center">
                                 
-                                <button class="btn btn-primary rounded-0 shadow btn-sm" [disabled]="!paymentForm.valid" mat-button>Confirm</button>
+                                <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" [disabled]="!paymentForm.valid" mat-button>Confirm</button>
                               </div>
                           </form>
 
@@ -499,8 +499,9 @@
                                         <mat-tab label="Cash on Delivery">
                                             <h2>Pay Cash on Delivery</h2>
                                             <p>You can pay cash after receiving your Ticket at your doorstep.</p>
-
-                                            <button (click)="cashOnDelivery()">Confirm</button>
+                                            <form action="">
+                                                <button (click)="cashOnDelivery()" class="btn btn-primary rounded-0 btn-block shadow btn-sm" mat-button>Confirm</button>
+                                            </form>
                                         </mat-tab>
                                         <mat-tab label="Bank">
                                             <h2>Bank</h2>
@@ -522,8 +523,10 @@
 
                                             </div>
                                             <div class="center">
-                                                <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp;
-                                                <button class="btn btn-primary rounded-0 shadow btn-sm" (click)="byBank()">Confirm</button>
+                                                <!-- <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp; -->
+                                                <form action="">
+                                                    <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" (click)="byBank()" mat-button>Confirm</button>
+                                                </form>
                                             </div>
                                         </mat-tab>
                                         <mat-tab label="Branches">
@@ -542,11 +545,14 @@
 
                                             </div>
                                             <div class="center">
-                                                <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp;
-                                                <button class="btn btn-primary rounded-0 shadow btn-sm" (click)="byBranch()">Confirm</button>
+                                                <!-- <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp; -->
+                                                <form action="">
+                                                    <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" (click)="byBranch()" mat-button>Confirm</button>
+                                                </form>
                                             </div>
                                         </mat-tab>
                                     </mat-tab-group>
+                                    <p>&nbsp;</p>
                                     <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>
                                 </mat-step>
                             </mat-horizontal-stepper>
