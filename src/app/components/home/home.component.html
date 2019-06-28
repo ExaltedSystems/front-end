@@ -3,9 +3,9 @@
 <div class="mian-slider">
     <!-- Search Form -->
     <div class="main-search-form pt-sm-3 pt-5 pt-md-5">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row card-deck">
-                <div class="col-sm-12 form-col">
+                <div class="col-sm-12 col-xl-10 offset-xl-1 form-col">
                     <div class="main-search-form-container">
                         <ul class="nav nav-tabs border-bottom-0" id="myTab" role="tablist">
                             <li class="nav-item mb-0">
@@ -83,7 +83,8 @@
                                                         </span>
                                                     </div>
                                                     <mat-form-field class="form-control material-input">
-                                                        <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
+                                                        <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open();setDatepickerTitle($event)" (focus)="departureDate.open();setDatepickerTitle($event)" (dateChange)="setReturnDate($event)" class="border-left-0 rounded-0"
+                                                            placeholder="Departure Date" [min]="currDate">
                                                         <mat-datepicker touchUi #departureDate></mat-datepicker>
                                                     </mat-form-field>
 
@@ -93,7 +94,7 @@
                                                         </span>
                                                     </div>
                                                     <mat-form-field class="form-control rounded-0 material-input" [hidden]="!isReturn">
-                                                        <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Return Date" [min]="flightSearch.get('departureDate').value">
+                                                        <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open();setDatepickerTitle($event)" (focus)="returnDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Return Date" [min]="flightSearch.get('departureDate').value">
                                                         <mat-datepicker touchUi #returnDate></mat-datepicker>
                                                     </mat-form-field>
                                                 </div>

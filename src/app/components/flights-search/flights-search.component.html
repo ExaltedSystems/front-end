@@ -62,7 +62,8 @@
                 </span>
                             </div>
                             <mat-form-field class="form-control material-input">
-                                <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Departure Date" [min]="currDate">
+                                <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open();setDatepickerTitle($event)" (focus)="departureDate.open();setDatepickerTitle($event)" (dateChange)="setReturnDate($event)" class="border-left-0 rounded-0"
+                                    placeholder="Departure Date" [min]="currDate">
                                 <mat-datepicker touchUi #departureDate></mat-datepicker>
                             </mat-form-field>
                             <div class="input-group-prepend" (click)="returnDate.open();setDatepickerTitle('Return Date')" [hidden]="!isReturn">
@@ -71,7 +72,7 @@
                 </span>
                             </div>
                             <mat-form-field class="form-control rounded-0 material-input" [hidden]="!isReturn">
-                                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
+                                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open();setDatepickerTitle($event)" (focus)="returnDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Return Date" [min]="currDate">
                                 <mat-datepicker touchUi #returnDate></mat-datepicker>
                             </mat-form-field>
                         </div>

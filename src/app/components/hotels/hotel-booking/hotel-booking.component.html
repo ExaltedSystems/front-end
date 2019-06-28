@@ -200,8 +200,9 @@
                         <option *ngFor="let item of createRange(room.no_of_guest);  let last = last" [attr.selected]="last" [value]="item">{{item}}</option>
                       </select>
                                         </div>
-                                        <div class="col-sm-4">
-                                            Smooking: Non Smooking
+                                        <div class="col-sm-6">
+                                            <p>
+                                                <b>Smooking:</b> {{room.smooking_policy}}</p>
                                         </div>
                                     </div>
                                     <!-- <div class="list-divider"></div>

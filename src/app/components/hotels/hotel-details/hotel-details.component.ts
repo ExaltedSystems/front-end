@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 declare var jQuery;
 
 
@@ -52,12 +53,17 @@ export class HotelDetailsComponent implements OnInit {
     inlineSearchForm: boolean = false;
     hotelPaymentDetails: any;
 
+    deviceInfo = null;
+    isDesktop = null;
+    isMobile = null;
+    isTablet = null;
     sideForm:boolean = true;
     roomsMsg;
 
     constructor(private _ms: MainService, private _date: DatePipe, private __fb: FormBuilder,private _router: Router,
-         private _cookieService: CookieService) {
-            window.scroll(0, 300);
+         private _cookieService: CookieService, private deviceService: DeviceDetectorService) {
+             this.epicFunction();
+            window.scroll(0, 0);
         }
 
     ngOnInit() {
@@ -76,7 +82,7 @@ export class HotelDetailsComponent implements OnInit {
             hotel_id: this.hotelId
         }
 
-        this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/hotelDetails', this.hotelObj).subscribe(result => {
+        this._ms.postData(this._ms.backEndUrl+'HotelQuery/hotelDetails', this.hotelObj).subscribe(result => {
             this.hotelDetails = result;
             console.log(typeof result)
             this.galleryImages = result['images'];
@@ -154,6 +160,12 @@ export class HotelDetailsComponent implements OnInit {
         }
 
     } //
+    epicFunction() {
+        this.deviceInfo = this.deviceService.getDeviceInfo();
+        this.isMobile = this.deviceService.isMobile();
+        this.isTablet = this.deviceService.isTablet();
+        this.isDesktop = this.deviceService.isDesktop();
+    }
 
     createChildForm(formData, childrensCount) {
         let chd_arr = this.UpdateHotelSearch.controls.childrenAges as FormArray;
@@ -372,5 +384,12 @@ export class HotelDetailsComponent implements OnInit {
         this._cookieService.set('bookingInfo',JSON.stringify(bookingInfo));
         this._router.navigate(['/hotel-booking']);
     }
+    
+  closeDropDown(ev) {
+    console.log(ev.path);
+    jQuery(ev.path[2]).removeClass('show')
+    jQuery(ev.path[3]).removeClass('show')
+
+  }
 
 }

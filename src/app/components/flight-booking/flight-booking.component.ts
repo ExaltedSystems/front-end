@@ -88,7 +88,7 @@ export class FlightBookingComponent implements OnInit {
   fareRules = null;
   constructor(private __fb: FormBuilder, private __actRouter:ActivatedRoute, private __router: Router, 
     private __ms:MainService, private __datepipe: DatePipe) {
-      window.scroll(0, 300);
+      window.scroll(0, 100);
     }
 
   ngOnInit() {
@@ -285,7 +285,7 @@ export class FlightBookingComponent implements OnInit {
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
       dob: ["", Validators.required],
-      docType: ["", Validators.required],
+      docType: [""],
       cnic: ["", Validators.required],
       cnicExp: ["", Validators.required],
       issuingCountry: ["", Validators.required],

@@ -310,7 +310,8 @@ header {
     -webkit-transform: scale(1)!important;
     transform: scale(1)!important;
     opacity: 1;
-    visibility: visible
+    visibility: visible;
+    z-index: 9999;
 }
 
 .dropdown-menu {
@@ -1430,5 +1431,22 @@ legend {
     .navbar-nav .dropdown-menu {
         position: absolute!important;
         top: auto!important
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .navbar-light .navbar-nav .nav-link {
+        font-size: 12px;
+    }
+    .custom-material-form .form-control,
+    .main-search-form .form-control {
+        font-size: 12px;
+    }
+    label,
+    p {
+        font-size: .8rem;
+    }
+    .sidebar-list ul li a {
+        font-size: 12px;
     }
 }

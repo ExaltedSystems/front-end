@@ -21,14 +21,14 @@
             </div>
             <b class="form-error">{{desMsg}}</b>
         </div>
-        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15bx' : '0'}">
+        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
             <div class="input-group flex-nowrap mb-4 mb-sm-0">
                 <div class="input-group-prepend">
                     <span class="input-group-text rounded-0" (click)="openDatePicker()">
                   <i-calendar></i-calendar>
                 </span>
                 </div>
-                <input type="text" id="date-range" autocomplete="off" (focus)="openDatePicker()" readonly="readonly" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut" />
+                <input type="text" id="date-range" autocomplete="off" (focus)="openDatePicker()" readonly="readonly" class="form-control material-input rounded-0 pl-0 date-range" formControlName="dateRange" placeholder="CheckIn - CheckOut" />
                 <!-- <span id="date-range" class="form-control material-input rounded-0 pl-0">CheckIn - CheckOut</span> -->
                 <!-- <input type="text" [autoApply]="true" class="form-control material-input rounded-0 pl-0" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/> -->
                 <!-- <mat-form-field class="form-control material-input rounded-0 pl-0">
@@ -132,11 +132,11 @@
 
                     </div>
 
-                    <!-- <div class="dropdown-divider"></div>
-            <a class="float-right" (click)="closeDropDown($event)">
-              <i-check class="dropdown-feather text-success float-left m-1"></i-check>
-              <span class="float-right">Done</span>
-            </a> -->
+                    <div class="dropdown-divider"></div>
+                    <a class="float-right" (click)="closeDropDown($event)">
+                        <i-check class="dropdown-feather text-success float-left m-1"></i-check>
+                        <span class="float-right">Done</span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -6,6 +6,11 @@
     border: solid 1px #333;
 }
 
+.clock-icon {
+    width: 16px !important;
+    height: 20px !important;
+}
+
 .hotel-search-item .badge {
     padding: 0.45em .8em;
 }

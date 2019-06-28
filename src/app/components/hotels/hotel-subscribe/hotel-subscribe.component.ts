@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 export class HotelSubscribeComponent implements OnInit {
 
   hotelSubscribeForm: FormGroup;
-  subscriberMsg: string;
+  subscriberSuccessMsg: string;
+  subscriberErrorMsg: string;
+  isLoad: boolean = false;
   constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router) { }
 
   ngOnInit() {
@@ -21,13 +23,25 @@ export class HotelSubscribeComponent implements OnInit {
   }
 
   subscribeNow(inputs) {
-    Object.assign(inputs, {
+      this.isLoad = true;
+      Object.assign(inputs, {
       ipAddress: this.__ms.ipAddress,
       pageUrl: this.__router.url,
       queryFrom: "Hotel"
     });
     this.__ms.postData(this.__ms.backEndUrl + 'cms/addSubscriber', inputs).subscribe(result => {
-      this.subscriberMsg = result.message;
+      if(result.status){
+        this.subscriberSuccessMsg = result.message;
+      } else {
+        this.subscriberErrorMsg = result.message;
+      }
+      window.setTimeout(()=>{
+        this.hotelSubscribeForm.get('email').setValue('');
+        this.hotelSubscribeForm.controls['email'].markAsUntouched(); 
+        this.subscriberSuccessMsg = '';
+        this.subscriberErrorMsg = '';
+      }, 10000)
+      this.isLoad = false;
     });
   }
 

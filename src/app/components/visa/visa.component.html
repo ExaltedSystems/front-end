@@ -29,7 +29,7 @@
                 </div> -->
             </div>
             <div class="col-sm-9 order-sm-2" *ngIf="page_info">
-                <h1>{{ page_info[0].countryName }}</h1>
+                <h1>{{ page_info.countryName }}</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -38,12 +38,12 @@
                         <li class="breadcrumb-item">
                             <a routerLink="/visa">Visa</a>
                         </li>
-                        <li class="breadcrumb-item active">{{ page_info[0].countryName }}</li>
+                        <li class="breadcrumb-item active">{{ page_info.countryName }}</li>
                     </ol>
                 </nav>
                 <!--listing start-->
                 <div class="row card-deck">
-                    <div class="col-sm-4" *ngFor="let item of page_info; let i=index;">
+                    <div class="col-sm-4" *ngFor="let item of page_info.visaDetails; let i=index;">
                         <div class="visa-type-card mx-0 card shadow mb-4">
                             <div class="duration d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">{{ item.durationId }}</h5>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <!--listing end-->
-                <div class="ck-editor-data" [innerHTML]="page_info[0].details"></div>
+                <div class="ck-editor-data" [innerHTML]="page_info.details"></div>
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@ export class HotelsListingComponent implements OnInit {
 
     deviceInfo = null;
     isDesktop = null;
-    isMobile = null;
+    isMobile = false;
     isTablet = null;
     sideForm:boolean = true;
 
@@ -67,7 +67,7 @@ export class HotelsListingComponent implements OnInit {
     ngOnInit() {
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
 
-        this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search', this.searchQuery).subscribe(result => {
+        this._ms.postData(this._ms.backEndUrl+'HotelQuery/search', this.searchQuery).subscribe(result => {
             this.hotelsSearchResult = result;
             this.isLoading = false;
             console.log('result', result);

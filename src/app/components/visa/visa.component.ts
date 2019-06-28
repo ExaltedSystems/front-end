@@ -9,7 +9,7 @@ import { Meta, Title } from '@angular/platform-browser';
 	styleUrls: ['./visa.component.css']
 })
 export class VisaComponent implements OnInit {
-	page_info: any;	
+	page_info: any;
 	popularVisa: object;
 	constructor(private __ms: MainService, private router: Router, private __meta: Meta, private __title: Title
 		, private __device: DeviceDetectorService) {
@@ -29,7 +29,7 @@ export class VisaComponent implements OnInit {
 		param = param.substring(1);
 		this.__ms.getData(this.__ms.backEndUrl + 'Cms/viewVisaDetailsByUrl/?visaUrl=' + param).subscribe(res => {
 			this.page_info = res.data;
-			this.updateMetaTags(res.data[0]);
+			this.updateMetaTags(res.data);
 		});
 	}
 	popularVisas() {

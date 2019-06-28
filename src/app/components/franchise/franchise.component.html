@@ -5,7 +5,7 @@
 <section class="visa-contents">
     <div class="container sidebar">
         <div class="section-title">
-            <h1>Franchise Registration</h1>
+            <h1>{{ page_info.name }}</h1>
             <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
         </div>
         <div class="row">
@@ -15,6 +15,7 @@
                 </div>
             </div>
             <div class="col-sm-9 order-1 order-sm-12">
+              <div [innerHTML]="page_info.description"></div>
                 <div class="card-deck">
                     <form class="main-search-form position-relative" [formGroup]="franchiseForm" (submit)="onSubmit(franchiseForm.value)">
                         <div class="form-group row mb-1">

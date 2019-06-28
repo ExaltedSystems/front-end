@@ -1,7 +1,7 @@
 import { MainService } from './../../services/main.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange } from '@angular/material';
+import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange, MatDatepickerInputEvent } from '@angular/material';
 import { map } from 'rxjs/operators';
 
 import { startWith } from 'rxjs/operators';
@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit {
       flyingFrom: ["", Validators.required],
       flyingTo: ["", Validators.required],
       departureDate: ["", Validators.required],
-      returnDate: ["", Validators.required],
+      returnDate: [""],
       preferredClass: [],
       PreferredAirline: [],
       adults: ["1", Validators.required],
@@ -428,5 +428,8 @@ export class HomeComponent implements OnInit {
 		window.setTimeout(()=> {
 			jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">'+placeHolder+'</h3>');
 		}, 300);
-	}
+  }
+  setReturnDate(event: MatDatepickerInputEvent<Date>) {
+    this.flightSearch.get('returnDate').setValue(this.addDays(3, event.target.value));
+  }
 }

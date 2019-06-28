@@ -70,7 +70,7 @@ export class HotelSearchFormComponent implements OnInit {
       destination: ["",Validators.required],
       checkInDate: [""],
       checkOutDate: [""],
-      dates: ["", Validators.required],
+      dates: [""],
       dateRange: [""],
       rooms: ["1"],
       adults: ["1"],
@@ -109,7 +109,7 @@ export class HotelSearchFormComponent implements OnInit {
 
 
     // get hotels list
-    this.__ms.getLIst('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/getHotels').subscribe(data => {
+    this.__ms.getLIst(this.__ms.backEndUrl+'HotelQuery/getHotels').subscribe(data => {
      this.hotelsList = data;
      this.isLoading = false;
     })
@@ -247,7 +247,7 @@ export class HotelSearchFormComponent implements OnInit {
   
   public getSearchResults = (obj) => {
     this.searchBtn = 'Loading';
-    this.__ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search',obj).subscribe(result => {
+    this.__ms.postData(this.__ms.backEndUrl+'HotelQuery/search',obj).subscribe(result => {
       this.hotelSearchResult = result;
       this.searchEvent.emit(this.hotelSearchResult);
       this.searchBtn = 'Search';
@@ -259,6 +259,7 @@ export class HotelSearchFormComponent implements OnInit {
     console.log('date', jQuery('#date-range').val());
     let date1 = new Date(jQuery('#date-range').val().split('-')[0]);
     let date2 = new Date(jQuery('#date-range').val().split('-')[1]);
+    console.log("Dates:", [date1, date2])
     // return;
     if(this.hotelSearch.valid){
       let formObj = {
@@ -281,6 +282,12 @@ export class HotelSearchFormComponent implements OnInit {
     } else {
       console.log('form invalid!')
     }
+  }
+  closeDropDown(ev) {
+    // console.log(ev.path[2]);
+    jQuery(ev.path[2]).removeClass('show')
+    jQuery(ev.path[3]).removeClass('show')
+
   }
 
 } //

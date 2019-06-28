@@ -57,7 +57,7 @@ export class HotelBookingComponent implements OnInit {
 
   constructor(private _ms: MainService, private _cookieService: CookieService, private __fb: FormBuilder,
     private __router: Router) {
-      window.scroll(0, 300);
+      window.scroll(0, 0);
     }
 
   ngOnInit() {
@@ -77,7 +77,7 @@ export class HotelBookingComponent implements OnInit {
       hotel_id: this.hotelId
     }
 
-    this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/hotelDetails', this.hotelObj).subscribe(result => {
+    this._ms.postData(this._ms.backEndUrl+'HotelQuery/hotelDetails', this.hotelObj).subscribe(result => {
       this.hotelDetails = result;
       this.galleryImages = result['images'];
       this.isLoading = false;
@@ -167,7 +167,7 @@ export class HotelBookingComponent implements OnInit {
       room_ids: this.room_ids
     }
 
-    this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/reservedHotelDetails', reservedRooms).subscribe(result => {
+    this._ms.postData(this._ms.backEndUrl+'HotelQuery/reservedHotelDetails', reservedRooms).subscribe(result => {
       this.selectedRooms = result['room_details']
       this.selectedRooms = _.map(this.selectedRooms, (obj) => {
         return _.assign(obj, _.find(this.roomsInfo, { roomId: obj.id }));
@@ -240,6 +240,7 @@ export class HotelBookingComponent implements OnInit {
       totalNights: this.totalNights,
       totalGuests: this.totalGuests,
       totalPirce: this.totalPrice,
+      totalRooms:this.bookingInfo['totalRooms'],
       guests: {
         adults: this.searchQuery['adults'],
         children: this.searchQuery['children'],
@@ -251,7 +252,7 @@ export class HotelBookingComponent implements OnInit {
     }
 
     console.log('confirm', bookingObj)
-    this._ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/bookingRequest', bookingObj).subscribe(result => {
+    this._ms.postData(this._ms.backEndUrl+'HotelQuery/bookingRequest', bookingObj).subscribe(result => {
       this._cookieService.set('bookingId', JSON.stringify(result));
       this.__router.navigate(['/hotel-voucher']);
     })
