@@ -35,22 +35,25 @@ export class PnrViewComponent implements OnInit {
   ngOnInit() {
     this.queryParams = this.__actRouter.snapshot.queryParams;
     this.refNo = this.queryParams.__token;
-    console.log('token:', localStorage.getItem("paxToken"));
     let flightInfoObj = {
       _refrenceNo: this.refNo,
-      _token: localStorage.getItem("paxToken")
+      _token: localStorage.getItem("paxToken"),
+      _flag: 'ccard'
     } 
     // Object.assign({refrenceNo:refNo}, {token:localStorage.getItem("paxToken")})
-    // let flightInfoUrl = 'http://localhost/rgtapp/index.php/services/Ticket/flightInfo';
-    // this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
-    //   console.log(res)
-    //   if(res['res_flag'] == true){
-    //     this.createPnr(res);
-    //   }
-    // })
-
-    this.airItinerary();
-
+    let flightInfoUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retFlightInfo';
+    this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      if(res['res_flag'] == true){
+        this.createPnr(res);
+      }else if(res['res_flag'] == false){
+        if(res['pnr']){
+          this.airItinerary(res['pnr']);
+        }else{
+          this.pnrResponse = res['ERROR'];
+        }
+      }
+    })
+    
   }
 
   createPnr(flightInfos){
@@ -74,28 +77,35 @@ export class PnrViewComponent implements OnInit {
       __isSectors: flightInfos.segmentArr,
       __isTravellers: flightInfos.travellers
     } //  end pnr obj
-    console.log(pnrObj)
-    // this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
-    //   console.log(resp)
-    // let pnr = 'JFLWVB'; // res['__isFlag'];
-    // this.pnrCreated(pnr);
-    // })
+    // console.log(pnrObj)
+    this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
+      console.log(resp)
+      let pnr = resp['__isPnr']; // res['__isPnr'];
+      this.pnrCreated(pnr);
+    })
     // JFLWVB
+    // {"__isPnr":"IJQTOW"}
+    // let pnr = "IJQTOW";
+    // this.pnrCreated(pnr);
   } // 
 
   pnrCreated(pnr){
-    let pnrSaveUrl = 'http://localhost/rgtapp/index.php/services/Ticket/pnr';
+    let pnrSaveUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/pnr';
     let pnrSaveObj = {
       _refrenceNo: this.refNo,
       pnr: pnr,
       _token: localStorage.getItem("paxToken")
     }
     this.__ms.postData(pnrSaveUrl, pnrSaveObj).subscribe(res => {
-      console.log(res)
+      if(res['tkt_flag'] == true){
+        // call for ticket issuance
+      }else{
+        this.airItinerary(pnr)
+      }
     })
   }
 
-  airItinerary(){
+  airItinerary(pnr){
     let itineraryUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirItinerary';
     let itineraryObj = {
       __isView: "W",
@@ -105,9 +115,37 @@ export class PnrViewComponent implements OnInit {
       __isParantId: 0,
       __isUserId: 0,
       __isAirType: "O",
-      __isPnr : "IMYIGE"
+      __isPnr : pnr
     }
-    // this.__ms.postData(itineraryUrl, itineraryObj).subscribe(res => {
+    this.__ms.postData(itineraryUrl, itineraryObj).subscribe(res => {      
+      res['CustomerInfo']['PersonName'] instanceof Array ? this.persons = res['CustomerInfo']['PersonName'] : this.persons.push(res['CustomerInfo']['PersonName'])
+      this.reservationItems.push(res['ItineraryInfo']['ReservationItems']['Item']);// = res['ItineraryInfo']['ReservationItems']['Item'];      
+      this.reservationItems.forEach(element => {
+        let dtsplt = element.Air.attr.DepartureDateTime.split('T');
+        let eachYear = dtsplt[0].split('-')[0];
+        this.segmentYears.push(eachYear);
+      })
+      // console.log(this.segmentYears)
+      this.PNR = res['ItineraryRef']['attr']['ID'];
+      this.pnrCreateDate += '-' + (res['ItineraryRef']['Source']['attr']['CreateDateTime']).split('T')[0];
+      this.specialServices = res['SpecialServices'];
+      
+      let psgBfare = 0;
+      let psgTaxes = 0;
+      this.priceQuotes.push(res['ItineraryInfo']['ItineraryPricing']['PriceQuote']);// = res['ItineraryInfo']['ItineraryPricing']['PriceQuote'];
+      this.priceQuotes.forEach(element => {
+        this.pnrBaseFare += Number(element.PricedItinerary.AirItineraryPricingInfo.ItinTotalFare.BaseFare.attr.Amount);
+        this.pnrTaxes += Number(element.PricedItinerary.AirItineraryPricingInfo.ItinTotalFare.Taxes.Tax.attr.Amount);
+      })
+      this.pnrTotalFare = Number(this.pnrBaseFare) + Number(this.pnrTaxes);
+
+      this.pnrReceivedFrom = res['ItineraryRef']['Source']['attr']['ReceivedFrom'];
+      this.pnrResponse = res;
+      // console.log(this.pnrTotalFare)
+    })
+    
+    // GET RESPONSE FROM JSON FILE FOR TESTING
+    // this.__ms.getJSON('../assets/airItinerary.json').subscribe(res => {
     //   console.log(res)
     //   this.pnrResponse = res;
     //   res['CustomerInfo']['PersonName'] instanceof Array ? this.persons = res['CustomerInfo']['PersonName'] : this.persons.push(res['CustomerInfo']['PersonName'])
@@ -135,36 +173,6 @@ export class PnrViewComponent implements OnInit {
     //   this.pnrReceivedFrom = res['ItineraryRef']['Source']['attr']['ReceivedFrom'];
     //   // console.log(this.pnrTotalFare)
     // })
-    
-    // GET RESPONSE FROM JSON FILE FOR TESTING
-    this.__ms.getJSON('../assets/airItinerary.json').subscribe(res => {
-      console.log(res)
-      this.pnrResponse = res;
-      res['CustomerInfo']['PersonName'] instanceof Array ? this.persons = res['CustomerInfo']['PersonName'] : this.persons.push(res['CustomerInfo']['PersonName'])
-      
-      this.reservationItems = res['ItineraryInfo']['ReservationItems']['Item'];
-      this.reservationItems.forEach(element => {
-        let dtsplt = element.Air.attr.DepartureDateTime.split('T');
-        let eachYear = dtsplt[0].split('-')[0];
-        this.segmentYears.push(eachYear);
-      })
-      // console.log(this.segmentYears)
-      this.PNR = res['ItineraryRef']['attr']['ID'];
-      this.pnrCreateDate += '-' + (res['ItineraryRef']['Source']['attr']['CreateDateTime']).split('T')[0];
-      this.specialServices = res['SpecialServices'];
-      
-      let psgBfare = 0;
-      let psgTaxes = 0;
-      this.priceQuotes = res['ItineraryInfo']['ItineraryPricing']['PriceQuote'];
-      this.priceQuotes.forEach(element => {
-        this.pnrBaseFare += Number(element.PricedItinerary.AirItineraryPricingInfo.ItinTotalFare.BaseFare.attr.Amount);
-        this.pnrTaxes += Number(element.PricedItinerary.AirItineraryPricingInfo.ItinTotalFare.Taxes.Tax.attr.Amount);
-      })
-      this.pnrTotalFare = Number(this.pnrBaseFare) + Number(this.pnrTaxes);
-
-      this.pnrReceivedFrom = res['ItineraryRef']['Source']['attr']['ReceivedFrom'];
-      // console.log(this.pnrTotalFare)
-    })
   } // 
 
 }
