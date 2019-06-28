@@ -322,7 +322,7 @@ export class FlightBookingComponent implements OnInit {
         __isLastName: formInputs.passengersArr[i].lastName,
         __isDOB: formInputs.passengersArr[i].dob,
         __isCountry: formInputs.passengersArr[i].nationality,
-        __isDocType: formInputs.passengersArr[i].docType,
+        __isDocType: this.selectedDocType,
         __isDocNo: formInputs.passengersArr[i].cnic,
         __isExpiryDate: formInputs.passengersArr[i].cnicExp,
         __isIssued: formInputs.passengersArr[i].issuingCountry,
