@@ -70,6 +70,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import { FranchiseComponent } from './components/franchise/franchise.component';
 import { TravelAgentsComponent } from './components/franchise/travel-agents/travel-agents.component';
 import { JobsComponent } from './components/jobs/jobs.component';
+import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { JobsComponent } from './components/jobs/jobs.component';
     VisaListingPipe,
     FranchiseComponent,
     TravelAgentsComponent,
-    JobsComponent
+    JobsComponent,
+    PaymentErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ import { GeneralPagesComponent } from './components/general-pages/general-pages.
 import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-voucher.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { FranchiseComponent } from './components/franchise/franchise.component';
+import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -41,13 +42,14 @@ export const APP_ROUTES: Routes = [
 	{ path: 'flight-booking', component: FlightBookingComponent },
 	{ path: 'pnrView', component: PnrViewComponent },
 	{ path: 'thank-you', component: ThankYouComponent },
+	{ path: 'paymentError', component: PaymentErrorComponent },
 	{ path: 'hotels-listing', component: HotelsListingComponent },
 	{ path: 'hotel-details', component: HotelDetailsComponent },
 	{ path: 'airlines/:airline', component: DetailComponent },
 	{ path: 'hotels/:hotel', component: DetailComponent },
 	{ path: 'hotel-booking', component: HotelBookingComponent },
 	{ path: 'hotel-voucher', component: HotelVoucherComponent },
-  { path: 'jobs', component: JobsComponent },
-  { path: 'franchise-reg', component: FranchiseComponent },
+	{ path: 'jobs', component: JobsComponent },
+	{ path: 'franchise-reg', component: FranchiseComponent },
 	{ path: '**', component: GeneralPagesComponent }
 ];

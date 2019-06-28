@@ -304,7 +304,7 @@
 
                                                         <div class="col-sm-3">
                                                             <mat-form-field class="form-control" (click)="dobDate.open()">
-                                                                <input matInput [matDatepicker]="dobDate" formControlName="dob" class="border-left-0 rounded-0" placeholder="Date of Birth" [min]="minPickerDate[i]" [max]="maxPickerDate[i]">
+                                                                <input matInput [matDatepicker]="dobDate" formControlName="dob" class="border-left-0 rounded-0" placeholder="Date of Birth" [min]="minPickerDate[i]" [max]="maxPickerDate[i]" (focus)="dobDate.open()">
                                                                 <mat-datepicker touchUi #dobDate></mat-datepicker>
                                                             </mat-form-field>
                                                         </div>
@@ -329,7 +329,7 @@
 
                                                         <div class="col-sm-3">
                                                             <mat-form-field class="form-control" (click)="cnicExp.open()">
-                                                                <input matInput [matDatepicker]="cnicExp" formControlName="cnicExp" class="border-left-0 rounded-0" placeholder="{{docExpPlaceholder}}" [min]="minDocExpiryDate">
+                                                                <input matInput [matDatepicker]="cnicExp" formControlName="cnicExp" class="border-left-0 rounded-0" placeholder="{{docExpPlaceholder}}" [min]="minDocExpiryDate" (focus)="cnicExp.open()">
                                                                 <mat-datepicker touchUi #cnicExp></mat-datepicker>
                                                             </mat-form-field>
                                                         </div>
