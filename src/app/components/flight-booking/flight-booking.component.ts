@@ -61,6 +61,8 @@ export class FlightBookingComponent implements OnInit {
   passengersArr: FormArray;
   paymentForm: FormGroup;
   creditCardForm;
+  jazzCashForm;
+
   // creditCardButton;
 
   cardTypeitems = [{"label": "Visa", "value": "visa", "checked": true},
@@ -370,7 +372,8 @@ export class FlightBookingComponent implements OnInit {
   cashOnDelivery(){
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
-      _token: localStorage.getItem("paxToken")
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: 3
     }
     Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
@@ -385,7 +388,8 @@ export class FlightBookingComponent implements OnInit {
   byBank(){
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
-      _token: localStorage.getItem("paxToken")
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: 2
     }
     Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
@@ -396,6 +400,22 @@ export class FlightBookingComponent implements OnInit {
       }
     })
   }// end by bank
+
+  byBranch(){
+    let flightInfoObj = {
+      _refrenceNo: this.referenceNo,
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: 7
+    }
+    Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
+    let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
+    this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      // console.log(res);
+      if(res['res_flag'] == true){
+        this.createPnr(res);
+      }
+    })
+  }// end by branch
 
   createPnr(flightInfos){
     let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
@@ -487,6 +507,21 @@ export class FlightBookingComponent implements OnInit {
       this.fareRules = res['Rules']['Paragraph'];      
     })
     jQuery('#view_fare_rules').modal('show');      
-  } // 
+  } //
+  
+  jazzCashPost(formInputs){
+    
+    let jazzCashUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/jazzCash';
+    let jazzCashObj = Object.assign(formInputs, this.travellersObj, {_token: localStorage.getItem("paxToken")});
+    this.__ms.postData(jazzCashUrl, jazzCashObj).subscribe(res => {
+      console.log(JSON.stringify(res))
+      // localStorage.setItem("paxToken", res['jwt']);
+      this.jazzCashForm = res['inputs'];
+      setTimeout(function() {
+        jQuery('#jazzCashForm').html(res['inputs'])
+        // jQuery('#jazzCashForm').submit()
+      }, 1000)
+    })
+  }
   
 }
