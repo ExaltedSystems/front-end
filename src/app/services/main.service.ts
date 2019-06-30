@@ -218,7 +218,41 @@ export class MainService {
       "__isPassengers":revalidatePsgrs,
       "__isSectors": revalidateSectors
     }
-  }
+  }//
+
+  createPnr(flightInfos){
+    let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
+    let pnrObj = {
+      __isView: "W",
+      __isAction: "C",
+      __isVendorId: 1,
+      __isAgentId: 0,
+      __isParantId: 0,
+      __isUserId: 0,
+      __isFlightType: flightInfos.__isFlightType,
+      __isFr: flightInfos.__isEmail,
+      __isTo: flightInfos.__isEmail,
+      __isCc: flightInfos.__isEmail,
+      __isAirType: "O",
+      __isTravelDate: flightInfos.__isTravelDate,
+      __isReceivedFrom: "CheapFly",
+      __isPhoneNumber: flightInfos.__isPhone,
+      __isPassengers:flightInfos.passengers,
+      __isSectors: flightInfos.segmentArr,
+      __isTravellers: flightInfos.travellers
+    } //  end pnr obj
+    return this.postData(pnrUrl, pnrObj);
+  } // end createpnr
+
+  pnrCreated(pnr, paymentFlag){
+    let pnrSaveUrl = this.backEndUrl+'Ticket/pnrCreated';
+    let pnrSaveObj = {
+      pnr: pnr,
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: paymentFlag
+    }
+    return this.postData(pnrSaveUrl, pnrSaveObj)
+  } // end pnrcreated
 }
 export interface response {
   status: boolean,

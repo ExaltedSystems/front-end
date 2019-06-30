@@ -41,7 +41,7 @@ export class PnrViewComponent implements OnInit {
       _flag: 'ccard'
     } 
     // Object.assign({refrenceNo:refNo}, {token:localStorage.getItem("paxToken")})
-    let flightInfoUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/retFlightInfo';
+    let flightInfoUrl = this.__ms.backEndUrl + 'Ticket/retFlightInfo';
     this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
       if(res['res_flag'] == true){
         this.createPnr(res);
@@ -57,28 +57,8 @@ export class PnrViewComponent implements OnInit {
   }
 
   createPnr(flightInfos){
-    let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
-    let pnrObj = {
-      __isView: "W",
-      __isAction: "C",
-      __isVendorId: 1,
-      __isAgentId: 0,
-      __isParantId: 0,
-      __isUserId: 0,
-      __isFlightType: flightInfos.__isFlightType,
-      __isFr: flightInfos.__isEmail,
-      __isTo: flightInfos.__isEmail,
-      __isCc: flightInfos.__isEmail,
-      __isAirType: "O",
-      __isTravelDate: flightInfos.__isTravelDate,
-      __isReceivedFrom: "CheapFly",
-      __isPhoneNumber: flightInfos.__isPhone,
-      __isPassengers:flightInfos.passengers,
-      __isSectors: flightInfos.segmentArr,
-      __isTravellers: flightInfos.travellers
-    } //  end pnr obj
-    // console.log(pnrObj)
-    this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
+    
+    this.__ms.createPnr(flightInfos).subscribe(resp => {
       console.log(resp)
       let pnr = resp['__isPnr']; // res['__isPnr'];
       this.pnrCreated(pnr);
@@ -90,20 +70,15 @@ export class PnrViewComponent implements OnInit {
   } // 
 
   pnrCreated(pnr){
-    let pnrSaveUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/pnr';
-    let pnrSaveObj = {
-      _refrenceNo: this.refNo,
-      pnr: pnr,
-      _token: localStorage.getItem("paxToken")
-    }
-    this.__ms.postData(pnrSaveUrl, pnrSaveObj).subscribe(res => {
+
+    this.__ms.pnrCreated(pnr, 1).subscribe(res => {
       if(res['tkt_flag'] == true){
         // call for ticket issuance
       }else{
         this.airItinerary(pnr)
       }
     })
-  }
+  } //
 
   airItinerary(pnr){
     let itineraryUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirItinerary';
