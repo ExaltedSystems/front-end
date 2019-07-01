@@ -39,6 +39,7 @@ export class FlightBookingComponent implements OnInit {
   flightPricing:object;
   travellersObj:object;
   tagExpired:boolean = false;
+  tokenExpired:boolean = false;
   byTagResponse;
   issuingCountries:any;
 
@@ -62,6 +63,8 @@ export class FlightBookingComponent implements OnInit {
   passengersArr: FormArray;
   paymentForm: FormGroup;
   creditCardForm;
+  jazzCashForm;
+
   // creditCardButton;
 
   cardTypeitems = [{"label": "Visa", "value": "visa", "checked": true},
@@ -87,6 +90,7 @@ export class FlightBookingComponent implements OnInit {
   validatingCarrier:string;
   postPsgrs;
   fareRules = null;
+  paymentFlag = 1;
   constructor(private __fb: FormBuilder, private __actRouter:ActivatedRoute, private __router: Router, 
     private __ms:MainService, private __datepipe: DatePipe) {
       window.scroll(0, 0);
@@ -330,7 +334,7 @@ export class FlightBookingComponent implements OnInit {
         __isLastName: formInputs.passengersArr[i].lastName,
         __isDOB: formInputs.passengersArr[i].dob,
         __isCountry: formInputs.passengersArr[i].nationality,
-        __isDocType: formInputs.passengersArr[i].docType,
+        __isDocType: this.selectedDocType,
         __isDocNo: formInputs.passengersArr[i].cnic,
         __isExpiryDate: formInputs.passengersArr[i].cnicExp,
         __isIssued: formInputs.passengersArr[i].issuingCountry,
@@ -362,23 +366,25 @@ export class FlightBookingComponent implements OnInit {
 
   creditCardPost(formInputs){
     let creditCardUrl = this.__ms.backEndUrl+'Ticket/creditCard';
-    let reservationObj = Object.assign(formInputs, this.travellersObj, this.segmentInfoArr, {refrenceNo: this.referenceNo});
+    let reservationObj = Object.assign(formInputs, this.travellersObj, this.segmentInfoArr, {_token: localStorage.getItem('paxToken')});
     this.__ms.postData(creditCardUrl, reservationObj).subscribe(res => {
-      console.log(res)
-      localStorage.setItem("paxToken", res['jwt']);
+      // console.log(res)
+      // localStorage.setItem("paxToken", res['jwt']);
       this.creditCardForm = res['inputs'];
       setTimeout(function() {
         jQuery('#creditCardForm').html(res['inputs'])
         jQuery('#creditCardForm').submit()
       }, 1000)
     })
-    console.log(reservationObj)
+    // console.log(reservationObj)
   } //
 
   cashOnDelivery(){
+    this.paymentFlag = 3;
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
-      _token: localStorage.getItem("paxToken")
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: this.paymentFlag
     }
     Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
@@ -386,14 +392,18 @@ export class FlightBookingComponent implements OnInit {
       // console.log(res);
       if(res['res_flag'] == true){
         this.createPnr(res);
+      }else if(res['res_flag'] == false){
+        this.tokenExpired = true;
       }
     })
   } //
 
   byBank(){
+    this.paymentFlag = 2;
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
-      _token: localStorage.getItem("paxToken")
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: this.paymentFlag
     }
     Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
@@ -401,47 +411,43 @@ export class FlightBookingComponent implements OnInit {
       // console.log(res);
       if(res['res_flag'] == true){
         this.createPnr(res);
+      }else if(res['res_flag'] == false){
+        this.tokenExpired = true;
       }
     })
   }// end by bank
 
+  byBranch(){
+    this.paymentFlag = 7;
+    let flightInfoObj = {
+      _refrenceNo: this.referenceNo,
+      _token: localStorage.getItem("paxToken"),
+      _paymentFlag: this.paymentFlag
+    }
+    Object.assign({refrenceNo:this.referenceNo}, {token:localStorage.getItem("paxToken")})
+    let flightInfoUrl = this.__ms.backEndUrl+'Ticket/retFlightInfo';
+    this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      // console.log(res);
+      if(res['res_flag'] == true){
+        this.createPnr(res);
+      }else if(res['res_flag'] == false){
+        this.tokenExpired = true;
+      }
+    })
+  }// end by branch
+
   createPnr(flightInfos){
-    let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
-    let pnrObj = {
-      __isView: "W",
-      __isAction: "C",
-      __isVendorId: 1,
-      __isAgentId: 0,
-      __isParantId: 0,
-      __isUserId: 0,
-      __isFlightType: flightInfos.__isFlightType,
-      __isFr: flightInfos.__isEmail,
-      __isTo: flightInfos.__isEmail,
-      __isCc: flightInfos.__isEmail,
-      __isAirType: "O",
-      __isTravelDate: flightInfos.__isTravelDate,
-      __isReceivedFrom: "CheapFly",
-      __isPhoneNumber: flightInfos.__isPhone,
-      __isPassengers:flightInfos.passengers,
-      __isSectors: flightInfos.segmentArr,
-      __isTravellers: flightInfos.travellers
-    } //  end pnr obj
-    // console.log(pnrObj)
-    this.__ms.postData(pnrUrl, pnrObj).subscribe(resp => {
+    
+    this.__ms.createPnr(flightInfos).subscribe(resp => {
       // console.log(resp)
-    let pnr = resp['__isPnr']; // res['__isPnr'];
-    this.pnrCreated(pnr);
+      let pnr = resp['__isPnr'];
+      this.pnrCreated(pnr);
     })
     // JFLWVB
   } // 
 
   pnrCreated(pnr){
-    let pnrSaveUrl = this.__ms.backEndUrl+'Ticket/pnrCreated';
-    let pnrSaveObj = {
-      pnr: pnr,
-      _token: localStorage.getItem("paxToken")
-    }
-    this.__ms.postData(pnrSaveUrl, pnrSaveObj).subscribe(res => {
+    this.__ms.pnrCreated(pnr, this.paymentFlag).subscribe(res => {
       console.log(res)
       this.__router.navigate(["/thank-you"], {
         // relativeTo: this.__route,
@@ -495,11 +501,26 @@ export class FlightBookingComponent implements OnInit {
       this.fareRules = res['Rules']['Paragraph'];      
     })
     jQuery('#view_fare_rules').modal('show');      
-  } // 
+  } //
+  
+  jazzCashPost(formInputs){
+    
+    let jazzCashUrl = this.__ms.backEndUrl + 'Ticket/jazzCash';
+    let jazzCashObj = Object.assign(formInputs, this.travellersObj, {_token: localStorage.getItem("paxToken"), _paymentFlag: this.paymentFlag});
+    this.__ms.postData(jazzCashUrl, jazzCashObj).subscribe(res => {
+      console.log(JSON.stringify(res))
+      // localStorage.setItem("paxToken", res['jwt']);
+      this.jazzCashForm = res['inputs'];
+      setTimeout(function() {
+        jQuery('#jazzCashForm').html(res['inputs'])
+        // jQuery('#jazzCashForm').submit()
+      }, 1000)
+    })
+  } // END FUNCTION
   getIssuingCountriesList(){
     this.__ms.getData(this.__ms.backEndUrl+'Ticket/issuingCountries').subscribe(res => {
       this.issuingCountries = res.data;
     });
   }
   
-}
+} // END CLASS
