@@ -1472,7 +1472,6 @@ legend {
 }
 
 @media (min-width: 768px) {
-<<<<<<< HEAD
 	.shadow-sm-none{
 		box-shadow: none !important;
 	}
@@ -1491,23 +1490,3 @@ legend {
 
  /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {  }
-=======
-    .shadow-sm-none {
-        box-shadow: none !important;
-    }
-    .navbar-nav .dropdown-menu {
-        position: absolute !important;
-        top: auto !important;
-    }
-}
-
-
-/*Large devices (desktops, 992px and up)*/
-
-@media (min-width: 992px) {}
-
-
-/*Extra large devices (large desktops, 1200px and up)*/
-
-@media (min-width: 1200px) {}
->>>>>>> 26abc1d557a040d5b6cb25bbcdd94002e176933b
