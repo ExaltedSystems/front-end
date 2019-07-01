@@ -495,7 +495,7 @@ export class FlightBookingComponent implements OnInit {
       __isFares: fareSegments
     }
     // console.log(fareRulesObj)
-    let frUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirFareRules';
+    let frUrl = this.__ms.tktBaseUrl+'Air-Service/AirAvailability/AirFareRules';
     this.__ms.postData(frUrl, fareRulesObj).subscribe(res => {
       console.log(res)
       this.fareRules = res['Rules']['Paragraph'];      

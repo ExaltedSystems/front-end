@@ -11,20 +11,26 @@ import { Http, Response } from '@angular/http';
 export class MainService {
 
   public baseUrl = 'http://www.cheapfly.pk/';
+  public tktBaseUrl = 'http://exaltedsys.com/';
   backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
-  flightsUrl: string = 'https://exaltedsys.com/Air-Service/AirAvailability/Flights';
-  byTagUrl: string = 'https://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
-  revalidateUrl: string = 'https://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
+  flightsUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
+  byTagUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
+  revalidateUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
   FlightInfo:object;
   hotelSearchQuery: object;
   public ipAddress: any;
   constructor(private __httpClient: HttpClient, private __http: Http) {
     this.getIpAddress();
-    // For Live to Set http / https
+    // For Live Site to Set http / https
     let loc = window.location;
     let base_url = loc.protocol+"//"+loc.hostname+"/";
     this.baseUrl = base_url;
     this.backEndUrl = this.baseUrl+"rgtapp/index.php/services/";
+    
+    this.tktBaseUrl = loc.protocol+'//exaltedsys.com/';
+    this.flightsUrl = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
+    this.byTagUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
+    this.revalidateUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
   }
 
 
@@ -227,7 +233,7 @@ export class MainService {
   }//
 
   createPnr(flightInfos){
-    let pnrUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirReservation';
+    let pnrUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirReservation';
     let pnrObj = {
       __isView: "W",
       __isAction: "C",
