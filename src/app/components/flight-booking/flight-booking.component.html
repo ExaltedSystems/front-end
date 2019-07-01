@@ -319,11 +319,11 @@
                                                                 </mat-select>
                                                             </mat-form-field>
                                                         </div> -->
-                                                        <input type="hidden" formControlName="docType" value="{{selectedDocType}}">
+                                                        <input type="hidden" formControlName="docType">
 
                                                         <div class="col-sm-3">
                                                             <mat-form-field class="form-control">
-                                                                <input matInput placeholder="{{docNumPlaceholder}}" formControlName="cnic" (keyup)="changeDocType($event)">
+                                                                <input matInput placeholder="{{docNumPlaceholder}}" formControlName="cnic" (keyup)="changeDocType($event, i)">
                                                             </mat-form-field>
                                                         </div>
 
@@ -337,25 +337,30 @@
                                                         <div class="col-sm-3">
                                                             <mat-form-field class="form-control">
                                                                 <mat-select formControlName='issuingCountry' placeholder="Issuing Country">
-                                                                    <mat-option value="PK">Pakistan</mat-option>
-                                                                    <mat-option value="UAE">UAE</mat-option>
-                                                                    <mat-option value="UK">UK</mat-option>
+                                                                    <mat-option *ngFor="let c of issuingCountries" [value]="c.countryCode">{{c.countryName}}</mat-option>
+                                                                    <!-- <mat-option value="UAE">UAE</mat-option>
+                                                                    <mat-option value="UK">UK</mat-option> -->
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <mat-select formControlName='nationality' placeholder="Nationality">
+                                                                    <mat-option *ngFor="let c of issuingCountries" value="{{c.countryCode}}">{{c.countryName}}</mat-option>
                                                                 </mat-select>
                                                             </mat-form-field>
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row mb-sm-4">
+                                                    <!-- <div class="form-group row mb-sm-4">
                                                         <div class="col-sm-3">
                                                             <mat-form-field class="form-control">
                                                                 <mat-select formControlName='nationality' placeholder="Nationality">
-                                                                    <mat-option value="PK">Pakistan</mat-option>
-                                                                    <mat-option value="UAE">UAE</mat-option>
-                                                                    <mat-option value="UK">UK</mat-option>
+                                                                    <mat-option *ngFor="let c of issuingCountries" value="{{c.countryCode}}">{{c.countryName}}</mat-option>
                                                                 </mat-select>
                                                             </mat-form-field>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </fieldset>
                                             </div>
                                         </div>

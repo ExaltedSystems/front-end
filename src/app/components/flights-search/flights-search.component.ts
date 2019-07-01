@@ -1,19 +1,28 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MainService } from './../../services/main.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange, MatDatepickerInputEvent } from '@angular/material';
+import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange, MatDatepickerInputEvent, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { map, startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import allAirlinesList from '../../../assets/js/locations.json';
 import { isObject } from 'util';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
 declare var jQuery;
 
 @Component({
 	selector: 'app-flights-search',
 	templateUrl: './flights-search.component.html',
-	styleUrls: ['./flights-search.component.css']
+	styleUrls: ['./flights-search.component.css'],
+	providers: [
+		{
+			provide: DateAdapter, useClass: AppDateAdapter
+		},
+		{
+			provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+		}
+	]
 })
 export class FlightsSearchComponent implements OnInit {
 
@@ -51,25 +60,25 @@ export class FlightsSearchComponent implements OnInit {
 	frmObj: any;
 	cookieObj;
 	// For Autocomplete with Arrow Keys and Enter Key Selection
-	filteredFlyingFromList:Observable<string[]>;
+	filteredFlyingFromList: Observable<string[]>;
 	flyingFromAutocomplete = new FormControl();
 	flyingFromLists: string[] = [];
-	filteredFlyingToList:Observable<string[]>;
+	filteredFlyingToList: Observable<string[]>;
 	flyingToAutocomplete = new FormControl();
 	flyingToLists: string[] = [];
 
 
 	constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __activated: ActivatedRoute,
 		private __cookieService: CookieService) {
-			this.flyingFromLists = allAirlinesList;
-			this.flyingToLists = allAirlinesList;
-		}
+		this.flyingFromLists = allAirlinesList;
+		this.flyingToLists = allAirlinesList;
+	}
 
 	ngOnInit() {
 		if (this.__cookieService.get('srchCookies')) {
 			let cookiesData = JSON.parse(this.__cookieService.get('srchCookies'))
 			this.flightType = cookiesData[0].value;
-			if(cookiesData[0].value == 'OneWay') {this.isReturn = false;}
+			if (cookiesData[0].value == 'OneWay') { this.isReturn = false; }
 			this.flyingFrom = cookiesData[1].value;
 			this.flyingTo = cookiesData[2].value;
 			this.departureDate = cookiesData[3].value;
@@ -111,8 +120,8 @@ export class FlightsSearchComponent implements OnInit {
 		this.flyingFromAutocomplete.setValue(this.flyingFrom)
 		this.flyingToAutocomplete.setValue(this.flyingTo)
 		this.filteredFlyingFromList = this.flyingFromAutocomplete.valueChanges.pipe(
-		  startWith(''),
-		  map(value => this.__filterFlyFromAutocomplete(value))
+			startWith(''),
+			map(value => this.__filterFlyFromAutocomplete(value))
 		);
 		this.filteredFlyingToList = this.flyingToAutocomplete.valueChanges.pipe(
 			startWith(''),
@@ -120,20 +129,20 @@ export class FlightsSearchComponent implements OnInit {
 		);
 	}
 	private __filterFlyFromAutocomplete(value: string): string[] {
-	  if(value.length > 2) {
-		const filterValue = value.toLowerCase();
-		let filteredVal = this.flyingFromLists.filter(option => option.toLowerCase().includes(filterValue));
-		// this.flightSearch.controls['flyingFrom'].setValue(filteredVal[0]);
-		return filteredVal;
-	  } 
+		if (value.length > 2) {
+			const filterValue = value.toLowerCase();
+			let filteredVal = this.flyingFromLists.filter(option => option.toLowerCase().includes(filterValue));
+			// this.flightSearch.controls['flyingFrom'].setValue(filteredVal[0]);
+			return filteredVal;
+		}
 	}
 	private __filterFlyToAutocomplete(value: string): string[] {
-	  if(value.length > 2) {
-		const filterValue = value.toLowerCase();
-		let filteredVal = this.flyingToLists.filter(option => option.toLowerCase().includes(filterValue));
-		// this.flightSearch.controls['flyingTo'].setValue(filteredVal[0]);
-		return filteredVal;
-	  } 
+		if (value.length > 2) {
+			const filterValue = value.toLowerCase();
+			let filteredVal = this.flyingToLists.filter(option => option.toLowerCase().includes(filterValue));
+			// this.flightSearch.controls['flyingTo'].setValue(filteredVal[0]);
+			return filteredVal;
+		}
 	}
 	addDays = function (days, dptDate?) {
 		let date = new Date();
@@ -306,40 +315,42 @@ export class FlightsSearchComponent implements OnInit {
 		jQuery(ev.path[2]).removeClass('show');
 		jQuery(ev.path[3]).removeClass('show');
 	}
-	resetMatInput(evt){
+	resetMatInput(evt) {
 		let attrName = evt.target.getAttribute('formControlName');
 		this.flightSearch.controls[attrName].setValue('');
-		if(attrName == 'flyingFrom'){
+		if (attrName == 'flyingFrom') {
 			this.flyingFromAutocomplete.setValue('');
 		}
-		if(attrName == 'flyingTo'){
+		if (attrName == 'flyingTo') {
 			this.flyingToAutocomplete.setValue('');
 		}
 	}
-	setSelectedValue(evt: MatOptionSelectionChange, attrName:string){
+	setSelectedValue(evt: MatOptionSelectionChange, attrName: string) {
 		let val = evt.source.value;
-		if(attrName == 'flyingFrom'){
+		if (attrName == 'flyingFrom') {
 			this.flightSearch.controls['flyingFrom'].setValue(val);
 			this.flyingFromAutocomplete.setValue(val);
 		}
-		if(attrName == 'flyingTo'){
+		if (attrName == 'flyingTo') {
 			this.flightSearch.controls['flyingTo'].setValue(val);
 			this.flyingToAutocomplete.setValue(val);
 		}
 	}
-	setDatepickerTitle(evt){
+	setDatepickerTitle(evt) {
 		let placeHolder = '';
-		if(isObject(evt)){
+		if (isObject(evt)) {
 			placeHolder = evt.target.getAttribute('placeholder');
 		} else {
 			placeHolder = evt;
 		}
-		window.setTimeout(()=> {
-			jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">'+placeHolder+'</h3>');
-		}, 500);
+		window.setTimeout(() => {
+			if(jQuery('.mat-calendar-header').find("h4").length == 0) {
+				jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">' + placeHolder + '</h3>');
+			}
+		}, 300);
 	}
 	setReturnDate(event: MatDatepickerInputEvent<Date>) {
-	  this.flightSearch.get('returnDate').setValue(this.addDays(3, event.target.value));
+		this.flightSearch.get('returnDate').setValue(this.addDays(3, event.target.value));
 	}
 
 }

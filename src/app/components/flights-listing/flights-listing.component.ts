@@ -86,7 +86,7 @@ export class FlightsListingComponent implements OnInit {
 
   constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router,
     private __fb: FormBuilder, private __hm: HomeComponent, private __cookieService: CookieService) {
-    window.scroll(0, 50);
+    window.scroll(0, 0);
     this.__router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };

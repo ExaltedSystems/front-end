@@ -12,8 +12,11 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class GeneralPagesComponent implements OnInit {
   page_info: any;
   popularVisa: object;
+  parentPath : string = '';
   constructor(private __ms: MainService, private router: Router, private __meta: Meta, private __title: Title
     , private __device: DeviceDetectorService) {
+    console.log(window.location)
+    this.parentPath = window.location.pathname;
     if (this.__device.isDesktop()) {
       window.scrollTo(0, 400);
     }

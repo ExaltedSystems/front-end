@@ -40,20 +40,7 @@
                 <div class="sidebar-list">
                     <app-requst-call-back-form></app-requst-call-back-form>
                 </div>
-                <div class="sidebar-list mt-4" *ngIf="allVisas">
-                    <h3 class="sidebar-title">Amazing Visa Offers</h3>
-                    <ul class="flag-list">
-                        <li *ngFor="let item of allVisas | filterVisaByName: visaName"> <a
-                            routerLink="/{{ item.visaUrl }}"> <img
-                                src="{{ baseUrl+'rgtapp/assets/flags/'+(item.countryName.split(' ').join('-') | lowercase)+'-flag.png' }}">
-                                <p>{{ item.countryName }}</p>
-                                <p class="float-right">{{item.durationId}}</p></a></li>
-                        <!-- <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
-						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
-						<li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li> -->
-                    </ul>
-                    <!-- <a routerLink="/visa" class="view-all">View All</a> -->
-                </div>
+                <app-amazing-visa-offer></app-amazing-visa-offer>
                 <!-- <div class="sidebar-list">
 					<h3 class="sidebar-title">Top Exiciting Offers</h3>
 					<ul>
@@ -76,7 +63,8 @@
                   <div *ngIf="(allVisas | VisaListingPipe:searchVisa).length === 0" class="form-error">
                     No record found.
                   </div>
-                    <div class="col-sm-4" *ngFor="let item of allVisas | VisaListingPipe:searchVisa;">
+                  <ng-container *ngFor="let item of allVisas | VisaListingPipe:searchVisa;">
+                    <div class="col-sm-4" *ngIf="item.visaPrice > 0">
                         <div class="visa-card card shadow">
                             <img class="card-img-top img-fluid" src="{{ item.visaThumbnail != null ? baseUrl+item.visaThumbnail : baseUrl+'rgtapp/uploads/no-image-default.png' }}" alt="{{ item.countryName }} Rehman Travels">
                             <div class="card-body">
@@ -90,6 +78,7 @@
                         </div>
                         <div class="w-100 m-3"></div>
                     </div>
+                  </ng-container>
                     <div *ngIf="allVisas.length < 1" class="form-error">No record found.</div>
                 </div>
             </div>

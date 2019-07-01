@@ -1,7 +1,7 @@
 import { MainService } from './../../services/main.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange, MatDatepickerInputEvent } from '@angular/material';
+import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton, MatAutocompleteTrigger, MatOptionSelectionChange, MatDatepickerInputEvent, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { map } from 'rxjs/operators';
 
 import { startWith } from 'rxjs/operators';
@@ -14,12 +14,21 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import allAirlinesList from '../../../assets/js/locations.json';
 import { Observable } from 'rxjs';
 import { isObject } from 'util';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
 declare var jQuery;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+	providers: [
+		{
+			provide: DateAdapter, useClass: AppDateAdapter
+		},
+		{
+			provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+		}
+	]
 })
 export class HomeComponent implements OnInit {
   @Input()
@@ -426,7 +435,9 @@ export class HomeComponent implements OnInit {
 			placeHolder = evt;
 		}
 		window.setTimeout(()=> {
-			jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">'+placeHolder+'</h3>');
+			if(jQuery('.mat-calendar-header').find("h4").length == 0) {
+				jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">' + placeHolder + '</h3>');
+			}
 		}, 300);
   }
   setReturnDate(event: MatDatepickerInputEvent<Date>) {

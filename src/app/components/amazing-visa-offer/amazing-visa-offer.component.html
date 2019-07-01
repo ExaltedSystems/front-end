@@ -1,0 +1,23 @@
+               <div class="sidebar-list mt-4">
+                  <button class="button button2">Book Your Flight <span class="fa fa-plane"></span></button>
+                  <button class="button button3">Book Your Hotel <span class="fa fa-hotel"></span></button>
+                  <a href="https://www.rehmantravel.com/tours/" target="_blank"><button class="button">Pakistan Tour
+                    <span class="fa fa-bus"></span></button></a>
+                  <!-- <button class="button button4">Gray</button>
+                  <button class="button button5">Black</button> -->
+               </div>
+               <div class="sidebar-list mt-4" *ngIf="allVisas">
+                  <h3 class="sidebar-title">Amazing Visa Offers</h3>
+                  <ul class="flag-list">
+                    <li *ngFor="let item of allVisas | filterVisaByName: visaName"> <a routerLink="/{{ item.visaUrl }}">
+                        <img
+                          src="{{ baseUrl+'rgtapp/assets/flags/'+(item.countryName.split(' ').join('-') | lowercase)+'-flag.png' }}">
+                        <p>{{ (item.countryName=='United Arab Emirates') ? "Dubai (UAE)" : item.countryName }}</p>
+                        <p class="float-right">{{item.durationId}}</p><i class="fa fa-mountain"></i>
+                      </a></li>
+                    <!-- <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+                    <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li>
+                    <li><a href="">Dubai Visit Visa <span class="float-right">15 Days</span></a></li> -->
+                  </ul>
+                  <!-- <a routerLink="/visa" class="view-all">View All</a> -->
+                </div>

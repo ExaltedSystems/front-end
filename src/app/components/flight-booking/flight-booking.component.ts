@@ -40,6 +40,7 @@ export class FlightBookingComponent implements OnInit {
   travellersObj:object;
   tagExpired:boolean = false;
   byTagResponse;
+  issuingCountries:any;
 
   cnnStart:number = 1;
   infStart:number = 1;
@@ -76,9 +77,9 @@ export class FlightBookingComponent implements OnInit {
   referenceNo:string;
   currDate = new Date();
   
-  // dt = new Date();
-  // minDocExpiryDate = new Date(this.dt.setDate(this.dt.getDate() + 180 ));
-  minDocExpiryDate = new Date();
+  dt = new Date();
+  minDocExpiryDate = new Date(this.dt.setDate(this.dt.getDate() + 180 ));
+  // minDocExpiryDate = new Date();
 
   maxPickerDate = [];
   minPickerDate = [];
@@ -88,7 +89,8 @@ export class FlightBookingComponent implements OnInit {
   fareRules = null;
   constructor(private __fb: FormBuilder, private __actRouter:ActivatedRoute, private __router: Router, 
     private __ms:MainService, private __datepipe: DatePipe) {
-      window.scroll(0, 100);
+      window.scroll(0, 0);
+      this.getIssuingCountriesList();
     }
 
   ngOnInit() {
@@ -251,13 +253,20 @@ export class FlightBookingComponent implements OnInit {
     return this.__datepipe.transform(e, "yyyy-MM-dd"); //this.datePipe.transform(e, "yyyy-MM-dd")
   }
 
-  changeDocType(ev){
+  changeDocType(ev, key){
     let docValue = ev.target.value;
+    let docType = "P";
     if(docValue.length < 10){
       this.selectedDocType = "P";
+      docType = "P";
     } else {
       this.selectedDocType = "F";
+      docType = "F";
     }
+      
+    let formArray = this.travellersForm.controls['passengersArr'] as FormArray;
+    let formGroup = formArray.controls[key] as FormGroup;
+    formGroup.controls['docType'].setValue(docType);
     // if(ev.value == 'P'){
     //   this.docNumPlaceholder = 'Passport #';
     //   this.docExpPlaceholder = 'Passport Expiry Date';
@@ -312,7 +321,6 @@ export class FlightBookingComponent implements OnInit {
   }
 
   reservation_step1(formInputs){
-    // console.log(formInputs)    
     let postTravellers = [];
     for(var i = 0; i < formInputs.passengersArr.length; i++){
       postTravellers.push({
@@ -488,5 +496,10 @@ export class FlightBookingComponent implements OnInit {
     })
     jQuery('#view_fare_rules').modal('show');      
   } // 
+  getIssuingCountriesList(){
+    this.__ms.getData(this.__ms.backEndUrl+'Ticket/issuingCountries').subscribe(res => {
+      this.issuingCountries = res.data;
+    });
+  }
   
 }

@@ -9,6 +9,7 @@ import { Http, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class MainService {
+  
   public baseUrl = 'http://www.cheapfly.pk/';
   backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
   flightsUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
@@ -19,6 +20,11 @@ export class MainService {
   public ipAddress: any;
   constructor(private __httpClient: HttpClient, private __http: Http) {
     this.getIpAddress();
+    // For Live to Set http / https
+    let loc = window.location;
+    let base_url = loc.protocol+"//"+loc.hostname+"/";
+    this.baseUrl = base_url;
+    this.backEndUrl = this.baseUrl+"rgtapp/index.php/services/";
   }
 
 

@@ -71,6 +71,7 @@ import { FranchiseComponent } from './components/franchise/franchise.component';
 import { TravelAgentsComponent } from './components/franchise/travel-agents/travel-agents.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
+import { AmazingVisaOfferComponent } from './components/amazing-visa-offer/amazing-visa-offer.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { PaymentErrorComponent } from './components/payment-error/payment-error.
     FranchiseComponent,
     TravelAgentsComponent,
     JobsComponent,
-    PaymentErrorComponent
+    PaymentErrorComponent,
+    AmazingVisaOfferComponent
   ],
   imports: [
     BrowserModule,
