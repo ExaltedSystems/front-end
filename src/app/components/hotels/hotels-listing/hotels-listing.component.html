@@ -74,9 +74,9 @@
         <div class="current-search-footer d-flex justify-content-between align-items-center dropdown">
           <div class="current-search-dates d-flex align-items-center">
             <i-calendar class=""></i-calendar>
-            <p class="mr-3">{{searchQuery.dates.startDate | date:mediumDate}}</p>
+            <p class="mr-3">{{searchQuery.checkInDate | date:mediumDate}}</p>
             <i-calendar class=""></i-calendar>
-            <p>{{searchQuery.dates.endDate | date:mediumDate}}</p>
+            <p>{{searchQuery.checkOutDate | date:mediumDate}}</p>
           </div>
           <div>
             <button class="btn btn-primary btn-sm rounded-0 shadow" (click)="searchForm.toggle()">Change Search</button>

@@ -1239,6 +1239,10 @@ legend {
     right: 0;
 }
 
+.border-input{
+	border: solid 2px #57a5f9;
+}
+
 
 /*Small devices (portrait phones, 576px and up)*/
 
