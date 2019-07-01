@@ -2,7 +2,7 @@
 <form [formGroup]="hotelSearch" (submit)="searchHotels(hotelSearch.value)">
 
   <div class="form-group mobile-form-group shadow-sm shadow-xs-none row no-gutters mb-0">
-    <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-4'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+    <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
       <div class="input-group flex-nowrap">
         <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm-none" [hidden]="sideForm">
           <span class="input-group-text rounded-0">
@@ -22,43 +22,51 @@
       </div>
       <b class="form-error">{{desMsg}}</b>
     </div>
-    <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15bx' : '0'}">
-      <div class="input-group flex-nowrap mb-4 mb-sm-0">
+
+    <div [ngClass]="sideForm == true ? 'col-sm-12 mb-3' : 'col-sm-2'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+      <!--<div class="input-group flex-nowrap mb-4 mb-sm-0">
           <div class="input-group-prepend">
               <span class="input-group-text rounded-0" (click)="openDatePicker()">
                 <i-calendar></i-calendar>
               </span>
             </div>
-            <input type="text" id="date-range" autocomplete="off" (focus)="openDatePicker()" readonly="readonly" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut"/>
+             <input type="text" id="date-range" autocomplete="off" (focus)="openDatePicker()" readonly="readonly" class="form-control material-input rounded-0 pl-0" formControlName="dateRange" placeholder="CheckIn - CheckOut"/> -->
             <!-- <span id="date-range" class="form-control material-input rounded-0 pl-0">CheckIn - CheckOut</span> -->
             <!-- <input type="text" [autoApply]="true" class="form-control material-input rounded-0 pl-0" [showRangeLabelOnInput]="true" autocomplete="off" formControlName="dates" ngxDaterangepickerMd placeholder="CheckIn - CheckOut"/> -->
             <!-- <mat-form-field class="form-control material-input rounded-0 pl-0">
-            </mat-form-field> -->
-      </div>
-      <!-- <div class="input-group">
+            </mat-form-field> 
+      </div>-->
+       <div class="input-group rounded-0">
         <div class="input-group-prepend">
           <span class="input-group-text rounded-0">
             <i-calendar (click)="checkInDate.open()"></i-calendar>
           </span>
         </div>
-        <mat-form-field class="form-control material-input">
+        <mat-form-field class="form-control material-input pl-0 rounded-0">
           <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0"
             placeholder="CheckIn Date" [min]="currDate">
-          <mat-datepicker touchUi #checkInDate></mat-datepicker>
+          <mat-datepicker #checkInDate></mat-datepicker>
         </mat-form-field>
-
-        <div class="input-group-prepend" (click)="checkOutDate.open()">
-          <span class="input-group-text rounded-0">
-            <i-calendar></i-calendar>
-          </span>
         </div>
-        <mat-form-field class="form-control rounded-0 material-input">
-          <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (focus)="checkOutDate.open()"  (click)="checkOutDate.open()" class="border-left-0 rounded-0"
-            placeholder="Checkout Date" [min]="hotelSearch.get('checkInDate').value">
-          <mat-datepicker touchUi #checkOutDate></mat-datepicker>
-        </mat-form-field>
-      </div> -->
+
     </div>
+
+    <div [ngClass]="sideForm == true ? 'col-sm-12 mb-3' : 'col-sm-2'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+
+         <div class="input-group">
+          <div class="input-group-prepend" (click)="checkOutDate.open()">
+              <span class="input-group-text rounded-0">
+                <i-calendar></i-calendar>
+              </span>
+            </div>
+            <mat-form-field class="form-control rounded-0 material-input pl-0">
+              <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (focus)="checkOutDate.open()"  (click)="checkOutDate.open()" class="border-left-0 rounded-0"
+                placeholder="Checkout Date" [min]="hotelSearch.get('checkInDate').value">
+              <mat-datepicker #checkOutDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+      </div>
+    
     <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-3'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
       <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0">
         <div class="input-group-prepend" [hidden]="sideForm">
