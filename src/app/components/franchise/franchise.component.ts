@@ -44,6 +44,12 @@ export class FranchiseComponent implements OnInit {
   }
   onSubmit(inputs){
     console.log(inputs);
+    this.__ms.postData(this.__ms.backEndUrl + 'Cms/franchiseReg', inputs).subscribe(res=>{
+      console.log(res.data);
+      if (res.status) {
+        this.__router.navigate(['/thank-you']);
+      }
+    });
   }
   updateMetaTags(result) {
     this.__title.setTitle(result.metaTitle);

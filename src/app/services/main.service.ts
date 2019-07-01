@@ -9,12 +9,12 @@ import { Http, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class MainService {
-  
+
   public baseUrl = 'http://www.cheapfly.pk/';
   backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
-  flightsUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/Flights';
-  byTagUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
-  revalidateUrl: string = 'http://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
+  flightsUrl: string = 'https://exaltedsys.com/Air-Service/AirAvailability/Flights';
+  byTagUrl: string = 'https://exaltedsys.com/Air-Service/AirAvailability/AirByTag';
+  revalidateUrl: string = 'https://exaltedsys.com/Air-Service/AirAvailability/AirRevalidate';
   FlightInfo:object;
   hotelSearchQuery: object;
   public ipAddress: any;
@@ -30,15 +30,15 @@ export class MainService {
 
   /**
    * get all data
-   * @param url type any 
-   * @return json 
+   * @param url type any
+   * @return json
    */
   getData(url): Observable<response> {
     return this.__httpClient.get<response>(url);
   }
   /**
-   * 
-   * @param url 
+   *
+   * @param url
    */
   getLIst(url): Observable<any> {
     return this.__httpClient.get<any>(url);
@@ -46,7 +46,7 @@ export class MainService {
   public getJSON(jsonFile): Observable<any> {
     return this.__httpClient.get(jsonFile);
   }
-  getJsonData(url) { 
+  getJsonData(url) {
     return this.__httpClient.get<any>(url)
   }
 
@@ -56,17 +56,17 @@ export class MainService {
 
   getBankDetails(){
     let banksUrl = this.backEndUrl + 'cms/allBankDetails';
-    return this.getJsonData(banksUrl);         
+    return this.getJsonData(banksUrl);
   }
 
   getBranchesDetails(){
     let branchesUrl = this.backEndUrl + 'cms/allBranchesLists';
-    return this.getJsonData(branchesUrl);         
+    return this.getJsonData(branchesUrl);
   }
   /**
     * Get All Client All Informations
-    * @param url type any 
-    * @return json 
+    * @param url type any
+    * @return json
   */
   getClientInfo(url): Observable<ipInformation> {
     return this.__httpClient.get<ipInformation>(url);
@@ -79,15 +79,15 @@ export class MainService {
 
   /**
    * post data to server api
-   * @param url 
-   * @param obj 
+   * @param url
+   * @param obj
    */
   postData(url, obj): Observable<response> {
     return this.__httpClient.post<response>(url, obj);
   }
 
   sendPostData(url, obj){
-    obj = JSON.stringify(obj)    
+    obj = JSON.stringify(obj)
     return this.__httpClient.request("POST",url,obj);
   }
   putData(url, obj) {
@@ -116,7 +116,7 @@ export class MainService {
   }
 
   locationsJson() {
-    return this.getJsonData('../../assets/js/locations.json');         
+    return this.getJsonData('../../assets/js/locations.json');
   }
   __filterFlyFrom(sectors, val) {
     if (val.length > 3) {
@@ -149,13 +149,13 @@ export class MainService {
       "__isUserId": 0,
       "__isTag": tagID
     }
-  } // 
+  } //
 
   revalidateReq(byTagRes, adtQty, cnnQty, infQty, dptDate){
     const revalidateSectors = [];
     let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'][0]['FlightSegment'];
     tagSectors.forEach(element => {
-      
+
       let eachSector = {
         "__isADate": this.setDateFormat(element.ArrivalDateTime),
         "__isATime": this.setDateFormat(element.ArrivalDateTime, 't'),
@@ -209,7 +209,7 @@ export class MainService {
     let revalidateMsg = '';
     return this.postData(this.revalidateUrl, revalidateObj)
     // revalidateMsg;
-  } // 
+  } //
 
   revalidateObj(dptDate, revalidatePsgrs, revalidateSectors){
     return {

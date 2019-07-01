@@ -14,14 +14,15 @@
                 <div class="sidebar-list">
                     <app-requst-call-back-form></app-requst-call-back-form>
                 </div>
-                <div class="sidebar-list mt-4" *ngIf="popularVisa">
+                <app-amazing-visa-offer></app-amazing-visa-offer>
+                <!-- <div class="sidebar-list mt-4" *ngIf="popularVisa">
                     <h3 class="sidebar-title">Amazing Visa Offers</h3>
                     <ul>
                         <li *ngFor="let item of popularVisa;"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }}
 								<span class="float-right">{{item.durationId}}</span></a></li>
                     </ul>
                     <a routerLink="/visa" class="view-all">View All</a>
-                </div>
+                </div> -->
                 <!-- <div class="sidebar-subscribe mt-4">
                     <p class="mb-0">Subscribe to Get Amazing Offers</p>
                     <h3>Tour Alerts</h3>
