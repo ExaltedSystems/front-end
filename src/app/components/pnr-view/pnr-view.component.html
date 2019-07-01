@@ -15,7 +15,11 @@
           <h2>{{pnrResponse}}</h2>
         </div>
 
-        <div id="pnrDiv" *ngIf="pnrResponse != null && persons.length > 0">
+        <div class="center" *ngIf="pnrResponse != null && reservationItems.length == 0">
+          <h2>PNR ({{PNR}}) is expired.</h2>
+        </div>
+
+        <div id="pnrDiv" *ngIf="pnrResponse != null && persons.length > 0 && reservationItems.length > 0">
           <div class="ticket bg-white" id="print-section">
             <div class="ticket-header d-sm-flex justify-content-between align-items-start">
               <div class="ticket-logos">

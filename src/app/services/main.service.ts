@@ -16,6 +16,8 @@ export class MainService {
   flightsUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
   byTagUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
   revalidateUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
+  itineraryUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirItinerary';
+  ticketUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirTicket';
   FlightInfo:object;
   hotelSearchQuery: object;
   public ipAddress: any;
@@ -31,6 +33,8 @@ export class MainService {
     this.flightsUrl = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
     this.byTagUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
     this.revalidateUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
+    this.itineraryUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirItinerary';
+    this.ticketUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirTicket';
   }
 
 

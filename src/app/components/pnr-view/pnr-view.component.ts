@@ -27,6 +27,7 @@ export class PnrViewComponent implements OnInit {
   pnrTaxes:number = 0;
   pnrTotalFare:number = 0;
   pnrReceivedFrom;
+  validatingCarrier;
   specialServices = [];
   constructor(private __actRouter: ActivatedRoute, private __ms: MainService) {
     window.scroll(0, 300);
@@ -40,7 +41,7 @@ export class PnrViewComponent implements OnInit {
       _token: localStorage.getItem("paxToken"),
       _flag: 'ccard'
     } 
-    // Object.assign({refrenceNo:refNo}, {token:localStorage.getItem("paxToken")})
+    Object.assign({refrenceNo:this.refNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl + 'Ticket/retFlightInfo';
     this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
       if(res['res_flag'] == true){
@@ -53,7 +54,7 @@ export class PnrViewComponent implements OnInit {
         }
       }
     })
-    
+
   }
 
   createPnr(flightInfos){
@@ -73,15 +74,16 @@ export class PnrViewComponent implements OnInit {
 
     this.__ms.pnrCreated(pnr, 1).subscribe(res => {
       if(res['tkt_flag'] == true){
+        this.airItinerary(pnr, 'tkt')
         // call for ticket issuance
-      }else{
-        this.airItinerary(pnr)
+        // this.issueTicket(pnr);
+        // this.airItinerary(pnr)
       }
     })
   } //
 
-  airItinerary(pnr){
-    let itineraryUrl = 'http://exaltedsys.com/Air-Service/AirAvailability/AirItinerary';
+  airItinerary(pnr, tktFlag?){
+    let itineraryUrl = this.__ms.itineraryUrl;
     let itineraryObj = {
       __isView: "W",
       __isAction: "C",
@@ -94,7 +96,9 @@ export class PnrViewComponent implements OnInit {
     }
     this.__ms.postData(itineraryUrl, itineraryObj).subscribe(res => {      
       res['CustomerInfo']['PersonName'] instanceof Array ? this.persons = res['CustomerInfo']['PersonName'] : this.persons.push(res['CustomerInfo']['PersonName'])
-      this.reservationItems.push(res['ItineraryInfo']['ReservationItems']['Item']);// = res['ItineraryInfo']['ReservationItems']['Item'];      
+      
+      res['ItineraryInfo']['ReservationItems'] instanceof Array ? this.reservationItems.push(res['ItineraryInfo']['ReservationItems']['Item']) : ''
+      // this.reservationItems.push(resItems.length > 0 ? res['ItineraryInfo']['ReservationItems']['Item'] : "");// = res['ItineraryInfo']['ReservationItems']['Item'];      
       this.reservationItems.forEach(element => {
         let dtsplt = element.Air.attr.DepartureDateTime.split('T');
         let eachYear = dtsplt[0].split('-')[0];
@@ -113,9 +117,21 @@ export class PnrViewComponent implements OnInit {
         this.pnrTaxes += Number(element.PricedItinerary.AirItineraryPricingInfo.ItinTotalFare.Taxes.Tax.attr.Amount);
       })
       this.pnrTotalFare = Number(this.pnrBaseFare) + Number(this.pnrTaxes);
+      let priceQuote = res['ItineraryInfo']['ItineraryPricing']['PriceQuote'];
+      if(priceQuote.length > 1){
+
+        this.validatingCarrier = res['ItineraryInfo']['ItineraryPricing']['PriceQuote'][0]['PricedItinerary']['attr']['ValidatingCarrier'];
+      }else{
+        this.validatingCarrier = res['ItineraryInfo']['ItineraryPricing']['PriceQuote']['PricedItinerary']['attr']['ValidatingCarrier'];
+
+      }
 
       this.pnrReceivedFrom = res['ItineraryRef']['Source']['attr']['ReceivedFrom'];
       this.pnrResponse = res;
+      // IF TICKET ISSUANCE
+      if(tktFlag){
+        this.issueTicket(pnr);
+      }
       // console.log(this.pnrTotalFare)
     })
     
@@ -123,6 +139,7 @@ export class PnrViewComponent implements OnInit {
     // this.__ms.getJSON('../assets/airItinerary.json').subscribe(res => {
     //   console.log(res)
     //   this.pnrResponse = res;
+    //   this.validatingCarrier = res['ItineraryInfo']['ItineraryPricing']['PriceQuote'][0]['PricedItinerary']['attr']['ValidatingCarrier'];
     //   res['CustomerInfo']['PersonName'] instanceof Array ? this.persons = res['CustomerInfo']['PersonName'] : this.persons.push(res['CustomerInfo']['PersonName'])
       
     //   this.reservationItems = res['ItineraryInfo']['ReservationItems']['Item'];
@@ -149,5 +166,27 @@ export class PnrViewComponent implements OnInit {
     //   // console.log(this.pnrTotalFare)
     // })
   } // 
+
+  issueTicket(pnr){
+    let tktUrl = this.__ms.ticketUrl;
+    let tktObj = {
+      __isView: "W",
+      __isAction: "C",
+      __isVendorId: 1,
+      __isAgentId: 0,
+      __isParantId: 0,
+      __isUserId: 0,
+      __isAirType: "O",
+      __isPnr : pnr,
+      __isVCarrier: this.validatingCarrier,
+      __isReceivedFrom: this.pnrReceivedFrom,
+      __isFOP: 'Rehman Travels',
+      __ReceivableId: 1,
+      __isUS: ''
+    };
+    this.__ms.postData(tktUrl, tktObj).subscribe(res => {
+      console.log(res)
+    })
+  } // end issueTicket
 
 }
