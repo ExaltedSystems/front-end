@@ -93,7 +93,7 @@ export class HotelsListingComponent implements OnInit {
             },
             // max-width 400
             {
-                breakpoint: 400,
+                breakpoint: 568,
                 width: '100%',
                 height: '200px',
                 imagePercent: 100,

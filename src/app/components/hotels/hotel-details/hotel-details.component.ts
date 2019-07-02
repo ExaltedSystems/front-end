@@ -6,13 +6,23 @@ import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
 declare var jQuery;
 
 
 @Component({
     selector: 'app-hotel-details',
     templateUrl: './hotel-details.component.html',
-    styleUrls: ['./hotel-details.component.css']
+    styleUrls: ['./hotel-details.component.css'],
+	providers: [
+		{
+			provide: DateAdapter, useClass: AppDateAdapter
+		},
+		{
+			provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+		}
+	]
 })
 export class HotelDetailsComponent implements OnInit {
 
@@ -69,11 +79,19 @@ export class HotelDetailsComponent implements OnInit {
     ngOnInit() {
         
         window.scroll(0,0);
+        
+        jQuery(window).scroll(function(){
+            if (jQuery(this).scrollTop() > 1100) {
+                jQuery('#task_flyout').addClass('fixed');
+            } else {
+                jQuery('#task_flyout').removeClass('fixed');
+            }
+        });
         // get search query
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));
         console.log('search',this.searchQuery)
-        this.checkInDate = this.searchQuery['checkInDate']; //this.searchQuery['dates']['startDate'];
-        this.checkOutDate = this.searchQuery['checkOutDate']; //this.searchQuery['dates']['endDate'];
+        this.checkInDate = this.searchQuery['checkIn_date_value']; //this.searchQuery['dates']['startDate'];
+        this.checkOutDate = this.searchQuery['checkOut_date_value']; //this.searchQuery['dates']['endDate'];
         this.totalNights = this.calculateDate(this.checkInDate, this.checkOutDate)
         // console.log('nights', this.totalNights)
 
@@ -146,8 +164,8 @@ export class HotelDetailsComponent implements OnInit {
             this.currentSearch = JSON.parse(searchCookie);
             // this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.dates.startDate);
             // this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.dates.endDate);
-            this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.checkInDate);
-            this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.checkOutDate);
+            this.UpdateHotelSearch.controls['checkInDate'].setValue(this.currentSearch.checkIn_date_value);
+            this.UpdateHotelSearch.controls['checkOutDate'].setValue(this.currentSearch.checkOut_date_value);
             this.UpdateHotelSearch.controls['dates'].setValue(this.currentSearch.dates);
             this.UpdateHotelSearch.controls['dateRange'].setValue(this.currentSearch.dateRange);
             this.UpdateHotelSearch.controls['rooms'].setValue(this.currentSearch.rooms);
@@ -391,5 +409,6 @@ export class HotelDetailsComponent implements OnInit {
     jQuery(ev.path[3]).removeClass('show')
 
   }
+  
 
 }

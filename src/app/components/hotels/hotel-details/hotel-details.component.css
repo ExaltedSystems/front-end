@@ -1,1 +1,10 @@
-.room-facilities{font-size: 13px;}
+.room-facilities {
+    font-size: 13px;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 14%;
+}

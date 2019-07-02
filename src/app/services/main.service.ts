@@ -23,18 +23,18 @@ export class MainService {
   public ipAddress: any;
   constructor(private __httpClient: HttpClient, private __http: Http) {
     this.getIpAddress();
-    // For Live Site to Set http / https
-    let loc = window.location;
-    let base_url = loc.protocol+"//"+loc.hostname+"/";
-    this.baseUrl = base_url;
-    this.backEndUrl = this.baseUrl+"rgtapp/index.php/services/";
+    // // For Live Site to Set http / https
+    // let loc = window.location;
+    // let base_url = loc.protocol+"//"+loc.hostname+"/";
+    // this.baseUrl = base_url;
+    // this.backEndUrl = this.baseUrl+"rgtapp/index.php/services/";
     
-    this.tktBaseUrl = loc.protocol+'//exaltedsys.com/';
-    this.flightsUrl = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
-    this.byTagUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
-    this.revalidateUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
-    this.itineraryUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirItinerary';
-    this.ticketUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirTicket';
+    // this.tktBaseUrl = loc.protocol+'//exaltedsys.com/';
+    // this.flightsUrl = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
+    // this.byTagUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
+    // this.revalidateUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
+    // this.itineraryUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirItinerary';
+    // this.ticketUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirTicket';
   }
 
 

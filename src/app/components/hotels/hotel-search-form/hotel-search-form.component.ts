@@ -1,18 +1,27 @@
 import { MainService } from './../../../services/main.service';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { MatDatepickerInputEvent, MatAutocompleteTrigger } from '@angular/material';
+import { MatDatepickerInputEvent, MatAutocompleteTrigger, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
 declare var jQuery;
 
 @Component({
   selector: 'app-hotel-search-form',
   templateUrl: './hotel-search-form.component.html',
-  styleUrls: ['./hotel-search-form.component.css']
+  styleUrls: ['./hotel-search-form.component.css'],
+	providers: [
+		{
+			provide: DateAdapter, useClass: AppDateAdapter
+		},
+		{
+			provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+		}
+	]
 })
 export class HotelSearchFormComponent implements OnInit {
 
@@ -53,18 +62,18 @@ export class HotelSearchFormComponent implements OnInit {
    }
 
   ngOnInit() {
-    jQuery('#date-range').dateRangePicker(
-      {
-        autoClose: true,
-        format: 'DD MMM YYYY',
-        separator : ' - ',
-        startDate: new Date(),
-        setValue: function(s)
-        {
-          jQuery(this).val(s);
-        }
-      }
-    );
+    // jQuery('#date-range').dateRangePicker(
+    //   {
+    //     autoClose: true,
+    //     format: 'DD MMM YYYY',
+    //     separator : ' - ',
+    //     startDate: new Date(),
+    //     setValue: function(s)
+    //     {
+    //       jQuery(this).val(s);
+    //     }
+    //   }
+    // );
     // Hotel form
     this.hotelSearch = this.__fb.group({
       destination: ["",Validators.required],
@@ -73,7 +82,7 @@ export class HotelSearchFormComponent implements OnInit {
       dates: [""],
       dateRange: [""],
       rooms: ["1"],
-      adults: ["1"],
+      adults: ["2"],
       children: [""],
       childrenAges: this.__fb.array([ ])
     });
@@ -90,8 +99,8 @@ export class HotelSearchFormComponent implements OnInit {
       // let options = this._auto.autocomplete.options.toArray()
     // this.myControl.setValue(options[1].value)
       this.hotelsAutocomplete.setValue(currentSearch.destination);
-      this.hotelSearch.controls['checkInDate'].setValue(this._date.transform(currentSearch.checkInDate,'M/d/yy'));
-      this.hotelSearch.controls['checkOutDate'].setValue(this._date.transform(currentSearch.checkOutDate,'M/d/yy'));
+      this.hotelSearch.controls['checkInDate'].setValue(currentSearch.checkIn_date_value);
+      this.hotelSearch.controls['checkOutDate'].setValue(currentSearch.checkOut_date_value);
       this.hotelSearch.controls['dates'].setValue(currentSearch.dates);
       this.hotelSearch.controls['dateRange'].setValue(currentSearch.dateRange);
       this.hotelSearch.controls['rooms'].setValue(currentSearch.rooms);
@@ -109,7 +118,7 @@ export class HotelSearchFormComponent implements OnInit {
 
 
     // get hotels list
-    this.__ms.getLIst(this.__ms.backEndUrl+'HotelQuery/getHotels').subscribe(data => {
+    this.__ms.getLIst('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/getHotels').subscribe(data => {
      this.hotelsList = data;
      this.isLoading = false;
     })
@@ -247,7 +256,7 @@ export class HotelSearchFormComponent implements OnInit {
   
   public getSearchResults = (obj) => {
     this.searchBtn = 'Loading';
-    this.__ms.postData(this.__ms.backEndUrl+'HotelQuery/search',obj).subscribe(result => {
+    this.__ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search',obj).subscribe(result => {
       this.hotelSearchResult = result;
       this.searchEvent.emit(this.hotelSearchResult);
       this.searchBtn = 'Search';
@@ -256,18 +265,19 @@ export class HotelSearchFormComponent implements OnInit {
 
   searchHotels(formInputs){
     console.log('forminputs',formInputs);
-    console.log('date', jQuery('#date-range').val());
-    let date1 = new Date(jQuery('#date-range').val().split('-')[0]);
-    let date2 = new Date(jQuery('#date-range').val().split('-')[1]);
-    console.log("Dates:", [date1, date2])
+    // console.log('date', jQuery('#date-range').val());
+    let date1 = ''; //new Date(jQuery('#date-range').val().split('-')[0]);
+    let date2 = ''; //new Date(jQuery('#date-range').val().split('-')[1]);
     // return;
     if(this.hotelSearch.valid){
       let formObj = {
         destination: formInputs.destination,
-        checkInDate: this._date.transform(date1,'M/d/yy'),
-        checkOutDate: this._date.transform(date2,'M/d/yy'),
+        checkInDate: this._date.transform(formInputs.checkInDate,'M/d/yy'),
+        checkIn_date_value: formInputs.checkInDate,
+        checkOutDate: this._date.transform(formInputs.checkOutDate,'M/d/yy'),
+        checkOut_date_value: formInputs.checkOutDate,
         dates: formInputs.dates,
-        dateRange: jQuery('#date-range').val(),
+        dateRange: '',//jQuery('#date-range').val(),
         rooms: formInputs.rooms,
         adults: formInputs.adults,
         children: formInputs.children,

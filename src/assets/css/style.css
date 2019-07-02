@@ -837,6 +837,10 @@ footer .border-bottom {
     border-bottom: 1px solid #e7e8ea
 }
 
+.border-input {
+    border: solid 2px #57a5f9;
+}
+
 .mobile-flight-segment h5 {
     font-size: 14px;
     font-weight: 700
@@ -1444,7 +1448,7 @@ legend {
     }
     label,
     p {
-        font-size: .8rem;
+        font-size: .7rem;
     }
     .sidebar-list ul li a {
         font-size: 12px;
