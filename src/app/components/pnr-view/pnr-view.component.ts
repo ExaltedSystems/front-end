@@ -19,6 +19,8 @@ export class PnrViewComponent implements OnInit {
   segmentYears = [];
   // itineraryInfo = [];
   reservationItems = [];
+  ticketingItems = [];
+  ticketNos = [];
   itineraryRef:object;
   PNR:string;
   priceQuotes = [];
@@ -104,6 +106,21 @@ export class PnrViewComponent implements OnInit {
         let eachYear = dtsplt[0].split('-')[0];
         this.segmentYears.push(eachYear);
       })
+      
+      res['ItineraryInfo']['Ticketing'] instanceof Array ? this.ticketingItems.push(res['ItineraryInfo']['Ticketing']) : '';
+      this.ticketingItems = res['ItineraryInfo']['Ticketing'];
+      this.ticketingItems.forEach((elem, ind) => {
+        if(ind > 0){
+          let eachTktNum = elem['attr']['eTicketNumber'];
+          if(eachTktNum != ''){
+            eachTktNum = eachTktNum.split(' ')[1];
+            eachTktNum = eachTktNum.split('-')[0];
+            // console.log('eachTktNum',eachTktNum)
+            this.ticketNos.push(eachTktNum);
+          }
+        }
+      })
+      
       // console.log(this.segmentYears)
       this.PNR = res['ItineraryRef']['attr']['ID'];
       this.pnrCreateDate += '-' + (res['ItineraryRef']['Source']['attr']['CreateDateTime']).split('T')[0];
