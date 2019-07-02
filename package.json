@@ -40,6 +40,7 @@
     "ngx-infinite-scroll": "^6.0.1",
     "ngx-rangeslider-component": "^1.0.6",
     "ngx-smart-popover": "^1.0.8",
+    "ngx-tooltip": "0.0.9",
     "popper.js": "^1.14.3",
     "primeicons": "^1.0.0",
     "primeng": "^7.0.0",

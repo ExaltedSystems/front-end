@@ -238,7 +238,8 @@ export class HotelSearchFormComponent implements OnInit {
 
   keytab(event){
     let element = event.targetElement.nextElementSibling; // get the sibling element
-
+    console.log(event.targetElement)
+    event.targetElement.blur()
     if(element == null){  // check if its null
         return;
     } else

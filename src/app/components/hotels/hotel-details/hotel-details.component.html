@@ -40,11 +40,39 @@
 
             <div class="container">
 
-                <mat-card class="d-flex justify-content-between align-items-center mt-2 mb-3 rounded-0 d-none d-sm-flex">
-                    <div>
-                        <h3 class="mb-0">{{hotelDetails.name}}</h3>
-                        <p>{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
-                        <div>
+                <div class="row">
+                    <div class="col-sm-3">
+                      <mat-card class="p-2 mb-3 rounded-0">
+                          <button class="btn btn-primary shadow-sm rounded-0 btn-block" matTooltip="See Available Rooms" (click)="scroll(roomsSelection)">
+                            Book Now <br>
+                            <small>1 room for {{hotelDetails.room_details[0].price_pp_pn}}</small>
+                          </button>
+                      </mat-card>
+                        <div class="side-search-form custom-material-form p-2 mb-5 d-none d-sm-block" sticky style=" background:#57a5f9;">
+                            <app-hotel-search-form (searchEvent)="getSearchResults($event)" [sideForm]="sideForm"></app-hotel-search-form>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <mat-card class="row p-1 mt-2 mb-3 rounded-0 d-none d-sm-flex">
+                            <div class="col-sm-9">
+                                <h4 class="mb-0">{{hotelDetails.name}}</h4>
+                                <p>{{hotelDetails.address}}, {{hotelDetails.city}}, {{hotelDetails.country}}</p>
+                            </div>
+        
+                            <div class="col-sm-3">
+                                <div class="price text-right">
+                                    <button class="btn btn-primary shadow-sm rounded-0 btn-block"  matTooltip="See Available Rooms" (click)="scroll(roomsSelection)">
+                                        Book Now <br>
+                                        <small>1 room for {{hotelDetails.room_details[0].price_pp_pn}}</small>
+                                      </button>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <mat-card class="p-2 mb-3 rounded-0">
+                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                        </mat-card>
+
+                        <div class="mb-3">
                             <b>Most popular facilities</b>
                             <div class="tags my-1">
                                 <span [ngSwitch]="hotelDetails.parking_availability">
@@ -65,29 +93,6 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <div class="price text-right">
-                            <span class="text-muted org-price">10,000</span>
-                            <h5 class="d-block">PKR
-                                <span class="text-danger">{{hotelDetails.price}}</span>
-                            </h5>
-                            <button class="btn btn-primary shadow-sm rounded-0" (click)="scroll(roomsSelection)">Book Now</button>
-                        </div>
-                    </div>
-                </mat-card>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="side-search-form custom-material-form p-2 mb-5 d-none d-sm-block" style=" background:#57a5f9;">
-                            <app-hotel-search-form (searchEvent)="getSearchResults($event)" [sideForm]="sideForm"></app-hotel-search-form>
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <mat-card class="p-2 mb-3 rounded-0">
-                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-                        </mat-card>
 
                         <mat-card class="mb-3 rounded-0">
                             <div class="d-none d-sm-flex align-items-center justify-content-around" *ngIf="inlineSearchForm == false">
@@ -347,7 +352,7 @@
                                                             </div>
                                                             <br>
                                                             <button class="btn btn-primary shadow-sm rounded-0 py-2" (click)="continueBooking(totalRoomsSelected,totalRoomsGuests)">Continue Booking</button>
-
+                                                            
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -491,6 +496,15 @@
             </div>
         </section>
 
+        <!-- <div>
+            <tooltip-content #myTooltip>
+                <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+                <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+            </tooltip-content>
+     
+            <button [tooltip]="myTooltip">hover this button to see a tooltip</button>
+        </div> -->
+
         <mat-card class="reservation-options p-3 rounded-0 mat-card top-shadow">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex">
@@ -503,10 +517,11 @@
                     </div>
                     <p class="form-error">{{roomsMsg}}</p>
                 </div>
-                <button class="btn btn-primary shadow-sm rounded-0 py-2" (click)="continueBooking(totalRoomsSelected,totalRoomsGuests)">Continue Booking</button>
+                <button  class="btn btn-primary shadow-sm rounded-0 py-2" (click)="continueBooking(totalRoomsSelected,totalRoomsGuests)">Continue Booking</button>
                 <p>You'll be taken to the next step</p>
             </div>
         </mat-card>
+
 
         <app-footer></app-footer>
 
