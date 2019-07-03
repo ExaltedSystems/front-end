@@ -1,0 +1,97 @@
+<app-header></app-header>
+<div *ngIf="page_info && page_info.image">
+    <img class="img-fluid" src="rgtapp/uploads/cms/pages/{{page_info.image}}">
+</div>
+<section class="visa-contents">
+    <div class="container sidebar">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Tour Calculator</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a routerLink="/">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">Tour Calculator</li>
+                    </ol>
+                </nav>
+                <div>
+                    <form [formGroup]="tourCalculatorForm" class="custom-material-form position-relative">
+                        <div class="form-group row">
+                            <div class="col-sm-1">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <mat-select formControlName="totalAdults" placeholder="Adults">
+                                        <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" [value]="number">
+                                            {{number}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-2">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <mat-select formControlName="totalChildrens" placeholder="Children">
+                                        <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" [value]="number">
+                                            {{number}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Email Address" class="rounded-5" formControlName="email">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Phone #" class="rounded-5" formControlName="phone">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div formArrayName="hotelRows" *ngFor="let item of tourCalculatorForm.get('hotelRows').controls; let i = index;">
+                            <div formGroupName="{{i}}" class="form-group row">
+                                <div class="col-sm-3">
+                                    <mat-form-field class="form-control material-input mb-3 shadow">
+                                        <input placeholder="Hotel Name" class="rounded-5" formControlName="hotelName" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field class="form-control material-input">
+                                        <input matInput [matDatepicker]="tourCheckIn" formControlName="tourCheckIn" (click)="tourCheckIn.open()" (dateChange)="calculateDate(i)" class="border-left-0 rounded-0" placeholder="Check In Date" [min]="currDate">
+                                        <mat-datepicker touchUi #tourCheckIn></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field class="form-control material-input">
+                                        <input matInput [matDatepicker]="tourCheckOut" formControlName="tourCheckOut" (click)="tourCheckOut.open()" (dateChange)="calculateDate(i)" class="border-left-0 rounded-0" placeholder="Check Out Date" [min]="currDate">
+                                        <mat-datepicker touchUi #tourCheckOut></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field class="form-control material-input mb-3 shadow">
+                                        <input placeholder="Total Nights" class="rounded-5" formControlName="totalNights" readonly matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field class="form-control material-input mb-3 shadow">
+                                        <input placeholder="Room Price" class="rounded-5" formControlName="roomPrice" readonly matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-1" *ngIf="i>0">
+                                    <button type="button" (click)="removeTourRow(i);" class="btn btn-danger shadow rounded-5"><i-x-circle class="feather"></i-x-circle> Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <button type="button" (click)="addMoreTourRows();" class="btn btn-primary shadow rounded-5"><i-plus-circle class="feather"></i-plus-circle> Add More</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

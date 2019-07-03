@@ -118,7 +118,7 @@ export class HotelSearchFormComponent implements OnInit {
 
 
     // get hotels list
-    this.__ms.getLIst('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/getHotels').subscribe(data => {
+    this.__ms.getLIst(this.__ms.backEndUrl+'HotelQuery/getHotels').subscribe(data => {
      this.hotelsList = data;
      this.isLoading = false;
     })
@@ -256,7 +256,7 @@ export class HotelSearchFormComponent implements OnInit {
   
   public getSearchResults = (obj) => {
     this.searchBtn = 'Loading';
-    this.__ms.postData('http://cheapfly.pk/rgtapp/index.php/services/HotelQuery/search',obj).subscribe(result => {
+    this.__ms.postData(this.__ms.backEndUrl+'HotelQuery/search',obj).subscribe(result => {
       this.hotelSearchResult = result;
       this.searchEvent.emit(this.hotelSearchResult);
       this.searchBtn = 'Search';

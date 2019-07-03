@@ -22,6 +22,7 @@ import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-v
 import { JobsComponent } from './components/jobs/jobs.component';
 import { FranchiseComponent } from './components/franchise/franchise.component';
 import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
+import { TourCalculatorComponent } from './components/tour-calculator/tour-calculator.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -51,5 +52,6 @@ export const APP_ROUTES: Routes = [
 	{ path: 'hotel-voucher', component: HotelVoucherComponent },
 	{ path: 'jobs', component: JobsComponent },
 	{ path: 'franchise-reg', component: FranchiseComponent },
+	{ path: 'tour-calculator', component: TourCalculatorComponent },
 	{ path: '**', component: GeneralPagesComponent }
 ];
