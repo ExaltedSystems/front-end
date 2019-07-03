@@ -172,13 +172,27 @@
                         </div>
 
                         <div class="mb-3 p-0">
-                            <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block" style="background:#57a5f9;color:#fff;">
+                            <!-- <mat-card class="rounded-0 mb-3 py-1 d-none d-sm-block" style="background:#57a5f9;color:#fff;">
                                 <b class="d-inline-block mr-4">Sort:</b>
                                 <div class="d-inline-flex justify-content-between">
                                     <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>
                                     <button mat-button (click)="orderBy('star_rating')" class="mx-2">Star Rating</button>
                                     <button mat-button (click)="orderBy('distance')" class="mx-2">Distance form City Center</button>
                                     <button mat-button (click)="orderBy('recomended')" class="mx-2">RGT Recomended</button>
+                                </div>
+                            </mat-card> -->
+
+                            <mat-card class="rounded-0 mb-3 py-0 d-none d-sm-block" style="background:#57a5f9;color:#fff;">
+                                <b class="d-inline-block mr-4">Sort:</b>
+                                <div class="d-inline-flex justify-content-between align-items-center">
+                                    <button mat-button (click)="orderBy('price')" class="mx-2">Price</button>
+                                    <span>|</span>
+                                    <button mat-button (click)="orderBy('star_rating')" class="mx-2">Star Rating</button>
+                                    <span>|</span>
+                                    <button mat-button (click)="orderBy('distance')" class="mx-2">Distance form City Center</button>
+                                    <span>|</span>
+                                    <button mat-button (click)="orderBy('recomended')" class="mx-2">RGT Recomended</button>
+                                    <span>|</span>
                                 </div>
                             </mat-card>
 
@@ -226,7 +240,7 @@
                                                     <i-check class="success hotel-feather-icon"></i-check>
                                                     <p class="ml-1">Free Cancellation</p>
                                                 </div>
-                                                <div class="tags my-1">
+                                                <!-- <div class="tags my-1">
                                                     <span [ngSwitch]="item.parking_availability">
                               <span *ngSwitchCase="'Yes, Paid'" class="badge badge-info mr-1">Parking</span>
                                                     <span *ngSwitchCase="'Yes, Free'" class="badge badge-success mr-1">Free Parking</span>
@@ -239,6 +253,21 @@
                               <span *ngSwitchCase="'Yes, Its Optional'" class="badge badge-info mr-1">Breakfast</span>
                                                     <span *ngSwitchCase="'Yes, Included in Price'" class="badge badge-success mr-1">Free Breakfast</span>
                                                     </span>
+                                                </div> -->
+
+                                                <div class="tags my-1">
+                                                    <span [ngSwitch]="item.parking_availability">
+                                  <small *ngSwitchCase="'Yes, Paid'" class="text-info">Parking, </small>
+                                  <small *ngSwitchCase="'Yes, Free'" class="text-info">Free Parking, </small>
+                                </span>
+                                                    <span [ngSwitch]="item.internet_availability">
+                                  <small *ngSwitchCase="'Yes, Paid'" class="text-info">Internet, </small>
+                                  <small *ngSwitchCase="'Yes, Free'" class="text-info">Free Internet, </small>
+                                </span>
+                                                    <span [ngSwitch]="item.breakfast">
+                                  <small *ngSwitchCase="'Yes, Its Optional'" class="text-info">Breakfast</small>
+                                  <small *ngSwitchCase="'Yes, Included in Price'" class="text-info">Free Breakfast</small>
+                                </span>
                                                 </div>
                                                 <!-- <div class="facilities my-1">
                             <img alt="" class="icon" src="assets/img/icons/svg/wifi-solid.svg">

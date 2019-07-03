@@ -1,8 +1,8 @@
 <!-- <input id="date-range" size="40" value=""> -->
 <form [formGroup]="hotelSearch" (submit)="searchHotels(hotelSearch.value)">
-
+    <h4 class="text-white mb-2 mt-0" *ngIf="sideForm == true">Search</h4>
     <div class="form-group mobile-form-group shadow-xs-none row no-gutters mb-0" [ngClass]="sideForm == true ? '' : 'shadow-sm'">
-        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-3 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-5 col-lg-5 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
             <div class="input-group flex-nowrap border-input">
                 <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm-none" [hidden]="sideForm">
                     <span class="input-group-text rounded-0">
@@ -12,7 +12,7 @@
                 <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm-none" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'">
                     <input matInput formControlName="destination" [(ngModel)]="destValu" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" [matAutocomplete]="destinationAutocomplet">
                     <mat-autocomplete #destinationAutocomplet="matAutocomplete" autoActiveFirstOption>
-                        <mat-option *ngFor="let option of filteredList | async" [value]="option">
+                        <mat-option *ngFor="let option of filteredList | async" [value]="option" (onSelectionChange)="keytab($event, checkInFocus)">
                             {{option}}
                         </mat-option>
                     </mat-autocomplete>
@@ -42,7 +42,8 @@
             </span>
                 </div>
                 <mat-form-field class="form-control material-input pl-0 rounded-0">
-                    <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0" placeholder="CheckIn Date" [min]="currDate">
+                    <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" #checkInFocus (dateChange)="keytab($event, checkOutFocus)" id="test" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0" placeholder="CheckIn Date"
+                        [min]="currDate">
                     <mat-datepicker #checkInDate></mat-datepicker>
                 </mat-form-field>
             </div>
@@ -60,7 +61,8 @@
                 </span>
                 </div>
                 <mat-form-field class="form-control rounded-0 material-input pl-0">
-                    <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (focus)="checkOutDate.open()" (click)="checkOutDate.open()" class="border-left-0 rounded-0" placeholder="Checkout Date" [min]="hotelSearch.get('checkInDate').value">
+                    <input matInput [matDatepicker]="checkOutDate" #checkOutFocus (dateChange)="keytab($event, guestFocus)" formControlName="checkOutDate" (focus)="checkOutDate.open()" (click)="checkOutDate.open()" class="border-left-0 rounded-0" placeholder="Checkout Date"
+                        [min]="hotelSearch.get('checkInDate').value">
                     <mat-datepicker #checkOutDate></mat-datepicker>
                 </mat-form-field>
             </div>
@@ -75,7 +77,7 @@
               <i-users></i-users>
             </span>
                 </div>
-                <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
+                <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" #guestFocus [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
             <small class="d-block">No of Passenger</small>
             <p class="d-inline-block mb-0">{{rooms}} Rooms - {{adults}} Adult - {{children}} Child</p>
             <i-chevron-down class="dropdown-feather"></i-chevron-down>
@@ -142,15 +144,17 @@
 
                     </div>
 
-                    <!-- <div class="dropdown-divider"></div>
-            <a class="float-right" (click)="closeDropDown($event)">
-              <i-check class="dropdown-feather text-success float-left m-1"></i-check>
-              <span class="float-right">Done</span>
-            </a> -->
+                    <div class="dropdown-divider"></div>
+                    <a class="float-right" (click)="closeDropDown($event)">
+                        <i-check class="dropdown-feather text-success float-left m-1"></i-check>
+                        <span class="float-right">Done</span>
+                    </a>
                 </div>
             </div>
         </div>
-        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-2 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+    </div>
+    <div class="form-group row no-gutters my-2 text-right">
+        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-2 offset-lg-10 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
             <button class="btn btn-block rounded-0 search-flight-btn border-input" [disabled]="desMsg != ''" [ngClass]="sideForm == true ? 'btn-success' : 'btn-success'" type="submit">{{searchBtn}}</button>
         </div>
     </div>

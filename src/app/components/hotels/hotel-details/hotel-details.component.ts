@@ -77,7 +77,6 @@ export class HotelDetailsComponent implements OnInit {
         }
 
     ngOnInit() {
-        
         window.scroll(0,0);
         
         jQuery(window).scroll(function(){

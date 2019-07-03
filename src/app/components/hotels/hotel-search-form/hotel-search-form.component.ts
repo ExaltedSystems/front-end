@@ -245,14 +245,29 @@ export class HotelSearchFormComponent implements OnInit {
     return items;
   }
 
-  keytab(event){
-    let element = event.targetElement.nextElementSibling; // get the sibling element
-
-    if(element == null){  // check if its null
-        return;
-    } else
-        element.focus();   // focus if not null
+  keytab(e, el){
+    if(e.keyCode == 13) { // press A
+      el.focus();
+    }
+    if(el.getAttribute('id') == 'flightPaxDropdownMenu'){
+      // el.trigger('click')
+      console.log('test')
+      jQuery('.dropdown-toggle').dropdown('toggle');
+      jQuery('.dropdown').addClass('open');
+      jQuery('.dropdown-menu').addClass('show')
+    }
+    el.focus();
+    console.log(el.getAttribute('id'))
+    // return
+    // let element = event.targetElement.nextElementSibling; // get the sibling element
+    // console.log(event.targetElement.parentElement)
+    // event.targetElement.parentElement.parent().next('input').focus()
+    // if(element == null){  // check if its null
+    //     return;
+    // } else
+    //     element.focus();   // focus if not null
   }
+
   
   public getSearchResults = (obj) => {
     this.searchBtn = 'Loading';
