@@ -92,8 +92,8 @@ export class FlightsListingComponent implements OnInit {
     };
     __actRouter.params.subscribe(val => {
       // put the code from `ngOnInit` here
-      console.log(val)
-      console.log('Here again')
+      // console.log(val)
+      // console.log('Here again')
     });
   }
   ngAfterViewInit() {
@@ -187,8 +187,8 @@ export class FlightsListingComponent implements OnInit {
       __isAirLine: this.prefAirline,
       __isBlackListed: "",
       __isFlight: "50",
-      __isLimit: "10",
-      __isOffset: this.Offset,
+      __isLimit: "50",
+      __isOffset: "1",
       __isTravellers: [{
         __isType: "ADT",
         __isValue: this.adtQty
@@ -200,7 +200,7 @@ export class FlightsListingComponent implements OnInit {
         __isValue: this.infQty
       } : ""]
     }
-    console.log(this.frmObj)
+    // console.log(this.frmObj)
     // JUST FOR TESTING READING FLIGHTS FROM JSON FILE
     // if(!more){
 
@@ -304,7 +304,7 @@ export class FlightsListingComponent implements OnInit {
             }
           }
         }
-        console.log(this.moreFlights)
+        // console.log(this.moreFlights)
         this.moreFlights[this.defaultPage].forEach(element => {
           let eachAirline = element.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].OperatingAirline.Code;
           this.responseAirlines.push({
@@ -508,7 +508,7 @@ export class FlightsListingComponent implements OnInit {
     } else {
       this.isReturn = true;
     }
-    console.log(this.isReturn)
+    // console.log(this.isReturn)
   }
 
   addDays = function (days, dptDate?) {
@@ -573,12 +573,12 @@ export class FlightsListingComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('scrolled');
-    if (this.loadingMore == true) {
-      this.Offset = this.Offset + 10;
-      this.defaultPage = this.defaultPage + 1;
-      this.fetchFlightsListing('more');
-    } //
+    // console.log('scrolled');
+    // if (this.loadingMore == true) {
+    //   this.Offset = this.Offset + 10;
+    //   this.defaultPage = this.defaultPage + 1;
+    //   this.fetchFlightsListing('more');
+    // } //
 
   } //
 
@@ -619,14 +619,14 @@ export class FlightsListingComponent implements OnInit {
           this.mOriginDestinationOptions = res['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'];
         } else {
           this.mbyTag = 'Error';
-          console.log(this.mbyTag)
+          // console.log(this.mbyTag)
           // jQuery('#mbyTagError').html('Flight Not Valid, try again later').css('color', 'red').show();
           // setTimeout(() => {
           //   jQuery('#mbyTagError').hide();
           // }, 2000);
         }
       } else if (flag == 'MS') { // it is Mobile Select flight
-        console.log(res)
+        // console.log(res)
         if (!res['errorCode']) {
           this.airRevalidate(res, i, flag);
         } else {
