@@ -85,6 +85,12 @@ export class HotelDetailsComponent implements OnInit {
             } else {
                 jQuery('#task_flyout').removeClass('fixed');
             }
+            var scrollHeight = jQuery(document).height();
+            var scrollPosition = jQuery(window).height() + jQuery(window).scrollTop();
+            if ((scrollHeight - scrollPosition) / scrollHeight <= 0.410958904109589) {
+                // when scroll to bottom of the page
+                jQuery('#task_flyout').removeClass('fixed');
+            }
         });
         // get search query
         this.searchQuery = JSON.parse(this._cookieService.get('hotelQuery'));

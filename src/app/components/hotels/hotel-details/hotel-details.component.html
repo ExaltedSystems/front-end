@@ -401,6 +401,16 @@
                                     </div>
                                 </div>
                                 <!-- / -->
+                                <div>
+                                    <h4>Facilities of {{hotelDetails.name}}</h4>
+                                    <ul class="main-facilities-ul">
+                                        <li class="main-facilities-li" *ngFor="let mf of hotelDetails.hotel_all_facility">{{mf.main_facility}}
+                                            <ul class="sub-facilities-ul">
+                                                <li class="sub-facilities-li" *ngFor="let sf of mf.sub_facility">{{sf}}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <h4> Info</h4>
                                 <table cellspacing="7" class="table table-bordered d-none d-sm-table">
                                     <tbody>

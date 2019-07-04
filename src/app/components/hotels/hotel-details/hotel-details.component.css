@@ -8,3 +8,22 @@
     z-index: 2;
     width: 14%;
 }
+
+.main-facilities-ul {
+    column-count: 3;
+    -webkit-column-count: 3;
+    list-style-type: none;
+    color: green;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.main-facilities-li {
+    display: inline-block;
+}
+
+.sub-facilities-ul {
+    list-style-type: circle;
+    color: #333;
+    font-size: 12px;
+}
