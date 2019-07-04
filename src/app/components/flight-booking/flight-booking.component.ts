@@ -237,11 +237,11 @@ export class FlightBookingComponent implements OnInit {
     for (let i = 0; i < 10; i++) {      
       this.yearItems.push({"value": this.currentYear + i});
     }
-    for (let j = 0; j < this.monthsNames.length; j++) {
-      if(j >= this.currentMonth){
-        this.monthItems.push(this.monthsNames[j]);
-      }
-    }
+//     for (let j = 0; j < this.monthsNames.length; j++) {
+//       if(j >= this.currentMonth){
+//         this.monthItems.push(this.monthsNames[j]);
+//       }
+//     }
     this.__ms.getBankDetails().subscribe(res => {
       this.bankDetails = res.data;
     });
@@ -249,8 +249,26 @@ export class FlightBookingComponent implements OnInit {
     this.__ms.getBranchesDetails().subscribe(res => {
       this.branchesDetails = res.data;      
     });
-  }// end oninit
+    
+    this.populateMonths(this.currentYear);
 
+  }// end oninit
+  
+  populateMonths(Year){
+    this.monthItems = [];
+    if(Year > this.currentYear){
+      for (let j = 0; j < this.monthsNames.length; j++) {
+        this.monthItems.push(this.monthsNames[j]); 
+      }
+    }else{
+      for (let j = 0; j < this.monthsNames.length; j++) {
+        if(j >= this.currentMonth){
+          this.monthItems.push(this.monthsNames[j]);
+        }
+      }
+    }
+  }
+  
   getValidDobDate = function(t) {
     var n = new Date(this.flightInfo.dptDate),
         e = n.setFullYear(n.getFullYear() - t, n.getMonth(), n.getDate());
