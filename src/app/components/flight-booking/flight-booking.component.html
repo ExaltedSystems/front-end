@@ -416,17 +416,17 @@
                                 </div>
       
                                 <div class="col-sm-3">
+                                    <mat-form-field class="form-control">
+                                        <mat-select formControlName='expiryYear' placeholder="Expiry Year" (selectionChange)="populateMonths($event.value)">
+                                            <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
+                                        </mat-select>                                
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-3">
                                   <mat-form-field class="form-control">
                                       <mat-select formControlName='expiryMonth' placeholder="Expiry Month">
                                         <mat-option *ngFor="let month of monthItems" value="{{month.value}}">{{month.name}}</mat-option>
-                                      </mat-select>                                
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-3">
-                                  <mat-form-field class="form-control">
-                                      <mat-select formControlName='expiryYear' placeholder="Expiry Year">
-                                        <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
                                       </mat-select>                                
                                   </mat-form-field>
                                 </div>
