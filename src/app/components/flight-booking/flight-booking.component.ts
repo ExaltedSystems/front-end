@@ -301,8 +301,8 @@ export class FlightBookingComponent implements OnInit {
       docType: [""],
       cnic: ["", Validators.required],
       cnicExp: ["", Validators.required],
-      issuingCountry: ["", Validators.required],
-      nationality: ["", Validators.required],
+      issuingCountry: ["PK", Validators.required],
+      nationality: ["PK", Validators.required],
     })
   }
 

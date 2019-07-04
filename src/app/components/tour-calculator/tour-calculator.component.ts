@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
+import { MainService } from 'src/app/services/main.service';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tour-calculator',
@@ -19,11 +22,18 @@ import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
 export class TourCalculatorComponent implements OnInit {
   tourCalculatorForm: FormGroup;
   hotelRows: FormArray;
+  allHotels:object;
+
+  hotelsAutocomplete = new FormControl();
+  hotelsList: string[] = [];
+  filteredList: Observable<string[]>;
+
   dt: Date = new Date();
   currDate = new Date(this.dt.setDate(this.dt.getDate() + 1));
-  constructor(private __fb: FormBuilder) { }
+  constructor(private __fb: FormBuilder, private __ms: MainService) { }
 
   ngOnInit() {
+    this.getTourHotels();
     this.tourCalculatorForm = this.__fb.group({
       totalAdults:[2, Validators.required],
       totalChildrens:[''],
@@ -31,9 +41,21 @@ export class TourCalculatorComponent implements OnInit {
       phone:['', Validators.required],
       hotelRows: this.__fb.array([ this.addMoreHotelRows()])
     });
+    this.filteredList = this.hotelsAutocomplete.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    let filterResult = this.hotelsList.filter(option => option.toLowerCase().includes(filterValue));
+    if(filterResult.length > 0){
+      return filterResult;
+    }
   }
   addMoreHotelRows(): FormGroup {
     return this.__fb.group({
+      ID: [''],
       hotelName: [''],
       tourCheckIn: [''],
       tourCheckOut: [''],
@@ -64,6 +86,16 @@ export class TourCalculatorComponent implements OnInit {
     let diffc = new Date(date1).getTime() - new Date(date2).getTime();
     let days = Math.round(Math.abs(diffc / (1000 * 60 * 60 * 24)));
     formGroup.controls['totalNights'].setValue(days);
-}
+  }
+  getTourHotels(){
+    this.__ms.getData(this.__ms.backEndUrl+'Umrah/tourHotelAutocomplete').subscribe(result => {
+      // if(result.status) {
+        this.allHotels = result
+      // }
+    })
+  }
+  calculateHotelPkg(formInputs){
+    console.log('HotelData:', formInputs)
+  }
 
 }
