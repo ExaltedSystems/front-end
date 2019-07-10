@@ -49,6 +49,7 @@ import { FacilityFilterPipe } from './pipes/facility-filter.pipe';
 import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import {TooltipModule} from "ngx-tooltip";
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,10 @@ import {TooltipModule} from "ngx-tooltip";
     MatProgressSpinnerModule,
     DeviceDetectorModule.forRoot(),
     MatTooltipModule,
-    TooltipModule
+    TooltipModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCgL2VGk4yfL2IzdFgGO0m2D36MA3NVwLw'
+    })
     
   ],
   providers: [MainService, CookieService, DatePipe],

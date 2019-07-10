@@ -94,6 +94,16 @@
                             </div>
                         </div>
 
+                        <!-- tooltip with dynamic html content -->
+    <div>
+        <tooltip-content #myTooltip>
+            <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span> 
+            <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+        </tooltip-content>
+        
+        <button [tooltip]="myTooltip">hover this button to see a tooltip</button>
+    </div>
+
                         <mat-card class="mb-3 rounded-0">
                             <div class="d-none d-sm-flex align-items-center justify-content-around" *ngIf="inlineSearchForm == false">
                                 <div class="checkIn">
@@ -496,14 +506,7 @@
             </div>
         </section>
 
-        <!-- <div>
-            <tooltip-content #myTooltip>
-                <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
-                <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
-            </tooltip-content>
-     
-            <button [tooltip]="myTooltip">hover this button to see a tooltip</button>
-        </div> -->
+        
 
         <mat-card class="reservation-options p-3 rounded-0 mat-card top-shadow">
             <div class="d-flex align-items-center justify-content-between">

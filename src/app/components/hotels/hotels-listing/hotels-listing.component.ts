@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { StarRatingFilterPipe } from 'src/app/pipes/star-rating-filter.pipe';
 import { isArray } from 'util';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MouseEvent } from '@agm/core';
 declare var jQuery;
 
 
@@ -29,8 +30,8 @@ export class HotelsListingComponent implements OnInit {
     searchQuery: object;
     hotelsSearchResult: any = [];
 
-    order: string = 'price';
-    reverse: boolean = false;
+    order: string = '';
+    reverse: boolean;
 
     isLoading: boolean = true;
 
@@ -52,9 +53,15 @@ export class HotelsListingComponent implements OnInit {
     isDesktop = null;
     isMobile = null;
     isTablet = null;
-    sideForm:boolean = true;
+    sideForm: boolean = true;
 
     userFilter: any = { star_rating: '', price: '' };
+
+    // initial center position for the map
+    lat: number = 51.673858;
+    lng: number = 7.815982;
+    // google maps zoom level
+    zoom: number = 8;
 
     constructor(private _ms: MainService, private _cookieService: CookieService, private _router: Router, private deviceService: DeviceDetectorService) {
         this.epicFunction();
@@ -166,9 +173,47 @@ export class HotelsListingComponent implements OnInit {
 
     } // on init
 
-    // openDatePicker(){
-    //     jQuery('#date-range').data('dateRangePicker').open();
-    //   }
+
+
+    clickedMarker(label: string, index: number) {
+        console.log(`clicked the marker: ${label || index}`)
+    }
+
+    mapClicked($event: MouseEvent) {
+        this.markers.push({
+            lat: $event.coords.lat,
+            lng: $event.coords.lng,
+            draggable: true
+        });
+    }
+
+    markerDragEnd(m: marker, $event: MouseEvent) {
+        console.log('dragEnd', m, $event);
+    }
+
+    markers: marker[] = [
+        {
+            lat: 51.673858,
+            lng: 7.815982,
+            label: 'A',
+            draggable: false
+        },
+        {
+            lat: 51.373858,
+            lng: 7.215982,
+            label: 'B',
+            draggable: false
+        },
+        {
+            lat: 51.723858,
+            lng: 7.895982,
+            label: 'C',
+            draggable: false
+        }
+    ]
+
+
+
 
 
     onlyUnique(value, index, self) {
@@ -196,16 +241,16 @@ export class HotelsListingComponent implements OnInit {
             // console.log('element',element.price)
             // get property list array
             this.propertyTypes.push({ value: element.prperty_name, title: element.prperty_name, slelcted: false });
-            
+
             // get breakfast types array
-            if(element.breakfast_type != null){
+            if (element.breakfast_type != null) {
                 if (element.breakfast_type.length > 0) {
                     element.breakfast_type.forEach((ele) => {
                         this.breakfastTypes.push({ value: ele.name, title: ele.name, slelcted: false });
                     });
                 }
             }
-            
+
 
             // get price array
             this.priceList.push(element.price);
@@ -296,4 +341,12 @@ export class HotelsListingComponent implements OnInit {
         return items;
     }
 
+}
+
+// just an interface for type safety.
+interface marker {
+    lat: number;
+    lng: number;
+    label?: string;
+    draggable: boolean;
 }
