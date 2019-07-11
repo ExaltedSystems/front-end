@@ -1,11 +1,21 @@
+<!-- <mat-sidenav #searchForm class="custom-material-form p-2 d-block d-sm-none" opened="true">
+    <h3 class="sidebar-title mb-3">Change Your Search
+        <i-x-circle class="dropdown-feather" (click)="searchForm.close()"></i-x-circle>
+    </h3>
+    <app-flights-search></app-flights-search>
+</mat-sidenav> -->
 <app-header></app-header>
 <div class="banner d-flex align-items-center">
-    <img src="assets/img/flights-page.jpg" class="img-fluid">
+    <img src="assets/img/flights-page.jpg" class="img-fluid d-none d-sm-inline-block">
     <div class="page-search">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <app-flights-search></app-flights-search>
+                    <!-- <div class="modifySearchForm mb-4 d-none d-sm-block"> -->
+                    <mat-card class="main-search-form p-3 mat-card mat-card mt-3 pt-3" style="background: rgba(255,255,255,.7)">
+                        <app-flights-search></app-flights-search>
+                    </mat-card>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -14,9 +24,10 @@
 <section class="about-section">
     <div class="container">
 
-        <app-flights-search></app-flights-search>
+        <!-- <app-flights-search></app-flights-search> -->
         <div class="section-title">
             <h1>{{ page_info.name }}</h1>
+            <!-- <button type="button" class="btn btn-primary d-block d-sm-none" (click)="searchForm.toggle()">Change Search</button> -->
         </div>
         <div [innerHTML]="page_info.description"></div>
         <app-popular-airline-and-hotels></app-popular-airline-and-hotels>

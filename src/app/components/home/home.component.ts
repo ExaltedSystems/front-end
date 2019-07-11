@@ -83,7 +83,12 @@ export class HomeComponent implements OnInit {
       this.__meta.updateTag({property:"og:url", content: window.location.href});
       this.updateMetaTags();
 			this.flyingFromLists = allAirlinesList;
-			this.flyingToLists = allAirlinesList;
+      this.flyingToLists = allAirlinesList;
+      // if(window.matchMedia('(max-width: 768px)').matches){
+        window.scroll(0, 0);
+      // } else {
+      //   window.scroll(0, 300);
+      // }
     }
 
   ngOnInit() {

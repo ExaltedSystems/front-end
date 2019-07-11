@@ -1076,6 +1076,10 @@ legend {
     color: #000
 }
 
+.mat-datepicker-content .mat-calendar {
+    height: auto !important;
+}
+
 @-moz-keyframes spin {
     100% {
         -moz-transform: rotate(360deg)
@@ -1111,6 +1115,10 @@ legend {
 
 .star-rating i-star.active {
     stroke: #f3964a
+}
+
+.loading-container {
+    min-height: 700px;
 }
 
 .facilities .icon {
@@ -1403,8 +1411,10 @@ legend {
         color: #0248b1
     }
     h3 {
-        font-size: 1.1rem;
-        color: #fff
+        color: #0248b1
+    }
+    .footer-title h3 {
+        color: #fff;
     }
     h4 {
         font-size: 1rem;
@@ -1429,6 +1439,9 @@ legend {
     .branch {
         font-size: 14px;
     }
+    .page-search {
+        position: relative;
+    }
 }
 
 @media (min-width:768px) {
@@ -1438,6 +1451,10 @@ legend {
     .navbar-nav .dropdown-menu {
         position: absolute!important;
         top: auto!important
+    }
+    label,
+    p {
+        font-size: .7rem;
     }
 }
 

@@ -22,11 +22,15 @@ import { startWith, map } from 'rxjs/operators';
 export class TourCalculatorComponent implements OnInit {
   tourCalculatorForm: FormGroup;
   hotelRows: FormArray;
-  allHotels:object;
+  allHotels:any = [];
 
   hotelsAutocomplete = new FormControl();
   hotelsList: string[] = [];
   filteredList: Observable<string[]>;
+  
+  // filteredOptions: Observable<string[]>;
+  
+  filteredOptions: Observable<string[]>[] = [];
 
   dt: Date = new Date();
   currDate = new Date(this.dt.setDate(this.dt.getDate() + 1));
@@ -41,17 +45,48 @@ export class TourCalculatorComponent implements OnInit {
       phone:['', Validators.required],
       hotelRows: this.__fb.array([ this.addMoreHotelRows()])
     });
-    this.filteredList = this.hotelsAutocomplete.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+    this.ManageNameControl(0);
+
+    // this.filteredList = this.hotelsAutocomplete.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // );
+    
+    // this.filteredOptions = this.hotelsAutocomplete.valueChanges
+    //   .pipe(
+    //   startWith(''),
+    //   map(val => this.filter(val))
+    //   );
+  }
+  filter(val: string): string[] {
+    console.log('AutoComp:', val)
+    return this.allHotels.map(x => x.hotelName).filter(option =>
+      option.toLowerCase().includes(val.toLowerCase()));
+  }
+  onSelectionChange(ev, key){    
+    console.log(ev)
+    let formArray = this.tourCalculatorForm.controls['hotelRows'] as FormArray;
+    let formGroup = formArray.controls[key] as FormGroup;
+		this.hotelsAutocomplete.setValue(ev.source.value);
+    formGroup.controls['hotelName'].setValue(ev.source.value);
   }
   private _filter(value: string): string[] {
+    console.log(value)
     const filterValue = value.toLowerCase();
-    let filterResult = this.hotelsList.filter(option => option.toLowerCase().includes(filterValue));
+    let filterResult = this.allHotels.filter(option => option.hotelName.toLowerCase().includes(filterValue));
     if(filterResult.length > 0){
       return filterResult;
     }
+  }
+  ManageNameControl(index: number) {
+    var arrayControl = this.tourCalculatorForm.get('hotelRows') as FormArray;
+    this.filteredOptions[index] = arrayControl.at(index).get('hotelName').valueChanges
+      .pipe(
+      startWith<string>(''),
+      map(value => typeof value === 'string' ? value : value),
+      map(name => name ? this._filter(name) : this.allHotels.slice())
+      );
+
   }
   addMoreHotelRows(): FormGroup {
     return this.__fb.group({
@@ -60,12 +95,24 @@ export class TourCalculatorComponent implements OnInit {
       tourCheckIn: [''],
       tourCheckOut: [''],
       totalNights: [''],
+      dblRoom: [1],
+      tplRoom: [''],
+      qdRoom: [''],
       roomPrice:['']
     });
   }
   addMoreTourRows(){
     this.hotelRows = this.tourCalculatorForm.get('hotelRows') as FormArray;
     this.hotelRows.push(this.addMoreHotelRows());
+    console.log('Len:', this.hotelRows.length)
+    let formArray = this.tourCalculatorForm.controls['hotelRows'] as FormArray;
+    let formGroup = formArray.controls[this.hotelRows.length - 1] as FormGroup;
+    formGroup.controls['hotelName'].setValue('');
+    formGroup.controls['tourCheckIn'].setValue('');
+    formGroup.controls['tourCheckOut'].setValue('');
+    // Build the account Auto Complete values
+    this.ManageNameControl(this.hotelRows.length - 1);
+
   }
   removeTourRow(index): void {
     if(index > 0) {
@@ -81,7 +128,7 @@ export class TourCalculatorComponent implements OnInit {
     if(!date2){
       let dt = new Date(date1);
       date2 = new Date(dt.setDate(dt.getDate() + 3));
-      formGroup.controls['tourCheckIn'].setValue(date2);
+      formGroup.controls['tourCheckOut'].setValue(date2);
     }
     let diffc = new Date(date1).getTime() - new Date(date2).getTime();
     let days = Math.round(Math.abs(diffc / (1000 * 60 * 60 * 24)));
@@ -96,6 +143,9 @@ export class TourCalculatorComponent implements OnInit {
   }
   calculateHotelPkg(formInputs){
     console.log('HotelData:', formInputs)
+    this.__ms.postData(this.__ms.backEndUrl+'Umrah/calcUmrahTourPkg', formInputs).subscribe(result => {
+      console.log('Pkg_Details:', result)
+    })
   }
 
 }

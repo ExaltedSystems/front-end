@@ -1,45 +1,74 @@
 /* Visa List Inline CSS */
+
 .flag-list {
-  list-style-type: none;
-  margin-left: 0px;
-  padding-left: 0px;
-  display: inline-block;
-  list-style: none;
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    display: inline-block;
+    list-style: none;
+    width: 100%;
 }
 
 .flag-list img {
-  float: left;
-  /* padding-top: 2px; */
-  padding-right: 5px;
+    float: left;
+    /* padding-top: 2px; */
+    padding-right: 5px;
 }
 
 .flag-list p {
-  text-align: right;
-  display: inline-block;
-  padding-top: 5px;
-}
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  /* text-align: center; */
-  text-decoration: none;
-  display: inline-block;
-  text-align: left !important;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 4px 2px;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 3px;
-}
-.button span {
-  float: right;
-  padding-top: 5px;
+    text-align: right;
+    display: inline-block;
+    padding-top: 5px;
 }
 
-.button2 {background-color: #008CBA;} /* Blue */
-.button3 {background-color: #f44336;} /* Red */
-.button4 {background-color: #e7e7e7; color: black;} /* Gray */
-.button5 {background-color: #555555;} /* Black */
+.button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    /* text-align: center; */
+    text-decoration: none;
+    display: inline-block;
+    text-align: left !important;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.button span {
+    float: right;
+    padding-top: 5px;
+}
+
+.button2 {
+    background-color: #008CBA;
+}
+
+
+/* Blue */
+
+.button3 {
+    background-color: #f44336;
+}
+
+
+/* Red */
+
+.button4 {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+
+/* Gray */
+
+.button5 {
+    background-color: #555555;
+}
+
+
+/* Black */

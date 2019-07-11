@@ -1,128 +1,1167 @@
 <app-header></app-header>
 
 <section class="visa-contents">
-    <div class="container sidebar">
-        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <div class="container sidebar ">
+        <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom" #stepper>
             <mat-step [stepControl]="personalInfoForm">
-                <form [formGroup]="personalInfoForm" class="custom-material-form">
+                <form [formGroup]="personalInfoForm" class="custom-material-form" (submit)="addPersonalInfo(personalInfoForm.value)">
+                    <input type="hidden" formControlName="ID">
                     <ng-template matStepLabel>Personal Info</ng-template>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Apply For" formControlName="firstCtrl" required>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Username">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Email address" type="email">
-                            </mat-form-field>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="applicationId" placeholder="Apply For" required>
+                                    <mat-icon>business_center</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['applicationId'].hasError('required') && personalInfoForm.controls['applicationId'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="email" placeholder="Email address" type="email" required>
+                                    <mat-icon>email</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['email'].hasError('required') && personalInfoForm.controls['email'].touched">Required
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="DOB" [matDatepicker]="picker" placeholder="Date of Birth" required>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['DOB'].hasError('required') && personalInfoForm.controls['DOB'].touched">Required
+                                    </div>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>---Select Title---</mat-label>
+                                    <mat-select formControlName="title" type="text">
+                                        <mat-option value="Mr">Mr</mat-option>
+                                        <mat-option value="Mrs">Mrs</mat-option>
+                                        <mat-option value="Ms">Ms</mat-option>
+                                        <mat-option value="Miss">Miss</mat-option>
+                                    </mat-select>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['title'].hasError('required') && personalInfoForm.controls['title'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="firstName" placeholder="Fist Name" type="text" required>
+                                    <mat-icon>person_outline</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['firstName'].hasError('required') && personalInfoForm.controls['firstName'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="lastName" placeholder="Last Name" type="text" required>
+                                    <mat-icon>person_outline</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['lastName'].hasError('required') && personalInfoForm.controls['lastName'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>---Select Gender---</mat-label>
+                                    <mat-select formControlName="gender" type="text">
+                                        <mat-option value="Male">Male</mat-option>
+                                        <mat-option value="Female">Female</mat-option>
+                                        <mat-option value="Other">Other</mat-option>
+                                    </mat-select>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['gender'].hasError('required') && personalInfoForm.controls['gender'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>---Martial Status---</mat-label>
+                                    <mat-select formControlName="maritalStatus" type="text" required>
+                                        <mat-option value="Single">Single</mat-option>
+                                        <mat-option value="Married">Married</mat-option>
+                                        <mat-option value="Widow">Widow</mat-option>
+                                        <mat-option value="Divorce">Divorce</mat-option>
+                                    </mat-select>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['maritalStatus'].hasError('required') && personalInfoForm.controls['maritalStatus'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="cellNum" placeholder="Mobile Number" type="text" required>
+                                    <mat-icon>stay_current_portrait</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['cellNum'].hasError('required') && personalInfoForm.controls['cellNum'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="phoneNum" placeholder="Phone Number" type="text">
+                                    <mat-icon>phone</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>---Personal Conveyance---</mat-label>
+                                    <mat-select formControlName="conveyance" type="text">
+                                        <mat-option value="None">None</mat-option>
+                                        <mat-option value="car">Car</mat-option>
+                                        <mat-option value="Bike">Bike</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>---Country---</mat-label>
+                                    <mat-select formControlName="nationality" type="text" required>
+                                        <mat-option value="Pakistan">Pakistan</mat-option>
+                                        <mat-option value="Other">Other</mat-option>
+                                    </mat-select>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['nationality'].hasError('required') && personalInfoForm.controls['nationality'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="CNIC" placeholder="CNIC Number" type="text" required>
+                                    <mat-icon>credit_card</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['CNIC'].hasError('required') && personalInfoForm.controls['CNIC'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="passportNum" placeholder="Passport Number" type="text">
+                                    <mat-icon>credit_card</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="drivingLicence" placeholder="Driving Licence Number" type="text">
+                                    <mat-icon>drive_eta</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="material-input textarea-input mb-3 shadow">
+                                    <textarea matInput formControlName="presentAddress" placeholder="Postal Address"></textarea>
+                                    <mat-icon>place</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['presentAddress'].hasError('required') && personalInfoForm.controls['presentAddress'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="material-input textarea-input mb-3 shadow">
+                                    <textarea matInput formControlName="permanentAddress" placeholder="Permanant Address"></textarea>
+                                    <mat-icon>place</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['permanentAddress'].hasError('required') && personalInfoForm.controls['permanentAddress'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="material-input textarea-input mb-3 shadow">
+                                    <textarea matInput formControlName="aboutInfo" placeholder="About"></textarea>
+                                    <mat-icon>rate_review</mat-icon>
+                                    <div class="form-error" *ngIf="personalInfoForm.controls['aboutInfo'].hasError('required') && personalInfoForm.controls['aboutInfo'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="facebook" placeholder="Facebook" type="text"><i class="fa fa-facebook"></i>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="twitter" placeholder="Twitter" type="text"><i class="fa fa-twitter"></i>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="linkedIn" placeholder="LinkedIn" type="text"><i class="fa fa-linkedin"></i>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="center">
+                            <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Fist Name" type="text">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Last Name" type="text">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Adress" type="text">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="City" type="text">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Country" type="text">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="form-control material-input">
-                                <input matInput placeholder="Postal Code" type="text">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <mat-form-field class="form-control material-input">
-                                <textarea matInput placeholder="About Me"></textarea>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
                 </form>
 
             </mat-step>
             <mat-step [stepControl]="familyInfoForm">
-                <form [formGroup]="familyInfoForm">
+                <form [formGroup]="familyInfoForm" (submit)="addFamilyInfo(familyInfoForm.value)" class="custom-material-form">
+                    <input type="hidden" formControlName="ID">
+                    <input type="hidden" formControlName="personalInfoId">
                     <ng-template matStepLabel>Family Info</ng-template>
-                    <mat-form-field>
-                        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-                    </mat-form-field>
-                    <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
+                    <div class="card-body">
+                        <div class="col-md-4">
+                            <mat-radio-group aria-label="Select an option" formControlName="relation">
+                                <mat-radio-button value="Father">Father</mat-radio-button>&nbsp;&nbsp;
+                                <mat-radio-button value="Husband">Husband</mat-radio-button>
+                                <mat-radio-button value="Brother">Brother</mat-radio-button>
+                                <mat-radio-button value="Sister">Sister</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="name" placeholder="Name" type="text" required>
+                                    <mat-icon>person_outline</mat-icon>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['name'].hasError('required') && familyInfoForm.controls['name'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="cellNum" placeholder="Mobile" type="text" required>
+                                    <mat-icon>stay_current_portrait</mat-icon>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['cellNum'].hasError('required') && familyInfoForm.controls['cellNum'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="phoneNum" placeholder="Phone" type="text">
+                                    <mat-icon>phone</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="email" placeholder="Email" type="email" required>
+                                    <mat-icon>email</mat-icon>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['email'].hasError('required') && familyInfoForm.controls['email'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>---Select Occupation---</mat-label>
+                                    <mat-select formControlName="occupation">
+                                        <mat-option value="JOB">JOB</mat-option>
+                                        <mat-option value="Retired">Retired</mat-option>
+                                        <mat-option value="Business">Business</mat-option>
+                                        <mat-option value="Other">Other</mat-option>
+                                    </mat-select>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['occupation'].hasError('required') && familyInfoForm.controls['occupation'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="jobLocation" placeholder="Job Location" type="text">
+                                    <mat-icon>location_on</mat-icon>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['jobLocation'].hasError('required') && familyInfoForm.controls['jobLocation'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="orgName" placeholder="Organization" type="text">
+                                    <mat-icon>business</mat-icon>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['orgName'].hasError('required') && familyInfoForm.controls['orgName'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="designation" placeholder="Designation" type="text">
+                                    <mat-icon>contacts</mat-icon>
+                                    <div class="form-error" *ngIf="familyInfoForm.controls['designation'].hasError('required') && familyInfoForm.controls['designation'].touched">Required</div>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <!-- <div class="col-md-4">
+								<mat-radio-group aria-label="Select an option">
+								  <mat-radio-button value="Father"> Brother</mat-radio-button>&nbsp;&nbsp;
+								  <mat-radio-button value="Sister"> Sister</mat-radio-button>
+							  </mat-radio-group>
+						</div>
+						<div class="row">
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Name" type="text" required>
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Mobile" type="text" required>
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Phone" type="text">
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Email" type="email" required>
+									</mat-form-field>
+								</div>
+							</div><br>
+							<div class="row">
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<mat-label>---Select Occupation---</mat-label>
+											<mat-select required>
+												<mat-option value="JOB">JOB</mat-option>
+													<mat-option value="Retired">Retired</mat-option>
+													<mat-option value="Business">Business</mat-option>
+													<mat-option value="Other">Other</mat-option>
+											</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Job Location" type="text">
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Organization" type="text">
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="form-control material-input shadow">
+										<input matInput placeholder="Designation" type="text">
+									</mat-form-field>
+								</div>
+							</div><br> -->
+                        <div class="center">
+                            <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon> Back</button>
+                            <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
+                        </div>
                     </div>
                 </form>
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Education </ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
-                </div>
+            <mat-step [stepControl]="educationForm">
+                <form [formGroup]="educationForm" (submit)="addEducationInfo(educationForm.value)" class="custom-material-form">
+                    <input type="hidden" formControlName="personalInfoId">
+                    <ng-template matStepLabel>Education</ng-template>
+                    <div class="card-body" formArrayName="educations">
+                        <div class="col-md-14" *ngFor="let education of educationFormGroup.controls; let i = index;" formGroupName="{{i}}">
+                            <input type="hidden" formControlName="ID">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="qualification" placeholder="Qualification" type="text">
+                                        <mat-icon>local_library</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="majorSubject" placeholder="Major Subjects" type="text">
+                                        <mat-icon>subject</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="boardUniversity" placeholder="Board/University" type="text">
+                                        <mat-icon>location_city</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="startDate" [matDatepicker]="pickstartdate" placeholder="Start Date">
+                                        <mat-datepicker-toggle matSuffix [for]="pickstartdate"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickstartdate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="passingDate" [matDatepicker]="pickenddate" placeholder="End Date">
+                                        <mat-datepicker-toggle matSuffix [for]="pickenddate"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickenddate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="GPA" placeholder="Marks/CGPA/Division" type="text" required>
+                                        <mat-icon>bar_chart</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button mat-raised-button color="warn" (click)="removeEducation(i)" *ngIf="i>0"><mat-icon>close</mat-icon>Remove</button>
+                            </div>
+                            <hr color="primary"><br>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="addEducation()"><mat-icon>add_circle_outline</mat-icon> Add More Education Info</button>
+                    </div>
+                    <div class="card-body" formArrayName="languages">
+                        <div class="col-md-14" *ngFor="let language of languageFormGroup.controls; let i = index;" formGroupName="{{i}}">
+                            <input type="hidden" formControlName="ID">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="language" placeholder="Language" type="text" required>
+                                        <mat-icon>language</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <mat-label>---Speaking---</mat-label>
+                                        <mat-select formControlName="speaking" required>
+                                            <mat-option value="Good">Good</mat-option>
+                                            <mat-option value="Average">Average</mat-option>
+                                            <mat-option value="Fair">Fair</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <mat-label>---Writting---</mat-label>
+                                        <mat-select formControlName="writting">
+                                            <mat-option value="Good">Good</mat-option>
+                                            <mat-option value="Average">Average</mat-option>
+                                            <mat-option value="Fair">Fair</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <mat-label>---Reading---</mat-label>
+                                        <mat-select formControlName="reading">
+                                            <mat-option value="Good">Good</mat-option>
+                                            <mat-option value="Average">Average</mat-option>
+                                            <mat-option value="Fair">Fair</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <mat-label>---Listening---</mat-label>
+                                        <mat-select formControlName="listening">
+                                            <mat-option value="Good">Good</mat-option>
+                                            <mat-option value="Average">Average</mat-option>
+                                            <mat-option value="Fair">Fair</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="text-right"><button mat-raised-button color="warn" (click)="removeLanguage(i)" *ngIf="i>0"><mat-icon>close</mat-icon>Remove</button></div>
+                            <hr color="primary"><br>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="addLanguage()"><mat-icon>add_circle_outline</mat-icon> Add More Languages</button>
+                    </div>
+                    <div class="center">
+                        <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon> Back</button>
+                        <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
+                    </div>
+                </form>
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Courses / Trainings</ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
-                </div>
+            <mat-step [stepControl]="courseForm">
+                <form [formGroup]="courseForm" (submit)="addCourseInfo(courseForm.value)" class="custom-material-form">
+                    <input type="hidden" formControlName="ID">
+                    <ng-template matStepLabel>Courses / Trainings</ng-template>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="title" placeholder="Title" type="text" required>
+                                    <mat-icon>assignment_ind</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-5">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="institute" placeholder="Institute" type="text" required>
+                                    <mat-icon>location_city</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="city" placeholder="City" type="text" required>
+                                    <mat-icon>location_city</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="country" placeholder="Country" type="text">
+                                    <mat-icon>public</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="duration" placeholder="Duration Of Course" type="text">
+                                    <mat-icon>calendar_view_day</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput formControlName="year" placeholder="Year" type="text">
+                                    <mat-icon>calendar_today</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="material-input textarea-input shadow">
+                                    <textarea matInput formControlName="description" placeholder="Course Description"></textarea>
+                                    <mat-icon>assignment</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="center">
+                            <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon> Back</button>
+                            <button mat-raised-button color="warn" class="mr-2" matStepperNext>Skip <mat-icon>skip_next</mat-icon></button>
+                            <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
+                        </div>
+                    </div>
+                </form>
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Work Experience</ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
-                </div>
+            <mat-step [stepControl]="workForm">
+                <form [formGroup]="workForm" class="custom-material-form" (submit)="addWorkInfo(workForm.value)">
+                    <input type="hidden" formControlName="personalInfoId">
+                    <ng-template matStepLabel>Work Experience</ng-template>
+                    <div class="card-body" formArrayName="works">
+                        <div class="col-md-14" *ngFor="let work of workFormGroup.controls; let i = index;" formGroupName="{{i}}">
+                            <input type="hidden" formControlName="ID">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="organization" placeholder="Organization" type="text" required>
+                                        <mat-icon>location_city</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="jobTitle" placeholder="Job Title" type="text" required>
+                                        <mat-icon>wc</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="department" placeholder="Department" type="text" required>
+                                        <mat-icon>store_mall_directory</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="lastSalaryDrawn" placeholder="Last Salary" type="text" required><i class="fa fa-money"></i>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="joiningDate" [matDatepicker]="doJPick" placeholder="Date of Joining">
+                                        <mat-datepicker-toggle matSuffix [for]="doJPick"></mat-datepicker-toggle>
+                                        <mat-datepicker #doJPick></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3 curr-job-{{i}} cj-show">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="leavingDate" [matDatepicker]="doLPick" placeholder="Date of Leaving">
+                                        <mat-datepicker-toggle matSuffix [for]="doLPick"></mat-datepicker-toggle>
+                                        <mat-datepicker #doLPick></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-radio-group>
+                                        <mat-checkbox formControlName="isCurrOrg" (click)="showHideCurrJob(i)">I'm Currently Working Here</mat-checkbox>
+                                    </mat-radio-group>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="material-input textarea-input shadow">
+                                        <textarea matInput formControlName="jobDescription" placeholder="Job Description (Duties & Responsibilities)"></textarea>
+                                        <mat-icon>assignment</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6 curr-job-{{i}} cj-show">
+                                    <mat-form-field class="material-input textarea-input shadow">
+                                        <textarea matInput formControlName="leavingReason" placeholder="Reason For Leaving Job"></textarea>
+                                        <mat-icon>assignment</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <h5><b>Supervisor / Immediate Boss Name and Contact Information</b></h5>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <mat-label>May we contact your Supervisor</mat-label>
+                                        <mat-select formControlName="isContactSupervisor">
+                                            <mat-option value="Yes">Yes</mat-option>
+                                            <mat-option value="No">No</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="supervisorName" placeholder="Name" type="text">
+                                        <mat-icon>person_outline</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="supContactNum" placeholder="Contact Number" type="text">
+                                        <mat-icon>phone</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="supEmail" placeholder="Email Address" type="text">
+                                        <mat-icon>email</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="text-right"><button mat-raised-button color="warn" (click)="removeWork(i)" *ngIf="i > 0"><mat-icon>close</mat-icon>Remove</button></div>
+                            <hr color="primary"><br>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="addWork()"><mat-icon>add_circle_outline</mat-icon> Add More</button><br><br>
+                        <h4><b>Joining info</b></h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <input matInput placeholder="Expected Salary (PKR)" type="text" required><i class="fa fa-money"></i>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="form-control material-input shadow">
+                                    <mat-label>Joining Duration</mat-label>
+                                    <mat-select required>
+                                        <mat-option value="Immediate">Immediate</mat-option>
+                                        <mat-option value="1 Week">1 Week</mat-option>
+                                        <mat-option value="2 Week">2 Week</mat-option>
+                                        <mat-option value="3 Week">3 Week</mat-option>
+                                        <mat-option value="1 Month">1 Month</mat-option>
+                                        <mat-option value="2 Months">2 Months</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div><br>
+                        <div class="center">
+                            <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon> Back</button>
+                            <button mat-raised-button color="warn" class="mr-2" matStepperNext>Skip <mat-icon>skip_next</mat-icon></button>
+                            <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
+                        </div>
+                    </div>
+                </form>
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Refrences</ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
-                </div>
+            <mat-step [stepControl]="refrenceForm">
+                <form [formGroup]="refrenceForm" class="custom-material-form" (submit)="addRefrenceInfo(refrenceForm.value)">
+                    <input type="hidden" formControlName="personalInfoId">
+                    <ng-template matStepLabel>Refrences</ng-template>
+                    <div class="card-body" formArrayName="refrences">
+                        <div class="col-md-14" *ngFor="let refrence of refrenceFormGroup.controls; let i = index;" formGroupName="{{i}}">
+                            <input type="hidden" formControlName="ID">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="name" placeholder="Name" type="text" required>
+                                        <mat-icon>person_outline</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="relation" placeholder="Relationship" type="text" required>
+                                        <mat-icon>group</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="CNIC" placeholder="CNIC" type="text" required>
+                                        <mat-icon>credit_card</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="cellNum" placeholder="Mobile" type="tel" required>
+                                        <mat-icon>stay_primary_portrait</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="phoneNum" placeholder="Phone" type="tel">
+                                        <mat-icon>phone</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="email" placeholder="Email" type="email">
+                                        <mat-icon>email</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="material-input textarea-input shadow">
+                                        <textarea matInput formControlName="presentAddress" placeholder="Present Address"></textarea>
+                                        <mat-icon>assignment</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="material-input textarea-input shadow">
+                                        <textarea matInput formControlName="permanentAddress" placeholder="Permanent Address"></textarea>
+                                        <mat-icon>assignment</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="text-right"><button mat-raised-button color="warn" (click)="removeRefrence(i)" *ngIf="i > 0"><mat-icon>close</mat-icon>Remove</button></div>
+                            <hr color="primary"><br>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="addRefrence()"><mat-icon>add_circle_outline</mat-icon> Add More</button>
+                        <div class="center">
+                            <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon> Back</button>
+                            <button mat-raised-button color="warn" class="mr-2" matStepperNext>Skip <mat-icon>skip_next</mat-icon></button>
+                            <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
+                        </div>
+                    </div>
+                </form>
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Guaranters</ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" class="pull-right" matStepperNext>Next</button>
-                </div>
+            <mat-step [stepControl]="guaranterForm">
+                <form [formGroup]="guaranterForm" class="custom-material-form" (submit)="addGuaranterInfo(guaranterForm.value)">
+                    <input type="hidden" formControlName="personalInfoId">
+                    <ng-template matStepLabel>Guaranters</ng-template>
+                    <div class="card-body" formArrayName="guaranters">
+                        <div class="col-md-14" *ngFor="let guarantee of guaranterFormGroup.controls; let i=index;" formGroupName="{{i}}">
+                            <input type="hidden" formControlName="ID">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="name" placeholder="Name" type="text" required>
+                                        <mat-icon>person_outline</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="relation" placeholder="Relationship" type="text" required>
+                                        <mat-icon>group</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="CNIC" placeholder="CNIC" type="text" required>
+                                        <mat-icon>credit_card</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="cellNum" placeholder="Mobile" type="tel" required>
+                                        <mat-icon>stay_primary_portrait</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="phoneNum" placeholder="Phone" type="tel">
+                                        <mat-icon>phone</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="email" placeholder="Email" type="email">
+                                        <mat-icon>email</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="material-input textarea-input shadow">
+                                        <textarea matInput formControlName="presentAddress" placeholder="Present Address" required></textarea>
+                                        <mat-icon>place</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="material-input textarea-input shadow">
+                                        <textarea matInput formControlName="permanentAddress" placeholder="Permanent Address" required></textarea>
+                                        <mat-icon>place</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="text-right"><button mat-raised-button color="warn" (click)="removeGuaranter(i)" *ngIf="i > 0"><mat-icon>close</mat-icon>Reomve</button></div>
+                            <hr color="primary"><br>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="addGuaranter()"><mat-icon>add_circle_outline</mat-icon> Add More</button>
+                        <div class="center">
+                            <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon> Back</button>
+                            <button mat-raised-button color="warn" class="mr-2" matStepperNext>Skip <mat-icon>skip_next</mat-icon></button>
+                            <button mat-raised-button color="primary" matStepperNext>Next <mat-icon>navigate_next</mat-icon></button>
+                        </div>
+                    </div>
+                </form>
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>International Traveling</ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+            <mat-step [stepControl]="intTravelForm">
+                <form [formGroup]="intTravelForm" class="custom-material-form" (submit)="addIntTravelInfo(intTravelForm.value)">
+                    <input type="hidden" formControlName="personalInfoId">
+                    <ng-template matStepLabel>International Traveling</ng-template>
+                    <div class="card-body" formArrayName="intTravels">
+                        <div class="col-md-14" *ngFor="let travels of intTravelFormGroup.controls; let i=index;" formGroupName="{{i}}">
+                            <input type="hidden" formControlName="ID">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="country" placeholder="Country" type="text">
+                                        <mat-icon>public</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="travelDate" [matDatepicker]="picker" placeholder="Date of Traveling">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="form-control material-input shadow">
+                                        <input matInput formControlName="durationStay" placeholder="Duration of Stay" type="text">
+                                        <mat-icon>calendar_today</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="text-right"><button mat-raised-button color="warn" (click)="removeintTravel(i)" *ngIf="i > 0"><mat-icon>close</mat-icon>Remove</button></div>
+                            <hr color="primary"><br>
+                        </div>
+                        <button mat-raised-button color="primary" (click)="addintTravel()"><mat-icon>add_circle_outline</mat-icon> Add More</button>
+                    </div>
+                    <div class="center">
+                        <button mat-raised-button color="accent" class="mr-2" matStepperPrevious><mat-icon>navigate_before</mat-icon>Back</button>
+                        <button mat-raised-button color="warn" class="mr-2" (click)="stepper.reset()"><mat-icon>undo</mat-icon> Reset</button>
+                        <button mat-raised-button color="primary" matStepperNext><mat-icon>done_all</mat-icon> Submit</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="Preview">
+                <ng-template matStepLabel>Preview</ng-template>
+
+                <!-- PAGE STUFF -->
+
+                <div class="container">
+                    <div class="col-sm-12">
+                        <div class="panel panel-primary main-panel">
+                            <div class="panel-body">
+                                <div id="printablediv">
+                                    <table class="table resume" cellpadding="5" style="font-family:arial;">
+                                        <tr>
+                                            <td width="25%" class="left-sec" style="vertical-align:top; font-family:arial; background:#3983D4 !important; text-align:center !important;">
+                                                <table width="">
+                                                    <tr>
+                                                        <td align="center" style="background:#3983D4 !important; color:#fff !important;">
+                                                            <div style="background:#3983D4 !important; color:#fff !important;"><img src="https://rehmantravel.com/employeesPhotos/" class="prof-img" alt="" style="margin-bottom:13px; border-radius:100% !important; width:150px; height:150px; border:solid 2px #fff;"></div>
+                                                            <br>
+                                                            <h4 style="background:#3983D4 !important; color:#fff !important;">Nadeem Khan Shinwari</h4> <br>
+                                                            <img src="https://rehmantravel.com/icons/address-sm.png" alt=""> <br>
+                                                            <p style="background:#3983D4 !important; color:#fff !important;" style="font-size: 1em !important;">Mirdad Khel, Shinwari Landi Kotal</p><br>
+                                                            <img src="https://rehmantravel.com/icons/email-sm.png" alt=""> <br>
+                                                            <p style="background:#3983D4 !important; color:#fff !important;" style="font-size: 1em !important;">nadeemkhan@exalted.pk</p> <br>
+                                                            <img src="https://rehmantravel.com/icons/mobile-sm.png" alt=""> <br>
+                                                            <p style="background:#3983D4 !important; color:#fff !important;" style="font-size: 1em !important;">923075956747</p> <br>
+
+                                                            <img src="https://rehmantravel.com/icons/LanguageIcon-sm.png" alt=""> <br>
+                                                            <table width="70%">
+                                                                <tr>
+                                                                    <td align="center"><b style="background:#3983D4 !important; color:#fff !important;font-size: 0.8em !important;">Languages</b></td>
+                                                                    <td align="center"><b style="background:#3983D4 !important; color:#fff !important;font-size: 0.8em !important;">Speaking</b></td>
+                                                                    <td align="center"><b style="background:#3983D4 !important; color:#fff !important;font-size: 0.8em !important;">Writing</b></td>
+                                                                    <td align="center"><b style="background:#3983D4 !important; color:#fff !important;font-size: 0.8em !important;">Reading</b></td>
+                                                                    <td align="center"><b style="background:#3983D4 !important; color:#fff !important;font-size: 0.8em !important;">Listening</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background:#3983D4 !important; color:#fff !important;font-size: 0.6em !important;" align="center">English</td>
+                                                                    <td style="background:#3983D4 !important; color:#fff !important;font-size: 0.6em !important;" align="center">Good</td>
+                                                                    <td style="background:#3983D4 !important; color:#fff !important;font-size: 0.6em !important;" align="center">Good</td>
+                                                                    <td style="background:#3983D4 !important; color:#fff !important;font-size: 0.6em !important;" align="center">Good</td>
+                                                                    <td style="background:#3983D4 !important; color:#fff !important;font-size: 0.6em !important;" align="center">Good</td>
+                                                                </tr>
+                                                            </table>
+                                                            <img src="https://rehmantravel.com/icons/airplane_takeoff-sm.png" alt=""> <br>
+                                                            <p style="background:#3983D4 !important; color:#fff !important;"><b style="color:#fff !important;font-size: 1em !important;">Travel to</b>Afghanistan for 2 Weeks on 12 Feb 2018</p> <br>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td width="75%" class="right-sec">
+                                                <table width="">
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            <h4 style="margin-top:0; border-bottom:1px dotted #333; display: inline">Apply For : <span style="color:#3983D4 !important; font-style:normal;">Web Development</span> <small>(Expected Salary : 90,000)</small></h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/personal-info-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top:6px; text-align:left; color:#3983D4;">Personal Info</h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Date of Birth</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">03 Mar 1990</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Marital Status</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">Married</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Nationality</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">Pakistani</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">CNIC</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">21203-5109166-5</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Passport #</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">N / A</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Driving Licence</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">N / A</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/family-info-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top:6px; text-align:left; color:#3983D4;">Family Info</h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Father Name</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">M. Umar Khan</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Phone Number</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">03214569879</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Cell Number</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">03145698791</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Email</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">N / A</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td style="vertical-align:top">
+                                                            <p><b style="font-size: 1em !important;">Occupation</b></p>
+                                                        </td>
+                                                        <td colspan="3">
+                                                            <p style="font-size: 1em !important;">Driver</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/education-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top:6px; text-align:left; color:#3983D4;">Education</h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td colspan="4">
+                                                            <h5><b>BS(CS) (Java, C++, Networking), 2013,</b></h5> <b>The University of Agriculture, Peshawar</b>, <br><b>CGPA/Score :</b> 3.40
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/trainings-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top:6px; text-align:left; color:#3983D4;">Courses / Trainings / Seminars</h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td colspan="4">
+                                                            <h5><b>Web Development (2011)</b>, 3 Months, Peshawar, Pakistan</h5>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/bag-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top: 6px; display:inline; text-align:left; color:#3983D4;">Professional Experience</h4><i class='text-size'>( 5 Year(s) )</i>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td colspan="4">
+                                                            <h5>
+                                                                <b>Parexons IT Solutions</b> In IT Department</h5>
+                                                            <p style="font-size: 1em !important;">From 2013 To 2014 (Last Salary : 20,000)
+                                                            </p>
+                                                            <h5><b>Description</b></h5>
+                                                            <p style="font-size: 1em !important;">Team Leader</p>
+                                                            <h5><b>Reason for Leaving Job</b></h5>
+                                                            <p style="font-size: 1em !important;">Better oppertunity in Islamabad</p>
+                                                            <div style="border-bottom:1px dotted; padding:3px;margin-bottom:3px"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/refrence-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top:6px; text-align:left; color:#3983D4;">Reference</h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td width="85%" colspan="4">
+                                                            <h5><b>Sajjad A Khan</b></h5>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Relation</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">CEO</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Email</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">test@test.com</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">CNIC</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">12365-1236548-9</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Phone No</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">12365478932</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Cell</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">12365478932</p>
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Address</b></p>
+                                                        </td>
+                                                        <td colspan="3">
+                                                            <p style="font-size: 1em !important;">Swat, Khyber Pukhtoon Khwa, Peshawar<br>Swat, Khyber Pukhtoon Khwa, Peshawar</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td class="seperator" colspan="4"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;"><img src="https://rehmantravel.com/icons/guaranter-sm.png" alt=""></td>
+                                                        <td width="85%" colspan="4">
+                                                            <h4 style="margin-top:6px; text-align:left; color:#3983D4;">Guaranter</h4>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td width="85%" colspan="4">
+                                                            <h5><b>Syed Khan</b></h5>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Relation</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">Test</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Email</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">test@test.com</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">CNIC</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">12345-1234569-8</p>
+                                                        </td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Phone No</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">12345698745</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td>
+                                                            <p><b style="font-size: 1em !important;">Cell</b></p>
+                                                        </td>
+                                                        <td>
+                                                            <p style="font-size: 1em !important;">12345698745</p>
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%" align="center" style="vertical-align:top;">&nbsp;</td>
+                                                        <td style="vertical-align:top">
+                                                            <p><b style="font-size: 1em !important;">Address</b></p>
+                                                        </td>
+                                                        <td colspan="3">
+                                                            <p style="font-size: 1em !important;">Swat, Khyber Pukhtoon Khwa, Peshawar<br>Swat, Khyber Pukhtoon Khwa, Peshawar</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td class="seperator" colspan="4"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </mat-step>
         </mat-horizontal-stepper>
     </div>

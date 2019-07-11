@@ -38,12 +38,12 @@
             <div class="input-group rounded-0 border-input">
                 <div class="input-group-prepend">
                     <span class="input-group-text rounded-0">
-              <i-calendar (click)="checkInDate.open()"></i-calendar>
+              <i-calendar (click)="checkInDate.open();setDateHeader($event,'Check-In Date')"></i-calendar>
             </span>
                 </div>
                 <mat-form-field class="form-control material-input pl-0 rounded-0">
-                    <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" #checkInFocus (dateChange)="keytab($event, checkOutFocus)" id="test" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="border-left-0 rounded-0" placeholder="CheckIn Date"
-                        [min]="currDate">
+                    <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" #checkInFocus (dateChange)="keytab($event, checkOutFocus)" id="test" (focus)="checkInDate.open();setDateHeader($event,'Check-In Date')" (click)="checkInDate.open();setDateHeader($event,'Check-In Date')"
+                        class="border-left-0 rounded-0" placeholder="CheckIn Date" [min]="currDate" readonly>
                     <mat-datepicker #checkInDate></mat-datepicker>
                 </mat-form-field>
             </div>
@@ -55,14 +55,14 @@
         <div [ngClass]="sideForm == true ? 'col-sm-12 mb-3' : 'col-sm-12 col-lg-2 mb-3 mb-lg-0'">
 
             <div class="input-group border-input">
-                <div class="input-group-prepend" (click)="checkOutDate.open()">
+                <div class="input-group-prepend" (click)="checkOutDate.open();setDateHeader($event,'Check-Out Date')">
                     <span class="input-group-text rounded-0">
                   <i-calendar></i-calendar>
                 </span>
                 </div>
                 <mat-form-field class="form-control rounded-0 material-input pl-0">
-                    <input matInput [matDatepicker]="checkOutDate" #checkOutFocus (dateChange)="keytab($event, guestFocus)" formControlName="checkOutDate" (focus)="checkOutDate.open()" (click)="checkOutDate.open()" class="border-left-0 rounded-0" placeholder="Checkout Date"
-                        [min]="hotelSearch.get('checkInDate').value">
+                    <input matInput [matDatepicker]="checkOutDate" #checkOutFocus (dateChange)="keytab($event, guestFocus)" formControlName="checkOutDate" (focus)="checkOutDate.open();setDateHeader($event,'Check-Out Date')" (click)="checkOutDate.open();setDateHeader($event,'Check-Out Date')"
+                        class="border-left-0 rounded-0" placeholder="Checkout Date" [min]="hotelSearch.get('checkInDate').value" readonly>
                     <mat-datepicker #checkOutDate></mat-datepicker>
                 </mat-form-field>
             </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="form-group row no-gutters my-2 text-right">
         <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-2 offset-lg-10 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
-            <button class="btn btn-block rounded-0 search-flight-btn border-input" [disabled]="desMsg != ''" [ngClass]="sideForm == true ? 'btn-success' : 'btn-success'" type="submit">{{searchBtn}}</button>
+            <button class="btn btn-block rounded-0 search-flight-btn hotel-btn border-input" [disabled]="desMsg != ''" [ngClass]="sideForm == true ? 'btn-success' : 'btn-success'" type="submit">{{searchBtn}}</button>
         </div>
     </div>
     <p class="form-error mb-0"></p>

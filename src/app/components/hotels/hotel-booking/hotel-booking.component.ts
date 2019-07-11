@@ -145,11 +145,12 @@ export class HotelBookingComponent implements OnInit {
       this.yearItems.push({"value": this.currentYear + i});
     }
     // months list
-    for (let j = 0; j < this.monthsNames.length; j++) {
-      if(j >= this.currentMonth){
-        this.monthItems.push(this.monthsNames[j]);
-      }
-    }
+    // for (let j = 0; j < this.monthsNames.length; j++) {
+    //   this.monthItems.push(this.monthsNames[j]);
+    //   // if(j >= this.currentMonth){
+    //   // }
+    // }
+    this.populateMonths(this.currentYear);
 
   } //
 
@@ -215,10 +216,36 @@ export class HotelBookingComponent implements OnInit {
     if(this.bookingInfoFrom.valid){
       this.guestFormInfo = formData;
       console.log('form data',formData);
+      this.paymentInfoForm.controls['cardHolderFirstName'].setValue(formData.firstName);
+      this.paymentInfoForm.controls['cardHolderLastName'].setValue(formData.lastName);
+      this.paymentInfoForm.controls['email'].setValue(formData.email);
+      this.paymentInfoForm.controls['phone'].setValue(formData.phone);
     }
     else{
+      // this.scroll('paxInfoForm');
       this.bookingErrorMsg = "Please Fill All Required Fields";
+      this.bookingInfoFrom.controls['firstName'].markAsTouched();
+      this.bookingInfoFrom.controls['lastName'].markAsTouched();
+      this.bookingInfoFrom.controls['phone'].markAsTouched();
+      this.bookingInfoFrom.controls['email'].markAsTouched();
       this.bookingInfoFrom.controls['bookingFor'].markAsTouched();
+    }
+  }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+  populateMonths(Year){
+    this.monthItems = [];
+    if(Year > this.currentYear){
+      for (let j = 0; j < this.monthsNames.length; j++) {
+        this.monthItems.push(this.monthsNames[j]); 
+      }
+    }else{
+      for (let j = 0; j < this.monthsNames.length; j++) {
+        if(j >= this.currentMonth){
+          this.monthItems.push(this.monthsNames[j]);
+        }
+      }
     }
   }
 
@@ -227,7 +254,14 @@ export class HotelBookingComponent implements OnInit {
       this.paymentFormInfo = formData;
       this.bookingComplete = true;
     }else{
-      this.paymentErrorMsg = "Please Fill All Required Fields";
+      this.paymentErrorMsg = "Please fill all required fields";
+      this.paymentInfoForm.controls['cardNumber'].markAsTouched();
+      this.paymentInfoForm.controls['cvn'].markAsTouched();
+      this.paymentInfoForm.controls['cardHolderFirstName'].markAsTouched();
+      this.paymentInfoForm.controls['cardHolderLastName'].markAsTouched();
+      this.paymentInfoForm.controls['email'].markAsTouched();
+      this.paymentInfoForm.controls['phone'].markAsTouched();
+      this.paymentInfoForm.controls['address'].markAsTouched();
     }
   }
 

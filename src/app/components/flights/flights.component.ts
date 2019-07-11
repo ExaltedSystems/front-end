@@ -15,7 +15,6 @@ export class FlightsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.__router)
     this.getPageData();
   }
   getPageData() {

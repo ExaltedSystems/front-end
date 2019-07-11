@@ -29,8 +29,8 @@ export class HotelsListingComponent implements OnInit {
     searchQuery: any;
     hotelsSearchResult: any = [];
 
-    order: string = 'price';
-    reverse: boolean = false;
+    order: string = '';
+    reverse: boolean;
 
     isLoading: boolean = true;
 

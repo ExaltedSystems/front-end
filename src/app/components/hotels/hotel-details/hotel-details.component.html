@@ -101,7 +101,7 @@
                                     <p class="text-primary m-0">{{searchQuery.checkInDate | date:'mediumDate'}}</p>
                                 </div>
                                 <div class="checkIn">
-                                    <b>Check In Date</b>
+                                    <b>Check Out Date</b>
                                     <p class="text-primary m-0">{{searchQuery.checkOutDate | date:'mediumDate'}}</p>
                                 </div>
                                 <div>
@@ -124,7 +124,7 @@
                                         <p class="text-primary m-0">{{searchQuery.checkInDate | date:'mediumDate'}}</p>
                                     </div>
                                     <div class="checkIn">
-                                        <b>Check In Date</b>
+                                        <b>Check Out Date</b>
                                         <p class="text-primary m-0">{{searchQuery.checkOutDate | date:'mediumDate'}}</p>
                                     </div>
                                 </div>
@@ -318,7 +318,7 @@
                                                                     <br/> {{hotelDetails.breakfast_price}}</div>
                                                                 <div *ngSwitchCase="'Yes, Included in Price'">Good Breakfast Included</div>
                                                             </div>
-                                                            <div>Smooking:{{room.smooking_policy}}</div>
+                                                            <!-- <div>Smooking:{{room.smooking_policy}}</div> -->
                                                         </td>
                                                         <td class="td-filled">
                                                             <select class="form-control" #rooms (change)="getRoomsPrice(rooms.value,(room.price_pp_pn),i,room.no_of_guest,room.id)">
@@ -350,7 +350,7 @@
                                                             <p class="form-error">{{roomsMsg}}</p>
                                                             <div class="pr-3">
                                                                 <p class="mb-1">{{totalRoomsSelected}} Rooms Selected</p>
-                                                                <b class="text-primary">PKR </b>{{totalRoomsPrice}}
+                                                                <h4><b class="text-primary">PKR </b>{{totalRoomsPrice}}</h4>
                                                             </div>
                                                             <br>
                                                             <button class="btn btn-primary shadow-sm rounded-0 py-2" (click)="continueBooking(totalRoomsSelected,totalRoomsGuests)">Continue Booking</button>
@@ -401,8 +401,8 @@
                                     </div>
                                 </div>
                                 <!-- / -->
-                                <div>
-                                    <h4>Facilities of {{hotelDetails.name}}</h4>
+                                <div class="d-none d-sm-block">
+                                    <h4 *ngIf="hotelDetails.hotel_all_facility">Facilities of {{hotelDetails.name}}</h4>
                                     <ul class="main-facilities-ul">
                                         <li class="main-facilities-li" *ngFor="let mf of hotelDetails.hotel_all_facility">{{mf.main_facility}}
                                             <ul class="sub-facilities-ul">
@@ -411,7 +411,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h4> Info</h4>
+                                <h4 class="d-none d-sm-block"> Info</h4>
                                 <table cellspacing="7" class="table table-bordered d-none d-sm-table">
                                     <tbody>
                                         <tr>
@@ -429,7 +429,7 @@
                                     </tbody>
                                 </table>
 
-                                <h4>Policies at Islamabad Marriot Hotel</h4>
+                                <h4 class="d-none d-sm-block">Policies at Islamabad Marriot Hotel</h4>
                                 <table cellspacing="7" class="table table-bordered d-none d-sm-table">
                                     <tbody>
                                         <tr>

@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
+import { isObject } from 'util';
 declare var jQuery;
 
 @Component({
@@ -29,7 +30,7 @@ export class HotelSearchFormComponent implements OnInit {
   @Input() sideForm: boolean;
 
   hotelSearch: FormGroup;
-  adults: number = 1;
+  adults: number = 2;
   children: number = 0;
   rooms: number = 1;
   currDate: Date = new Date();
@@ -250,14 +251,13 @@ export class HotelSearchFormComponent implements OnInit {
       el.focus();
     }
     if(el.getAttribute('id') == 'flightPaxDropdownMenu'){
-      // el.trigger('click')
-      console.log('test')
-      jQuery('.dropdown-toggle').dropdown('toggle');
-      jQuery('.dropdown').addClass('open');
-      jQuery('.dropdown-menu').addClass('show')
+      // console.log('test')
+      // jQuery('.dropdown-toggle').dropdown('toggle');
+      // jQuery('.dropdown').addClass('open');
+      // jQuery('.dropdown-menu').addClass('show');
+      jQuery('.hotel-btn').focus();
     }
     el.focus();
-    console.log(el.getAttribute('id'))
     // return
     // let element = event.targetElement.nextElementSibling; // get the sibling element
     // console.log(event.targetElement.parentElement)
@@ -314,5 +314,18 @@ export class HotelSearchFormComponent implements OnInit {
     jQuery(ev.path[3]).removeClass('show')
 
   }
+	setDateHeader(evt, type) {
+		let placeHolder = type;
+		// if (isObject(evt)) {
+		// 	placeHolder = evt.target.getAttribute('placeholder');
+		// } else {
+		// 	placeHolder = evt;
+		// }
+		window.setTimeout(() => {
+			if(jQuery('.mat-calendar-header').find("h4").length == 0) {
+				jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">' + placeHolder + '</h4>');
+			}
+		}, 300);
+	}
 
 } //

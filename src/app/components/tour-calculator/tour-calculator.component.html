@@ -17,8 +17,8 @@
                 </nav>
                 <div>
                     <form [formGroup]="tourCalculatorForm" class="custom-material-form position-relative" (submit)="calculateHotelPkg(tourCalculatorForm.value)">
-                        <div class="form-group row">
-                            <div class="col-sm-1">
+                        <div class="form-group row mb-0">
+                            <div class="col-sm-1 col-6">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
                                     <mat-select formControlName="totalAdults" placeholder="Adults">
                                         <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" [value]="number">
@@ -27,7 +27,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 col-6">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
                                     <mat-select formControlName="totalChildrens" placeholder="Children">
                                         <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" [value]="number">
@@ -52,9 +52,15 @@
                                 <input type="hidden" formControlName="ID">
                                 <div class="col-sm-3">
                                     <mat-form-field class="form-control material-input mb-3 shadow">
-                                        <mat-select matInput formControlName="hotelName">
+                                        <!-- <mat-select matInput formControlName="hotelName" placeholder="Hotel Name">
                                             <mat-option *ngFor="let h of allHotels" [value]="h.ID">{{h.hotelName}}</mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
+                                        <input matInput formControlName="hotelName" [matAutocomplete]="auto" placeholder="Hotel Name">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions[i] | async" [value]="option.hotelName" (onSelectionChange)="onSelectionChange($event, i)">
+                                                {{ option.hotelName }}
+                                            </mat-option>
+                                        </mat-autocomplete>
                                     </mat-form-field>
                                     <!-- <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm-none" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'">
                                         <input matInput formControlName="hotelName" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" [matAutocomplete]="hAutocomplete">
@@ -66,24 +72,51 @@
                                         <i-x-circle class="feather-x-circle" *ngIf="destValu" (click)="destValu=''"></i-x-circle>
                                     </mat-form-field> -->
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1 col-6 w-11">
                                     <mat-form-field class="form-control material-input mb-3 shadow">
                                         <input matInput [matDatepicker]="tourCheckIn" formControlName="tourCheckIn" (click)="tourCheckIn.open()" (dateChange)="calculateDate(i)" class="border-left-0 rounded-0" placeholder="Check In Date" [min]="currDate">
                                         <mat-datepicker touchUi #tourCheckIn></mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1 col-6 w-11">
                                     <mat-form-field class="form-control material-input mb-3 shadow">
                                         <input matInput [matDatepicker]="tourCheckOut" formControlName="tourCheckOut" (click)="tourCheckOut.open()" (dateChange)="calculateDate(i)" class="border-left-0 rounded-0" placeholder="Check Out Date" [min]="currDate">
                                         <mat-datepicker touchUi #tourCheckOut></mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1 w-10">
+                                    <mat-form-field class="form-control material-input mb-3 shadow">
+                                        <mat-select formControlName="dblRoom" placeholder="Double">
+                                            <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]" [value]="number">
+                                                {{number}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-1 w-10">
+                                    <mat-form-field class="form-control material-input mb-3 shadow">
+                                        <mat-select formControlName="tplRoom" placeholder="Triple">
+                                            <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]" [value]="number">
+                                                {{number}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-1 w-10">
+                                    <mat-form-field class="form-control material-input mb-3 shadow">
+                                        <mat-select formControlName="qdRoom" placeholder="Quad">
+                                            <mat-option *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]" [value]="number">
+                                                {{number}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-1 w-11">
                                     <mat-form-field class="form-control material-input mb-3 shadow">
                                         <input placeholder="Total Nights" class="rounded-5" formControlName="totalNights" readonly matInput>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1 w-11">
                                     <mat-form-field class="form-control material-input mb-3 shadow">
                                         <input placeholder="Room Price" class="rounded-5" formControlName="roomPrice" readonly matInput>
                                     </mat-form-field>

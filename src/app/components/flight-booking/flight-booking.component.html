@@ -268,7 +268,7 @@
                             <div></div>
                             <button hidden="" type="submit">submit form</button>
                         </form>
-                        <div class="row">
+                        <div>
                             <mat-horizontal-stepper [linear]="isLinear" #stepper>
                                 <mat-step [stepControl]="travellersForm">
                                     <form [formGroup]="travellersForm" (submit)="reservation_step1(travellersForm.value)">
@@ -391,116 +391,116 @@
                                 <mat-step [stepControl]="paymentForm">
 
                                     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-                                        
-                      <mat-tab label="Credit Card"> 
-                          <form [formGroup]="paymentForm" (submit)="creditCardPost(paymentForm.value)">
-                              <ng-template matStepLabel>Payment Information</ng-template>
-                              <fieldset>
-                                  <legend>Pay Via Credit Card</legend>
-                              <div class="form-group mb-sm-4">
-                                <mat-radio-group class="d-block my-2" formControlName="cardType">
-                                    <mat-radio-button *ngFor="let cardType of cardTypeitems" class="mr-3" value="{{cardType.value}}" checked="{{cardType.checked}}"> {{cardType.label}}</mat-radio-button>                                    
-                                </mat-radio-group>
-                              </div>
-                              <div class="form-group row mb-sm-4">
-                                <div class="col-sm-4">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="Card Number" formControlName="cardNumber">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-2">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="CVN" formControlName="cvn">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-3">
-                                    <mat-form-field class="form-control">
-                                        <mat-select formControlName='expiryYear' placeholder="Expiry Year" (selectionChange)="populateMonths($event.value)">
-                                            <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
-                                        </mat-select>                                
-                                    </mat-form-field>
-                                </div>
 
-                                <div class="col-sm-3">
-                                  <mat-form-field class="form-control">
-                                      <mat-select formControlName='expiryMonth' placeholder="Expiry Month">
-                                        <mat-option *ngFor="let month of monthItems" value="{{month.value}}">{{month.name}}</mat-option>
-                                      </mat-select>                                
-                                  </mat-form-field>
-                                </div>
-                              </div>
-                              <div class="form-group row mb-sm-4">
-                                <div class="col-sm-4">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="Card Holder First Name" formControlName="cardHolderFirstName">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-4">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="Card Holder Last Name" formControlName="cardHolderLastName">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-4">
-                                    <mat-form-field class="form-control">
-                                      <input matInput placeholder="Card Holder Mobile" formControlName="cardHolderMobile">
-                                    </mat-form-field>
-                                  </div>
-                              </div>
-      
-                              <div class="form-group row mb-sm-4">
-                                <div class="col-sm-4">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="Card Holder Email" formControlName="cardHolderEmail">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-8">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="Address" formControlName="address">
-                                  </mat-form-field>
-                                </div>
-                              </div>
-                              <div class="form-group row mb-sm-4">
-                                <div class="col-sm-3">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="City" formControlName="city">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-3">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="Zip Code" formControlName="zipCode">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-3">
-                                  <mat-form-field class="form-control">
-                                    <input matInput placeholder="State" formControlName="state">
-                                  </mat-form-field>
-                                </div>
-      
-                                <div class="col-sm-3">
-                                  <mat-form-field class="form-control">
-                                    <mat-select formControlName='country' placeholder="Country">
-                                      <mat-option value="PK">Pakistan</mat-option>
-                                      <mat-option value="UAE">UAE</mat-option>
-                                      <mat-option value="UK">UK</mat-option>
-                                    </mat-select>
-                                  </mat-form-field>
-                                </div>
-                              </div>
-                              </fieldset>
-                              <div class="center">
-                                
-                                <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" [disabled]="!paymentForm.valid" mat-button>Confirm</button>
-                              </div>
-                          </form>
+                                        <mat-tab label="Credit Card">
+                                            <form [formGroup]="paymentForm" (submit)="creditCardPost(paymentForm.value)">
+                                                <ng-template matStepLabel>Payment Information</ng-template>
+                                                <fieldset>
+                                                    <legend>Pay Via Credit Card</legend>
+                                                    <div class="form-group mb-sm-4">
+                                                        <mat-radio-group class="d-block my-2" formControlName="cardType">
+                                                            <mat-radio-button *ngFor="let cardType of cardTypeitems" class="mr-3" value="{{cardType.value}}" checked="{{cardType.checked}}"> {{cardType.label}}</mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </div>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Card Number" formControlName="cardNumber">
+                                                            </mat-form-field>
+                                                        </div>
 
-                      </mat-tab>
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="CVN" formControlName="cvn">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <mat-select formControlName='expiryYear' placeholder="Expiry Year" (selectionChange)="populateMonths($event.value)">
+                                                                    <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <mat-select formControlName='expiryMonth' placeholder="Expiry Month">
+                                                                    <mat-option *ngFor="let month of monthItems" value="{{month.value}}">{{month.name}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Card Holder First Name" formControlName="cardHolderFirstName">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Card Holder Last Name" formControlName="cardHolderLastName">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Card Holder Mobile" formControlName="cardHolderMobile">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Card Holder Email" formControlName="cardHolderEmail">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-8">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Address" formControlName="address">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="City" formControlName="city">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="Zip Code" formControlName="zipCode">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <input matInput placeholder="State" formControlName="state">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control">
+                                                                <mat-select formControlName='country' placeholder="Country">
+                                                                    <mat-option value="PK">Pakistan</mat-option>
+                                                                    <mat-option value="UAE">UAE</mat-option>
+                                                                    <mat-option value="UK">UK</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="center">
+
+                                                    <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" [disabled]="!paymentForm.valid" mat-button>Confirm</button>
+                                                </div>
+                                            </form>
+
+                                        </mat-tab>
                                         <mat-tab label="Cash on Delivery">
                                             <h2>Pay Cash on Delivery</h2>
                                             <p>You can pay cash after receiving your Ticket at your doorstep.</p>

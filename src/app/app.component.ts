@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SwitchLanguageService } from './services/switch-language.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  constructor(private __lang: SwitchLanguageService){
+    this.__lang.use('en').then(() => {
+      console.log(this.__lang.data);
+    });
+  }
   ngOnInit(){
-    window.scroll(0, 300);
+    if(window.matchMedia('(max-width: 768px)').matches){
+      window.scroll(0, 0);
+    } else {
+      window.scroll(0, 300);
+    }
   }
 }

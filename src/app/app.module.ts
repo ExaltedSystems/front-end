@@ -73,6 +73,7 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
 import { AmazingVisaOfferComponent } from './components/amazing-visa-offer/amazing-visa-offer.component';
 import { TourCalculatorComponent } from './components/tour-calculator/tour-calculator.component';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { TourCalculatorComponent } from './components/tour-calculator/tour-calcu
     JobsComponent,
     PaymentErrorComponent,
     AmazingVisaOfferComponent,
-    TourCalculatorComponent
+    TourCalculatorComponent,
+    TranslatePipe,
   ],
   imports: [
     BrowserModule,

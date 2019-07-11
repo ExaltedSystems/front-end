@@ -134,7 +134,7 @@
                         <mat-step [stepControl]="bookingInfoFrom" [editable]="true">
                             <form [formGroup]="bookingInfoFrom" (submit)="guestInfo(bookingInfoFrom.value)" class="custom-material-form">
                                 <ng-template matStepLabel>Enter Your Details</ng-template>
-                                <div class="form-group row">
+                                <div class="form-group row" #paxInfoForm>
                                     <div class="col-sm-2">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input material-select rounded-0">
                                             <mat-label>Title</mat-label>
@@ -147,25 +147,47 @@
                                     </div>
                                     <div class="col-sm-5">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="firstName" placeholder="First Name" mask="S*">
+                                            <input matInput formControlName="firstName" placeholder="First Name" mask="S*" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.bookingInfoFrom.get('firstName').value" (click)="this.bookingInfoFrom.get('firstName').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="bookingInfoFrom.controls['firstName'].hasError('required') && bookingInfoFrom.controls['firstName'].touched">
+                                            First Name is required.
+                                        </div>
                                     </div>
                                     <div class="col-sm-5">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="lastName" placeholder="Last Name" mask="S*">
+                                            <input matInput formControlName="lastName" placeholder="Last Name" mask="S*" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.bookingInfoFrom.get('lastName').value" (click)="this.bookingInfoFrom.get('lastName').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="bookingInfoFrom.controls['lastName'].hasError('required') && bookingInfoFrom.controls['lastName'].touched">
+                                            Last Name is required.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="phone" placeholder="Phone No" minlength="9" maxlength="17" mask="9*">
+                                            <input matInput formControlName="phone" placeholder="Phone No" minlength="9" maxlength="17" mask="9*" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.bookingInfoFrom.get('phone').value" (click)="this.bookingInfoFrom.get('phone').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="bookingInfoFrom.controls['phone'].hasError('required') && bookingInfoFrom.controls['phone'].touched">
+                                            Phone Number is required.
+                                        </div>
+                                        <div class="form-error" *ngIf="bookingInfoFrom.controls['phone'].errors?.minlength">
+                                            Minimum 9 characters.
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input type="email" matInput formControlName="email" placeholder="Email" class="">
+                                            <input type="email" matInput formControlName="email" placeholder="Email" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.bookingInfoFrom.get('email').value" (click)="this.bookingInfoFrom.get('email').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="bookingInfoFrom.controls['email'].hasError('required') && bookingInfoFrom.controls['email'].touched">
+                                            Email address required.
+                                        </div>
+                                        <div class="form-error" *ngIf="bookingInfoFrom.controls['email'].invalid && bookingInfoFrom.controls['email'].value != ''">
+                                            Email address not valid.
+                                        </div>
                                     </div>
                                     <!-- <div class="col-sm-4">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
@@ -192,7 +214,7 @@
                                     <p class="mb-1">
                                         <b>{{room.room_title}}</b>
                                     </p>
-                                    <small>Can I cancel? When do I pay?</small>
+                                    <!-- <small>Can I cancel? When do I pay?</small> -->
                                     <div class="form-group row d-flex align-items-center my-2">
                                         <label class="col-sm-1 m-0">Guests</label>
                                         <div class="col-sm-2">
@@ -202,7 +224,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <p>
-                                                <b>Smooking:</b> {{room.smooking_policy}}</p>
+                                                <b>Smoking:</b> {{room.smooking_policy}}</p>
                                         </div>
                                     </div>
                                     <!-- <div class="list-divider"></div>
@@ -222,7 +244,7 @@
                                     <small> Make the most out of your trip and check car hire options in your booking confirmation</small>
                                 </div> -->
                                 <div>
-                                    <button type="submit" matStepperNext class="btn btn-success rounded-0 shadow-sm px-4" style="width:20%">Next</button>
+                                    <button type="submit" matStepperNext class="btn btn-success rounded-0 shadow-sm px-4 btn-block" (click)="scroll(paxInfoForm)">Next</button>
                                     <small class="form-error" *ngIf="bookingInfoFrom.invalid">{{bookingErrorMsg}}</small>
                                 </div>
                             </form>
@@ -241,28 +263,54 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="cardNumber" minlength="12" maxlength="20" mask="9*" placeholder="Card Number">
+                                            <input matInput formControlName="cardNumber" minlength="12" maxlength="20" mask="9*" placeholder="Card Number" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('cardNumber').value" (click)="this.paymentInfoForm.get('cardNumber').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['cardNumber'].hasError('required') && paymentInfoForm.controls['cardNumber'].touched">
+                                            Credit Card Number is required.
+                                        </div>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['cardNumber'].errors?.minlength">
+                                            Minimum 12 characters.
+                                        </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="cvn" placeholder="CVN" mask="999">
+                                            <input matInput formControlName="cvn" placeholder="CVN" mask="999" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('cvn').value" (click)="this.paymentInfoForm.get('cvn').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['cvn'].hasError('required') && paymentInfoForm.controls['cvn'].touched">
+                                            CVN required.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="cardHolderFirstName" mask="S*" placeholder="Card Holder First Name">
+                                            <input matInput formControlName="cardHolderFirstName" mask="S*" placeholder="Card Holder First Name" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('cardHolderFirstName').value" (click)="this.paymentInfoForm.get('cardHolderFirstName').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['cardHolderFirstName'].hasError('required') && paymentInfoForm.controls['cardHolderFirstName'].touched">
+                                            First Name is required.
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="cardHolderLastName" mask="S*" placeholder="Card Holder Last Name">
+                                            <input matInput formControlName="cardHolderLastName" mask="S*" placeholder="Card Holder Last Name" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('cardHolderLastName').value" (click)="this.paymentInfoForm.get('cardHolderLastName').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['cardHolderLastName'].hasError('required') && paymentInfoForm.controls['cardHolderLastName'].touched">
+                                            Last Name is required.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <mat-form-field class="form-control  mb-3 mb-sm-0 material-input rounded-0">
+                                            <mat-select formControlName='expiryYear' placeholder="Expiry Year" (selectionChange)="populateMonths($event.value)">
+                                                <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
                                     <div class="col-sm-3">
                                         <mat-form-field class="form-control  mb-3 mb-sm-0 material-input rounded-0">
                                             <mat-select formControlName='expiryMonth' placeholder="Expiry Month">
@@ -270,37 +318,41 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
-
-                                    <div class="col-sm-3">
-                                        <mat-form-field class="form-control  mb-3 mb-sm-0 material-input rounded-0">
-                                            <mat-select formControlName='expiryYear' placeholder="Expiry Year">
-                                                <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-6">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="email" placeholder="Email">
+                                            <input matInput formControlName="email" placeholder="Email" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('email').value" (click)="this.paymentInfoForm.get('email').setValue('')"></i-x-circle>
                                         </mat-form-field>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
-                                            <input matInput formControlName="phone" placeholder="Phone" minlength="9" maxlength="17" mask="9*">
-                                        </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['email'].hasError('required') && paymentInfoForm.controls['email'].touched">
+                                            Email is required.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-3">
+                                        <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
+                                            <input matInput formControlName="phone" placeholder="Phone" minlength="9" maxlength="17" mask="9*" autocomplete="off">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('phone').value" (click)="this.paymentInfoForm.get('phone').setValue('')"></i-x-circle>
+                                        </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['phone'].hasError('required') && paymentInfoForm.controls['phone'].touched">
+                                            Phone is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
                                         <mat-form-field class="form-control mb-3 mb-sm-0 material-input rounded-0">
                                             <input matInput formControlName="address" placeholder="Address">
+                                            <i-x-circle class="feather-x-circle" *ngIf="this.paymentInfoForm.get('address').value" (click)="this.paymentInfoForm.get('address').setValue('')"></i-x-circle>
                                         </mat-form-field>
+                                        <div class="form-error" *ngIf="paymentInfoForm.controls['address'].hasError('required') && paymentInfoForm.controls['address'].touched">
+                                            Address is required.
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2" style="width:20%">Back</button>
-                                    <button type="submit" matStepperNext class="btn btn-success rounded-0 shadow-sm w-30" style="width:20%">Next</button>
-                                    <small class="form-error" *ngIf="paymentInfoForm.invalid">{{paymentErrorMsg}}</small>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button matStepperPrevious class="btn btn-default rounded-0 shadow-sm mr-2 btn-block">Back</button>
+                                    <button type="submit" matStepperNext class="btn btn-success rounded-0 shadow-sm mt-0 btn-block">Next</button>
                                 </div>
+                                <small class="form-error" *ngIf="paymentInfoForm.invalid">{{paymentErrorMsg}}</small>
                             </form>
 
                         </mat-step>

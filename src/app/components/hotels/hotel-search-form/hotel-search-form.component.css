@@ -8,3 +8,7 @@
     background: #827d7d !important;
     color: #fff !important;
 }
+
+.mat-datepicker-content .mat-calendar {
+    height: auto !important;
+}
