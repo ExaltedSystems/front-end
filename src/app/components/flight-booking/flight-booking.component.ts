@@ -62,6 +62,7 @@ export class FlightBookingComponent implements OnInit {
   docExpPlaceholder = 'Document Expiry Date';
   passengersArr: FormArray;
   paymentForm: FormGroup;
+  jazzForm: FormGroup;
   creditCardForm;
   jazzCashForm;
 
@@ -232,7 +233,11 @@ export class FlightBookingComponent implements OnInit {
       zipCode: ["", Validators.required],
       state: ["", Validators.required],
       country: ["", Validators.required]
-  })
+    })
+
+    this.jazzForm = this.__fb.group({
+      transactionType: ["MWALLET", Validators.required],
+    })
 
     for (let i = 0; i < 10; i++) {      
       this.yearItems.push({"value": this.currentYear + i});
