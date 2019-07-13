@@ -501,6 +501,30 @@
                                             </form>
 
                                         </mat-tab>
+
+                                        <mat-tab label="JazzCash">
+                                            <h2>Pay via JazzCash</h2> 
+                                            <p>You can pay cash after receiving your Ticket at your doorstep.</p>
+                                            
+                                            <form action="https://payments.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform" method="POST" novalidate="" class="" id="jazzCashForm">
+                                                <div></div>
+                                                <button hidden="" type="submit">submit form</button>
+                                            </form>
+                                            <form [formGroup]="jazzForm" (submit)="jazzCashPost(jazzForm.value)">
+                                            <div class="col-sm-12">
+                                                <mat-radio-group class="d-block my-2" formControlName="transactionType" >
+                                                    <mat-radio-button class="mr-3" value="MWALLET"> Mobile Account</mat-radio-button>
+                                                    <mat-radio-button value="OTC"> Over The Counter</mat-radio-button>
+                                                </mat-radio-group>
+                                                
+                                                <div class="center">
+                                                <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp;
+                                                <button class="btn btn-primary rounded-0 shadow btn-sm">Confirm</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        </mat-tab>
+                                        
                                         <mat-tab label="Cash on Delivery">
                                             <h2>Pay Cash on Delivery</h2>
                                             <p>You can pay cash after receiving your Ticket at your doorstep.</p>
