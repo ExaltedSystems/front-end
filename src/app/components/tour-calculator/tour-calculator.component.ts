@@ -5,6 +5,8 @@ import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/date.adapter';
 import { MainService } from 'src/app/services/main.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tour-calculator',
@@ -35,7 +37,15 @@ export class TourCalculatorComponent implements OnInit {
 
   dt: Date = new Date();
   currDate = new Date(this.dt.setDate(this.dt.getDate() + 1));
-  constructor(private __fb: FormBuilder, private __ms: MainService) { }
+  deviceFullInfo = null;
+  browser = null;
+  operatingSys = null;
+
+  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __dd: DeviceDetectorService) {
+    this.deviceFullInfo = this.__dd.getDeviceInfo();
+    this.browser = this.__dd.browser;
+    this.operatingSys = this.__dd.os;
+  }
 
   ngOnInit() {
     this.getTourHotels();
@@ -145,6 +155,7 @@ export class TourCalculatorComponent implements OnInit {
   calculateHotelPkg(formInputs) {
     console.log('HotelData:', formInputs)
     if (this.tourCalculatorForm.valid) {
+      Object.assign(formInputs, {type:'preview'});
       this.__ms.postData(this.__ms.backEndUrl + 'Umrah/calcUmrahTourPkg', formInputs).subscribe(result => {
         // console.log('Pkg_Details:', result)
         this.pkgPreview = result;
@@ -155,7 +166,23 @@ export class TourCalculatorComponent implements OnInit {
     }
   }
   confirmPkg() {
-    console.log('HotelData:', this.tourCalculatorForm.value)
+    let formData = this.tourCalculatorForm.value;
+    Object.assign(formData, {
+      ipAddress: this.__ms.ipAddress,
+      browser: this.browser,
+      type: 'confirm',
+      operatingSys: this.operatingSys,
+      deviceFullInfo: this.deviceFullInfo,
+      pageUrl: this.__router.url,
+      country: "PK",
+      referrerUrl: this.__router.url
+    });
+    // console.log('HotelData:', this.tourCalculatorForm.value)
+    // console.log('HotelFormData:', formData)
+    this.__ms.postData(this.__ms.backEndUrl + 'Umrah/calcUmrahTourPkg', formData).subscribe(result => {
+      // console.log('Pkg_Details:', result)
+      this.pkgPreview = result;
+    })
   }
   printPkg(divId) {
     let printContents, popupWin;
