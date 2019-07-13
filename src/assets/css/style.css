@@ -1228,6 +1228,10 @@ legend {
     right: 0
 }
 
+.span-input {
+    width: 50%;
+}
+
 @media (max-width:575px) {
     h1 {
         font-size: 1.3rem;
@@ -1306,10 +1310,10 @@ legend {
     .main-search-form .mobile-form-group {
         margin-bottom: 0
     }
-    .custom-material-form .mobile-input-group-control,
+    /* .custom-material-form .mobile-input-group-control,
     .main-search-form .mobile-input-group-control {
         width: 84%
-    }
+    } */
     .custom-material-form .mat-input-element,
     .custom-material-form .material-input input[type=text],
     .main-search-form .mat-input-element,
@@ -1442,6 +1446,9 @@ legend {
     .page-search {
         position: relative;
     }
+    .span-input {
+        width: 100%;
+    }
 }
 
 @media (min-width:768px) {
@@ -1451,10 +1458,6 @@ legend {
     .navbar-nav .dropdown-menu {
         position: absolute!important;
         top: auto!important
-    }
-    label,
-    p {
-        font-size: .7rem;
     }
 }
 

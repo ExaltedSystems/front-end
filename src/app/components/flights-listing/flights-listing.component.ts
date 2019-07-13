@@ -9,6 +9,7 @@ import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton } f
 import { map } from 'rxjs/operators';
 import { HomeComponent } from '../home/home.component';
 import { CookieService } from 'ngx-cookie-service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 declare var jQuery;
 
@@ -83,10 +84,15 @@ export class FlightsListingComponent implements OnInit {
   mChangeSearch: boolean = false;
   currDate: Date = new Date();
   cookieObj;
+  sideForm:boolean;
 
   constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router,
-    private __fb: FormBuilder, private __hm: HomeComponent, private __cookieService: CookieService) {
+    private __fb: FormBuilder, private __hm: HomeComponent, private __cookieService: CookieService, private __device: DeviceDetectorService) {
     window.scroll(0, 0);
+    
+    if(this.__device.isMobile()){
+      this.sideForm = true;
+    }
     this.__router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
@@ -410,6 +416,7 @@ export class FlightsListingComponent implements OnInit {
   }
 
   airlineFilters(t, n, e) {
+    console.log("airline:", [t, n, e])
     var l = t.source.value;
     if (t.checked) "airline" == n ? this.airlineFilterValue.push(l) : "stop" == n && this.stopFilterValue.push(l);
     else if ("airline" == n) {

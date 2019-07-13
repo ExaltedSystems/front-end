@@ -2,14 +2,14 @@
 <form [formGroup]="hotelSearch" (submit)="searchHotels(hotelSearch.value)">
     <h4 class="text-white mb-2 mt-0" *ngIf="sideForm == true">Search</h4>
     <div class="form-group mobile-form-group shadow-xs-none row no-gutters mb-0" [ngClass]="sideForm == true ? '' : 'shadow-sm'">
-        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-5 col-lg-5 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-5 col-lg-4 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
             <div class="input-group flex-nowrap border-input">
-                <div class="input-group-prepend mb-4 mb-sm-0 shadow-sm-none" [hidden]="sideForm">
+                <div class="input-group-prepend mb-sm-0 shadow-sm-none" [hidden]="sideForm">
                     <span class="input-group-text rounded-0">
               <i-map-pin></i-map-pin>
             </span>
                 </div>
-                <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm-none" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'">
+                <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-sm-0 shadow-sm-none" [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'">
                     <input matInput formControlName="destination" [(ngModel)]="destValu" placeholder="Where Are You Going?" [formControl]="hotelsAutocomplete" [matAutocomplete]="destinationAutocomplet">
                     <mat-autocomplete #destinationAutocomplet="matAutocomplete" autoActiveFirstOption>
                         <mat-option *ngFor="let option of filteredList | async" [value]="option" (onSelectionChange)="keytab($event, checkInFocus)">
@@ -50,7 +50,7 @@
 
         </div>
 
-        <div class="d-block d-sm-none col-12" style="height:20px;"></div>
+        <div *ngIf="sideForm == true" class="d-block d-sm-none col-12" style="height:20px;"></div>
 
         <div [ngClass]="sideForm == true ? 'col-sm-12 mb-3' : 'col-sm-12 col-lg-2 mb-3 mb-lg-0'">
 
@@ -68,9 +68,9 @@
             </div>
         </div>
 
-        <div class="d-block d-sm-none col-12" style="height:20px;"></div>
+        <div *ngIf="sideForm == true" class="d-block d-sm-none col-12" style="height:20px;"></div>
 
-        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-3 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
+        <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-4 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
             <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0 border-input">
                 <div class="input-group-prepend" [hidden]="sideForm">
                     <span class="input-group-text rounded-0">

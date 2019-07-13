@@ -16,6 +16,10 @@ form .btn {
     padding: 0.3rem;
 }
 
+..mat-horizontal-stepper-header-container {
+    padding: 10px !important;
+}
+
 @media(max-width:786px) {
     .form-group {
         margin-bottom: 0rem;

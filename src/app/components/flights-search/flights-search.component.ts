@@ -26,7 +26,7 @@ declare var jQuery;
 })
 export class FlightsSearchComponent implements OnInit {
 
-	@Input()
+  	@Input() sideForm: boolean;
 	@ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
 	@ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
 	flightSearch: FormGroup;

@@ -74,6 +74,7 @@ import { PaymentErrorComponent } from './components/payment-error/payment-error.
 import { AmazingVisaOfferComponent } from './components/amazing-visa-offer/amazing-visa-offer.component';
 import { TourCalculatorComponent } from './components/tour-calculator/tour-calculator.component';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -170,7 +171,11 @@ import { TranslatePipe } from './pipes/translate.pipe';
     RangeSliderModule,
     FilterPipeModule,
     MatTooltipModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCgL2VGk4yfL2IzdFgGO0m2D36MA3NVwLw'
+    })
   ],
   providers: [MainService, CookieService, DatePipe],
   bootstrap: [AppComponent]

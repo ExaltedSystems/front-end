@@ -9,14 +9,7 @@
                 <div class="sidebar-list">
                     <app-requst-call-back-form></app-requst-call-back-form>
                 </div>
-                <div class="sidebar-list mt-4" *ngIf="popularVisa">
-                    <h3 class="sidebar-title">Amazing Visa Offers</h3>
-                    <ul>
-                        <li *ngFor="let item of popularVisa;"><a routerLink="/{{ item.visaUrl }}">{{ item.countryName }}
-                <span class="float-right">{{item.validityId}}</span></a></li>
-                    </ul>
-                    <a routerLink="/visa" class="view-all">View All</a>
-                </div>
+                <app-amazing-visa-offer></app-amazing-visa-offer>
                 <!-- <div class="sidebar-subscribe mt-4">
                     <p class="mb-0">Subscribe to Get Amazing Offers</p>
                     <h3>Tour Alerts</h3>
@@ -30,8 +23,8 @@
                         <li class="breadcrumb-item">
                             <a routerLink="/">Home</a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a routerLink="/airmiles">Air Miles</a>
+                        <li class="breadcrumb-item" *ngIf="page_info.parent">
+                           {{ page_info.parent.navbarTitle }}
                         </li>
                         <li class="breadcrumb-item active">{{ page_info.name }}</li>
                     </ol>

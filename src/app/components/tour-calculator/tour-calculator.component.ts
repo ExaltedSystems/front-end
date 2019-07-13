@@ -10,26 +10,27 @@ import { startWith, map } from 'rxjs/operators';
   selector: 'app-tour-calculator',
   templateUrl: './tour-calculator.component.html',
   styleUrls: ['./tour-calculator.component.css'],
-	providers: [
-		{
-			provide: DateAdapter, useClass: AppDateAdapter
-		},
-		{
-			provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
-		}
-	]
+  providers: [
+    {
+      provide: DateAdapter, useClass: AppDateAdapter
+    },
+    {
+      provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+    }
+  ]
 })
 export class TourCalculatorComponent implements OnInit {
   tourCalculatorForm: FormGroup;
   hotelRows: FormArray;
-  allHotels:any = [];
-
+  allHotels: any = [];
+  isLinear = true;
+  pkgPreview: object;
   hotelsAutocomplete = new FormControl();
   hotelsList: string[] = [];
   filteredList: Observable<string[]>;
-  
+
   // filteredOptions: Observable<string[]>;
-  
+
   filteredOptions: Observable<string[]>[] = [];
 
   dt: Date = new Date();
@@ -39,11 +40,12 @@ export class TourCalculatorComponent implements OnInit {
   ngOnInit() {
     this.getTourHotels();
     this.tourCalculatorForm = this.__fb.group({
-      totalAdults:[2, Validators.required],
-      totalChildrens:[''],
-      email:['', [Validators.required, Validators.email]],
-      phone:['', Validators.required],
-      hotelRows: this.__fb.array([ this.addMoreHotelRows()])
+      totalAdults: [2, Validators.required],
+      totalChildrens: [''],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      hotelRows: this.__fb.array([this.addMoreHotelRows()])
     });
     this.ManageNameControl(0);
 
@@ -51,7 +53,7 @@ export class TourCalculatorComponent implements OnInit {
     //   startWith(''),
     //   map(value => this._filter(value))
     // );
-    
+
     // this.filteredOptions = this.hotelsAutocomplete.valueChanges
     //   .pipe(
     //   startWith(''),
@@ -63,18 +65,18 @@ export class TourCalculatorComponent implements OnInit {
     return this.allHotels.map(x => x.hotelName).filter(option =>
       option.toLowerCase().includes(val.toLowerCase()));
   }
-  onSelectionChange(ev, key){    
+  onSelectionChange(ev, key) {
     console.log(ev)
     let formArray = this.tourCalculatorForm.controls['hotelRows'] as FormArray;
     let formGroup = formArray.controls[key] as FormGroup;
-		this.hotelsAutocomplete.setValue(ev.source.value);
+    this.hotelsAutocomplete.setValue(ev.source.value);
     formGroup.controls['hotelName'].setValue(ev.source.value);
   }
   private _filter(value: string): string[] {
     console.log(value)
     const filterValue = value.toLowerCase();
     let filterResult = this.allHotels.filter(option => option.hotelName.toLowerCase().includes(filterValue));
-    if(filterResult.length > 0){
+    if (filterResult.length > 0) {
       return filterResult;
     }
   }
@@ -82,26 +84,25 @@ export class TourCalculatorComponent implements OnInit {
     var arrayControl = this.tourCalculatorForm.get('hotelRows') as FormArray;
     this.filteredOptions[index] = arrayControl.at(index).get('hotelName').valueChanges
       .pipe(
-      startWith<string>(''),
-      map(value => typeof value === 'string' ? value : value),
-      map(name => name ? this._filter(name) : this.allHotels.slice())
+        startWith<string>(''),
+        map(value => typeof value === 'string' ? value : value),
+        map(name => name ? this._filter(name) : this.allHotels.slice())
       );
 
   }
   addMoreHotelRows(): FormGroup {
     return this.__fb.group({
       ID: [''],
-      hotelName: [''],
-      tourCheckIn: [''],
-      tourCheckOut: [''],
+      hotelName: ['', Validators.required],
+      tourCheckIn: ['', Validators.required],
+      tourCheckOut: ['', Validators.required],
       totalNights: [''],
       dblRoom: [1],
       tplRoom: [''],
       qdRoom: [''],
-      roomPrice:['']
     });
   }
-  addMoreTourRows(){
+  addMoreTourRows() {
     this.hotelRows = this.tourCalculatorForm.get('hotelRows') as FormArray;
     this.hotelRows.push(this.addMoreHotelRows());
     console.log('Len:', this.hotelRows.length)
@@ -115,7 +116,7 @@ export class TourCalculatorComponent implements OnInit {
 
   }
   removeTourRow(index): void {
-    if(index > 0) {
+    if (index > 0) {
       this.hotelRows = this.tourCalculatorForm.get('hotelRows') as FormArray;
       this.hotelRows.removeAt(index);
     }
@@ -125,7 +126,7 @@ export class TourCalculatorComponent implements OnInit {
     let formGroup = formArray.controls[key] as FormGroup;
     let date1 = formGroup.controls['tourCheckIn'].value;
     let date2 = formGroup.controls['tourCheckOut'].value;
-    if(!date2){
+    if (!date2) {
       let dt = new Date(date1);
       date2 = new Date(dt.setDate(dt.getDate() + 3));
       formGroup.controls['tourCheckOut'].setValue(date2);
@@ -134,18 +135,45 @@ export class TourCalculatorComponent implements OnInit {
     let days = Math.round(Math.abs(diffc / (1000 * 60 * 60 * 24)));
     formGroup.controls['totalNights'].setValue(days);
   }
-  getTourHotels(){
-    this.__ms.getData(this.__ms.backEndUrl+'Umrah/tourHotelAutocomplete').subscribe(result => {
+  getTourHotels() {
+    this.__ms.getData(this.__ms.backEndUrl + 'Umrah/tourHotelAutocomplete').subscribe(result => {
       // if(result.status) {
-        this.allHotels = result
+      this.allHotels = result
       // }
     })
   }
-  calculateHotelPkg(formInputs){
+  calculateHotelPkg(formInputs) {
     console.log('HotelData:', formInputs)
-    this.__ms.postData(this.__ms.backEndUrl+'Umrah/calcUmrahTourPkg', formInputs).subscribe(result => {
-      console.log('Pkg_Details:', result)
-    })
+    if (this.tourCalculatorForm.valid) {
+      this.__ms.postData(this.__ms.backEndUrl + 'Umrah/calcUmrahTourPkg', formInputs).subscribe(result => {
+        // console.log('Pkg_Details:', result)
+        this.pkgPreview = result;
+      })
+    } else {
+      this.tourCalculatorForm.controls['email'].markAsTouched();
+      this.tourCalculatorForm.controls['phone'].markAsTouched();
+    }
+  }
+  confirmPkg() {
+    console.log('HotelData:', this.tourCalculatorForm.value)
+  }
+  printPkg(divId) {
+    let printContents, popupWin;
+    printContents = document.getElementById(divId).innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Tour Custom Package</title>
+          <style>.table-bordered {border: 1px solid #dee2e6;}
+          .table-bordered td, .table-bordered th {border: 1px solid #dee2e6;}
+          .table td, .table th {padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;}</style>
+        </head>
+        <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
   }
 
 }

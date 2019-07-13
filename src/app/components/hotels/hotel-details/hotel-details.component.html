@@ -390,7 +390,7 @@
                                             <p class="mb-0">
                                                 <b class="text-primary">PKR </b>{{room.price_pp_pn}}/-</p>
                                             <select class="form-control w-50" #rooms (change)="getRoomsPrice(rooms.value,(room.price_pp_pn),i,room.no_of_guest,room.id)">
-                            <option value="" disabled>Select Room</option>
+                            <option value="">Select Room</option>
                             <option value="1">1 (PKR {{(room.price_pp_pn) *1}})</option>
                             <option value="2">2 (PKR {{(room.price_pp_pn) *2}})</option>
                             <option value="3">3 (PKR {{(room.price_pp_pn) *3}})</option>
@@ -500,6 +500,22 @@
                                     </tbody>
                                 </table>
                             </mat-card>
+                            <mat-card class="p-3 rounded-0 mat-card top-shadow">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex">
+                                        <div class="pr-3 border-right ng-star-inserted">
+                                            <p class="mb-1">{{totalRoomsSelected}} Rooms Selected</p>
+                                            <b class="text-primary">PKR </b>{{totalRoomsPrice}}
+                                        </div>
+                                        <div class="pl-3 text-warning d-none d-sm-block" *ngIf="totalRoomsSelected > 0 && totalRoomsGuests < adults">
+                                            <p>You still need to fit {{adults - totalRoomsGuests}} more adult.</p>
+                                        </div>
+                                        <p class="form-error">{{roomsMsg}}</p>
+                                    </div>
+                                    <button class="btn btn-primary shadow-sm rounded-0 py-2" (click)="continueBooking(totalRoomsSelected,totalRoomsGuests);scroll(roomsSelection)">Continue Booking</button>
+
+                                </div>
+                            </mat-card>
                         </div>
                     </div>
                 </div>
@@ -517,22 +533,7 @@
             <button [tooltip]="myTooltip">hover this button to see a tooltip</button>
         </div> -->
 
-        <mat-card class="reservation-options p-3 rounded-0 mat-card top-shadow">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex">
-                    <div class="pr-3 border-right ng-star-inserted">
-                        <p class="mb-1">{{totalRoomsSelected}} Rooms Selected</p>
-                        <b class="text-primary">PKR </b>{{totalRoomsPrice}}
-                    </div>
-                    <div class="pl-3 text-warning d-none d-sm-block" *ngIf="totalRoomsSelected > 0 && totalRoomsGuests < adults">
-                        <p>You still need to fit {{adults - totalRoomsGuests}} more adult.</p>
-                    </div>
-                    <p class="form-error">{{roomsMsg}}</p>
-                </div>
-                <button class="btn btn-primary shadow-sm rounded-0 py-2" (click)="continueBooking(totalRoomsSelected,totalRoomsGuests)">Continue Booking</button>
 
-            </div>
-        </mat-card>
 
 
         <app-footer></app-footer>

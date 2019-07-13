@@ -14,3 +14,15 @@
 .hotel-search-item .badge {
     padding: 0.45em .8em;
 }
+
+agm-map {
+    height: 400px;
+}
+
+* {
+    font-family: sans-serif;
+}
+
+a {
+    color: darkblue;
+}

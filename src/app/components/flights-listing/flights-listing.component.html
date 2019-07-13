@@ -1,11 +1,37 @@
 <mat-drawer-container class="mat-drawer-container mat-drawer-transition">
-    <mat-drawer-content class="mat-drawer-content">
-        <mat-sidenav #searchForm class="custom-material-form p-2">
-            <h3 class="sidebar-title mb-3">Change Your Search
-                <i-x-circle class="dropdown-feather" (click)="searchForm.close()"></i-x-circle>
+    <!-- <mat-drawer #filterForm class="mat-drawer">
+        <div class="sidebar-list">
+            <h3 class="sidebar-title">Filter Your Search
+                <i-x-circle class="dropdown-feather" (click)="filterForm.close()"></i-x-circle>
             </h3>
-            <app-flights-search></app-flights-search>
-        </mat-sidenav>
+            <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
+                <li *ngFor="let stopFilteritem of stopFilteritems">
+                    <mat-checkbox (change)="airlineFilters($event, 'stop', 'm')" value="{{stopFilteritem.value}}" class="mat-checkbox">
+                        {{stopFilteritem.text}} </mat-checkbox>
+
+                </li>
+            </ul>
+
+            <div *ngIf="responseAirlinesUnique.length > 0">
+                <h3 class="sidebar-title">Filter By AirLine</h3>
+                <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
+                    <li *ngFor="let eachAirLine of responseAirlinesUnique">
+                        <mat-checkbox (change)="airlineFilters($event, 'airline', 'm')" value="{{eachAirLine.value}}" class="mat-checkbox">
+                            {{eachAirLine.text}} </mat-checkbox>
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </mat-drawer> -->
+    <mat-drawer #searchForm class="mat-drawer" position="end">
+        <h3 class="sidebar-title mb-3">Change Your Search
+            <i-x-circle class="dropdown-feather" (click)="searchForm.close()"></i-x-circle>
+        </h3>
+        <app-flights-search [sideForm]="sideForm"></app-flights-search>
+    </mat-drawer>
+    <mat-drawer-content class="mat-drawer-content">
         <app-header></app-header>
 
         <sticky sticky-start="80" class="current-flight-search d-block d-sm-none mb-3" style="box-sizing: border-box; position: static; float: none; top: auto; bottom: auto; width: 375px; left: auto; z-index: 3 !important;">
@@ -31,8 +57,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-primary btn-sm rounded-0 shadow" (click)="searchForm.toggle();">Change
-                        Search</button>
+                    <button class="btn btn-primary btn-sm rounded-0 shadow" (click)="searchForm.toggle();">Change Search</button>
                 </div>
             </div>
 
@@ -214,7 +239,11 @@
                         </div> -->
                     </div>
                     <div class="col-sm-9 flight-listing">
-
+                        <!-- <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 mat-card">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn rounded-0 shadow btn-secondary" (click)="filterForm.toggle();"><i-sliders class="button-feather"></i-sliders> Filter</button>
+                            </div>
+                        </mat-card> -->
                         <div *ngIf="availableFlights == 'Loading'">
                             <p class="center">Loading Results</p>
                             <mat-progress-bar mode="indeterminate"></mat-progress-bar>

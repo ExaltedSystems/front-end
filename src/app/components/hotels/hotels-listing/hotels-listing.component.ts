@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { StarRatingFilterPipe } from 'src/app/pipes/star-rating-filter.pipe';
 import { isArray } from 'util';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MouseEvent } from '@agm/core';
 declare var jQuery;
 
 
@@ -55,6 +56,12 @@ export class HotelsListingComponent implements OnInit {
     sideForm:boolean = true;
 
     userFilter: any = { star_rating: '', price: '' };
+    
+    // initial center position for the map
+    lat: number = 33.6844;
+    lng: number = 73.0479;
+    // google maps zoom level
+    zoom: number = 12;
 
     constructor(private _ms: MainService, private _cookieService: CookieService, private __router: Router, private deviceService: DeviceDetectorService) {
         this.epicFunction();
@@ -165,10 +172,48 @@ export class HotelsListingComponent implements OnInit {
                 slelcted: false
             }
         ];
+        
 
 
 
     } // on init
+
+    clickedMarker(label: string, index: number) {
+        console.log(`clicked the marker: ${label || index}`)
+    }
+
+    mapClicked($event: MouseEvent) {
+        this.markers.push({
+            lat: $event.coords.lat,
+            lng: $event.coords.lng,
+            draggable: true
+        });
+    }
+
+    markerDragEnd(m: marker, $event: MouseEvent) {
+        console.log('dragEnd', m, $event);
+    }
+
+    markers: marker[] = [
+        {
+            lat: 33.7152332,
+            lng: 73.0319362,
+            label: 'A',
+            draggable: false
+        },
+        {
+            lat: 33.7160285,
+            lng: 73.0144321,
+            label: 'B',
+            draggable: false
+        },
+        {
+            lat: 33.7160285,
+            lng: 73.0144332,
+            label: 'C',
+            draggable: false
+        }
+    ]
 
     // openDatePicker(){
     //     jQuery('#date-range').data('dateRangePicker').open();
@@ -304,4 +349,12 @@ export class HotelsListingComponent implements OnInit {
         return items;
     }
 
+}
+
+// just an interface for type safety.
+interface marker {
+    lat: number;
+    lng: number;
+    label?: string;
+    draggable: boolean;
 }
