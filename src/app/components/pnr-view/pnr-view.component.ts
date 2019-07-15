@@ -99,8 +99,14 @@ export class PnrViewComponent implements OnInit {
     this.__ms.postData(itineraryUrl, itineraryObj).subscribe(res => {      
       res['CustomerInfo']['PersonName'] instanceof Array ? this.persons = res['CustomerInfo']['PersonName'] : this.persons.push(res['CustomerInfo']['PersonName'])
       
-      res['ItineraryInfo']['ReservationItems'] instanceof Array ? this.reservationItems.push(res['ItineraryInfo']['ReservationItems']['Item']) : ''
-      // this.reservationItems.push(resItems.length > 0 ? res['ItineraryInfo']['ReservationItems']['Item'] : "");// = res['ItineraryInfo']['ReservationItems']['Item'];      
+      let resItems = res['ItineraryInfo']['ReservationItems'];
+      
+      if(res['ItineraryInfo']['ReservationItems'] instanceof Array){
+        this.reservationItems.push(res['ItineraryInfo']['ReservationItems']['Item']);
+      }else if(resItems){
+        this.reservationItems.push(res['ItineraryInfo']['ReservationItems']['Item']);
+      }
+
       this.reservationItems.forEach(element => {
         let dtsplt = element.Air.attr.DepartureDateTime.split('T');
         let eachYear = dtsplt[0].split('-')[0];
@@ -109,17 +115,19 @@ export class PnrViewComponent implements OnInit {
       
       res['ItineraryInfo']['Ticketing'] instanceof Array ? this.ticketingItems.push(res['ItineraryInfo']['Ticketing']) : '';
       this.ticketingItems = res['ItineraryInfo']['Ticketing'];
-      this.ticketingItems.forEach((elem, ind) => {
-        if(ind > 0){
-          let eachTktNum = elem['attr']['eTicketNumber'];
-          if(eachTktNum != ''){
-            eachTktNum = eachTktNum.split(' ')[1];
-            eachTktNum = eachTktNum.split('-')[0];
-            // console.log('eachTktNum',eachTktNum)
-            this.ticketNos.push(eachTktNum);
+      if(this.ticketingItems.length > 0){
+        this.ticketingItems.forEach((elem, ind) => {
+          if(ind > 0){
+            let eachTktNum = elem['attr']['eTicketNumber'];
+            if(eachTktNum != ''){
+              eachTktNum = eachTktNum.split(' ')[1];
+              eachTktNum = eachTktNum.split('-')[0];
+              // console.log('eachTktNum',eachTktNum)
+              this.ticketNos.push(eachTktNum);
+            }
           }
-        }
-      })
+        })
+      }
       
       // console.log(this.segmentYears)
       this.PNR = res['ItineraryRef']['attr']['ID'];
