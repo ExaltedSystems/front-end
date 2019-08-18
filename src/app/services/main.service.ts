@@ -164,28 +164,32 @@ export class MainService {
 
   revalidateReq(byTagRes, adtQty, cnnQty, infQty, dptDate){
     const revalidateSectors = [];
-    let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'][0]['FlightSegment'];
-    console.log('RevalidateReq:', tagSectors)
-    tagSectors.forEach(element => {
-
+    // let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'][0]['FlightSegment'];
+    let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'];
+    // console.log('RevalidateReq:', [byTagRes, tagSectors])
+    tagSectors.forEach(FlightSegments => {
+      let flightSegment = FlightSegments.FlightSegment;
+      flightSegment.forEach(element => {
+      console.log('nestedForeach:', element);
       let eachSector = {
-        "__isADate": this.setDateFormat(element.ArrivalDateTime),
-        "__isATime": this.setDateFormat(element.ArrivalDateTime, 't'),
-        "__isDDate": this.setDateFormat(element.DepartureDateTime),
-        "__isDTime": this.setDateFormat(element.DepartureDateTime, 't'),
-        "__isFlightNo": element.FlightNumber,
-        "__isParty": (adtQty + cnnQty),
-        "__isCabin": element.ResBookDesigCode,
-        // "__isMarriage": element.MarriageGrp == 'I' ? 'X' : element.MarriageGrp,
-        "__isMarriage": element.MarriageGrp == 'O' ? 'X' : 'O',
-        "__isStatus": "NN",
-        "__isEquipType": element.Equipment[0].AirEquipType,
-        "__isOLocation": element.DepartureAirport.LocationCode,
-        "__isDLocation": element.ArrivalAirport.LocationCode,
-        "__isMkAirLine": element.MarketingAirline.Code,
-        "__isOpAirLine": element.OperatingAirline.Code
-      }
-      revalidateSectors.push(eachSector);
+            "__isADate": this.setDateFormat(element.ArrivalDateTime),
+            "__isATime": this.setDateFormat(element.ArrivalDateTime, 't'),
+            "__isDDate": this.setDateFormat(element.DepartureDateTime),
+            "__isDTime": this.setDateFormat(element.DepartureDateTime, 't'),
+            "__isFlightNo": element.FlightNumber,
+            "__isParty": (adtQty + cnnQty),
+            "__isCabin": element.ResBookDesigCode,
+            // "__isMarriage": element.MarriageGrp == 'I' ? 'X' : element.MarriageGrp,
+            "__isMarriage": element.MarriageGrp == 'O' ? 'X' : 'O',
+            "__isStatus": "NN",
+            "__isEquipType": element.Equipment[0].AirEquipType,
+            "__isOLocation": element.DepartureAirport.LocationCode,
+            "__isDLocation": element.ArrivalAirport.LocationCode,
+            "__isMkAirLine": element.MarketingAirline.Code,
+            "__isOpAirLine": element.OperatingAirline.Code
+          }
+          revalidateSectors.push(eachSector);
+      });
     });
 
     let revalidatePsgrs = [{

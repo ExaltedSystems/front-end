@@ -296,13 +296,13 @@
                                                         <div class="col-sm-4">
                                                             <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                                 <input matInput placeholder="First Name" formControlName="firstName">
-                                                                <mat-error *ngIf="travellersForm.controls['firstName'].hasError('required') && travellersForm.controls['firstName'].touched"></mat-error>
+                                                                <!-- <mat-error *ngIf="travellersForm.controls['firstName'].hasError('required') && travellersForm.controls['firstName'].touched"></mat-error> -->
                                                             </mat-form-field>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                                 <input matInput placeholder="Last Name" formControlName="lastName">
-                                                                <mat-error *ngIf="travellersForm.controls['lastName'].hasError('required') && travellersForm.controls['lastName'].touched"></mat-error>
+                                                                <!-- <mat-error *ngIf="travellersForm.controls['lastName'].hasError('required') && travellersForm.controls['lastName'].touched"></mat-error> -->
                                                             </mat-form-field>
                                                         </div>
                                                         <div class="col-sm-3">
@@ -372,14 +372,14 @@
                                                     <div class="col-sm-4">
                                                         <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                             <input matInput placeholder="Phone No" formControlName="phoneNo" prefix="+92" minlength="10" maxlength="19">
-                                                            <mat-error *ngIf="travellersForm.controls['phoneNo'].hasError('required') && travellersForm.controls['phoneNo'].touched">Phone # required</mat-error>
+                                                            <!-- <mat-error *ngIf="travellersForm.controls['phoneNo'].hasError('required') && travellersForm.controls['phoneNo'].touched">Phone # required</mat-error> -->
                                                             <mat-error *ngIf="travellersForm.controls['phoneNo'].invalid">Phone # not valid</mat-error>
                                                         </mat-form-field>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                             <input matInput placeholder="Email Address" formControlName="emailAddress">
-                                                            <mat-error *ngIf="travellersForm.controls['emailAddress'].hasError('required') && travellersForm.controls['emailAddress'].touched">Email address required</mat-error>
+                                                            <!-- <mat-error *ngIf="travellersForm.controls['emailAddress'].hasError('required') && travellersForm.controls['emailAddress'].touched">Email address required</mat-error> -->
                                                             <mat-error *ngIf="travellersForm.controls['emailAddress'].invalid">Email is invalid</mat-error>
                                                         </mat-form-field>
                                                     </div>
@@ -408,14 +408,14 @@
                                                         <div class="col-sm-4">
                                                             <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                                 <input matInput placeholder="Card Number" formControlName="cardNumber">
-                                                                <mat-error *ngIf="paymentForm.controls['cardNumber'].hasError('required') && paymentForm.controls['cardNumber'].touched">Card # required</mat-error>
+                                                                <!-- <mat-error *ngIf="paymentForm.controls['cardNumber'].hasError('required') && paymentForm.controls['cardNumber'].touched">Card # required</mat-error> -->
                                                                 <mat-error *ngIf="paymentForm.controls['cardNumber'].invalid">Enter correct Card #</mat-error>
                                                             </mat-form-field>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                                 <input matInput placeholder="CVN" formControlName="cvn" minlength="3" maxlength="5">
-                                                                <mat-error *ngIf="paymentForm.controls['cvn'].hasError('required') && paymentForm.controls['cvn'].touched">CVN required</mat-error>
+                                                                <!-- <mat-error *ngIf="paymentForm.controls['cvn'].hasError('required') && paymentForm.controls['cvn'].touched">CVN required</mat-error> -->
                                                                 <mat-error *ngIf="paymentForm.controls['cvn'].invalid">Enter correct CVN</mat-error>
                                                             </mat-form-field>
                                                         </div>
@@ -450,8 +450,8 @@
                                                         <div class="col-sm-4">
                                                             <mat-form-field class="form-control material-input mb-2 mb-sm-0">
                                                                 <input matInput placeholder="Card Holder Mobile" formControlName="cardHolderMobile" minlength="10" maxlength="19">
-                                                                <mat-error *ngIf="paymentForm.controls['cardHolderMobile'].hasError('required') && paymentForm.controls['cardHolderMobile'].touched">Mobile # required</mat-error>
-                                                                <mat-error *ngIf="paymentForm.controls['cardHolderMobile'].invalid">Mobile # invalid</mat-error>
+                                                                <!-- <mat-error *ngIf="paymentForm.controls['cardHolderMobile'].hasError('required') && paymentForm.controls['cardHolderMobile'].touched">Mobile # required</mat-error> -->
+                                                                <!-- <mat-error *ngIf="paymentForm.controls['cardHolderMobile'].invalid">Mobile # invalid</mat-error> -->
                                                             </mat-form-field>
                                                         </div>
                                                     </div>
