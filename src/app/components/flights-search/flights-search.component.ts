@@ -26,7 +26,7 @@ declare var jQuery;
 })
 export class FlightsSearchComponent implements OnInit {
 
-  	@Input() sideForm: boolean;
+	@Input() sideForm: boolean;
 	@ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
 	@ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
 	flightSearch: FormGroup;
@@ -99,8 +99,14 @@ export class FlightsSearchComponent implements OnInit {
 			PreferredAirline: [],
 			adults: ["1", Validators.required],
 			children: [],
-			infant: []
+			infant: [],
+			clientPhone: ['', [Validators.minLength(9), Validators.maxLength(20)]]
 		});
+		let pageUrl = this.__router.url.substr(1);
+		if (pageUrl.split('/')[0] == 'airlines') {
+			this.flightSearch.controls['clientPhone'].setValidators(Validators.required);
+			this.flightSearch.updateValueAndValidity();
+		}
 		this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
 		this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);
 		this.flightSearch.controls['departureDate'].setValue(this.departureDate != null ? this.departureDate : this.addDays(3));
@@ -191,6 +197,25 @@ export class FlightsSearchComponent implements OnInit {
 
 	incrementNumber(type) {
 		this.passengerError = '';
+		
+		let totalPax = (+this.adults + +this.children);
+		// If Number of Infant is greater than Number of Adults
+		if((+this.infant + 1) > this.adults && type == 'infant'){
+		  this.passengerError = 'Number of Infant must be Equal to number of Adult';
+		  return false;
+		}
+		// If Total Number of Adult and Children is greater than 6
+		if(totalPax >= 6 && (type == 'adults' || type == 'children')) {
+		  this.passengerError = 'Maximum # of passenger is 6';
+		  return false;
+		}
+		let totalPaxWdInfant = (totalPax + (+this.infant + 1));
+		console.log('TotalPxWdInfnt:', [totalPax, this.infant, totalPaxWdInfant])
+		// If Total Number of Passengers (Adult, Children and Infant) is greater than 9
+		if (totalPaxWdInfant > 9) {
+		  this.passengerError = 'Please Select Upto 9 Passengers!';
+		  return false;
+		}
 		switch (type) {
 			case 'adults': {
 				this.adults = +this.adults + 1;
@@ -208,11 +233,11 @@ export class FlightsSearchComponent implements OnInit {
 				break;
 			}
 		}
-		this.passengerError = '';
-		if (this.adults + +this.children + +this.infant > 40) {
-			this.passengerError = 'Please Select Upto 9 Passengers!';
-			return false;
-		}
+		// this.passengerError = '';
+		// if (this.adults + +this.children + +this.infant > 40) {
+		// 	this.passengerError = 'Please Select Upto 9 Passengers!';
+		// 	return false;
+		// }
 	}
 
 	decrementNumber(type) {
@@ -294,6 +319,10 @@ export class FlightsSearchComponent implements OnInit {
 				{ name: 'prefAirline', value: formInputs.prefAirline }
 			]
 			this.__cookieService.set('srchCookies', JSON.stringify(this.cookieObj));
+			let pageUrl = this.__router.url.substr(1);
+			if(pageUrl.indexOf('flights-listing') > -1){
+				pageUrl = 'flights-listing';
+			}
 			this.__router.navigate(["/flights-listing"], {
 				queryParams: {
 					_flight_type: flightType,
@@ -305,7 +334,9 @@ export class FlightsSearchComponent implements OnInit {
 					children: cnnQty,
 					infant: infQty,
 					cabin: cabin,
-					prefAirline: prefAirline
+					prefAirline: prefAirline,
+					clientPhone: formInputs.clientPhone,
+					pageUrl: pageUrl
 				}
 			});
 		}
@@ -344,7 +375,7 @@ export class FlightsSearchComponent implements OnInit {
 			placeHolder = evt;
 		}
 		window.setTimeout(() => {
-			if(jQuery('.mat-calendar-header').find("h4").length == 0) {
+			if (jQuery('.mat-calendar-header').find("h4").length == 0) {
 				jQuery('.mat-calendar-header').prepend('<h4 class="center font-weight-bold text-danger">' + placeHolder + '</h3>');
 			}
 		}, 300);

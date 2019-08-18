@@ -44,3 +44,7 @@
 .mat-tab-body-wrapper {
     padding: 10px;
 }
+
+.mat-expansion-panel-body {
+    padding: 0px 5px !important;
+}

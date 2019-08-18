@@ -1,3 +1,8 @@
+.form-control,
+.textarea-input {
+    border: 1px solid #2072b9!important
+}
+
 .cj-show {
     display: block;
 }

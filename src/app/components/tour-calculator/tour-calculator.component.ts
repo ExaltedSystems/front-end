@@ -115,15 +115,16 @@ export class TourCalculatorComponent implements OnInit {
   addMoreTourRows() {
     this.hotelRows = this.tourCalculatorForm.get('hotelRows') as FormArray;
     this.hotelRows.push(this.addMoreHotelRows());
-    console.log('Len:', this.hotelRows.length)
     let formArray = this.tourCalculatorForm.controls['hotelRows'] as FormArray;
     let formGroup = formArray.controls[this.hotelRows.length - 1] as FormGroup;
+    let lastCheckOut = formArray.controls[this.hotelRows.length - 2] as FormGroup;
+    let date1 = lastCheckOut.controls['tourCheckOut'].value;
     formGroup.controls['hotelName'].setValue('');
-    formGroup.controls['tourCheckIn'].setValue('');
+    formGroup.controls['tourCheckIn'].setValue(date1);
     formGroup.controls['tourCheckOut'].setValue('');
     // Build the account Auto Complete values
     this.ManageNameControl(this.hotelRows.length - 1);
-
+    this.calculateDate(this.hotelRows.length - 1);
   }
   removeTourRow(index): void {
     if (index > 0) {
@@ -131,7 +132,7 @@ export class TourCalculatorComponent implements OnInit {
       this.hotelRows.removeAt(index);
     }
   }
-  calculateDate = (key) => {
+  calculateDate = (key, inc = false) => {
     let formArray = this.tourCalculatorForm.controls['hotelRows'] as FormArray;
     let formGroup = formArray.controls[key] as FormGroup;
     let date1 = formGroup.controls['tourCheckIn'].value;
@@ -140,6 +141,22 @@ export class TourCalculatorComponent implements OnInit {
       let dt = new Date(date1);
       date2 = new Date(dt.setDate(dt.getDate() + 3));
       formGroup.controls['tourCheckOut'].setValue(date2);
+    }
+    let compDate = new Date(date1).getTime() > new Date(date2).getTime();
+    if(compDate || inc) {
+      let dt = new Date(date1);
+      date2 = new Date(dt.setDate(dt.getDate() + 3));
+      formGroup.controls['tourCheckOut'].setValue(date2);
+    }
+    let hotelRows = this.tourCalculatorForm.get('hotelRows') as FormArray;
+    if(hotelRows.length > key) {
+      for(let i = (key + 1);i<hotelRows.length;i++){
+        console.log('Key:', i)
+        let lastCheckOut = hotelRows.controls[i] as FormGroup;
+        // let date1 = lastCheckOut.controls['tourCheckOut'].value;
+        lastCheckOut.controls['tourCheckIn'].setValue(date2);
+        this.calculateDate(i, true);
+      }
     }
     let diffc = new Date(date1).getTime() - new Date(date2).getTime();
     let days = Math.round(Math.abs(diffc / (1000 * 60 * 60 * 24)));

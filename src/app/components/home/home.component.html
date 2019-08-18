@@ -27,10 +27,11 @@
                                             <div class="col-sm-6 shadow-sm shadow-xs-none">
                                                 <div class="input-group">
                                                     <span class="d-flex border-input mb-4 mb-sm-0 span-input">
-                                                    <div class="input-group-prepend mb-sm-0 shadow-sm shadow-sm-none">
-                                                        <span class="input-group-text rounded-0">
-                                                            <i-map-pin></i-map-pin>
-                                                        </span>
+                                                        <div
+                                                            class="input-group-prepend mb-sm-0 shadow-sm shadow-sm-none">
+                                                            <span class="input-group-text rounded-0">
+                                                                <i-map-pin></i-map-pin>
+                                                            </span>
                                                 </div>
                                                 <!-- <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow-sm shadow-sm-none">
                                                         <input matInput formControlName="flyingFrom" placeholder="Flying From" [matAutocomplete]="flyingFromAuto" (click)="resetMatInput($event)" (keyup)="filterFlyingFrom($event)">
@@ -49,14 +50,15 @@
                                                             {{option}}
                                                         </mat-option>
                                                     </mat-autocomplete>
-                                                    <i-x-circle class="feather-x-circle" *ngIf="flyingFromAutocomplete.value" (click)="flyingFromAutocomplete.setValue('')"></i-x-circle>
+                                                    <i-x-circle class="feather-x-circle" *ngIf="flyingFromAutocomplete.value" (click)="flyingFromAutocomplete.setValue('');flightSearch.get('flyingFrom').setValue('')">
+                                                    </i-x-circle>
                                                 </mat-form-field>
                                                 </span>
                                                 <span class="d-flex border-input mb-4 mb-sm-0 span-input">
-                                                            <div class="input-group-prepend mb-sm-0 shadow shadow-sm-none">
-                                                        <span class="input-group-text rounded-0">
-                                                            <i-map-pin></i-map-pin>
-                                                        </span>
+                                                        <div class="input-group-prepend mb-sm-0 shadow shadow-sm-none">
+                                                            <span class="input-group-text rounded-0">
+                                                                <i-map-pin></i-map-pin>
+                                                            </span>
                                             </div>
                                             <!-- <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-4 mb-sm-0 shadow shadow-sm-none">
                                                         <input matInput formControlName="flyingTo" placeholder="Flying To" [matAutocomplete]="flyingToAuto" (click)="resetMatInput($event)" (keyup)="filterFlyingTo($event)">
@@ -74,7 +76,8 @@
                                                         {{option}}
                                                     </mat-option>
                                                 </mat-autocomplete>
-                                                <i-x-circle class="feather-x-circle" *ngIf="flyingToAutocomplete.value" (click)="flyingToAutocomplete.setValue('')"></i-x-circle>
+                                                <i-x-circle class="feather-x-circle" *ngIf="flyingToAutocomplete.value" (click)="flyingToAutocomplete.setValue('');flightSearch.get('flyingTo').setValue('')">
+                                                </i-x-circle>
                                             </mat-form-field>
                                             </span>
                                         </div>
@@ -83,12 +86,14 @@
                                         <div class="input-group border-input mb-4 mb-sm-0">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text rounded-0">
-                                                            <i-calendar (click)="departureDate.open();setDatepickerTitle('Departure Date')"></i-calendar>
+                                                            <i-calendar
+                                                                (click)="departureDate.open();setDatepickerTitle('Departure Date')">
+                                                            </i-calendar>
                                                         </span>
                                             </div>
                                             <mat-form-field class="form-control material-input">
                                                 <input matInput [matDatepicker]="departureDate" formControlName="departureDate" (click)="departureDate.open();setDatepickerTitle($event)" (focus)="departureDate.open();setDatepickerTitle($event)" (dateChange)="setReturnDate($event)" class="border-left-0 rounded-0"
-                                                    placeholder="Departure Date" [min]="currDate">
+                                                    placeholder="Departure Date" [min]="currDate" readonly>
                                                 <mat-datepicker touchUi #departureDate></mat-datepicker>
                                             </mat-form-field>
 
@@ -98,7 +103,8 @@
                                                         </span>
                                             </div>
                                             <mat-form-field class="form-control rounded-0 material-input" [hidden]="!isReturn">
-                                                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open();setDatepickerTitle($event)" (focus)="returnDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Return Date" [min]="flightSearch.get('departureDate').value">
+                                                <input matInput [matDatepicker]="returnDate" formControlName="returnDate" (click)="returnDate.open();setDatepickerTitle($event)" (focus)="returnDate.open();setDatepickerTitle($event)" class="border-left-0 rounded-0" placeholder="Return Date" [min]="flightSearch.get('departureDate').value"
+                                                    readonly>
                                                 <mat-datepicker touchUi #returnDate></mat-datepicker>
                                             </mat-form-field>
                                         </div>
@@ -112,11 +118,13 @@
                                             </div>
                                             <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
                                                         <small class="d-block">No of Passenger</small>
-                                                        <p class="d-inline-block mb-0">{{adults}} Adult, {{children}} Child, {{infant}} Infant</p>
+                                                        <p class="d-inline-block mb-0">{{adults}} Adult, {{children}}
+                                                            Child, {{infant}} Infant</p>
                                                         <i-chevron-down class="dropdown-feather"></i-chevron-down>
                                                     </button>
                                             <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
                                                 <div class="form-group">
+                                                    <p class="mb-0 text-center text-danger"><b>Adults (12+ years)</b></p>
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
                                                             <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('adults')">
@@ -133,6 +141,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
+                                                    <p class="mb-0 text-center text-danger"><b>Child (2 - 12 years)</b></p>
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
                                                             <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('children')">
@@ -149,6 +158,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
+                                                    <p class="mb-0 text-center text-danger"><b>Infant (Under 2 years)</b></p>
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
                                                             <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('infant')">
@@ -165,8 +175,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="float-right" (click)="closeDropDown($event)">
-                                                    <i-check class="dropdown-feather text-success float-left m-1"></i-check>
+                                                <p class="form-error">{{passengerError}}</p>
+                                                <div class="dropdown-divider" *ngIf="passengerError"></div>
+                                                <a class="float-right btn btn-success text-white" (click)="closeDropDown($event)">
+                                                    <!-- <i-check class="dropdown-feather float-left m-1"></i-check> -->
                                                     <span class="float-right">Done</span>
                                                 </a>
                                             </div>
@@ -174,9 +186,44 @@
                                     </div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <button class="btn btn-primary shadow rounded-0 search-flight-btn">Search Flights</button>
+                        <div class="form-group mobile-form-group">
+                            <div class="row no-gutters">
+                                <div class="mr-0 mr-sm-2 col-sm-3">
+                                    <div class="input-group border-input mb-4 mb-sm-0">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text rounded-0">
+                                                <i-send></i-send>
+                                            </span>
+                                        </div>
+                                        <mat-form-field class="form-control material-input border-left-0 rounded-0">
+                                            <mat-select formControlName="preferredClass" placeholder="preferred Class" panelClass="mat-select-opt">
+                                                <mat-option *ngFor="let class of preferredClasses" [value]="class.value">{{class.label}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="mr-0 mr-sm-2 col-sm-3">
+                                    <div class="input-group border-input mb-4 mb-sm-0">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text rounded-0">
+                                                <i-phone-call></i-phone-call>
+                                            </span>
+                                        </div>
+                                        <mat-form-field class="form-control material-input border-left-0 rounded-0">
+                                            <input matInput formControlName="clientPhone" placeholder="Phone #" minlength="9" maxlength="20">
+                                            <i-x-circle class="feather-x-circle" *ngIf="flightSearch.controls['clientPhone'].value" (click)="flightSearch.controls['clientPhone'].setValue('')"></i-x-circle>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary border shadow rounded-0 search-flight-btn">Search Flights</button>
+                                </div>
+                            </div>
                         </div>
+                        <!-- <div class="text-right">
+                            <button class="btn btn-primary shadow rounded-0 search-flight-btn">Search
+                                            Flights</button>
+                    </div> -->
                         </form>
                         <!-- /Flights Form - Round Trip -->
                     </div>
@@ -303,7 +350,7 @@
 
         <div class="card-deck">
             <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngFor="let item of popularVisa;">
-                <img class="card-img-top rounded-0" src="{{ baseUrl+item.visaThumbnail }}" height="150px" alt="{{ item.countryName }} Rehman Travels">
+                <img class="card-img-top rounded-0" src="{{ baseUrl+item.visaThumbnail }}" alt="{{ item.countryName }} Rehman Travels">
                 <div class="card-body">
                     <h5 class="card-title">{{ item.countryName }}</h5>
                     <p class="card-text">{{ item.shortDescription.substring(0,90) }} .....</p>
@@ -400,7 +447,8 @@
                         <div class="col-9">
                             <h2 class="service-title">Executive Hajj & Umrah</h2>
                             <p class="service-text">Do you want to experience a holy trip in luxury? Well, you can try our executive Umrah package because it provides you with top notch facilities and amazing traveling experience Our executive packages will take you to five-star
-                                hotels, amazing cuisines, pick and drop services in air-conditioned cars and so much more</p>
+                                hotels, amazing cuisines, pick and drop services in air-conditioned cars and so much more
+                            </p>
                         </div>
                     </div>
                 </div>

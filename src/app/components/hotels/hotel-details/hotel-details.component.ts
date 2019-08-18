@@ -266,29 +266,33 @@ export class HotelDetailsComponent implements OnInit {
 
     toggleInlineSearch = (value) => {
         this.inlineSearchForm = value;
-        console.log('test',jQuery('#date-range1').val());
-        if(value == true)
-        jQuery('#date-range1').dateRangePicker(
-            {
-              autoClose: true,
-              format: 'DD MMM YYYY',
-              separator : ' - ',
-              startDate: new Date()
-            }
-          );
+        // console.log('test',jQuery('#date-range1').val());
+        // if(value == true)
+        // jQuery('#date-range1').dateRangePicker(
+        //     {
+        //       autoClose: true,
+        //       format: 'DD MMM YYYY',
+        //       separator : ' - ',
+        //       startDate: new Date()
+        //     }
+        //   );
     }
 
     updateInlineSearch = (formInputs) => {
         // console.log('forminputs',formInputs);
-        let date1 = new Date(jQuery('#date-range1').val().split('-')[0]);
-    let date2 = new Date(jQuery('#date-range1').val().split('-')[1]);
+        // console.log('checkInDate:', this._date.transform(formInputs.checkInDate,'M/d/yy'));
+        // return false
+        //     let date1 = new Date(jQuery('#date-range1').val().split('-')[0]);
+        // let date2 = new Date(jQuery('#date-range1').val().split('-')[1]);
         if(this.UpdateHotelSearch.valid){
           let formObj = {
             destination: this.currentSearch.destination,
-            checkInDate: this._date.transform(date1,'M/d/yy'),
-            checkOutDate: this._date.transform(date2,'M/d/yy'),
+            checkInDate: this._date.transform(formInputs.checkInDate,'M/d/yy'),//this._date.transform(date1,'M/d/yy'),
+            checkIn_date_value: formInputs.checkInDate,
+            checkOutDate: this._date.transform(formInputs.checkOutDate,'M/d/yy'),//this._date.transform(date2,'M/d/yy'),
+            checkOut_date_value: formInputs.checkOutDate,
             dates: formInputs.dates,
-            dateRange: jQuery('#date-range1').val(),
+            dateRange: formInputs.checkInDate+"-"+formInputs.checkInDate,//jQuery('#date-range1').val(),
             rooms: formInputs.rooms,
             adults: formInputs.adults,
             children: formInputs.children,

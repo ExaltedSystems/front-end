@@ -1,23 +1,22 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MainService } from 'src/app/services/main.service';
+import { MainService } from '../../services/main.service';
 import { DatePipe } from '@angular/common';
-import { AirPortsPipe } from 'src/app/air-ports.pipe';
-import { SecondsPipePipe } from 'src/app/pipes/seconds-pipe.pipe';
+import { AirPortsPipe } from '../../air-ports.pipe';
+import { SecondsPipePipe } from '../../pipes/seconds-pipe.pipe';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDatepicker, MatAutocomplete, MatInput, MatSelect, MatRadioButton } from '@angular/material';
 import { map } from 'rxjs/operators';
-import { HomeComponent } from '../home/home.component';
+// import { HomeComponent } from '../home/home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DeviceDetectorService } from 'ngx-device-detector';
-// import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 declare var jQuery;
 
 @Component({
   selector: 'app-flights-listing',
   templateUrl: './flights-listing.component.html',
   styleUrls: ['./flights-listing.component.css'],
-  providers: [DatePipe, AirPortsPipe, SecondsPipePipe, HomeComponent]
+  providers: [DatePipe, AirPortsPipe, SecondsPipePipe]
 })
 export class FlightsListingComponent implements OnInit {
   @Input()
@@ -46,6 +45,8 @@ export class FlightsListingComponent implements OnInit {
   adtQty: number;
   cnnQty: number;
   infQty: number;
+  clientPhone: any;
+  pageUrl: string;
   Offset: number = 1;
 
   flyingFromSectors: any;
@@ -84,13 +85,19 @@ export class FlightsListingComponent implements OnInit {
   mChangeSearch: boolean = false;
   currDate: Date = new Date();
   cookieObj;
-  sideForm:boolean;
+  sideForm: boolean;
+  deviceFullInfo = null;
+  browser = null;
+  operatingSys = null;
 
   constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router,
-    private __fb: FormBuilder, private __hm: HomeComponent, private __cookieService: CookieService, private __device: DeviceDetectorService) {
+    private __fb: FormBuilder, private __cookieService: CookieService, private __device: DeviceDetectorService) {
     window.scroll(0, 0);
-    
-    if(this.__device.isMobile()){
+    this.deviceFullInfo = this.__device.getDeviceInfo();
+    this.browser = this.__device.browser;
+    this.operatingSys = this.__device.os;
+
+    if (this.__device.isMobile()) {
       this.sideForm = true;
     }
     this.__router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -103,9 +110,15 @@ export class FlightsListingComponent implements OnInit {
     });
   }
   ngAfterViewInit() {
-    this.ngOnInit();
+    this.ngOnInit(false);
   }
-  ngOnInit() {
+  // trackElement(index: number, element: any) {
+  //   let x = Math.floor((Math.random() * 10) + element.ElapsedTime);
+  //   console.log(x);
+  //   // return element ? element.guid : null
+  //   return x;
+  // }
+  ngOnInit(pageLoad = true) {
     this.queryParams = this.__actRouter.snapshot.queryParams;
     this.flightsUrl = this.__ms.flightsUrl;
     this.byTagUrl = this.__ms.byTagUrl;
@@ -126,8 +139,12 @@ export class FlightsListingComponent implements OnInit {
     this.adtQty = Number(this.queryParams.adults);
     this.cnnQty = Number(this.queryParams.children);
     this.infQty = Number(this.queryParams.infant);
+    this.clientPhone = this.queryParams.clientPhone;
+    this.pageUrl = this.queryParams.pageUrl;
     // this.Offset = 1;
-    this.fetchFlightsListing();
+    if (pageLoad) {
+      this.fetchFlightsListing();
+    }
 
     this.flightSearch = this.__fb.group({
       flightType: [this.flightType],
@@ -166,6 +183,12 @@ export class FlightsListingComponent implements OnInit {
     // }
     // console.log('FormValues:', formInputs);
     this.frmObj = {
+      pageUrl: this.pageUrl,
+      clientPhone: this.clientPhone,
+      ipAddress: this.__ms.ipAddress,
+      browser: this.browser,
+      operatingSys: this.operatingSys,
+      deviceFullInfo: this.deviceFullInfo,
       __isView: "W",
       __isAction: "C",
       __isVendorId: 1,
@@ -267,6 +290,9 @@ export class FlightsListingComponent implements OnInit {
 
     // RETRIEVE LIVE FLIGHTS BELOW
     if (!more) {
+      this.__ms.postData(this.__ms.backEndUrl+"Ticket/sendFlightQueries", this.frmObj).subscribe(res => {
+
+      });
       this.availableFlights = 'Loading';
       this.__ms.postData(this.flightsUrl, this.frmObj).subscribe(res => {
         let e;
@@ -280,11 +306,13 @@ export class FlightsListingComponent implements OnInit {
             this.availableFlights = null;
           }
           this.availableFlights.forEach(element => {
+            let lowestAmount = element.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount;
             let eachAirline = element.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].OperatingAirline.Code;
             this.responseAirlines.push({
               checked: !1,
               value: eachAirline,
-              text: eachAirline
+              text: eachAirline,
+              lowestAmount: lowestAmount
             });
 
           });
@@ -327,17 +355,29 @@ export class FlightsListingComponent implements OnInit {
       });
     }
     // RETRIEVE LIVE FLIGHTS END
+    window.scroll(0, 100);
+    // setTimeout(() => {
+    //   window.scroll(0,0);
+    // }, 500);
 
   }
 
-  flightDetailsToggle(ev) {
+  flightDetailsToggle(ev, other?) {
     jQuery('#' + ev.target.id).hide();
     let currSpan = ev.target.id;
     let currId = currSpan.split('_')[1];
-    if (currSpan.indexOf('plus') == -1) {
-      jQuery('#plus_' + currId).show();
+    if(other == 'FBD'){
+      if (currSpan.indexOf('FBDplus') == -1) {
+        jQuery('#FBDplus_' + currId).show();
+      } else {
+        jQuery('#FBDminus_' + currId).show();
+      }
     } else {
-      jQuery('#minus_' + currId).show();
+      if (currSpan.indexOf('plus') == -1) {
+        jQuery('#plus_' + currId).show();
+      } else {
+        jQuery('#minus_' + currId).show();
+      }
     }
   }
 
@@ -416,7 +456,7 @@ export class FlightsListingComponent implements OnInit {
   }
 
   airlineFilters(t, n, e) {
-    console.log("airline:", [t, n, e])
+    // console.log("airline:", [t, n, e])
     var l = t.source.value;
     if (t.checked) "airline" == n ? this.airlineFilterValue.push(l) : "stop" == n && this.stopFilterValue.push(l);
     else if ("airline" == n) {
@@ -589,61 +629,85 @@ export class FlightsListingComponent implements OnInit {
 
   } //
 
-  airByTag(tagID, i, flag?) {
-    let flightInfo = { 'flightType': this.flightType, 'origin': this.oLocation, 'destination': this.dLocation, 'adults': this.adtQty, 'children': this.cnnQty, 'infants': this.infQty, 'dptDate': this.dptDate, 'rtnDate': this.rtnDate, 'cabin': this.cabin, 'prefAirline': this.prefAirline, 'tagID': tagID };
+  airByTag(Itinerary, i, flag?) {
+    let vCarrier = Itinerary.TPA_Extensions.ValidatingCarrier.Code;
+    let tagID = Itinerary.TPA_Extensions.TagID;
+    let flightInfo = { 'flightType': this.flightType, 'origin': this.oLocation, 'destination': this.dLocation, 'adults': this.adtQty, 
+    'children': this.cnnQty, 'infants': this.infQty, 'dptDate': this.dptDate, 'rtnDate': this.rtnDate, 'cabin': this.cabin, 
+    'prefAirline': this.prefAirline, 'tagID': tagID, 'vCarrier': vCarrier };
     localStorage.setItem('flightInfo', JSON.stringify(flightInfo));
+    localStorage.setItem('OriginDestinationOption', JSON.stringify(Itinerary))
     this.__ms.FlightInfo = flightInfo;
 
     if (!flag) {
       jQuery('#isValidating_' + i).show();
     } else if (flag == 'M') { // mobile view Details
-      this.mbyTag = null;
-      this.mOriginDestinationOptions = null;
+      this.mbyTag = Itinerary;
+      this.mOriginDestinationOptions = Itinerary.AirItinerary.OriginDestinationOptions.OriginDestinationOption;
       this.msideNav = true;
+      return false;
     } else if (flag == 'MS') { // Mobile Select
       jQuery('#isValidatingM_' + i).show();
       // this.mbyTag = null;
       // this.mOriginDestinationOptions = null;
       // this.msideNav = true;
     }
-
-    let airByTagObj: any = this.__ms.airByTagObj(tagID);
-    this.__ms.postData(this.byTagUrl, airByTagObj).subscribe(res => {
-      // this.__ms.getJsonData('../../../assets/airByTag.json').subscribe(res => {
-      if (!flag) {
-        if (!res['errorCode']) {
-          this.airRevalidate(res, i);
-        } else {
-          jQuery('#isValidatingMsg_' + i).html('Flight Not Valid, try again later').css('color', 'red');
-          setTimeout(() => {
-            jQuery('#isValidating_' + i).hide();
-          }, 2000);
+    // If Validating Carrier is Serene Airline (No need to Re-Validate)
+    if(vCarrier == 'ER') {
+      this.__router.navigate(["/flight-booking"], {
+        queryParams: {
+          _flight_type: this.flightType,
+          _flying_from: this.oLocation,
+          _flying_to: this.dLocation,
+          _departure_date: this.dptDate,
+          _return_date: this.rtnDate,
+          adults: this.adtQty,
+          children: this.cnnQty,
+          infant: this.infQty,
+          cabin: this.cabin,
+          prefAirline: this.prefAirline
         }
-      } else if (flag == 'M') { // it is mobile view flight details only
-        // console.log(res)
-        if (!res['errorCode']) {
-          this.mbyTag = res;
-          this.mOriginDestinationOptions = res['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'];
-        } else {
-          this.mbyTag = 'Error';
-          // console.log(this.mbyTag)
-          // jQuery('#mbyTagError').html('Flight Not Valid, try again later').css('color', 'red').show();
-          // setTimeout(() => {
-          //   jQuery('#mbyTagError').hide();
-          // }, 2000);
+      });
+    } else {
+      // let tagID = Itinerary.TPA_Extensions.tagID;
+      let airByTagObj: any = this.__ms.airByTagObj(tagID);
+      this.__ms.postData(this.byTagUrl, airByTagObj).subscribe(res => {
+        // this.__ms.getJsonData('../../../assets/airByTag.json').subscribe(res => {
+        if (!flag) {
+          if (!res['errorCode']) {
+            this.airRevalidate(res, i);
+          } else {
+            jQuery('#isValidatingMsg_' + i).html('Flight Not Valid, try again later').css('color', 'red');
+            setTimeout(() => {
+              jQuery('#isValidating_' + i).hide();
+            }, 2000);
+          }
+        } else if (flag == 'M') { // it is mobile view flight details only
+          // console.log(res)
+          if (!res['errorCode']) {
+            this.mbyTag = res;
+            this.mOriginDestinationOptions = res['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'];
+          } else {
+            this.mbyTag = 'Error';
+            // console.log(this.mbyTag)
+            // jQuery('#mbyTagError').html('Flight Not Valid, try again later').css('color', 'red').show();
+            // setTimeout(() => {
+            //   jQuery('#mbyTagError').hide();
+            // }, 2000);
+          }
+        } else if (flag == 'MS') { // it is Mobile Select flight
+          // console.log(res)
+          if (!res['errorCode']) {
+            this.airRevalidate(res, i, flag);
+          } else {
+            jQuery('#isValidatingMsgM_' + i).html('Flight Not Valid, try again later').css('color', 'red');
+            setTimeout(() => {
+              jQuery('#isValidatingM_' + i).hide();
+            }, 2000);
+          }
         }
-      } else if (flag == 'MS') { // it is Mobile Select flight
-        // console.log(res)
-        if (!res['errorCode']) {
-          this.airRevalidate(res, i, flag);
-        } else {
-          jQuery('#isValidatingMsgM_' + i).html('Flight Not Valid, try again later').css('color', 'red');
-          setTimeout(() => {
-            jQuery('#isValidatingM_' + i).hide();
-          }, 2000);
-        }
-      }
-    })
+      })
+    }
 
   } //
 
@@ -755,8 +819,9 @@ export class FlightsListingComponent implements OnInit {
     // })
   } // 
 
-  showFlightDetailsM(tagID, i) {
-    this.airByTag(tagID, i, 'M');
+  showFlightDetailsM(Itinerary, i) {
+    this.msideNav = true;
+    this.airByTag(Itinerary, i, 'M');
   }
   searchFlights(formInputs) {
     if (this.flightSearch.valid) {
@@ -822,6 +887,8 @@ export class FlightsListingComponent implements OnInit {
     // console.log(ev.path[2]);
     jQuery(ev.path[2]).removeClass('show')
     jQuery(ev.path[3]).removeClass('show')
-
+  }
+  desktopSideForm() {
+    this.sideForm = true;
   }
 }

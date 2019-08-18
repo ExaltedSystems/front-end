@@ -6,6 +6,14 @@ body {
     background: #ececec!important
 }
 
+h3 {
+    color: #0248b1
+}
+
+a {
+    cursor: pointer;
+}
+
 label,
 p {
     font-size: .9rem
@@ -92,7 +100,7 @@ header {
 }
 
 .main-search-form .form-control,
-.main-search-form .material-input {
+.main-search-form .material-input .textarea-input {
     padding-left: .75rem!important
 }
 
@@ -172,6 +180,10 @@ header {
     -o-position: absolute!important
 }
 
+.cdk-overlay-container .cdk-overlay-pane .mat-select-opt {
+    margin-top: 40px;
+}
+
 .mat-autocomplete-panel {
     position: absolute!important;
     -webkit-position: absolute!important;
@@ -208,6 +220,7 @@ header {
 .textarea-input {
     width: 100%;
     background: #fff;
+    padding-left: .75rem !important;
 }
 
 .nav-tabs a {
@@ -929,7 +942,8 @@ footer .border-bottom {
 
 .current-search-dates .feather {
     width: 17px;
-    height: 24px;
+    /* height: 24px; */
+    height: 31px;
     margin-right: 5px
 }
 
@@ -1042,8 +1056,14 @@ legend {
     overflow: visible!important
 }
 
-.ck-editor-data img {
+
+/* .ck-editor-data img {
     width: 100%!important
+} */
+
+.pakistan-visa>li {
+    width: 19%;
+    display: inline-block;
 }
 
 .inline-form-btn {
@@ -1230,6 +1250,58 @@ legend {
 
 .span-input {
     width: 50%;
+}
+
+.span-input-50 {
+    width: 50%;
+}
+
+.span-input-100 {
+    width: 100%;
+}
+
+.iframe-w100 {
+    width: 100% !important;
+    height: 460px !important;
+}
+
+.iframe-w50 {
+    width: 100% !important;
+    height: 460px !important;
+}
+
+.mat-step-label-selected {
+    font-weight: bold !important;
+}
+
+.mat-step-icon-selected {
+    background: #57a5f9 !important;
+}
+
+.mat-step-icon-state-edit {
+    background: #28a745!important;
+}
+
+.img-fluid {
+    width: 100%;
+}
+
+#pkg_headings {
+    text-align: center;
+    background: #1a1b1d;
+    font-size: 16px;
+    border-left: none;
+    vertical-align: middle;
+    color: #fff;
+}
+
+#pkg_numbering {
+    background: #f5ed31;
+    color: #000;
+    font-size: 16px;
+    vertical-align: middle;
+    border-right: none;
+    width: 200px !important;
 }
 
 @media (max-width:575px) {
@@ -1428,6 +1500,9 @@ legend {
         color: #0248b1;
         font-size: 1.2rem
     }
+    .pakistan-visa>li {
+        width: 49%;
+    }
     .mat-autocomplete-panel {
         min-width: 330px!important
     }
@@ -1448,6 +1523,27 @@ legend {
     }
     .span-input {
         width: 100%;
+    }
+    .span-input-50 {
+        width: 100%;
+    }
+    .custom-material-form .mat-input-element,
+    .custom-material-form .mat-select-trigger,
+    .custom-material-form .material-input input[type=text],
+    .main-search-form .mat-input-element,
+    .main-search-form .mat-select-trigger,
+    .main-search-form .material-input input[type=text] {
+        margin-top: 17px !important;
+    }
+    .cdk-overlay-container .cdk-overlay-pane .mat-select-opt {
+        margin-top: 45px;
+    }
+    .iframe-w100 {
+        height: 200px !important;
+    }
+    .iframe-w50 {
+        width: 100% !important;
+        height: 200px !important;
     }
 }
 

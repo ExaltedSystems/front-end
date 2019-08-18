@@ -1,0 +1,636 @@
+<mat-drawer-container class="mat-drawer-container mat-drawer-transition">
+    <mat-drawer-content class="mat-drawer-content">
+        <app-header></app-header>
+        <section class="flight-serch pt-0 pt-sm-2 main-search-form" style="position:relative">
+            <div class="container">
+                <div class="section-title d-none d-sm-block">
+                    <h1>Flight Booking</h1>
+                </div>
+                <div class="row" *ngIf="OriginDestinationOptions != null">
+                    <div class="col-sm-4">
+                        <div class="sidebar-list mb-3">
+                            <h3 class="sidebar-title">Flight Summary
+                                <button class="btn btn-primary rounded-0 shadow float-right btn-sm" (click)="changeFlight();">Choose Another Flight</button></h3>
+
+                            <div class="current-flight-search">
+                                <div class="current-search-sector row d-flex align-items-center pb-2">
+                                    <div class="col-5 pr-0">
+                                        <p>{{oLocationName}}</p>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <i-arrow-right class="feather"></i-arrow-right>
+                                    </div>
+                                    <div class="col-5 pl-0">
+                                        <p>{{dLocationName}}</p>
+                                    </div>
+                                </div>
+                                <p class="current-search-passenger text-center">{{flightInfo.adults}} Adult(s), {{flightInfo.children}} Child, {{flightInfo.infants}} Infant</p>
+                                <div class="current-search-footer d-flex justify-content-between align-items-center">
+                                    <div class="current-search-dates d-flex align-items-center justify-content-between">
+                                        <i-calendar class="feather"></i-calendar>
+                                        <p class="mr-3">{{flightInfo.dptDate}}</p>
+                                        <div *ngIf="flightInfo.flightType == 'Return'">
+                                            <i-calendar class="feather"></i-calendar>
+                                            <p>{{flightInfo.rtnDate}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- <div>
+                                        <button class="btn btn-primary btn-sm rounded-0 shadow">Change Search</button>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <mat-accordion class="mat-accordion">
+                                <mat-expansion-panel class="mat-expansion-panel">
+                                    <mat-expansion-panel-header class="mat-expansion-panel-header" role="button" id="mat-expansion-panel-header-0" tabindex="0" aria-controls="cdk-accordion-child-0" aria-expanded="false" aria-disabled="false" style="height: 48px;">
+                                        <span class="mat-content">
+                      <mat-panel-title class="mat-expansion-panel-header-title">
+                        Show Flight Details
+                      </mat-panel-title>
+
+                    </span>
+                                        <!---->
+
+                                    </mat-expansion-panel-header>
+                                    <div class="mat-expansion-panel-content" role="region" aria-labelledby="mat-expansion-panel-header-0" id="cdk-accordion-child-0">
+                                        <div class="mat-expansion-panel-body">
+
+                                            <!---->
+                                            <div class="flight-segment-details">
+                                                <!---->
+                                                <div *ngFor="let Segments of OriginDestinationOptions">
+                                                    <div class="bg-white" *ngFor="let Segment of Segments.FlightSegment">
+                                                        <div class="flight-segment-details-header py-1 px-2">
+
+                                                            {{Segment.DepartureAirport.LocationCode | airPorts}}
+                                                            <b>TO</b> {{Segment.ArrivalAirport.LocationCode | airPorts}}
+                                                        </div>
+                                                        <div class="row py-2 d-flex align-items-center flight-details-sec">
+                                                            <div class="col-4">
+                                                                <p class="mb-0">Flight</p>
+                                                            </div>
+                                                            <div class="col-8 pl-0 d-flex justify-content-between">
+                                                                <div>
+                                                                    <img class="img-fluid" src="http://rehmantravel.com/application/modules/RT-agent/AirlineLogos/{{Segment.OperatingAirline.Code}}.png" alt="EK Logo"> {{Segment.OperatingAirline.Code}} {{Segment.OperatingAirline.FlightNumber}}
+                                                                </div>
+                                                                <div>
+                                                                    <p class="mb-0">Class : {{Segment.ResBookDesigCode}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row py-2 d-flex align-items-center flight-details-sec">
+                                                            <div class="col-4">
+                                                                <p class="mb-0">Departure</p>
+                                                            </div>
+                                                            <div class="col-8 pl-0">
+                                                                <div class="d-flex justify-contents-between">
+                                                                    <div>
+                                                                        <i-map-pin class="feather"></i-map-pin>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="mb-0">{{Segment.DepartureAirport.LocationCode | airPorts}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex justify-contents-between">
+                                                                        <div>
+                                                                            <i-calendar class="feather"></i-calendar>
+                                                                        </div>
+                                                                        <div>
+                                                                            <small>{{Segment.DepartureDateTime.replace('T', ' ') | date}}</small>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex justify-contents-between">
+                                                                        <div>
+                                                                            <i-clock class="feather"></i-clock>
+                                                                        </div>
+                                                                        <div>
+                                                                            <small>{{Segment.DepartureDateTime.replace('T', ' ') | date : 'mediumTime'}}</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-contents-between">
+                                                                    <div>
+                                                                        <i-map-pin class="feather"></i-map-pin>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="mb-0">{{Segment.DepartureAirport.LocationCode | airPorts: '1'}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row py-2 d-flex align-items-center flight-details-sec">
+                                                            <div class="col-4">
+                                                                <p class="mb-0">Duration</p>
+                                                            </div>
+                                                            <div class="col-8 pl-0 d-flex justify-content-between align-items-center">
+                                                                <div>
+                                                                    <small class="text-muted d-flex align-items-center">
+                                    <i-clock class="feather"></i-clock> &nbsp;{{Segment.ElapsedTime | secondsPipe}}
+                                  </small>
+                                                                </div>
+                                                                <div>
+                                                                    <p class="mb-0 text-primary">{{Segment.StopQuantity}} Stop</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row py-2 d-flex align-items-center flight-details-sec">
+                                                            <div class="col-4">
+                                                                <p class="mb-0">Arrival</p>
+                                                            </div>
+                                                            <div class="col-8 pl-0">
+                                                                <div class="d-flex">
+                                                                    <div>
+                                                                        <i-map-pin class="feather"></i-map-pin>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="mb-0">{{Segment.ArrivalAirport.LocationCode | airPorts}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <i-calendar class="feather"></i-calendar>
+                                                                        </div>
+                                                                        <div>
+                                                                            <small>{{Segment.ArrivalDateTime.replace('T', ' ') | date}}</small>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <i-clock class="feather"></i-clock>
+                                                                        </div>
+                                                                        <div>
+                                                                            <small>{{Segment.ArrivalDateTime.replace('T', ' ') | date : 'mediumTime'}}</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <div>
+                                                                        <i-map-pin class="feather"></i-map-pin>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="mb-0">{{Segment.ArrivalAirport.LocationCode | airPorts: '1'}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!---->
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+
+                        <div class="sidebar-list mb-4">
+                            <h3 class="sidebar-title">Price Summary
+                                <span class="float-right">{{flightPricing.ItinTotalFare.TotalFare.Amount}}/-</span>
+                            </h3>
+                            <div class="price-summary">
+                                <mat-accordion class="mat-accordion">
+                                    <mat-expansion-panel class="mat-expansion-panel">
+                                        <mat-expansion-panel-header class="mat-expansion-panel-header" role="button" id="mat-expansion-panel-header-1" tabindex="0" aria-controls="cdk-accordion-child-1" aria-expanded="false" aria-disabled="false" style="height: 48px;"><span class="mat-content">
+                        <mat-panel-title class="mat-expansion-panel-header-title">
+                          Fare
+                        </mat-panel-title>
+                        <mat-panel-description class="d-inline-block text-right mat-expansion-panel-header-description">
+                          {{flightPricing.ItinTotalFare.EquivFare.Amount}}/-
+                        </mat-panel-description>
+
+
+                      </span>
+                                            <!---->
+                                        </mat-expansion-panel-header>
+                                        <div class="mat-expansion-panel-content" role="region" aria-labelledby="mat-expansion-panel-header-1" id="cdk-accordion-child-1">
+                                            <div class="mat-expansion-panel-body">
+
+                                                <div *ngFor="let psgrBreakdown of flightPricing.PTC_FareBreakdowns.PTC_FareBreakdown" class="price-breakup">
+                                                    <ul>
+                                                        <!---->
+                                                        <li>
+                                                            {{psgrBreakdown.PassengerTypeQuantity.Quantity}} - {{psgrBreakdown.PassengerTypeQuantity.Code}}
+                                                            <span class="float-right">{{psgrBreakdown.PassengerFare.EquivFare.Amount}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!---->
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel class="mat-expansion-panel ng-tns-c51-27">
+                                        <mat-expansion-panel-header class="mat-expansion-panel-header ng-tns-c52-28 " role="button" id="mat-expansion-panel-header-2" tabindex="0" aria-controls="cdk-accordion-child-2" aria-expanded="false" aria-disabled="false" style="height: 48px;"><span class="mat-content">
+                        <mat-panel-title class="mat-expansion-panel-header-title">
+                          Taxes
+                        </mat-panel-title>
+                        <mat-panel-description class="d-inline-block text-right mat-expansion-panel-header-description">
+                          {{flightPricing.ItinTotalFare.Taxes.Tax[0].Amount}}/-
+                        </mat-panel-description>
+
+
+                      </span>
+                                            <!---->
+                                        </mat-expansion-panel-header>
+                                        <div class="mat-expansion-panel-content" role="region" aria-labelledby="mat-expansion-panel-header-2" id="cdk-accordion-child-2">
+                                            <div class="mat-expansion-panel-body">
+
+                                                <div *ngFor="let psgrBreakdown of flightPricing.PTC_FareBreakdowns.PTC_FareBreakdown" class="price-breakup">
+                                                    <!---->
+                                                    <li>
+                                                        <b>{{psgrBreakdown.PassengerTypeQuantity.Code}} * {{psgrBreakdown.PassengerTypeQuantity.Quantity}}</b>
+
+                                                        <span *ngFor="let eachTax of psgrBreakdown.PassengerFare.Taxes.Tax" class="d-block ">
+                              <span *ngIf="eachTax.Amount > 0">
+                                {{eachTax.TaxCode}}
+                                <span class="float-right">{{eachTax.Amount}}</span>
+                                                        </span>
+                                                        </span>
+                                                    </li>
+                                                </div>
+                                                <!---->
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+
+                        <div *ngIf="OriginDestinationOptions != null">
+                            <button class="float-right btn btn-primary btn-sm rounded-0 shadow" (click)="viewFareRules();">View Fare Rules</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h3 class="sidebar-title">Booking Information</h3>
+                        <form action="https://secureacceptance.cybersource.com/pay" method="POST" novalidate="" class="" id="creditCardForm">
+                            <div></div>
+                            <button hidden="" type="submit">submit form</button>
+                        </form>
+                        <div>
+                            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                <mat-step [stepControl]="travellersForm">
+                                    <form [formGroup]="travellersForm" (submit)="reservation_step1(travellersForm.value)">
+                                        <ng-template matStepLabel>Travellers Information</ng-template>
+                                        <div formArrayName="passengersArr" *ngFor="let psgr of this.travellersForm.get('passengersArr').controls; let i = index;">
+                                            <div [formGroupName]="i">
+                                                <fieldset>
+                                                    <legend *ngIf="(i+1) < cnnStart">Adult</legend>
+                                                    <legend *ngIf="(i+1) > adtQty && (i+1) < infStart">Child</legend>
+                                                    <legend *ngIf="(i+1) > (adtQty + cnnQty)">Infant</legend>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-2">
+                                                            <input matInput hidden="true" formControlName="psgType">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <!-- <input matInput placeholder="Title" formControlName="lastName" required> -->
+                                                                <mat-select formControlName='title' placeholder="Title">
+                                                                    <mat-option value="MR">Mr</mat-option>
+                                                                    <mat-option value="MISS">Miss</mat-option>
+                                                                    <mat-option value="MRS">Mrs</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="First Name" formControlName="firstName">
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Last Name" formControlName="lastName">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0" (click)="dobDate.open()">
+                                                                <input matInput [matDatepicker]="dobDate" formControlName="dob" class="border-left-0 rounded-0" placeholder="Date of Birth" [min]="minPickerDate[i]" [max]="maxPickerDate[i]" (focus)="dobDate.open()">
+                                                                <mat-datepicker touchUi #dobDate></mat-datepicker>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-sm-4">
+                                                        <!-- <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='docType' placeholder="Document Type" (selectionChange)="changeDocType($event)">
+                                                                    <mat-option value="F">National ID Card</mat-option>
+                                                                    <mat-option value="P">Passport</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div> -->
+                                                        <input type="hidden" formControlName="docType">
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="{{docNumPlaceholder}}" formControlName="cnic" (keyup)="changeDocType($event, i)">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0" (click)="cnicExp.open()">
+                                                                <input matInput [matDatepicker]="cnicExp" formControlName="cnicExp" class="border-left-0 rounded-0" placeholder="{{docExpPlaceholder}}" [min]="minDocExpiryDate" (focus)="cnicExp.open()">
+                                                                <mat-datepicker touchUi #cnicExp></mat-datepicker>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='issuingCountry' placeholder="Issuing Country">
+                                                                    <mat-option *ngFor="let c of issuingCountries" [value]="c.countryCode">{{c.countryName}}</mat-option>
+                                                                    <!-- <mat-option value="UAE">UAE</mat-option>
+                                                                    <mat-option value="UK">UK</mat-option> -->
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='nationality' placeholder="Nationality">
+                                                                    <mat-option *ngFor="let c of issuingCountries" value="{{c.countryCode}}">{{c.countryName}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='nationality' placeholder="Nationality">
+                                                                    <mat-option *ngFor="let c of issuingCountries" value="{{c.countryCode}}">{{c.countryName}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div> -->
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+
+                                        <fieldset>
+                                            <legend>Contact Information</legend>
+                                            <div class="form-group row mb-sm-4">
+                                                <div class="col-sm-4">
+                                                    <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                        <input matInput placeholder="Phone No" formControlName="phoneNo" prefix="+92">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                        <input matInput placeholder="Email Address" formControlName="emailAddress">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="center">
+                                            <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" [disabled]="!travellersForm.valid" mat-button matStepperNext>Next</button>
+                                        </div>
+                                    </form>
+                                </mat-step>
+
+                                <mat-step [stepControl]="paymentForm">
+
+                                    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+
+                                        <mat-tab label="Credit Card">
+                                            <form [formGroup]="paymentForm" (submit)="creditCardPost(paymentForm.value)">
+                                                <ng-template matStepLabel>Payment Information</ng-template>
+                                                <fieldset>
+                                                    <legend>Pay Via Credit Card</legend>
+                                                    <div class="form-group mb-sm-4">
+                                                        <mat-radio-group class="d-block my-2" formControlName="cardType">
+                                                            <mat-radio-button *ngFor="let cardType of cardTypeitems" class="mr-3" value="{{cardType.value}}" checked="{{cardType.checked}}"> {{cardType.label}}</mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </div>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Card Number" formControlName="cardNumber">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="CVN" formControlName="cvn">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='expiryYear' placeholder="Expiry Year" (selectionChange)="populateMonths($event.value)">
+                                                                    <mat-option *ngFor="let year of yearItems" value="{{year.value}}">{{year.value}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='expiryMonth' placeholder="Expiry Month">
+                                                                    <mat-option *ngFor="let month of monthItems" value="{{month.value}}">{{month.name}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Card Holder First Name" formControlName="cardHolderFirstName">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Card Holder Last Name" formControlName="cardHolderLastName">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Card Holder Mobile" formControlName="cardHolderMobile">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Card Holder Email" formControlName="cardHolderEmail">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-8">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Address" formControlName="address">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-sm-4">
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="City" formControlName="city">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="Zip Code" formControlName="zipCode">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <input matInput placeholder="State" formControlName="state">
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <mat-form-field class="form-control material-input mb-2 mb-sm-0">
+                                                                <mat-select formControlName='country' placeholder="Country">
+                                                                    <mat-option value="PK">Pakistan</mat-option>
+                                                                    <mat-option value="UAE">UAE</mat-option>
+                                                                    <mat-option value="UK">UK</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="center">
+
+                                                    <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" [disabled]="!paymentForm.valid" mat-button>Confirm</button>
+                                                </div>
+                                            </form>
+
+                                        </mat-tab>
+
+                                        <mat-tab label="JazzCash">
+                                            <h2>Pay via JazzCash</h2>
+                                            <p>You can pay cash after receiving your Ticket at your doorstep.</p>
+
+                                            <form action="https://payments.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform" method="POST" novalidate="" class="" id="jazzCashForm">
+                                                <div></div>
+                                                <button hidden="" type="submit">submit form</button>
+                                            </form>
+                                            <form [formGroup]="jazzForm" (submit)="jazzCashPost(jazzForm.value)">
+                                                <div class="col-sm-12">
+                                                    <mat-radio-group class="d-block my-2" formControlName="transactionType">
+                                                        <mat-radio-button class="mr-3" value="MWALLET"> Mobile Account</mat-radio-button>
+                                                        <mat-radio-button value="OTC"> Over The Counter</mat-radio-button>
+                                                    </mat-radio-group>
+
+                                                    <div class="center">
+                                                        <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp;
+                                                        <button class="btn btn-primary rounded-0 shadow btn-sm">Confirm</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </mat-tab>
+
+                                        <mat-tab label="Cash on Delivery">
+                                            <h2>Pay Cash on Delivery</h2>
+                                            <p>You can pay cash after receiving your Ticket at your doorstep.</p>
+                                            <form action="">
+                                                <button (click)="cashOnDelivery()" class="btn btn-primary rounded-0 btn-block shadow btn-sm" mat-button>Confirm</button>
+                                            </form>
+                                        </mat-tab>
+                                        <mat-tab label="Bank">
+                                            <h2>Bank</h2>
+                                            <p>You can pay in any branch of below mentioned Banks.</p>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-6 eachBrankBranch" *ngFor="let eachBank of bankDetails">
+                                                        <div class="col-sm-12 well well-sm">
+                                                            <div class="col-sm-4"><img src="https://www.rehmantravel.com/assets/banks-logos/{{eachBank.logo}}" class="width-100" alt="Allied Bank"></div>
+                                                            <div class="col-sm-8">
+                                                                <b>{{eachBank.name}}</b>
+                                                                <small class="inline-block">TITLE : {{eachBank.title}}</small>
+                                                                <small class="inline-block">BR-CODE : {{eachBank.branchCode}}</small>
+                                                                <small class="inline-block">AC# : {{eachBank.accNumber}}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="center">
+                                                <!-- <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp; -->
+                                                <form action="">
+                                                    <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" (click)="byBank()" mat-button>Confirm</button>
+                                                </form>
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab label="Branches">
+                                            <h2>Branches</h2>
+                                            <p>You can pay in any of below mentioned branches.</p>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-6 col-lg-4" *ngFor="let eachBranch of branchesDetails">
+                                                        <div class="branch">
+                                                            <b class="border-bottom py-1 mb-2 d-block">{{eachBranch.branchName}}</b>
+                                                            <p class="branch-address">{{eachBranch.address}}</p>
+                                                            <p class="phone">Ph: {{eachBranch.branchPhone}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="center">
+                                                <!-- <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>&nbsp;&nbsp; -->
+                                                <form action="">
+                                                    <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" (click)="byBranch()" mat-button>Confirm</button>
+                                                </form>
+                                            </div>
+                                        </mat-tab>
+                                    </mat-tab-group>
+                                    <p>&nbsp;</p>
+                                    <button class="btn btn-primary rounded-0 shadow btn-sm" mat-button matStepperPrevious>Back</button>
+                                </mat-step>
+                            </mat-horizontal-stepper>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 center" *ngIf="OriginDestinationOptions == null && (tagExpired == false && tokenExpired == false)">
+                    <mat-spinner></mat-spinner>
+                </div>
+
+                <div class="col-sm-12 center" *ngIf="tagExpired == true && tokenExpired == false">
+                    <h3 style="color:red;">The flight you selected is no longer available.</h3>
+                    <button class="btn btn-primary rounded-0 shadow btn-sm" (click)="changeFlight();">Choose Another Flight</button>
+                </div>
+
+                <div class="col-sm-12 center" *ngIf="tokenExpired == true">
+                    <h3 style="color:red;">Token Expired. Please try again later. OR </h3>
+                    <button class="btn btn-primary rounded-0 shadow btn-sm" (click)="changeFlight();">Choose Another Flight</button>
+                </div>
+            </div>
+        </section>
+
+        <app-footer></app-footer>
+
+    </mat-drawer-content>
+</mat-drawer-container>
+<div class="modal fade" id="view_fare_rules" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width:80% !important">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <h4 class="modal-title">Fare Rules</h4>
+            </div>
+            <div class="modal-body" id="fare_rules">
+                <mat-spinner *ngIf="fareRules == null"></mat-spinner>
+                <div *ngIf="fareRules != null">
+                    <div *ngFor="let eachRule of fareRules">
+                        <h5 *ngIf="eachRule.attr">{{eachRule.attr.Title}}</h5>
+                        <p>{{eachRule.Text.value}}</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

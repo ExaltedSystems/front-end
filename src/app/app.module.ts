@@ -10,7 +10,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule, MatInputModule, MatFormFieldModule, MatRadioModule, MatNativeDateModule, MatAutocompleteModule,
   MatSelectModule, MatSidenavModule, MatDrawerContainer, MatDrawer, MatSidenav, MatProgressBarModule, MatCheckboxModule,
    MatExpansionModule, MatStepperModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatTabsModule, MatIconModule, MatTooltipModule} from '@angular/material';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -75,6 +74,9 @@ import { AmazingVisaOfferComponent } from './components/amazing-visa-offer/amazi
 import { TourCalculatorComponent } from './components/tour-calculator/tour-calculator.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { AgmCoreModule } from '@agm/core';
+import { CalculateUmrahPackageComponent } from './components/umrah/calculate-umrah-package/calculate-umrah-package.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { FilterAirlineNamePipe } from './pipes/filter-airline-name.pipe';
 
 @NgModule({
   declarations: [
@@ -129,6 +131,9 @@ import { AgmCoreModule } from '@agm/core';
     AmazingVisaOfferComponent,
     TourCalculatorComponent,
     TranslatePipe,
+    CalculateUmrahPackageComponent,
+    SafeHtmlPipe,
+    FilterAirlineNamePipe,
   ],
   imports: [
     BrowserModule,
@@ -153,7 +158,6 @@ import { AgmCoreModule } from '@agm/core';
     IconsModule,
     MatSidenavModule,
     MatProgressBarModule,
-    InfiniteScrollModule,
     MatExpansionModule,
     MatStepperModule,
     MatProgressSpinnerModule,

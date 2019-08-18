@@ -13,8 +13,12 @@ export class VisaComponent implements OnInit {
 	popularVisa: object;
 	constructor(private __ms: MainService, private router: Router, private __meta: Meta, private __title: Title
 		, private __device: DeviceDetectorService) {
+		window.scrollTo(0, 0);
 		if(this.__device.isDesktop()){
 		  window.scrollTo(0, 400);
+		}
+		if(this.__device.isMobile()){
+			window.scrollTo(0, 0);
 		}
 		this.router.routeReuseStrategy.shouldReuseRoute = function () {
 			return false;

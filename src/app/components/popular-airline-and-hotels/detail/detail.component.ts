@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MainService } from "src/app/services/main.service";
 import { Meta, Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -18,6 +19,7 @@ export class DetailComponent implements OnInit {
     }
   }
   ngOnInit() {
+    window.scroll(0, 0);
     this.getPageData();
     this.popularVisas();
     this.pageType = this.__actRoute.snapshot.url[0].path;
@@ -26,15 +28,14 @@ export class DetailComponent implements OnInit {
     this.baseUrl = this.__ms.baseUrl;
     let param = this.__router.url;
     param = param.substring(1);
-    console.log("Controller:",param);
     this.__ms.getData(this.__ms.backEndUrl + 'Cms/viewAirlineHotelContents/?urlLink=' + param).subscribe(res => {
       this.page_info = res.data;
+      this.updateMetaTags(res.data);
     });
   }
   popularVisas() {
     this.__ms.getData(this.__ms.backEndUrl + 'Cms/popularVisaRecords/').subscribe(res => {
       this.popularVisa = res.data;
-      this.updateMetaTags(res.data);
     });
   }
   updateMetaTags(result) {

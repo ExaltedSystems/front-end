@@ -33,13 +33,14 @@ export class SubscribeComponent implements OnInit {
           this.subscriberSuccessMsg = result.message;
         } else {
           this.subscriberErrorMsg = result.message;
+          this.subscribeForm.controls['email'].setErrors({ 'incorrect': true });
         }
         window.setTimeout(()=>{
           this.subscribeForm.get('email').setValue('');
           this.subscribeForm.controls['email'].markAsUntouched(); 
           this.subscriberSuccessMsg = '';
           this.subscriberErrorMsg = '';
-        }, 10000)
+        }, 20000)
         this.isLoad = false;
       });
     }

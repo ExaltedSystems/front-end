@@ -1,0 +1,48 @@
+.col-sm-1,
+.col-sm-3 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.locations {
+    max-width: 12%;
+}
+
+.w-11 {
+    max-width: 11%;
+}
+
+.w-10 {
+    max-width: 10%;
+}
+
+form .btn {
+    padding: 0.3rem;
+}
+
+.mat-horizontal-stepper-header-container {
+    padding: 10px !important;
+}
+
+.blue {
+    color: #28A2DB;
+}
+
+@media(max-width:786px) {
+    .form-group {
+        margin-bottom: 0rem;
+    }
+    .locations {
+        max-width: 100%;
+    }
+    .col-sm-1,
+    .col-sm-3 {
+        padding-left: 15px;
+    }
+    .w-10 {
+        max-width: 33%;
+    }
+    .w-11 {
+        max-width: 50%;
+    }
+}

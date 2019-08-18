@@ -96,7 +96,7 @@ export class HotelSearchFormComponent implements OnInit {
     if(this.cookieExists == true){
       let searchCookie = this._cookieService.get('hotelQuery');
       let currentSearch = JSON.parse(searchCookie);
-      console.log('current',currentSearch)
+      //console.log('current',currentSearch)
       // let options = this._auto.autocomplete.options.toArray()
     // this.myControl.setValue(options[1].value)
       this.hotelsAutocomplete.setValue(currentSearch.destination);
@@ -114,7 +114,9 @@ export class HotelSearchFormComponent implements OnInit {
       this.destValu = currentSearch.destination;
       this.dateRangeValue = currentSearch.dateRange;
       // get search results
-      this.hotelSearchResult = this.getSearchResults(currentSearch);
+      if(this._router.url == '/hotels-listing'){
+        this.hotelSearchResult = this.getSearchResults(currentSearch);
+      }
     }
 
 
@@ -190,6 +192,16 @@ export class HotelSearchFormComponent implements OnInit {
   }
 
   incrementNumbers(type) {
+    // If Total Number of Adult and Children is greater than 6
+    if((+this.rooms + 1) > 30 && type == 'rooms') {
+      return false;
+    }
+    if((+this.adults + 1) > 30 && type == 'adults') {
+      return false;
+    }
+    if((+this.children + 1) > 10 && type == 'children') {
+      return false;
+    }
     switch (type) {
       case 'adults': {
         this.adults = +this.adults + 1;
@@ -224,7 +236,7 @@ export class HotelSearchFormComponent implements OnInit {
         this.children < 0 ? this.children = 0 : this.children;
         this.hotelSearch.controls['children'].setValue(this.children);
         // this.addChildrenAgeForm(); 
-        if(this.children > 0){
+        if(this.children >= 0){
           this.removeChild(0);
         }
         break;
@@ -279,7 +291,7 @@ export class HotelSearchFormComponent implements OnInit {
   }
 
   searchHotels(formInputs){
-    console.log('forminputs',formInputs);
+    //console.log('forminputs',formInputs);
     // console.log('date', jQuery('#date-range').val());
     let date1 = ''; //new Date(jQuery('#date-range').val().split('-')[0]);
     let date2 = ''; //new Date(jQuery('#date-range').val().split('-')[1]);

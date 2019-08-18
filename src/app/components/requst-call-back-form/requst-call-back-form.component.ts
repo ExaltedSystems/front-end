@@ -3,6 +3,7 @@ import { MainService } from '../../services/main.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router, RouterState, ActivatedRoute } from '@angular/router';
+import { isObject } from 'util';
 
 @Component({
   selector: 'app-requst-call-back-form',
@@ -16,7 +17,9 @@ export class RequstCallBackFormComponent implements OnInit {
   deviceFullInfo = null;
   browser = null;
   operatingSys = null;
-  isLoad:boolean = false;
+  isLoad: boolean = false;
+  disableSubmitBtn: boolean = false;
+  errors;
 
   constructor(private __ms: MainService, private __fb: FormBuilder, private __dd: DeviceDetectorService,
     private __router: Router, private __actRoute: ActivatedRoute) {
@@ -34,8 +37,9 @@ export class RequstCallBackFormComponent implements OnInit {
     });
   }
   onSubmit(inputs) {
+    this.isLoad = true;
     if (this.contactForm.valid) {
-      this.isLoad = true;
+      this.disableSubmitBtn = true;
       let emailSubject: string;
       let urlStr = this.__actRoute.snapshot.url;
       if (urlStr.length > 1) {
@@ -55,7 +59,17 @@ export class RequstCallBackFormComponent implements OnInit {
       this.__ms.postData(this.__ms.backEndUrl + 'cms/inquiryCallBack', inputs).subscribe(result => {
         if (result.status) {
           this.isLoad = false;
+          this.disableSubmitBtn = false;
           this.__router.navigate(['/thank-you']);
+        } else {
+          this.disableSubmitBtn = false;
+          if (isObject(result.data)) {
+            for (let i in result.data) {
+              this.contactForm.controls[i].setErrors({ 'incorrect': true });
+              this.errors = result.data;
+            }
+            this.isLoad = false;
+          }
         }
       });
     }

@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
   title = 'app';
   constructor(private __lang: SwitchLanguageService){
     this.__lang.use('en').then(() => {
-      console.log(this.__lang.data);
     });
   }
   ngOnInit(){

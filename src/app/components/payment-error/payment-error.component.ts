@@ -19,7 +19,7 @@ export class PaymentErrorComponent implements OnInit {
     this.queryParams = this.__actRouter.snapshot.queryParams;
     this.refNo = this.queryParams.__token;
     if(this.refNo != ''){
-      let pay_errorUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/paymentError';
+      let pay_errorUrl = this.__ms.backEndUrl+'Ticket/paymentError';
       let pay_errorObj = Object.assign({_refrenceNo:this.refNo});
       this.__ms.postData(pay_errorUrl, pay_errorObj).subscribe(res => {
         this.referenceNo = res['ref_no'];

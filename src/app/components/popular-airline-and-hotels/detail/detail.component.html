@@ -16,7 +16,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12" *ngIf="pageType == 'airlines'">
-                <app-flights-search></app-flights-search>
+                <mat-card _ngcontent-c1="" class="main-search-form p-3 mat-card mat-card mt-3 pt-3 mat-card" style="background: rgba(255,255,255,.7)">
+                    <app-flights-search></app-flights-search>
+                </mat-card>
             </div>
             <div class="col-sm-12 main-search-form position-relative" *ngIf="pageType == 'hotels'">
                 <app-hotel-search-form></app-hotel-search-form>
@@ -62,7 +64,7 @@
                         <li class="breadcrumb-item active">{{ page_info.title }}</li>
                     </ol>
                 </nav>
-                <div [innerHTML]="page_info.details"></div>
+                <div [innerHTML]="page_info.details | safeHtml"></div>
             </div>
         </div>
     </div>

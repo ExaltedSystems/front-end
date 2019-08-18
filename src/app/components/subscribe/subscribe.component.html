@@ -13,8 +13,8 @@
                     Email address not valid.
                 </div>
                 <mat-progress-bar mode="indeterminate" *ngIf="isLoad"></mat-progress-bar>
-                <h3 *ngIf="subscriberSuccessMsg" class="form-success">{{subscriberSuccessMsg}}</h3>
-                <h3 *ngIf="subscriberErrorMsg" class="form-error">{{subscriberErrorMsg}}</h3>
+                <h3 *ngIf="subscriberSuccessMsg" class="form-success" [innerHTML]="subscriberSuccessMsg"></h3>
+                <h3 *ngIf="subscriberErrorMsg" class="form-error" [innerHTML]="subscriberErrorMsg"></h3>
             </div>
             <div class="col-sm-2">
                 <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!subscribeForm.valid" type="submit">Subscribe</button>

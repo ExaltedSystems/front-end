@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit {
     if(this.__cookieService.get('srchCookies')){
       let cookiesData       = JSON.parse(this.__cookieService.get('srchCookies'))
       this.flightType       = cookiesData[0].value;
-      console.log(cookiesData[0].value)
+      //console.log(cookiesData[0].value)
 			if(cookiesData[0].value == 'OneWay') {this.isReturn = false;}
       this.flyingFrom       = cookiesData[1].value;
       this.flyingTo         = cookiesData[2].value;
@@ -127,11 +127,12 @@ export class HomeComponent implements OnInit {
       flyingTo: ["", Validators.required],
       departureDate: ["", Validators.required],
       returnDate: [""],
-      preferredClass: [],
+      preferredClass: ["Y"],
       PreferredAirline: [],
       adults: ["1", Validators.required],
       children: [],
-      infant: []
+      infant: [],
+      clientPhone:['']
     });
 
     // Hotel form
@@ -253,6 +254,24 @@ export class HomeComponent implements OnInit {
 
   incrementNumber(type) {
     this.passengerError = '';
+    let totalPax = (+this.adults + +this.children);
+    // If Number of Infant is greater than Number of Adults
+    if((+this.infant + 1) > this.adults && type == 'infant'){
+      this.passengerError = 'Number of Infant must be Equal to number of Adult';
+      return false;
+    }
+    // If Total Number of Adult and Children is greater than 6
+    if(totalPax >= 6 && (type == 'adults' || type == 'children')) {
+      this.passengerError = 'Maximum # of passenger is 6';
+      return false;
+    }
+    let totalPaxWdInfant = (totalPax + (+this.infant + 1));
+    console.log('TotalPxWdInfnt:', [totalPax, this.infant, totalPaxWdInfant])
+    // If Total Number of Passengers (Adult, Children and Infant) is greater than 9
+    if (totalPaxWdInfant > 9) {
+      this.passengerError = 'Please Select Upto 9 Passengers!';
+      return false;
+    }
     switch (type) {
       case 'adults': {
         this.adults = +this.adults + 1;
@@ -269,11 +288,6 @@ export class HomeComponent implements OnInit {
         this.flightSearch.controls['infant'].setValue(this.infant);
         break;
       }
-    }
-    this.passengerError = '';
-    if (this.adults + +this.children + +this.infant > 40) {
-      this.passengerError = 'Please Select Upto 9 Passengers!';
-      return false;
     }
   }
 
@@ -301,7 +315,7 @@ export class HomeComponent implements OnInit {
 
     // jQuery('#flightPaxDropdownMenu').toggle();
     this.passengerError = '';
-    if (this.adults + +this.children + +this.infant <= 0) {
+    if (+this.adults + +this.children + +this.infant <= 0) {
       this.passengerError = 'Please Select atleast 1 Passenger!';
       return false;
     }
@@ -369,7 +383,9 @@ export class HomeComponent implements OnInit {
           children: cnnQty,
           infant: infQty,
           cabin: cabin,
-          prefAirline: prefAirline
+          prefAirline: prefAirline,
+					clientPhone: formInputs.clientPhone,
+					pageUrl: 'home'
         }
       });
       // return false;      

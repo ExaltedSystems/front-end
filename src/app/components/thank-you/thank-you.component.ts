@@ -18,7 +18,7 @@ export class ThankYouComponent implements OnInit {
   ngOnInit() {
     this.queryParams = this.__actRouter.snapshot.queryParams;
 
-    let thankUrl = 'http://www.cheapfly.pk/rgtapp/index.php/services/Ticket/thankYou';
+    let thankUrl = this.__ms.backEndUrl+'Ticket/thankYou';
     let thankObj = {
       _token : this.queryParams._token
     };

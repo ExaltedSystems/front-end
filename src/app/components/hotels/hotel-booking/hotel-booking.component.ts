@@ -156,7 +156,7 @@ export class HotelBookingComponent implements OnInit {
 
   getSelectedRooms = () => {
     this.roomsInfo = this.bookingInfo['roomsInfo'];
-    console.log('rommsInfo:', this.roomsInfo)
+    // console.log('rommsInfo:', this.roomsInfo)
     for (let i = 0; i < this.roomsInfo.length; i++) {
       if(isObject(this.roomsInfo[i])) {
         let id = this.roomsInfo[i].roomId;
@@ -178,12 +178,12 @@ export class HotelBookingComponent implements OnInit {
 
 
   removeSelectedRoom = (id) => {
-    console.log("removeRoom:", id)
+    // console.log("removeRoom:", id)
     for (var i = this.roomsInfo.length - 1; i--;) {
       if (this.roomsInfo[i].roomId === id) this.roomsInfo.splice(i, 1);
       this.roomsInfo = this.roomsInfo.splice(i, 1);
     }
-    console.log('roomsInfo:', this.roomsInfo)
+    // console.log('roomsInfo:', this.roomsInfo)
     let bookingInfo = {
       roomsInfo: this.roomsInfo,
       totalPrice: this.totalPrice,
@@ -215,7 +215,7 @@ export class HotelBookingComponent implements OnInit {
   guestInfo = (formData) => {
     if(this.bookingInfoFrom.valid){
       this.guestFormInfo = formData;
-      console.log('form data',formData);
+      // console.log('form data',formData);
       this.paymentInfoForm.controls['cardHolderFirstName'].setValue(formData.firstName);
       this.paymentInfoForm.controls['cardHolderLastName'].setValue(formData.lastName);
       this.paymentInfoForm.controls['email'].setValue(formData.email);
@@ -285,7 +285,7 @@ export class HotelBookingComponent implements OnInit {
       paymentInfo: this.paymentFormInfo
     }
 
-    console.log('confirm', bookingObj)
+    // console.log('confirm', bookingObj)
     this._ms.postData(this._ms.backEndUrl+'HotelQuery/bookingRequest', bookingObj).subscribe(result => {
       this._cookieService.set('bookingId', JSON.stringify(result));
       this.__router.navigate(['/hotel-voucher']);

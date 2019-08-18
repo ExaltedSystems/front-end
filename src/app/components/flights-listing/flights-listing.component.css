@@ -7,4 +7,12 @@
     background: #eee;
     /* width: 80% !important; */
     z-index: 11 !important;
-  }
+}
+
+.popup-clr-btn {
+    margin: 0 15px !important;
+}
+
+.feather-x-circle {
+    width: 30px !important;
+}

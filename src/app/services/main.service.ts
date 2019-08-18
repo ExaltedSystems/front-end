@@ -28,6 +28,7 @@ export class MainService {
     let base_url = loc.protocol+"//"+loc.hostname+"/";
     this.baseUrl = base_url;
     this.backEndUrl = this.baseUrl+"rgtapp/index.php/services/";
+    // this.backEndUrl = "https://www.rehmantravel.com/rgtapp/index.php/services/";
     
     this.tktBaseUrl = loc.protocol+'//exaltedsys.com/';
     this.flightsUrl = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
@@ -164,6 +165,7 @@ export class MainService {
   revalidateReq(byTagRes, adtQty, cnnQty, infQty, dptDate){
     const revalidateSectors = [];
     let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'][0]['FlightSegment'];
+    console.log('RevalidateReq:', tagSectors)
     tagSectors.forEach(element => {
 
       let eachSector = {
@@ -174,7 +176,8 @@ export class MainService {
         "__isFlightNo": element.FlightNumber,
         "__isParty": (adtQty + cnnQty),
         "__isCabin": element.ResBookDesigCode,
-        "__isMarriage": element.MarriageGrp == 'I' ? 'X' : element.MarriageGrp,
+        // "__isMarriage": element.MarriageGrp == 'I' ? 'X' : element.MarriageGrp,
+        "__isMarriage": element.MarriageGrp == 'O' ? 'X' : 'O',
         "__isStatus": "NN",
         "__isEquipType": element.Equipment[0].AirEquipType,
         "__isOLocation": element.DepartureAirport.LocationCode,
@@ -238,6 +241,7 @@ export class MainService {
 
   createPnr(flightInfos){
     let pnrUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirReservation';
+    let AirType = (flightInfos.vCarrier == 'ER' ? 'S' : 'O');
     let pnrObj = {
       __isView: "W",
       __isAction: "C",
@@ -249,7 +253,7 @@ export class MainService {
       __isFr: flightInfos.__isEmail,
       __isTo: flightInfos.__isEmail,
       __isCc: flightInfos.__isEmail,
-      __isAirType: "O",
+      __isAirType: AirType,
       __isTravelDate: flightInfos.__isTravelDate,
       __isReceivedFrom: "CheapFly",
       __isPhoneNumber: flightInfos.__isPhone,

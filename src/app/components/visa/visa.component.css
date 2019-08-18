@@ -1,5 +1,30 @@
 /* Visa Inline CSS */
 
-img {
+/*img {
     width: 100% !important;
+}*/
+
+.visa-duration {
+    text-align: center;
+    padding: 10px;
+    background: #e1b401;
+    display: inline-block;
+    width: 70%;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 40px;
+}
+
+.visa-type-card .visa-price-pp {
+    background: #274cb7;
+    color: #fff;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.visa-type-card .visa-includes ul {
+    font-size: 14px;
+    margin-top: 10px;
+    list-style-type: none;
+    padding-left: 0px;
 }

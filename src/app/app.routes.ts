@@ -4,18 +4,18 @@ import { FlightsListingComponent } from './components/flights-listing/flights-li
 import { FlightBookingComponent } from './components/flight-booking/flight-booking.component';
 import { PnrViewComponent } from './components/pnr-view/pnr-view.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
-import { HotelsListingComponent } from 'src/app/components/hotels/hotels-listing/hotels-listing.component';
-import { HotelDetailsComponent } from 'src/app/components/hotels/hotel-details/hotel-details.component';
-import { ContactusComponent } from 'src/app/components/contactus/contactus.component';
-import { FlightsComponent } from 'src/app/components/flights/flights.component';
-import { HotelsComponent } from 'src/app/components/hotels/hotels.component';
-import { VisaListsComponent } from 'src/app/components/visa/visa-lists/visa-lists.component';
-import { VisaComponent } from 'src/app/components/visa/visa.component';
-import { UmrahComponent } from 'src/app/components/umrah/umrah.component';
-import { DealsComponent } from 'src/app/components/deals/deals.component';
-import { ToursComponent } from 'src/app/components/tours/tours.component';
-import { AboutusComponent } from 'src/app/components/aboutus/aboutus.component';
-import { DetailComponent } from 'src/app/components/popular-airline-and-hotels/detail/detail.component';
+import { HotelsListingComponent } from './components/hotels/hotels-listing/hotels-listing.component';
+import { HotelDetailsComponent } from './components/hotels/hotel-details/hotel-details.component';
+import { ContactusComponent } from './components/contactus/contactus.component';
+import { FlightsComponent } from './components/flights/flights.component';
+import { HotelsComponent } from './components/hotels/hotels.component';
+import { VisaListsComponent } from './components/visa/visa-lists/visa-lists.component';
+import { VisaComponent } from './components/visa/visa.component';
+import { UmrahComponent } from './components/umrah/umrah.component';
+import { DealsComponent } from './components/deals/deals.component';
+import { ToursComponent } from './components/tours/tours.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { DetailComponent } from './components/popular-airline-and-hotels/detail/detail.component';
 import { HotelBookingComponent } from './components/hotels/hotel-booking/hotel-booking.component';
 import { GeneralPagesComponent } from './components/general-pages/general-pages.component';
 import { HotelVoucherComponent } from './components/hotels/hotel-voucher/hotel-voucher.component';
@@ -23,6 +23,7 @@ import { JobsComponent } from './components/jobs/jobs.component';
 import { FranchiseComponent } from './components/franchise/franchise.component';
 import { PaymentErrorComponent } from './components/payment-error/payment-error.component';
 import { TourCalculatorComponent } from './components/tour-calculator/tour-calculator.component';
+import { CalculateUmrahPackageComponent } from './components/umrah/calculate-umrah-package/calculate-umrah-package.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -33,6 +34,7 @@ export const APP_ROUTES: Routes = [
 	{ path: 'visa/:visa', component: VisaComponent },
 	{ path: 'umrah', component: UmrahComponent },
 	{ path: 'umrah-packages/:package', component: UmrahComponent },
+	{ path: 'umrah/design-your-package', component: CalculateUmrahPackageComponent },
 	{ path: 'flight-deals/:deal', component: DealsComponent },
 	{ path: 'deals', component: DealsComponent },
 	{ path: 'tours', component: ToursComponent },

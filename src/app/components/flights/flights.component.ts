@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MainService } from "src/app/services/main.service";
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-flights',
@@ -9,9 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./flights.component.css']
 })
 export class FlightsComponent implements OnInit {
+  @Input()
   page_info: any = { name: '', description: '' };
-  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) {
+  sideForm:boolean = false;
+  constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title, private __device: DeviceDetectorService) {
     window.scroll(0, 300);
+    if(this.__device.isMobile()){
+      this.sideForm = true;
+    }
   }
 
   ngOnInit() {

@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item" *ngFor="let item of nav; let i = index">
-                        <a *ngIf="item.ID==34" href="https://www.rehmantravel.com/tours/" class="px-2 nav-link" target='_blank'>{{  item.navbarTitle | translate }}</a>
+                        <a *ngIf="item.ID==34" href="https://www.rehmantravel.com/pakistantours/" class="px-2 nav-link" target='_blank'>{{  item.navbarTitle | translate }}</a>
                         <a *ngIf="!item.children && item.ID!=34" routerLink="/{{item.urlLink }}" class="px-2 nav-link">{{  item.navbarTitle | translate }}</a>
                         <a *ngIf="item.children" href="#" class="px-2 nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.navbarTitle | translate }}</a>
                         <!-- Check if Sub Childs Exists -->
@@ -44,7 +44,7 @@
                     <a routerLink="/visa">Visa</a>
                 </li>
                 <li>
-                    <a href="https://www.rehmantravel.com/tours">Tours</a>
+                    <a href="https://www.rehmantravel.com/pakistantours/">Tours</a>
                 </li>
                 <li>
                     <a routerLink="/franchise-reg">Franchise</a>

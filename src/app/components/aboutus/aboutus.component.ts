@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AboutusComponent implements OnInit {
   page_info: any;
   bankDetails: object;
-  aboutUsPdf:string = "http://www.cheapfly.pk/doc/profile-book-version-02April.pdf";
+  aboutUsPdf:string = "doc/profile-book-version-02April.pdf";
   constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) {
     window.scroll(0, 300);    
   }
