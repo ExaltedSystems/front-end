@@ -23,7 +23,7 @@
                     <i-x-circle class="feather-x-circle" *ngIf="flyingFromAutocomplete.value" (click)="flyingFromAutocomplete.setValue('');flightSearch.get('flyingFrom').setValue('')"></i-x-circle>
                 </mat-form-field>
                 </span>
-                <i class="material-icons my_swapper_listing" (click)="swapLocations();">
+                <i class="material-icons my_swapper_listing" title="Swap Locations" (click)="swapLocations();">
                     swap_vert
                 </i>
                 <span class="d-flex border-input mb-4 mb-sm-{{(sideForm ? 4 : 0)}} span-input-{{(sideForm ? 100 : 50)}}">

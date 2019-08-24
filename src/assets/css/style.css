@@ -1350,11 +1350,11 @@ legend {
     top: 1rem;
 }
 
-.my_swapper_listing {
+.my_swapper_listing{
     cursor: pointer;
     position: absolute;
     top: 3rem;
-    left: 6.5rem;
+    left:6.5rem;
 }
 
 @media (max-width:575px) {
@@ -1598,14 +1598,25 @@ legend {
         width: 100% !important;
         height: 200px !important;
     }
-    .max-w-10,
-    .max-w-13 {
-        max-width: 50%;
+
+    .my_swapper{
+        display: none !important;        
     }
-    .max-w-11,
-    .max-w-12,
-    .max-w-14 {
-        max-width: 100%;
+
+    .my_swapper_mob{
+        display: block !important;    
+        cursor: pointer;
+        /* border: 2px solid #2072b9; */
+        position: absolute;
+        top: 3.2rem;
+        left: 10rem;
+    }
+
+    .my_swapper_listing{
+        cursor: pointer;
+        position: absolute;
+        top: 3rem;
+        left:6.5rem;
     }
 }
 
@@ -1616,6 +1627,22 @@ legend {
     .navbar-nav .dropdown-menu {
         position: absolute!important;
         top: auto!important
+    }
+    .my_swapper{    
+        cursor: pointer;
+        border: 2px solid #2072b9;
+        position: absolute;
+        top: 0.7rem;
+        left: 15.1rem;
+    }
+    .my_swapper_mob{
+        display: none !important;            
+    }
+    .my_swapper_listing{
+        cursor: pointer;
+        position: absolute;
+        top: 3rem;
+        left:9.5rem;
     }
 }
 
@@ -1634,4 +1661,5 @@ legend {
     .sidebar-list ul li a {
         font-size: 12px;
     }
+    
 }
