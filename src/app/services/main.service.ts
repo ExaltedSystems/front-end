@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Http, Response } from '@angular/http';
+import { DatePipe } from '@angular/common';
 
 
 @Injectable({
@@ -12,6 +13,8 @@ export class MainService {
 
   public baseUrl = 'http://www.cheapfly.pk/';
   public tktBaseUrl = 'http://exaltedsys.com/';
+  public __isAirToken = '';
+  public __isAirType = '';
   backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
   flightsUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
   byTagUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';
@@ -20,8 +23,9 @@ export class MainService {
   ticketUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirTicket';
   FlightInfo:object;
   hotelSearchQuery: object;
+  public emailPattern: string = "[A-Za-z0-9._%+-]{2,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})";
   public ipAddress: any;
-  constructor(private __httpClient: HttpClient, private __http: Http) {
+  constructor(private __httpClient: HttpClient, private __http: Http, private __datePipe: DatePipe) {
     this.getIpAddress();
     // For Live Site to Set http / https
     let loc = window.location;
@@ -36,6 +40,7 @@ export class MainService {
     this.revalidateUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirRevalidate';
     this.itineraryUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirItinerary';
     this.ticketUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirTicket';
+    this.__isAirToken = localStorage.getItem('__isAirToken');
   }
 
 
@@ -164,13 +169,13 @@ export class MainService {
 
   revalidateReq(byTagRes, adtQty, cnnQty, infQty, dptDate){
     const revalidateSectors = [];
-    // let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'][0]['FlightSegment'];
+    let tagSectors1 = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'];
     let tagSectors = byTagRes['AirItinerary']['OriginDestinationOptions']['OriginDestinationOption'];
     // console.log('RevalidateReq:', [byTagRes, tagSectors])
+    console.log('nestedForeach:', tagSectors1);
     tagSectors.forEach(FlightSegments => {
       let flightSegment = FlightSegments.FlightSegment;
       flightSegment.forEach(element => {
-      console.log('nestedForeach:', element);
       let eachSector = {
             "__isADate": this.setDateFormat(element.ArrivalDateTime),
             "__isATime": this.setDateFormat(element.ArrivalDateTime, 't'),
@@ -218,7 +223,7 @@ export class MainService {
       "__isAgentId": 0,
       "__isParantId": 0,
       "__isUserId": 0,
-      "__isAirType": "O",
+      "__isAirType": this.__isAirType,
       "__isTravelDate": dptDate,
       "__isPassengers":revalidatePsgrs,
       "__isSectors": revalidateSectors
@@ -236,7 +241,7 @@ export class MainService {
       "__isAgentId": 0,
       "__isParantId": 0,
       "__isUserId": 0,
-      "__isAirType": "O",
+      "__isAirType": this.__isAirType,
       "__isTravelDate": dptDate,
       "__isPassengers":revalidatePsgrs,
       "__isSectors": revalidateSectors
@@ -246,6 +251,7 @@ export class MainService {
   createPnr(flightInfos){
     let pnrUrl = this.tktBaseUrl+'Air-Service/AirAvailability/AirReservation';
     let AirType = (flightInfos.vCarrier == 'ER' ? 'S' : 'O');
+    this.__isAirType = AirType;
     let pnrObj = {
       __isView: "W",
       __isAction: "C",
@@ -258,15 +264,74 @@ export class MainService {
       __isTo: flightInfos.__isEmail,
       __isCc: flightInfos.__isEmail,
       __isAirType: AirType,
-      __isTravelDate: flightInfos.__isTravelDate,
+      __isTravelDate: this.__datePipe.transform(flightInfos.__isTravelDate, "yyyy-MM-dd"),
       __isReceivedFrom: "CheapFly",
       __isPhoneNumber: flightInfos.__isPhone,
       __isPassengers:flightInfos.passengers,
       __isSectors: flightInfos.segmentArr,
-      __isTravellers: flightInfos.travellers
+      __isTravellers: flightInfos.travellers,
+      __isAirToken: this.__isAirToken
     } //  end pnr obj
     return this.postData(pnrUrl, pnrObj);
   } // end createpnr
+
+  private __payload() {
+    return {
+      "__isView": "W",
+      "__isAction": "C",
+      "__isVendorId": 1,
+      "__isAgentId": 0,
+      "__isParantId": 0,
+      "__isUserId": 0,
+      "__isFlightType": "OneWay",
+      "__isFr": "kabirsafi@exalted.pk",
+      "__isTo": "",
+      "__isCc": "kabirsafi@exalted.pk",
+      "__isAirType": "S",
+      "__isTravelDate": "2019-10-01",
+      "__isReceivedFrom": "API",
+      "__isPhoneNumber": "923018195697",
+      "__isPassengers": [{
+        "__isType": "ADT",
+        "__isValue": 1
+      }],
+      "__isSectors": [{
+        "__isFareTypeId": "11",
+        "__isLfid": "6547",
+        "__isPfid": "6147",
+        "__isADate": "2019-10-01",
+        "__isATime": "12:00:00",
+        "__isDDate": "2019-10-01",
+        "__isDTime": "10:00:00",
+        "__isFlightNo": "501",
+        "__isParty": "1",
+        "__isCabin": "U ",
+        "__isMarriage": "O",
+        "__isStatus": "NN",
+        "__isEquipType": "738A",
+        "__isOLocation": "ISB",
+        "__isDLocation": "KHI",
+        "__isMkAirLine": "ER",
+        "__isOpAirLine": "ER"
+
+      }],
+      "__isTravellers": [{
+        "__isType": "ADT",
+        "__isPrefix": "MR",
+        "__isFirstName": "khan",
+        "__isLastName": "nadeem",
+        "__isDocType": "F",
+        "__isDocNo": "NAQ1984",
+        "__isCountry": "PK",
+        "__isIssued": "PK",
+        "__isGender": "M",
+        "__isDOB": "1988-10-13",
+        "__isExpiryDate": "2032-08-26"
+      }],
+      "__isAirToken": this.__isAirToken
+    };
+  }
+
 
   pnrCreated(pnr, paymentFlag){
     let pnrSaveUrl = this.backEndUrl+'Ticket/pnrCreated';

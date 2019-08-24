@@ -184,7 +184,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group mb-3 text-center">
                                                                             <div class="input-group-prepend">
-                                                                                <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="decrementNumber('dblRoom', i)">
+                                                                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('dblRoom', i)">
                                                                                     <i-minus class="dropdown-feather">
                                                                                     </i-minus>
                                                                                 </button>
@@ -193,7 +193,7 @@
                                                                                 Double</span>
                                                                             <input formControlName="dblRoom" type="hidden" value="{{dblRoom}}">
                                                                             <div class="input-group-append">
-                                                                                <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="incrementNumber('dblRoom', i)">
+                                                                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('dblRoom', i)">
                                                                                     <i-plus class="dropdown-feather">
                                                                                     </i-plus>
                                                                                 </button>
@@ -203,7 +203,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group mb-3 text-center">
                                                                             <div class="input-group-prepend">
-                                                                                <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="decrementNumber('tplRoom', i)">
+                                                                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('tplRoom', i)">
                                                                                     <i-minus class="dropdown-feather">
                                                                                     </i-minus>
                                                                                 </button>
@@ -212,7 +212,7 @@
                                                                                 Triple</span>
                                                                             <input formControlName="tplRoom" type="hidden" value="0">
                                                                             <div class="input-group-append">
-                                                                                <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="incrementNumber('tplRoom', i)">
+                                                                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('tplRoom', i)">
                                                                                     <i-plus class="dropdown-feather">
                                                                                     </i-plus>
                                                                                 </button>
@@ -222,7 +222,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group mb-3 text-center">
                                                                             <div class="input-group-prepend">
-                                                                                <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="decrementNumber('qdRoom', i)">
+                                                                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('qdRoom', i)">
                                                                                     <i-minus class="dropdown-feather">
                                                                                     </i-minus>
                                                                                 </button>
@@ -231,7 +231,7 @@
                                                                                 Quad</span>
                                                                             <input formControlName="qdRoom" type="hidden" value="0">
                                                                             <div class="input-group-append">
-                                                                                <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="incrementNumber('qdRoom', i)">
+                                                                                <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('qdRoom', i)">
                                                                                     <i-plus class="dropdown-feather">
                                                                                     </i-plus>
                                                                                 </button>
@@ -243,7 +243,7 @@
                                                                         {{roomErrors}}</p>
                                                                     <div class="dropdown-divider" *ngIf="roomErrors">
                                                                     </div>
-                                                                    <a class="float-right btn btn-success dark-btn text-white" (click)="closeDropDown($event, i)">
+                                                                    <a class="float-right btn btn-success text-white" (click)="closeDropDown($event, i)">
                                                                         <i-check class="dropdown-feather float-left m-1">
                                                                         </i-check>
                                                                         <span class="float-right">Done</span>
@@ -306,7 +306,7 @@
                                                 <br><br><br><br>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12 center">
-                                                        <button class="btn btn-success p-2 mr-2 shadow rounded-5" *ngIf="confirmed" (click)="confirmPkg()" matStepperNext>
+                                                        <button class="btn btn-success mr-2" *ngIf="confirmed" (click)="confirmPkg()" matStepperNext>
                                                             <i-check-square class="feather"></i-check-square> Confirm
                                                         </button>
                                                         <button class="btn btn-primary p-2 mr-2 shadow rounded-5" matStepperNext>
@@ -337,107 +337,122 @@
                                         <div class="table-responsive" id="print-pkg-div" *ngIf="pkgPreview">
                                             <table class="table table-bordered table-stripped">
                                                 <tr>
-                                                    <td colspan="6">
+                                                    <td colspan="11">
                                                         <img src="https://rehmantravel.com/img/holiday-letter-head.png" width="100%" alt="" style="border-bottom:solid 1px;">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="22" bgcolor="#00AEEF" colspan="6" align="center"><b>UBC Booking</b></td>
+                                                    <td height="22" bgcolor="#00AEEF" colspan="11" align="center"><b>UBC Booking</b></td>
                                                 </tr>
                                                 <tr>
                                                     <td height="22" class="blue" align="center"><b>Name</b></td>
-                                                    <td height="22" colspan="2" align="center">{{pkgPreview.postData.name}}</td>
-                                                    <td height="22" class="blue" align="center"><b>Contact #</b></td>
-                                                    <td height="22" class="blue" align="center"><b>Date / Time</b></td>
-                                                    <td height="22" class="blue" align="center"><b>Inquiry No :</b></td>
+                                                    <td height="22" colspan="2" class="blue" align="center"><b>Email</b>
+                                                    </td>
+                                                    <td height="22" colspan="2" class="blue" align="center"><b>Contact
+                                                            #</b></td>
+                                                    <td height="22" colspan="3" class="blue" align="center"><b>Date /
+                                                            Time</b></td>
+                                                    <td height="22" class="blue" colspan="3" align="center">Inquiry No :</td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="22" class="blue" align="center"><b>Email</b></td>
-                                                    <td height="22" colspan="2" align="center">{{pkgPreview.postData.email}}</td>
-                                                    <td height="22" align="center">{{pkgPreview.postData.phone}}</td>
-                                                    <td height="22" align="center">{{pkgPreview.postData.createDate | date : 'dd MMM yyyy hh:mm:ss'}}</td>
-                                                    <td height="22" align="center">{{pkgPreview.postData.inquiryNum}}</td>
+                                                    <td height="22" align="center">{{pkgPreview.postData.name}}</td>
+                                                    <td height="22" colspan="2" align="center">
+                                                        {{pkgPreview.postData.email}}</td>
+                                                    <td height="22" colspan="2" align="center">
+                                                        {{pkgPreview.postData.phone}}</td>
+                                                    <td height="22" colspan="3" align="center">
+                                                        {{pkgPreview.postData.createDate | date : 'dd MMM yyyy hh:mm:ss'}}
+                                                    </td>
+                                                    <td height="22" colspan="3" align="center">{{pkgPreview.postData.inquiryNum}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="22" class="blue" rowspan="2" style="padding:3px;vertical-align: middle;width: 9%" align="center">
+                                                    <td height="22" class="blue" rowspan="2" style="padding:3px;vertical-align: middle" align="center">
                                                         <b>Passengers</b></td>
                                                     <td height="22" class="blue" align="center"><b>Adults</b></td>
                                                     <td height="22" class="blue" align="center"><b>Children</b></td>
-                                                    <td height="22" class="blue" align="center"><b>Infant</b></td>
-                                                    <td height="22" class="blue" colspan="2" align="center"><b>Total Passengers</b></td>
+                                                    <td height="22" class="blue" colspan="2" align="center"><b>Infant <i>(0-2 Years)</i></b></td>
+                                                    <td height="22" class="blue" colspan="6" align="center"><b>Total
+                                                            Passengers</b></td>
                                                 </tr>
                                                 <tr>
                                                     <td height="22" align="center">{{pkgPreview.postData.totalAdults}}</td>
                                                     <td height="22" align="center">{{pkgPreview.postData.totalChildrens}}</td>
-                                                    <td height="22" align="center">{{pkgPreview.postData.totalInfants}}</td>
-                                                    <td height="22" colspan="2" align="center"> {{pkgPreview.postData.totalPax}}</td>
+                                                    <td height="22" align="center" colspan="2">{{pkgPreview.postData.totalInfants}}</td>
+                                                    <td height="22" colspan="7" align="center">
+                                                        {{pkgPreview.postData.totalPax}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="22" bgcolor="#00AEEF" colspan="6" align="center"><b>Accommodation Details</b></td>
+                                                    <td height="22" bgcolor="#00AEEF" colspan="11" align="center">
+                                                        <b>Accommodation Details</b></td>
                                                 </tr>
-                                            </table>
-                                            <table class="table table-bordered table-stripped">
                                                 <tr>
-                                                    <td height="22" class="blue" align="center" style="width: 9%"><b>Location</b></td>
+                                                    <td height="22" class="blue" align="center"><b>Location</b></td>
                                                     <td height="22" class="blue" align="center"><b>Hotel Name</b></td>
                                                     <td height="22" class="blue" align="center"><b>Type</b></td>
                                                     <td height="22" class="blue" align="center"><b>Basis</b></td>
                                                     <td height="22" class="blue" align="center"><b>Check In</b></td>
                                                     <td height="22" class="blue" align="center"><b>Check Out</b></td>
-                                                    <td height="22" class="blue" align="center" *ngIf="pkgPreview.hotelData[0].dblRoom > 0"><b>Double</b></td>
-                                                    <td height="22" class="blue" align="center" *ngIf="pkgPreview.hotelData[0].tplRoom > 0"><b>Triple</b></td>
-                                                    <td height="22" class="blue" align="center" *ngIf="pkgPreview.hotelData[0].qdRoom > 0"><b>Quad</b></td>
+                                                    <td height="22" class="blue" align="center"><b>Double</b></td>
+                                                    <td height="22" class="blue" align="center"><b>Triple</b></td>
+                                                    <td height="22" class="blue" align="center"><b>Quad</b></td>
                                                     <td height="22" class="blue" align="center"><b>Nights</b></td>
                                                     <td height="22" class="blue" align="center"><b>Room Price</b></td>
                                                 </tr>
                                                 <tr *ngFor="let h of pkgPreview.hotelData;let i=index">
                                                     <td height="22" align="center">{{h.location}}</td>
                                                     <td height="22" align="center">{{h.hotelName}}</td>
-                                                    <td height="22" align="center">{{h.typeId}} <img src="{{baseUrl}}assets/img/star-img.png"></td>
+                                                    <td height="22" align="center">{{h.typeId}} Star</td>
                                                     <td height="22" align="center">{{h.roomType}}</td>
-                                                    <td height="22" align="center">{{h.checkInDate | date : 'mediumDate'}}</td>
-                                                    <td height="22" align="center">{{h.checkOutDate | date : 'mediumDate'}}</td>
-                                                    <td height="22" align="center" *ngIf="h.dblRoom > 0">{{h.dblRoom}}</td>
-                                                    <td height="22" align="center" *ngIf="h.tplRoom > 0">{{h.tplRoom}}</td>
-                                                    <td height="22" align="center" *ngIf="h.qdRoom > 0">{{h.qdRoom}}</td>
-                                                    <td height="22" align="center" width="5%">{{h.totalNights}}</td>
-                                                    <td height="22" align="center" width="11%">{{pkgPreview.priceData[i].totalRoomsPrice}}</td>
+                                                    <td height="22" align="center">
+                                                        {{h.checkInDate | date : 'mediumDate'}}</td>
+                                                    <td height="22" align="center">
+                                                        {{h.checkOutDate | date : 'mediumDate'}}</td>
+                                                    <td height="22" align="center">{{h.dblRoom}}</td>
+                                                    <td height="22" align="center">{{h.tplRoom}}</td>
+                                                    <td height="22" align="center">{{h.qdRoom}}</td>
+                                                    <td height="22" align="center">{{h.totalNights}}</td>
+                                                    <td height="22" align="center">
+                                                        {{pkgPreview.priceData[i].totalRoomsPrice}}</td>
                                                 </tr>
-                                                <!-- </table>
-                                            <table class="table table-bordered table-stripped"> -->
                                                 <tr>
-                                                    <td align="right" class="blue" [attr.colspan]="tNightsVisaCol"><b>Total Nights</b></td>
-                                                    <td align="center" height="22"><b>{{pkgPreview.postData.grandTotalNights}}</b></td>
+                                                    <td colspan="9" align="right" class="blue"><b>Total Nights</b></td>
+                                                    <td align="center" height="22">
+                                                        <b>{{pkgPreview.postData.grandTotalNights}}</b></td>
                                                     <td align="center" height="22">&nbsp;</td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="right" class="blue" [attr.colspan]="tCostCol"><b>Total Room Prices (Saudi Riyal)</b></td>
-                                                    <td align="center" height="22" width="11%"><b><span class="blue">SAR: </span>{{pkgPreview.postData.grandTotalRoomPrice}}</b></td>
+                                                    <td colspan="10" align="right" class="blue"><b>Total Room Prices (Saudi Riyal)</b>
+                                                    </td>
+                                                    <td align="center" height="22"><b><span class="blue">SAR:
+                                                            </span>{{pkgPreview.postData.grandTotalRoomPrice}}</b></td>
                                                 </tr>
-                                                <!-- </table>
-                                            <table class="table table-bordered table-stripped"> -->
                                                 <tr>
-                                                    <td class="blue" width="9%"><b>Visa</b></td>
-                                                    <td align="center" [attr.colspan]="visaCol" class="blue">
+                                                    <td class="blue"><b>Umrah Visa</b></td>
+                                                    <td colspan="9" align="center" class="blue">
                                                         <b class="text-success" *ngIf="pkgPreview.postData.isVisa">You have selected Umrah Visa for {{pkgPreview.postData.totalPax}} Person(s)</b>
                                                         <b class="text-danger" *ngIf="!pkgPreview.postData.isVisa">You have not select Umrah Visa</b></td>
-                                                    <td align="center" height="22" width="11%"><b>{{pkgPreview.postData.visaPrice}}</b></td>
+                                                    <td align="center" height="22"><b>{{pkgPreview.postData.visaPrice}}</b></td>
                                                 </tr>
                                                 <tr *ngIf="pkgPreview.postData.isTransport">
-                                                    <td class="blue" width="9%"><b>Transport</b></td>
-                                                    <td align="center" class="blue" colspan="3"><b>{{pkgPreview.postData.vehicleName}}</b></td>
-                                                    <td align="center" class="blue" [attr.colspan]="sectorCol"><b>{{pkgPreview.postData.sectorName}}</b></td>
-                                                    <td align="center" height="22" width="11%"><b>{{pkgPreview.postData.transportPrice}}</b></td>
+                                                    <td class="blue"><b>Transport</b></td>
+                                                    <td align="center" class="blue"><b>{{pkgPreview.postData.vehicleName}}</b></td>
+                                                    <td colspan="8" align="center" class="blue"><b>{{pkgPreview.postData.sectorName}}</b></td>
+                                                    <td align="center" height="22"><b>{{pkgPreview.postData.transportPrice}}</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="blue" align="right" [attr.colspan]="tCostCol"><b>Total Cost Of Your Desire Package</b></td>
-                                                    <td align="center" height="22" width="11%"><b class="blue">SAR:</b>{{pkgPreview.postData.totalPackageCost}}</td>
+                                                    <td class="blue" colspan="10" align="right"><b>Total Cost Of Your Desire Package</b></td>
+                                                    <td align="center" height="22"><b class="blue">SAR:</b>{{pkgPreview.postData.totalPackageCost}}</td>
                                                 </tr>
                                             </table>
                                             <table style="font-family:arial !important; font-size:0.6em !important;">
                                                 <tbody>
                                                     <tr>
-                                                        <td width="40%" style="padding-left: 5px; vertical-align:top;">
+                                                        <td width="60%" style="padding-right:5px;  vertical-align:top;">
+                                                            <h5 class="blue" style="margin-bottom:0px !important; border:solid 1px; padding:3px">
+                                                                <b>Note</b></h5>
+                                                            <span [innerHTML]="pkgPreview.postData.notes | safeHtml"></span>
+                                                        </td>
+                                                        <td width="40%" style="border-left: solid 1px; padding-left: 5px; vertical-align:top;">
                                                             <!-- <h5 class="blue" style="margin-bottom:0px !important; border:solid 1px; padding:3px; width:47%;">
                                                                 <b>Terms & Conditions</b></h5>
                                                             <span [innerHTML]="pkgPreview.postData.termsCondition"></span> -->
@@ -446,11 +461,6 @@
                                                             <h5 class="blue" style="margin-bottom:0px !important; border:solid 1px; padding:3px;">
                                                                 <b>Requirements</b></h5>
                                                             <span [innerHTML]="pkgPreview.postData.requirements | safeHtml"></span>
-                                                        </td>
-                                                        <td width="60%" style="border-left: solid 1px; padding-right:5px;  vertical-align:top;">
-                                                            <h5 class="blue" style="margin-bottom:0px !important; border:solid 1px; padding:3px">
-                                                                <b>Note</b></h5>
-                                                            <span [innerHTML]="pkgPreview.postData.notes | safeHtml"></span>
                                                         </td>
                                                     </tr>
                                                     <tr>

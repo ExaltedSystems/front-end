@@ -5,7 +5,7 @@
 <section class="visa-contents">
     <div class="container sidebar">
         <div class="section-title">
-            <h1>{{ page_info.name }}</h1>
+            <h1>{{ (page_info ? page_info.name : '') }}</h1>
             <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
         </div>
         <div class="row">
@@ -15,61 +15,89 @@
                 </div>
             </div>
             <div class="col-sm-9 order-1 order-sm-12">
-                <div [innerHTML]="page_info.description"></div>
+                <div [innerHTML]="(page_info ? page_info.description : '')"></div>
                 <div class="card-deck">
                     <form class="main-search-form position-relative" [formGroup]="franchiseForm" (submit)="onSubmit(franchiseForm.value)">
                         <div class="form-group row mb-1">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Name" class="rounded-5" formControlName="name" matInput required>
+                                    <input matInput placeholder="Name" class="rounded-5" formControlName="name" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('name').value" (click)="this.franchiseForm.get('name').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="franchiseForm.controls['name'].invalid">Name is invalid</mat-error>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['name'].invalid">{{errorObj.name}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['name'].hasError('required') && franchiseForm.controls['name'].touched">
                                     Name required.
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Email " class="rounded-5" formControlName="email" matInput required>
+                                    <input matInput placeholder="Email " class="rounded-5" formControlName="email" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('email').value" (click)="this.franchiseForm.get('email').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="franchiseForm.controls['email'].invalid">Email address is invalid</mat-error>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['email'].invalid">{{errorObj.email}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['email'].hasError('required') && franchiseForm.controls['email'].touched">
                                     Email required.
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Tel No " class="rounded-5" formControlName="tel_no" matInput required>
+                                    <input matInput placeholder="Tel No " class="rounded-5" formControlName="tel_no" minlength="10" maxlength="19" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('tel_no').value" (click)="this.franchiseForm.get('tel_no').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['tel_no'].invalid">{{errorObj.tel_no}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['tel_no'].hasError('required') && franchiseForm.controls['tel_no'].touched">
                                     Tel No required.
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row mb-1">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Mobile No" class="rounded-5" formControlName="mobile_no" matInput required>
+                                    <input matInput placeholder="Mobile No" class="rounded-5" formControlName="mobile_no" minlength="10" maxlength="19" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('mobile_no').value" (click)="this.franchiseForm.get('mobile_no').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['mobile_no'].invalid">{{errorObj.mobile_no}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['mobile_no'].hasError('required') && franchiseForm.controls['mobile_no'].touched">
                                     Mobile No required.
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                        </div>
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-3 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Investment " class="rounded-5" formControlName="investment" matInput required>
+                                    <input matInput placeholder="CNIC" class="rounded-5" formControlName="cnic" minlength="13" maxlength="15" required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('cnic').value" (click)="this.franchiseForm.get('cnic').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['cnic'].invalid">{{errorObj.cnic}}</mat-error>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['cnic'].hasError('required') && franchiseForm.controls['cnic'].touched">
+                                    CNIC required.
+                                </div>
+                            </div>
+                            <div class="col-sm-2 p-sm-1">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="Investment " class="rounded-5" formControlName="investment" minlength="5" maxlength="9" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('investment').value" (click)="this.franchiseForm.get('investment').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['investment'].invalid">{{errorObj.investment}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['investment'].hasError('required') && franchiseForm.controls['investment'].touched">
                                     Investment required.
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="City" class="rounded-5" formControlName="city" matInput required>
+                                    <input matInput placeholder="Education " class="rounded-5" formControlName="education" required>
+                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('education').value" (click)="this.franchiseForm.get('education').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['education'].invalid">{{errorObj.education}}</mat-error>
+                                </mat-form-field>
+                                <div class="form-error" *ngIf="franchiseForm.controls['education'].hasError('required') && franchiseForm.controls['education'].touched">
+                                    Education required.
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-sm-1">
+                                <mat-form-field class="form-control material-input mb-3 shadow">
+                                    <input matInput placeholder="City" class="rounded-5" formControlName="city" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('city').value" (click)="this.franchiseForm.get('city').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['city'].invalid">{{errorObj.city}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['city'].hasError('required') && franchiseForm.controls['city'].touched">
                                     City required.
@@ -77,39 +105,23 @@
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <div class="col-sm-4">
+                            <div class="col-sm-12 p-sm-1">
                                 <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Address" class="rounded-5" formControlName="address" matInput required>
+                                    <input matInput placeholder="Address" class="rounded-5" formControlName="address" required>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('address').value" (click)="this.franchiseForm.get('address').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['address'].invalid">{{errorObj.address}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['address'].hasError('required') && franchiseForm.controls['address'].touched">
                                     Address required.
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="Education " class="rounded-5" formControlName="education" matInput required>
-                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('education').value" (click)="this.franchiseForm.get('education').setValue('')"></i-x-circle>
-                                </mat-form-field>
-                                <div class="form-error" *ngIf="franchiseForm.controls['education'].hasError('required') && franchiseForm.controls['education'].touched">
-                                    Education required.
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <mat-form-field class="form-control material-input mb-3 shadow">
-                                    <input matInput placeholder="CNIC" class="rounded-5" formControlName="cnic" matInput required>
-                                    <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('cnic').value" (click)="this.franchiseForm.get('cnic').setValue('')"></i-x-circle>
-                                </mat-form-field>
-                                <div class="form-error" *ngIf="franchiseForm.controls['cnic'].hasError('required') && franchiseForm.controls['cnic'].touched">
-                                    CNIC required.
-                                </div>
-                            </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 p-sm-1">
                                 <mat-form-field class="material-input textarea-input mb-3 shadow">
-                                    <textarea matInput placeholder="Details" rows="5" class="rounded-5" formControlName="details" matInput required></textarea>
+                                    <textarea matInput placeholder="Details" rows="5" class="rounded-5" formControlName="details" required></textarea>
                                     <i-x-circle class="feather-x-circle" *ngIf="this.franchiseForm.get('details').value" (click)="this.franchiseForm.get('details').setValue('')"></i-x-circle>
+                                    <mat-error *ngIf="errorObj && franchiseForm.controls['details'].invalid">{{errorObj.details}}</mat-error>
                                 </mat-form-field>
                                 <div class="form-error" *ngIf="franchiseForm.controls['details'].hasError('required') && franchiseForm.controls['details'].touched">
                                     Details required.
@@ -118,9 +130,10 @@
                         </div>
                         <div class="form-group row mb-1">
                             <div class="col-sm-12">
-                                <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!franchiseForm.valid" type="submit">Submit</button>
+                                <button class="btn btn-primary btn-lg btn-block shadow rounded-2" [disabled]="!franchiseForm.valid" type="submit">Register Now</button>
                             </div>
                         </div>
+                        <mat-error *ngIf="errorStr" [innerHTML]="errorStr"></mat-error>
                     </form>
 
                 </div>

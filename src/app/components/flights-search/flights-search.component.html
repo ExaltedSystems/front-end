@@ -166,7 +166,7 @@
                             </span>
             </div>
             <mat-form-field class="form-control material-input border-left-0 rounded-0">
-                <input matInput formControlName="clientPhone" placeholder="Phone #" minlength="9" maxlength="20">
+                <input matInput formControlName="clientPhone" placeholder="Phone #" minlength="10" maxlength="19">
                 <i-x-circle class="feather-x-circle" *ngIf="flightSearch.controls['clientPhone'].value" (click)="flightSearch.controls['clientPhone'].setValue('')"></i-x-circle>
             </mat-form-field>
             </span>
@@ -200,7 +200,7 @@
                 </div>
             </div> -->
     <div [ngClass]="(sideForm ? 'col-sm-12' : 'col-sm-2')" class="ml-0 ml-sm-3">
-        <button class="btn btn-primary shadow rounded-0 search-flight-btn">Search Flights</button>
+        <button class="btn btn-primary border shadow rounded-0 search-flight-btn">Search Flights</button>
     </div>
     </div>
     </div>

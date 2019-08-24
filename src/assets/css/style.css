@@ -1304,6 +1304,46 @@ legend {
     width: 200px !important;
 }
 
+.max-w-10 {
+    max-width: 11.7%;
+}
+
+.max-w-11 {
+    max-width: 11%;
+}
+
+.max-w-12 {
+    max-width: 12%;
+}
+
+.max-w-13 {
+    max-width: 13%;
+}
+
+.max-w-14 {
+    max-width: 14%;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    font-weight: bold;
+}
+
+.home-visa-list img {
+    transition: all ease-in-out 1.4s
+}
+
+.home-visa-list:hover img {
+    transform: scale(1.1) rotate(5deg)
+}
+
+.footer-title h3 {
+    color: #fff;
+}
+
+.dark-btn {
+    background: #1f3166;
+}
+
 @media (max-width:575px) {
     h1 {
         font-size: 1.3rem;
@@ -1544,6 +1584,15 @@ legend {
     .iframe-w50 {
         width: 100% !important;
         height: 200px !important;
+    }
+    .max-w-10,
+    .max-w-13 {
+        max-width: 50%;
+    }
+    .max-w-11,
+    .max-w-12,
+    .max-w-14 {
+        max-width: 100%;
     }
 }
 

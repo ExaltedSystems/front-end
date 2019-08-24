@@ -298,6 +298,8 @@ export class FlightsListingComponent implements OnInit {
         let e;
         this.availableFlights = res;
         if (res != null) {
+          this.__ms.__isAirToken = res['Token'];
+          localStorage.setItem('__isAirToken', res['Token']);
           if (res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'] && res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'].length > 0) {
             this.availableFlights = res['OTA_AirLowFareSearchRS']['PricedItineraries']['PricedItinerary'];
 

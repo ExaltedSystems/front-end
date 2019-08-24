@@ -8,18 +8,15 @@ import { startWith, map } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { isObject } from 'util';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-calculate-umrah-package',
   templateUrl: './calculate-umrah-package.component.html',
   styleUrls: ['./calculate-umrah-package.component.css'],
   providers: [
-    {
-      provide: DateAdapter, useClass: AppDateAdapter
-    },
-    {
-      provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
-    }
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
   ]
 })
 export class CalculateUmrahPackageComponent implements OnInit {
@@ -28,8 +25,8 @@ export class CalculateUmrahPackageComponent implements OnInit {
   hotelRows: FormArray;
   allHotels: any = [];
   hotelLists: any = [];
-  sectorLists: object;
-  vehicleLists: object;
+  sectorLists: any;
+  vehicleLists: any;
   isLinear = true;
   confirmed: boolean = true;
   errorMsg: string = '';
@@ -48,15 +45,23 @@ export class CalculateUmrahPackageComponent implements OnInit {
   browser = null;
   operatingSys = null;
   roomErrors: string = '';
-  dblRoom: number = 1;
+  dblRoom: number = 0;
   tplRoom: number = 0;
   qdRoom: number = 0;
+  baseUrl: string;
+  // Set Column Span for table > tr > td
+  tNightsVisaCol: number = 6;
+  visaCol: number = 6;
+  tCostCol: number = 7;
+  sectorCol: number = 3;
 
-  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __dd: DeviceDetectorService) {
+  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __dd: DeviceDetectorService, private _date: DatePipe) {
     this.deviceFullInfo = this.__dd.getDeviceInfo();
     this.browser = this.__dd.browser;
     this.operatingSys = this.__dd.os;
     this.getAllHotelList();
+    this.baseUrl = this.__ms.baseUrl;
+    window.scroll(0, 0);
   }
 
 
@@ -68,9 +73,9 @@ export class CalculateUmrahPackageComponent implements OnInit {
       totalAdults: [2, Validators.required],
       totalChildrens: [0],
       totalInfants: [0],
-      name: [''],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      name: ['', [Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]],
       hotelRows: this.__fb.array([this.addMoreHotelRows()]),
       isVisa: [true],
       isTransport: [true],
@@ -79,6 +84,7 @@ export class CalculateUmrahPackageComponent implements OnInit {
       vehicleId: [''],
       vehicleName: ['']
     });
+    this.dblRoom = +this.dblRoom + 1;
     this.ManageNameControl(0);
 
     // this.filteredList = this.hotelsAutocomplete.valueChanges.pipe(
@@ -130,8 +136,8 @@ export class CalculateUmrahPackageComponent implements OnInit {
       tourCheckOut: ['', Validators.required],
       totalNights: [''],
       dblRoom: [1],
-      tplRoom: [''],
-      qdRoom: [''],
+      tplRoom: [0],
+      qdRoom: [0],
     });
   }
   addMoreTourRows() {
@@ -210,8 +216,51 @@ export class CalculateUmrahPackageComponent implements OnInit {
     if (duplicateErrors) {
       return false;
     }
+    this.__setPaxVehicle();
     if (this.umrahCalculatorForm.valid) {
-      Object.assign(formInputs, { type: 'preview' });
+      
+      this.tNightsVisaCol = 6;
+      this.visaCol = 6;
+      this.tCostCol = 7;
+      this.sectorCol = 3;
+      // Set Column Span for table > tr > td
+      if(this.dblRoom > 0) {
+        this.tNightsVisaCol = +this.tNightsVisaCol + 1;
+        this.tCostCol = +this.tCostCol + 1;
+        this.visaCol = +this.visaCol + 1;
+        this.sectorCol = +this.sectorCol + 1;
+      }
+      if(this.tplRoom > 0) {
+        this.tNightsVisaCol = +this.tNightsVisaCol + 1;
+        this.tCostCol = +this.tCostCol + 1;
+        this.visaCol = +this.visaCol + 1;
+        this.sectorCol = +this.sectorCol + 1;
+      }
+      if(this.qdRoom > 0) {
+        this.tNightsVisaCol = +this.tNightsVisaCol + 1;
+        this.tCostCol = +this.tCostCol + 1;
+        this.visaCol = +this.visaCol + 1;
+        this.sectorCol = +this.sectorCol + 1;
+      }
+      let hotels = [];
+      for (let i = 0; i < formArray.controls.length; i++) {
+        let formGroup = formArray.controls[i] as FormGroup;
+        let rowsObj = {
+          "ID": formGroup.controls['ID'].value,
+          "locations": formGroup.controls['locations'].value,
+          "hotelName": formGroup.controls['hotelName'].value,
+          "tourCheckIn": this._date.transform(formGroup.controls['tourCheckIn'].value, 'yyyy-MM-dd'),
+          "tourCheckOut": this._date.transform(formGroup.controls['tourCheckOut'].value, 'yyyy-MM-dd'),
+          "totalNights": formGroup.controls['totalNights'].value,
+          "dblRoom": formGroup.controls['dblRoom'].value,
+          "tplRoom": formGroup.controls['tplRoom'].value,
+          "qdRoom": formGroup.controls['qdRoom'].value
+        }
+        hotels.push(rowsObj);
+      }
+      console.log('Colspan:', [this.tNightsVisaCol, this.tCostCol, this.visaCol, this.sectorCol])
+
+      Object.assign(formInputs, { type: 'preview', "hotelRows": hotels });
       this.__ms.postData(this.__ms.backEndUrl + 'Umrah/calcUmrahTourPkg', formInputs).subscribe(result => {
         if (result['errors'] != '') {
           this.stepper.selectedIndex = 0;
@@ -219,15 +268,61 @@ export class CalculateUmrahPackageComponent implements OnInit {
         }
         this.pkgPreview = result;
       })
-    } else {
+    }
+    else {
       this.umrahCalculatorForm.controls['email'].markAsTouched();
       this.umrahCalculatorForm.controls['phone'].markAsTouched();
     }
   }
   confirmPkg() {
+    this.__setPaxVehicle();
     if (this.umrahCalculatorForm.valid) {
+      this.tNightsVisaCol = 6;
+      this.visaCol = 6;
+      this.tCostCol = 7;
+      this.sectorCol = 3;
+      // Set Column Span for table > tr > td
+      if(this.dblRoom > 0) {
+        this.tNightsVisaCol = +this.tNightsVisaCol + 1;
+        this.tCostCol = +this.tCostCol + 1;
+        this.visaCol = +this.visaCol + 1;
+        this.sectorCol = +this.sectorCol + 1;
+      }
+      if(this.tplRoom > 0) {
+        this.tNightsVisaCol = +this.tNightsVisaCol + 1;
+        this.tCostCol = +this.tCostCol + 1;
+        this.visaCol = +this.visaCol + 1;
+        this.sectorCol = +this.sectorCol + 1;
+      }
+      if(this.qdRoom > 0) {
+        this.tNightsVisaCol = +this.tNightsVisaCol + 1;
+        this.tCostCol = +this.tCostCol + 1;
+        this.visaCol = +this.visaCol + 1;
+        this.sectorCol = +this.sectorCol + 1;
+      }
+
       let formData = this.umrahCalculatorForm.value;
+      let hotels = [];
+      let formArray = this.umrahCalculatorForm.controls['hotelRows'] as FormArray;
+      for (let i = 0; i < formArray.controls.length; i++) {
+        let formGroup = formArray.controls[i] as FormGroup;
+        let rowsObj = {
+          "ID": formGroup.controls['ID'].value,
+          "locations": formGroup.controls['locations'].value,
+          "hotelName": formGroup.controls['hotelName'].value,
+          "tourCheckIn": this._date.transform(formGroup.controls['tourCheckIn'].value, 'yyyy-MM-dd'),
+          "tourCheckOut": this._date.transform(formGroup.controls['tourCheckOut'].value, 'yyyy-MM-dd'),
+          "totalNights": formGroup.controls['totalNights'].value,
+          "dblRoom": formGroup.controls['dblRoom'].value,
+          "tplRoom": formGroup.controls['tplRoom'].value,
+          "qdRoom": formGroup.controls['qdRoom'].value
+        }
+        hotels.push(rowsObj);
+      }
+
+      // Object.assign(formInputs, { type: 'preview', "hotelRows": hotels });
       Object.assign(formData, {
+        "hotelRows": hotels,
         ipAddress: this.__ms.ipAddress,
         browser: this.browser,
         type: 'confirm',
@@ -258,10 +353,10 @@ export class CalculateUmrahPackageComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-          <title>Tour Custom Package</title>
+          <title>Umrah Calculator - Design Package</title>
           <style>.table-bordered {border: 1px solid #dee2e6;}
           .table-bordered td, .table-bordered th {border: 1px solid #dee2e6;}
-          .table td, .table th {padding: .75rem;vertical-align: top;border-top: 1px solid #dee2e6;}</style>
+          .table td, .table th {padding: .4rem;vertical-align: top;border-top: 1px solid #dee2e6;}</style>
         </head>
         <body onload="window.print();window.close()">${printContents}</body>
       </html>`
@@ -296,8 +391,12 @@ export class CalculateUmrahPackageComponent implements OnInit {
         break;
       }
     }
+    this.dblRoom = dblRoom;
+    this.tplRoom = tplRoom;
+    this.qdRoom = qdRoom;
     let roomStr = dblRoom + " Double, " + tplRoom + " Triple, " + qdRoom + " Quad";
     jQuery('#rooms_str_' + key).html(roomStr);
+    jQuery('#roomErrors_' + key).html('');
   }
 
   decrementNumber(type, key) {
@@ -310,7 +409,7 @@ export class CalculateUmrahPackageComponent implements OnInit {
     switch (type) {
       case 'dblRoom': {
         dblRoom--;
-        dblRoom < 1 ? dblRoom = 1 : dblRoom;
+        dblRoom < 1 ? dblRoom = 0 : dblRoom;
         formGroup.controls['dblRoom'].setValue(dblRoom);
         jQuery('#dblRoom_str_' + key).html(dblRoom + " Double");
         break;
@@ -331,6 +430,9 @@ export class CalculateUmrahPackageComponent implements OnInit {
       }
     }
     // jQuery('#flightPaxDropdownMenu').toggle();
+    this.dblRoom = dblRoom;
+    this.tplRoom = tplRoom;
+    this.qdRoom = qdRoom;
     this.roomErrors = '';
     let roomStr = dblRoom + " Double, " + tplRoom + " Triple, " + qdRoom + " Quad";
     jQuery('#rooms_str_' + key).html(roomStr);
@@ -360,6 +462,7 @@ export class CalculateUmrahPackageComponent implements OnInit {
   getVehicleList() {
     this.__ms.getData(this.__ms.backEndUrl + 'Cms/vehicleLists').subscribe(resp => {
       this.vehicleLists = resp.data;
+      this.__setPaxVehicle();
     });
   }
   getHotelsByType(type) {
@@ -372,11 +475,25 @@ export class CalculateUmrahPackageComponent implements OnInit {
     let formGroup = formArray.controls[key] as FormGroup;
     formGroup.controls['hotelName'].setValue('');
     formGroup.controls['ID'].setValue('');
+    this.__setPaxVehicle();
     let location: string;
     if (isObject(ev)) {
       location = ev.source.value;
     } else {
       location = ev;
+    }
+    /* Code To Set Transport (i.e. Sector and Vehicle) */
+    if (key == 0) {
+      if (location == 'Makkah') {
+        // Jeddah - Makkah or Return
+        this.umrahCalculatorForm.controls['sectorId'].setValue('1');
+        this.__setSectorName(1);
+      } else if (location == 'Madinah') {
+        // Madinah Airport - Madinah Hotel - Makkah - Jeddah
+        this.umrahCalculatorForm.controls['sectorId'].setValue('9');
+        this.__setSectorName(9);
+      }
+      // this.getOptionText(jQuery('#sectorId'), 'sector');
     }
     if (key > 0) {
       let formGroup = formArray.controls[(key - 1)] as FormGroup;
@@ -402,6 +519,37 @@ export class CalculateUmrahPackageComponent implements OnInit {
     // let formArray = this.umrahCalculatorForm.controls['hotelRows'] as FormArray;
     // let formGroup = formArray.controls[key] as FormGroup;
     // formGroup.controls['hotelName'].setValue(ev.source.value);
+  }
+  __setSectorName(ID: number) {
+    const sectorObj = this.sectorLists.find(c => c.ID == ID);
+    this.umrahCalculatorForm.get('sectorName').setValue(sectorObj.sector);
+  }
+  __setVehicleName(ID: number) {
+    const vehicleObj = this.vehicleLists.find(c => c.ID == ID);
+    this.umrahCalculatorForm.get('vehicleName').setValue(vehicleObj.vehicleType);
+  }
+  __setPaxVehicle() {
+    let adults = this.umrahCalculatorForm.controls['totalAdults'].value;
+    let child = this.umrahCalculatorForm.controls['totalChildrens'].value;
+    let totalPax = +adults + +child;
+    let vehicleId = '1';
+    if (totalPax < 5) {
+      vehicleId = '1';
+      this.__setVehicleName(1);
+    } else if (totalPax > 4 && totalPax < 8) {
+      vehicleId = '2';
+      this.__setVehicleName(2);
+    } else if (totalPax > 7 && totalPax < 11) {
+      vehicleId = '3';
+      this.__setVehicleName(3);
+    } else if (totalPax > 10 && totalPax < 21) {
+      vehicleId = '4';
+      this.__setVehicleName(4);
+    } else if (totalPax > 20 && totalPax < 50) {
+      vehicleId = '5';
+      this.__setVehicleName(5);
+    }
+    this.umrahCalculatorForm.controls['vehicleId'].setValue(vehicleId);
   }
 
   private __filterHotels(value: string, hotelLists, key): string[] {

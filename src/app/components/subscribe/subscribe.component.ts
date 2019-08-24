@@ -17,7 +17,7 @@ export class SubscribeComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeForm = this.__fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]]
     });
   }
 

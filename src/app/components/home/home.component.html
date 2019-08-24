@@ -127,14 +127,14 @@
                                                     <p class="mb-0 text-center text-danger"><b>Adults (12+ years)</b></p>
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('adults')">
+                                                            <button class="btn btn-sm btn-primary dark-btn rounded-0" type="button" (click)="decrementNumber('adults')">
                                                                         <i-minus class="dropdown-feather"></i-minus>
                                                                     </button>
                                                         </div>
                                                         <span class="form-control">{{adults}} Adults</span>
                                                         <input formControlName="adults" type="hidden" value="{{adults}}">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('adults')">
+                                                            <button class="btn btn-sm btn-primary dark-btn rounded-0" type="button" (click)="incrementNumber('adults')">
                                                                         <i-plus class="dropdown-feather"></i-plus>
                                                                     </button>
                                                         </div>
@@ -144,14 +144,14 @@
                                                     <p class="mb-0 text-center text-danger"><b>Child (2 - 12 years)</b></p>
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('children')">
+                                                            <button class="btn btn-sm btn-primary dark-btn rounded-0" type="button" (click)="decrementNumber('children')">
                                                                         <i-minus class="dropdown-feather"></i-minus>
                                                                     </button>
                                                         </div>
                                                         <span class="form-control">{{children}} Children</span>
                                                         <input formControlName="children" type="hidden" value="0">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('children')">
+                                                            <button class="btn btn-sm btn-primary dark-btn rounded-0" type="button" (click)="incrementNumber('children')">
                                                                         <i-plus class="dropdown-feather"></i-plus>
                                                                     </button>
                                                         </div>
@@ -161,14 +161,14 @@
                                                     <p class="mb-0 text-center text-danger"><b>Infant (Under 2 years)</b></p>
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumber('infant')">
+                                                            <button class="btn btn-sm btn-primary dark-btn rounded-0" type="button" (click)="decrementNumber('infant')">
                                                                         <i-minus class="dropdown-feather"></i-minus>
                                                                     </button>
                                                         </div>
                                                         <span class="form-control">{{infant}} Infant</span>
                                                         <input formControlName="infant" type="hidden" value="0">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumber('infant')">
+                                                            <button class="btn btn-sm btn-primary dark-btn rounded-0" type="button" (click)="incrementNumber('infant')">
                                                                         <i-plus class="dropdown-feather"></i-plus>
                                                                     </button>
                                                         </div>
@@ -177,7 +177,7 @@
                                                 <div class="dropdown-divider"></div>
                                                 <p class="form-error">{{passengerError}}</p>
                                                 <div class="dropdown-divider" *ngIf="passengerError"></div>
-                                                <a class="float-right btn btn-success text-white" (click)="closeDropDown($event)">
+                                                <a class="float-right btn btn-success dark-btn text-white" (click)="closeDropDown($event)">
                                                     <!-- <i-check class="dropdown-feather float-left m-1"></i-check> -->
                                                     <span class="float-right">Done</span>
                                                 </a>
@@ -210,13 +210,13 @@
                                             </span>
                                         </div>
                                         <mat-form-field class="form-control material-input border-left-0 rounded-0">
-                                            <input matInput formControlName="clientPhone" placeholder="Phone #" minlength="9" maxlength="20">
+                                            <input matInput formControlName="clientPhone" placeholder="Phone #" minlength="10" maxlength="19">
                                             <i-x-circle class="feather-x-circle" *ngIf="flightSearch.controls['clientPhone'].value" (click)="flightSearch.controls['clientPhone'].setValue('')"></i-x-circle>
                                         </mat-form-field>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <button class="btn btn-primary border shadow rounded-0 search-flight-btn">Search Flights</button>
+                                    <button class="btn btn-primary dark-btn border shadow rounded-0 search-flight-btn">Search Flights</button>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +349,7 @@
         </div>
 
         <div class="card-deck">
-            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0" *ngFor="let item of popularVisa;">
+            <div class="card shadow rounded-0 mb-sm-4 mb-lg-0 home-visa-list" *ngFor="let item of popularVisa;">
                 <img class="card-img-top rounded-0" src="{{ baseUrl+item.visaThumbnail }}" alt="{{ item.countryName }} Rehman Travels">
                 <div class="card-body">
                     <h5 class="card-title">{{ item.countryName }}</h5>

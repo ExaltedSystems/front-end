@@ -62,15 +62,15 @@ export class FlightBookingComponent implements OnInit {
   // @ViewChild('creditCardButton') MatButton;
   travellersForm: FormGroup;
   docNumPlaceholder = 'Document #';
-  docExpPlaceholder = 'Document Expiry Date';
+  docExpPlaceholder = 'Document Expiry';
   passengersArr: FormArray;
   paymentForm: FormGroup;
   jazzForm: FormGroup;
   creditCardForm;
   jazzCashForm;
   // Payment Gateways
-  paymentGateways:any;
-  validatingCarrier:string;
+  paymentGateways: any;
+  validatingCarrier: string;
 
   // creditCardButton;
 
@@ -113,7 +113,7 @@ export class FlightBookingComponent implements OnInit {
     this.infQty = Number(this.flightInfo.infants);
     let vCarrier = this.flightInfo.vCarrier;
     this.vCarrier = vCarrier;
-    if(vCarrier == 'ER') {
+    if (vCarrier == 'ER') {
       let Option = JSON.parse(localStorage.getItem('OriginDestinationOption'));
       this.__setReservationArr(Option);
       // this.tagExpired = true;
@@ -130,7 +130,6 @@ export class FlightBookingComponent implements OnInit {
       })
     }
 
-
     this.travellersForm = this.__fb.group({
       // title: ['', Validators.required],
       // firstName: ['', Validators.required],
@@ -142,7 +141,7 @@ export class FlightBookingComponent implements OnInit {
       // issuingCountry: ['', Validators.required],
       // nationality: ['', Validators.required],
       phoneNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]],
-      emailAddress: ['', [Validators.required, Validators.email]],
+      emailAddress: ['', [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]],
       passengersArr: this.__fb.array([this.setPassengerArr('ADT')])
     });
     this.maxPickerDate.push(this.getValidDobDate(12));
@@ -210,14 +209,14 @@ export class FlightBookingComponent implements OnInit {
 
     this.paymentForm = this.__fb.group({
       cardType: ["visa", Validators.required],
-      cardNumber: ["", Validators.required],
-      cvn: ["", Validators.required],
+      cardNumber: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]],
+      cvn: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern("^[0-9]*$")]],
       expiryMonth: ["", Validators.required],
       expiryYear: ["", Validators.required],
-      cardHolderFirstName: ["", Validators.required],
-      cardHolderLastName: ["", Validators.required],
+      cardHolderFirstName: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+      cardHolderLastName: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
       cardHolderMobile: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]],
-      cardHolderEmail: ["", [Validators.required, Validators.email]],
+      cardHolderEmail: ["", [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]],
       address: ["", Validators.required],
       city: ["", Validators.required],
       zipCode: ["", Validators.required],
@@ -259,6 +258,9 @@ export class FlightBookingComponent implements OnInit {
       flightSegments.forEach(segment => {
         // let MarriageGrp = segment.MarriageGrp == 'I' ? 'X' : segment.MarriageGrp;
         this.segmentInfoArr.push({
+          __isFareTypeId:segment.FareTypeID,
+          __isLfid:segment.LFID,
+          __isPfid:segment.PFID,
           __isADate: this.__datepipe.transform(segment.ArrivalDateTime, "yyyy-MM-dd"),
           __isATime: this.__datepipe.transform(segment.ArrivalDateTime, "hh:mm:ss"),
           __isDDate: this.__datepipe.transform(segment.DepartureDateTime, "yyyy-MM-dd"),
@@ -339,8 +341,8 @@ export class FlightBookingComponent implements OnInit {
     return this.__fb.group({
       psgType: [paxType, Validators.required],
       title: ["", Validators.required],
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
+      firstName: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+      lastName: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
       dob: ["", Validators.required],
       docType: [""],
       cnic: ["", Validators.required],
@@ -481,16 +483,17 @@ export class FlightBookingComponent implements OnInit {
   }// end by branch
 
   createPnr(flightInfos) {
-    Object.assign(flightInfos, {vCarrier: this.vCarrier})
+    Object.assign(flightInfos, { vCarrier: this.vCarrier })
     this.__ms.createPnr(flightInfos).subscribe(resp => {
       console.log(resp)
       let pnr = resp['__isPnr'];
       this.pnrCreated(pnr);
     })
     // JFLWVB
-  } // 
+  } //
 
   pnrCreated(pnr) {
+    this.insertPNR(pnr);
     this.__ms.pnrCreated(pnr, this.paymentFlag).subscribe(res => {
       //console.log(res)
       this.__router.navigate(["/thank-you"], {
@@ -567,11 +570,31 @@ export class FlightBookingComponent implements OnInit {
     });
   }
   getPaymentGateways() {
-    this.__ms.getData(this.__ms.backEndUrl+'Ticket/paymentGateways').subscribe(resp => {
-      if(resp.status){
+    this.__ms.getData(this.__ms.backEndUrl + 'Ticket/paymentGateways').subscribe(resp => {
+      if (resp.status) {
         this.paymentGateways = resp.data;
       }
     })
   }
+  // Insert PNR Data into DB
+  insertPNR(__siPnr) {
+    let payload = {
+      "__isView": "W",
+      "__isAction": "C",
+      "__isVendorId": 1,
+      "__isAgentId": 0,
+      "__isParantId": 0,
+      "__isUserId": 0,
+      "__isAirType": (this.__ms.__isAirType == '' ? "O" : this.__ms.__isAirType),
+      "__isPnr": __siPnr,
+      "__isAirToken": this.__ms.__isAirToken
+    }
+    this.__ms.postData(this.__ms.tktBaseUrl + 'Air-Service/AirAvailability/AirItinerary', payload).subscribe(resp => {
+      console.log('PNR:', resp)
+    });
+  }
+  
 
+
+  
 } // END CLASS

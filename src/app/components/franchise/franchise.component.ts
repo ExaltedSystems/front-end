@@ -4,6 +4,7 @@ import { MainService } from "src/app/services/main.service";
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { isObject } from 'util';
 
 @Component({
   selector: 'app-franchise',
@@ -16,6 +17,8 @@ export class FranchiseComponent implements OnInit {
   deviceFullInfo = null;
   browser = null;
   operatingSys = null;
+  errorStr: string = '';
+  errorObj: any = '';
   constructor(private __ms: MainService, private __fb: FormBuilder, private __dd: DeviceDetectorService,
   private __router: Router, private __meta: Meta, private __title: Title) {
 
@@ -24,15 +27,15 @@ export class FranchiseComponent implements OnInit {
   ngOnInit() {
     this.getPageData();
     this.franchiseForm = this.__fb.group({
-      name: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
+      name: ["", [Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+      email: ["", [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]],
       mobile_no: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
-      investment: ["", [Validators.required, Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
-      tel_no: ["", Validators.pattern('^(?=.*[0-9])[ +0-9]+$')],
+      investment: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(9), Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
+      tel_no: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
       city: [""],
       address: [""],
       education: [""],
-      cnic : [""],
+      cnic : ["", [Validators.required, Validators.minLength(13), Validators.maxLength(15), Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
       details:[""]
     });
   }
@@ -43,11 +46,18 @@ export class FranchiseComponent implements OnInit {
     });
   }
   onSubmit(inputs){
-    console.log(inputs);
     this.__ms.postData(this.__ms.backEndUrl + 'Cms/franchiseReg', inputs).subscribe(res=>{
-      console.log(res.data);
       if (res.status) {
         this.__router.navigate(['/thank-you']);
+      } else {
+        this.errorStr = res.message;
+        if (isObject(res.data)) {
+          for (let i in res.data) {
+            this.franchiseForm.controls[i].setErrors({ 'incorrect': true });
+            this.errorObj = res.data;
+          }
+        }
+        return false;
       }
     });
   }

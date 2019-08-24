@@ -167,7 +167,8 @@
                             </span>
                                             </div> -->
                                             <mat-form-field class="form-control material-input">
-                                                <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" name="inlineCheckInDate" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="rounded-0" placeholder="CheckIn Date" [min]="currDate">
+                                                <input matInput [matDatepicker]="checkInDate" formControlName="checkInDate" (dateChange)="keytab($event)" name="inlineCheckInDate" (focus)="checkInDate.open()" (click)="checkInDate.open()" class="rounded-0" placeholder="CheckIn Date" required readonly
+                                                    [min]="currDate">
                                                 <mat-datepicker #checkInDate></mat-datepicker>
                                             </mat-form-field>
 
@@ -177,7 +178,8 @@
                             </span>
                                             </div> -->
                                             <mat-form-field class="form-control rounded-0 material-input">
-                                                <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (dateChange)="keytab($event)" (focus)="checkOutDate.open()" name="inlineCheckOutDate" (click)="checkOutDate.open()" class="rounded-0" placeholder="Checkout Date" [min]="inlineCheckInDate">
+                                                <input matInput [matDatepicker]="checkOutDate" formControlName="checkOutDate" (dateChange)="keytab($event)" (focus)="checkOutDate.open()" name="inlineCheckOutDate" (click)="checkOutDate.open()" class="rounded-0" placeholder="Checkout Date" required readonly
+                                                    [min]="inlineCheckInDate">
                                                 <mat-datepicker #checkOutDate></mat-datepicker>
                                             </mat-form-field>
                                         </div>
@@ -201,14 +203,14 @@
                                                 <div class="form-group">
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('rooms')">
+                                                            <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="decrementNumbers('rooms')">
                                     <i-minus class="dropdown-feather"></i-minus>
                                   </button>
                                                         </div>
                                                         <span class="form-control">{{rooms}} Rooms</span>
                                                         <input formControlName="rooms" type="hidden" value="{{rooms}}">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('rooms')">
+                                                            <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="incrementNumbers('rooms')">
                                     <i-plus class="dropdown-feather"></i-plus>
                                   </button>
                                                         </div>
@@ -217,14 +219,14 @@
                                                 <div class="form-group">
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('adults')">
+                                                            <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="decrementNumbers('adults')">
                                     <i-minus class="dropdown-feather"></i-minus>
                                   </button>
                                                         </div>
                                                         <span class="form-control">{{adults}} Adults</span>
                                                         <input formControlName="adults" type="hidden" value="{{adults}}">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('adults')">
+                                                            <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="incrementNumbers('adults')">
                                     <i-plus class="dropdown-feather"></i-plus>
                                   </button>
                                                         </div>
@@ -233,14 +235,14 @@
                                                 <div class="form-group">
                                                     <div class="input-group mb-3 text-center">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="decrementNumbers('children')">
+                                                            <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="decrementNumbers('children')">
                                     <i-minus class="dropdown-feather"></i-minus>
                                   </button>
                                                         </div>
                                                         <span class="form-control">{{children}} Children</span>
                                                         <input formControlName="children" type="hidden" value="{{children}}">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm btn-secondary rounded-0" type="button" (click)="incrementNumbers('children')">
+                                                            <button class="btn btn-sm btn-secondary dark-btn rounded-0" type="button" (click)="incrementNumbers('children')">
                                     <i-plus class="dropdown-feather"></i-plus>
                                   </button>
                                                         </div>
@@ -260,8 +262,8 @@
                                                 </div>
 
                                                 <div class="dropdown-divider"></div>
-                                                <a class="float-right" (click)="closeDropDown($event)">
-                                                    <i-check class="dropdown-feather text-success float-left m-1"></i-check>
+                                                <a class="btn btn-primary dark-btn float-right" (click)="closeDropDown($event)">
+                                                    <!-- <i-check class="dropdown-feather text-success float-left m-1"></i-check> -->
                                                     <span class="float-right">Done</span>
                                                 </a>
                                             </div>

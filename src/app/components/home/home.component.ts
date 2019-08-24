@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit {
       adults: ["1", Validators.required],
       children: [],
       infant: [],
-      clientPhone:['']
+      clientPhone:['', [Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]]
     });
 
     // Hotel form

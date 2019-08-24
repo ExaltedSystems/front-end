@@ -33,8 +33,8 @@ export class ContactusComponent implements OnInit {
     ngOnInit() {
         this.getPageData();
         this.contactForm = this.__fb.group({
-            name: ["", Validators.required],
-            email: ["", [Validators.required, Validators.email]],
+            name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern('^[a-zA-Z ]*$')]],
+            email: ["", [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]],
             phone: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern('^(?=.*[0-9])[ +0-9]+$')]],
             emailMessage: ["", Validators.required],
         });

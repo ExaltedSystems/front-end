@@ -44,7 +44,9 @@ export class FlightsSearchComponent implements OnInit {
 	preferredAirline;
 	selectedFlyFrom = 'ISB,Islamabad,Pakistan';
 	selectedFlyTo = 'LHR,London,United Kingdom';
-	currDate: Date = new Date();
+	dt: Date = new Date();
+	currDate = new Date(this.dt.setDate(this.dt.getDate() + 1));
+	// currDate: Date = new Date();
 	passengerError: string;
 	numRoomsError: string;
 	airlineSectors: any;
@@ -100,12 +102,13 @@ export class FlightsSearchComponent implements OnInit {
 			adults: ["1", Validators.required],
 			children: [],
 			infant: [],
-			clientPhone: ['', [Validators.minLength(9), Validators.maxLength(20)]]
+			clientPhone: ['', [Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]]
 		});
 		let pageUrl = this.__router.url.substr(1);
 		if (pageUrl.split('/')[0] == 'airlines') {
-			this.flightSearch.controls['clientPhone'].setValidators(Validators.required);
-			this.flightSearch.updateValueAndValidity();
+			this.flightSearch.controls['clientPhone'].setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]);
+			this.flightSearch.controls['clientPhone'].updateValueAndValidity();
+			// this.flightSearch.updateValueAndValidity();
 		}
 		this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
 		this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);

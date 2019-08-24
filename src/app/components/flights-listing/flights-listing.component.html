@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-8 pl-0 d-flex justify-content-between">
                             <div>
-                                <img class="img-fluid" src="/{{Segment.OperatingAirline.Code}}.png" alt="EK Logo"> {{Segment.OperatingAirline.Code}} {{Segment.OperatingAirline.FlightNumber}}
+                                <img class="img-fluid" src="AirlineLogos/{{Segment.OperatingAirline.Code}}.png" alt="EK Logo"> {{Segment.OperatingAirline.Code}} {{Segment.OperatingAirline.FlightNumber}}
                             </div>
                             <div>
                                 <p class="mb-0">Class : {{Segment.ResBookDesigCode}}</p>
@@ -381,7 +381,7 @@
                                 <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
                                     <li *ngFor="let eachAirLine of responseAirlinesUnique">
                                         <mat-checkbox (change)="airlineFilters($event, 'airline', 'd')" value="{{eachAirLine.value}}" class="mat-checkbox">
-                                            <img src="AirlineLogos/{{eachAirLine.text}}" alt="{{eachAirLine.text}}"> {{eachAirLine.text | filterAirlineName}}</mat-checkbox>
+                                            <img src="AirlineLogos/{{eachAirLine.text}}.png" alt="{{eachAirLine.text}}"> {{eachAirLine.text | filterAirlineName}}</mat-checkbox>
                                         <span class="pull-right">{{eachAirLine.lowestAmount}}</span>
                                     </li>
                                 </ul>
@@ -392,6 +392,7 @@
                             <h3>Flight Alerts</h3>
                             <button class="btn btn-secondary">Subscribe</button>
                         </div> -->
+                        <app-amazing-visa-offer></app-amazing-visa-offer>
                     </div>
                     <div class="col-sm-9 flight-listing">
                         <!-- <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 mat-card">
@@ -443,7 +444,7 @@
                                     <div class="d-inline-block">
                                         <div class="d-inline-block text-center">
                                             <div>
-                                                <img class="img-fluid mx-1" src="/{{Itinerary.TPA_Extensions.ValidatingCarrier.Code}}.png" alt="{{Itinerary.TPA_Extensions.ValidatingCarrier.Code}} Logo">
+                                                <img class="img-fluid mx-1" src="AirlineLogos/{{Itinerary.TPA_Extensions.ValidatingCarrier.Code}}.png" alt="{{Itinerary.TPA_Extensions.ValidatingCarrier.Code}} Logo">
                                             </div>
                                         </div>
                                         <div class="d-inline-block text-center"></div>
@@ -513,7 +514,7 @@
                                                 <div class="row d-flex align-items-center">
                                                     <div class="col-sm-1 pr-2 text-left">
                                                         <div class="d-inline-block text-center">
-                                                            <img class="img-fluid" src="/{{Segment.FlightSegment[0].OperatingAirline.Code}}.png" alt="{{Segment.FlightSegment[0].OperatingAirline.Code}} Logo">
+                                                            <img class="img-fluid" src="AirlineLogos/{{Segment.FlightSegment[0].OperatingAirline.Code}}.png" alt="{{Segment.FlightSegment[0].OperatingAirline.Code}} Logo">
                                                             <p>{{Segment.FlightSegment[0].OperatingAirline.Code}} {{Segment.FlightSegment[0].OperatingAirline.FlightNumber}}
                                                             </p>
                                                         </div>
@@ -698,7 +699,7 @@
                                                 <div class="row m-0 py-2 d-flex align-items-center">
                                                     <div class="col-sm-2">
                                                         <div class="d-inline-block text-center">
-                                                            <img class="img-fluid" src="/{{eachSegment.OperatingAirline.Code}}.png" alt="EY Logo">
+                                                            <img class="img-fluid" src="AirlineLogos/{{eachSegment.OperatingAirline.Code}}.png" alt="EY Logo">
                                                             <p class="mb-0">{{eachSegment.OperatingAirline.Code}} {{eachSegment.FlightNumber}}
                                                             </p>
                                                         </div>
@@ -807,7 +808,7 @@
                                                         <div class="row d-flex align-items-center">
                                                             <div class="col-sm-1 pr-2 text-left">
                                                                 <div class="d-inline-block text-center">
-                                                                    <img class="img-fluid" src="/{{Segment.FlightSegment[0].OperatingAirline.Code}}.png" alt="{{Segment.FlightSegment[0].OperatingAirline.Code}} Logo">
+                                                                    <img class="img-fluid" src="AirlineLogos/{{Segment.FlightSegment[0].OperatingAirline.Code}}.png" alt="{{Segment.FlightSegment[0].OperatingAirline.Code}} Logo">
                                                                     <p>{{Segment.FlightSegment[0].OperatingAirline.Code}} {{Segment.FlightSegment[0].OperatingAirline.FlightNumber}}
                                                                     </p>
                                                                 </div>
@@ -886,7 +887,7 @@
                                                         <div class="row m-0 py-2 d-flex align-items-center">
                                                             <div class="col-sm-2">
                                                                 <div class="d-inline-block text-center">
-                                                                    <img class="img-fluid" src="/{{eachSegment.OperatingAirline.Code}}.png" alt="EY Logo">
+                                                                    <img class="img-fluid" src="AirlineLogos/{{eachSegment.OperatingAirline.Code}}.png" alt="EY Logo">
                                                                     <p class="mb-0">
                                                                         {{eachSegment.OperatingAirline.Code}} {{eachSegment.FlightNumber}}
                                                                     </p>

@@ -34,7 +34,7 @@ export class HotelSearchFormComponent implements OnInit {
   children: number = 0;
   rooms: number = 1;
   currDate: Date = new Date();
-  searchBtn: string = 'Search';
+  searchBtn: string = 'Search Hotels';
   destValu: string;
   dateRangeValue = "Check In  -  Check Out";
 
@@ -78,8 +78,8 @@ export class HotelSearchFormComponent implements OnInit {
     // Hotel form
     this.hotelSearch = this.__fb.group({
       destination: ["",Validators.required],
-      checkInDate: [""],
-      checkOutDate: [""],
+      checkInDate: ["", Validators.required],
+      checkOutDate: ["", Validators.required],
       dates: [""],
       dateRange: [""],
       rooms: ["1"],
