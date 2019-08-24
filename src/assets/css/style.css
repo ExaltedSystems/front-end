@@ -1344,6 +1344,19 @@ legend {
     background: #1f3166;
 }
 
+.my_swapper {
+    cursor: pointer;
+    position: relative;
+    top: 1rem;
+}
+
+.my_swapper_listing {
+    cursor: pointer;
+    position: absolute;
+    top: 3rem;
+    left: 6.5rem;
+}
+
 @media (max-width:575px) {
     h1 {
         font-size: 1.3rem;

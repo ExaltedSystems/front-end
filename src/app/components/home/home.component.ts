@@ -440,14 +440,32 @@ export class HomeComponent implements OnInit {
 	setSelectedValue(evt: MatOptionSelectionChange, attrName:string){
 		let val = evt.source.value;
 		if(attrName == 'flyingFrom'){
-			this.flightSearch.controls['flyingFrom'].setValue(val);
+      this.flightSearch.controls['flyingFrom'].setValue(val);
+      this.flyingFrom = val;
 			this.flyingFromAutocomplete.setValue(val);
 		}
 		if(attrName == 'flyingTo'){
-			this.flightSearch.controls['flyingTo'].setValue(val);
+      this.flightSearch.controls['flyingTo'].setValue(val);
+      this.flyingTo = val;
 			this.flyingToAutocomplete.setValue(val);
     }
-	}
+  }
+  
+  swapLocations(){
+    let oldflyfrom = this.flyingFrom;
+    let oldflyto = this.flyingTo;
+
+    this.flyingFrom = oldflyto;
+    this.flyingTo = oldflyfrom;
+
+    this.flyingFromAutocomplete.setValue(this.flyingFrom);
+    this.flyingToAutocomplete.setValue(this.flyingTo);
+    
+    this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
+    this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);
+
+  }
+
 	setDatepickerTitle(evt){
 		let placeHolder = '';
 		if(isObject(evt)){
