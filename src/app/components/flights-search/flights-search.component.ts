@@ -367,6 +367,22 @@ export class FlightsSearchComponent implements OnInit {
 			this.flyingToAutocomplete.setValue(val);
 		}
 	}
+
+	swapLocations(){
+		let oldflyfrom = this.flyingFrom;
+		let oldflyto = this.flyingTo;
+	
+		this.flyingFrom = oldflyto;
+		this.flyingTo = oldflyfrom;
+	
+		this.flyingFromAutocomplete.setValue(this.flyingFrom);
+		this.flyingToAutocomplete.setValue(this.flyingTo);
+		
+		this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
+		this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);
+	
+	}
+
 	setDatepickerTitle(evt) {
 		let placeHolder = '';
 		if (isObject(evt)) {

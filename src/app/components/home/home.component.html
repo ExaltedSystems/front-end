@@ -54,6 +54,9 @@
                                                     </i-x-circle>
                                                 </mat-form-field>
                                                 </span>
+                                                <i class="material-icons my_swapper" (click)="swapLocations();">
+                                                    swap_horiz
+                                                </i>
                                                 <span class="d-flex border-input mb-4 mb-sm-0 span-input">
                                                         <div class="input-group-prepend mb-sm-0 shadow shadow-sm-none">
                                                             <span class="input-group-text rounded-0">
@@ -69,6 +72,7 @@
                                                         </mat-autocomplete>
                                                         <i-x-circle class="feather-x-circle" *ngIf="flightSearch.get('flyingTo').value" (click)="flightSearch.get('flyingTo').setValue('')"></i-x-circle>
                                                     </mat-form-field> -->
+                                            
                                             <mat-form-field class="form-control material-input border-left-0 rounded-0 mobile-input-group-control mb-sm-0 shadow-sm-none">
                                                 <input matInput formControlName="flyingTo" placeholder="Flying To" [formControl]="flyingToAutocomplete" (click)="resetMatInput($event)" [matAutocomplete]="flyingToAuto">
                                                 <mat-autocomplete #flyingToAuto="matAutocomplete" autoActiveFirstOption>
@@ -79,6 +83,8 @@
                                                 <i-x-circle class="feather-x-circle" *ngIf="flyingToAutocomplete.value" (click)="flyingToAutocomplete.setValue('');flightSearch.get('flyingTo').setValue('')">
                                                 </i-x-circle>
                                             </mat-form-field>
+                                            
+                                            <!-- <span (click)="swapLocations();"><i class="fas fa-exchange-alt"></i></span> -->
                                             </span>
                                         </div>
                                     </div>
