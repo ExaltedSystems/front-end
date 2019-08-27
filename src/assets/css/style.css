@@ -426,7 +426,8 @@ a.btn-primary {
 
 .form-dropdown-btn small {
     font-size: 74%;
-    color: #bbb9b9;
+    /* color: #bbb9b9; */
+    color: #000;
     margin-top: 5px
 }
 
@@ -667,6 +668,10 @@ section {
     text-align: right;
     line-height: 12px;
     margin-bottom: 1rem
+}
+
+.visa-type-card {
+    height: 300px;
 }
 
 .visa-type-card .duration {
@@ -1190,7 +1195,8 @@ legend {
 }
 
 .form-control {
-    height: 47px!important
+    height: 47px!important;
+    padding: 0 0.75rem;
 }
 
 .home-flight-search-form .mat-input-element {
@@ -1253,11 +1259,25 @@ legend {
 }
 
 .span-input-50 {
-    width: 50%;
+    width: 47%;
 }
 
 .span-input-100 {
     width: 100%;
+}
+
+
+/* .homepage-flight-form .span-input {
+    width: 47%;
+} */
+
+.homepage-flight-row .span-input-swap {
+    width: 6%;
+    cursor: pointer;
+    background: #1f3166;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
 }
 
 .iframe-w100 {
@@ -1350,11 +1370,31 @@ legend {
     top: 1rem;
 }
 
-.my_swapper_listing{
+.my_swapper_listing {
     cursor: pointer;
     position: absolute;
     top: 3rem;
-    left:6.5rem;
+    left: 6.5rem;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #000;
+}
+
+.stop-filter li {
+    border: 1px solid #ccc;
+    padding: 0px 8px;
+    background: linear-gradient(#f8f8f8, #c1c1c1);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.stop-filter img {
+    width: 25%;
+}
+
+.mat-error {
+    line-height: 1.7;
 }
 
 @media (max-width:575px) {
@@ -1580,6 +1620,9 @@ legend {
     .span-input-50 {
         width: 100%;
     }
+    .homepage-flight-row .span-input {
+        width: 100%;
+    }
     .custom-material-form .mat-input-element,
     .custom-material-form .mat-select-trigger,
     .custom-material-form .material-input input[type=text],
@@ -1587,6 +1630,10 @@ legend {
     .main-search-form .mat-select-trigger,
     .main-search-form .material-input input[type=text] {
         margin-top: 17px !important;
+    }
+    .custom-material-form .mat-form-field-infix,
+    .main-search-form .mat-form-field-infix {
+        padding: .4375em 0;
     }
     .cdk-overlay-container .cdk-overlay-pane .mat-select-opt {
         margin-top: 45px;
@@ -1598,25 +1645,29 @@ legend {
         width: 100% !important;
         height: 200px !important;
     }
-
-    .my_swapper{
-        display: none !important;        
+    .max-w-10,
+    .max-w-13 {
+        max-width: 50%;
     }
-
-    .my_swapper_mob{
-        display: block !important;    
+    .max-w-11 {
+        max-width: 100%;
+    }
+    .my_swapper {
+        display: none !important;
+    }
+    .my_swapper_mob {
+        display: block !important;
         cursor: pointer;
         /* border: 2px solid #2072b9; */
         position: absolute;
         top: 3.2rem;
         left: 10rem;
     }
-
-    .my_swapper_listing{
+    .my_swapper_listing {
         cursor: pointer;
         position: absolute;
         top: 3rem;
-        left:6.5rem;
+        left: 6.5rem;
     }
 }
 
@@ -1628,21 +1679,21 @@ legend {
         position: absolute!important;
         top: auto!important
     }
-    .my_swapper{    
+    .my_swapper {
         cursor: pointer;
         border: 2px solid #2072b9;
         position: absolute;
         top: 0.7rem;
         left: 15.1rem;
     }
-    .my_swapper_mob{
-        display: none !important;            
+    .my_swapper_mob {
+        display: none !important;
     }
-    .my_swapper_listing{
+    .my_swapper_listing {
         cursor: pointer;
         position: absolute;
         top: 3rem;
-        left:9.5rem;
+        left: 9.5rem;
     }
 }
 
@@ -1661,5 +1712,4 @@ legend {
     .sidebar-list ul li a {
         font-size: 12px;
     }
-    
 }

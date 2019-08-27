@@ -10,13 +10,14 @@ import { map } from 'rxjs/operators';
 // import { HomeComponent } from '../home/home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { FilterAirlineNamePipe } from '../../pipes/filter-airline-name.pipe';
 declare var jQuery;
 
 @Component({
   selector: 'app-flights-listing',
   templateUrl: './flights-listing.component.html',
   styleUrls: ['./flights-listing.component.css'],
-  providers: [DatePipe, AirPortsPipe, SecondsPipePipe]
+  providers: [DatePipe, AirPortsPipe, SecondsPipePipe, FilterAirlineNamePipe]
 })
 export class FlightsListingComponent implements OnInit {
   @Input()
@@ -310,10 +311,13 @@ export class FlightsListingComponent implements OnInit {
           this.availableFlights.forEach(element => {
             let lowestAmount = element.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount;
             let eachAirline = element.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].OperatingAirline.Code;
+            // console.log('StopFilter:', [eachAirline, FilterAirlineNamePipe.prototype.transform(eachAirline)])
+            let airlineText = FilterAirlineNamePipe.prototype.transform(eachAirline);
+            // console.log('AirlineText:', [airlineText, airlineText[0].slice(3)])
             this.responseAirlines.push({
               checked: !1,
               value: eachAirline,
-              text: eachAirline,
+              text: airlineText[0].slice(3),
               lowestAmount: lowestAmount
             });
 

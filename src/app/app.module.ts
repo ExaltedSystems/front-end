@@ -164,7 +164,7 @@ import { FilterAirlineNamePipe } from './pipes/filter-airline-name.pipe';
     MatCardModule,
     MatSidenavModule,
     StickyModule,
-    RouterModule.forRoot(APP_ROUTES),
+    RouterModule.forRoot(APP_ROUTES, {scrollPositionRestoration: 'top'}),
     NgxDaterangepickerMd.forRoot({
       separator: '  -  ',
       format: "DD/MM/YYYY",

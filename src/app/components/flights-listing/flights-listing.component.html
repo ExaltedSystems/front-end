@@ -381,7 +381,8 @@
                                 <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
                                     <li *ngFor="let eachAirLine of responseAirlinesUnique">
                                         <mat-checkbox (change)="airlineFilters($event, 'airline', 'd')" value="{{eachAirLine.value}}" class="mat-checkbox">
-                                            <img src="AirlineLogos/{{eachAirLine.text}}.png" alt="{{eachAirLine.text}}"> {{eachAirLine.text | filterAirlineName}}</mat-checkbox>
+                                            <img src="http://cheapfly.pk/AirlineLogos/{{eachAirLine.value}}.png" alt="{{eachAirLine.text}}"> {{eachAirLine.text}}
+                                        </mat-checkbox>
                                         <span class="pull-right">{{eachAirLine.lowestAmount}}</span>
                                     </li>
                                 </ul>
@@ -602,13 +603,15 @@
                                             <div class="row m-0 py-1">
                                                 <div class="col-sm-8">{{Fare.PassengerTypeQuantity.Code}} X {{Fare.PassengerTypeQuantity.Quantity}}
                                                 </div>
-                                                <div class="col-sm-2"> {{Fare.PassengerFare.BaseFare.Amount}} {{Fare.PassengerFare.BaseFare.CurrencyCode}}
+                                                <!-- <div class="col-sm-2"> {{Fare.PassengerFare.BaseFare.Amount}} {{Fare.PassengerFare.BaseFare.CurrencyCode}}
+                                                </div> -->
+                                                <div class="col-sm-2"> {{Fare.PassengerFare.EquivFare.Amount}} {{Fare.PassengerFare.EquivFare.CurrencyCode}}
                                                 </div>
                                                 <!-- <div class="col-sm-2"> {{Fare.PassengerFare.FareConstruction.Amount}} {{Fare.PassengerFare.FareConstruction.CurrencyCode}}
                                                 </div>
                                                 <div class="col-sm-3"> {{Fare.PassengerFare.EquivFare.Amount}} {{Fare.PassengerFare.EquivFare.CurrencyCode}}
                                                 </div> -->
-                                                <div class="col-sm-2"> {{Fare.PassengerFare.BaseFare.Amount * Fare.PassengerTypeQuantity.Quantity}} {{Fare.PassengerFare.BaseFare.CurrencyCode}}
+                                                <div class="col-sm-2"> {{Fare.PassengerFare.EquivFare.Amount * Fare.PassengerTypeQuantity.Quantity}} {{Fare.PassengerFare.EquivFare.CurrencyCode}}
                                                 </div>
                                             </div>
                                         </div>
@@ -665,8 +668,8 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span>Base Fare:
-                                                    {{TPA.PassengerFare.BaseFare.Amount * TPA.PassengerTypeQuantity.Quantity}}
-                                                    {{TPA.PassengerFare.BaseFare.CurrencyCode}}
+                                                    {{TPA.PassengerFare.EquivFare.Amount * TPA.PassengerTypeQuantity.Quantity}}
+                                                    {{TPA.PassengerFare.EquivFare.CurrencyCode}}
                                                 </span><br />
                                                     <span>
                                                     Total Taxes:

@@ -14,7 +14,7 @@ export class MainService {
   public baseUrl = 'http://www.cheapfly.pk/';
   public tktBaseUrl = 'http://exaltedsys.com/';
   public __isAirToken = '';
-  public __isAirType = '';
+  public __isAirType = 'O';
   backEndUrl: string = 'http://www.cheapfly.pk/rgtapp/index.php/services/';
   flightsUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/Flights';
   byTagUrl: string = this.tktBaseUrl+'Air-Service/AirAvailability/AirByTag';

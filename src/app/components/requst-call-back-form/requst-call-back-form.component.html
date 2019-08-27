@@ -2,7 +2,7 @@
 
 <form class="main-search-form position-relative" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
     <div class="form-group">
-        <mat-form-field class="form-control material-input mb-2 mb-sm-1 shadow">
+        <mat-form-field class="form-control border-input mb-2 mb-sm-1 shadow">
             <input matInput placeholder="Name" class="rounded-5" formControlName="name" required>
             <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('name').value" (click)="this.contactForm.get('name').setValue('')"></i-x-circle>
             <mat-error class="mt-1" *ngIf="errors && contactForm.controls['name'].invalid">{{errors.name}}</mat-error>
@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="form-group">
-        <mat-form-field class="form-control material-input mb-2 mb-sm-1 shadow">
+        <mat-form-field class="form-control border-input mb-2 mb-sm-1 shadow">
             <input matInput placeholder="Email" class="rounded-5" formControlName="email" required>
             <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('email').value" (click)="this.contactForm.get('email').setValue('')"></i-x-circle>
             <mat-error class="mt-1" *ngIf="errors && contactForm.controls['email'].invalid">{{errors.email}}</mat-error>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="form-group">
-        <mat-form-field class="form-control material-input mb-2 mb-sm-1 shadow">
+        <mat-form-field class="form-control border-input mb-2 mb-sm-1 shadow">
             <input matInput placeholder="Phone" class="rounded-5" formControlName="phone" required>
             <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('phone').value" (click)="this.contactForm.get('phone').setValue('')"></i-x-circle>
             <mat-error class="mt-1" *ngIf="errors && contactForm.controls['phone'].invalid">{{errors.phone}}</mat-error>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="form-group">
-        <mat-form-field class="material-input textarea-input mb-2 mb-sm-1 shadow">
+        <mat-form-field class="border-input textarea-input mb-2 mb-sm-1 shadow">
             <textarea cols="33" rows="10" placeholder="Message" class="rounded-5" formControlName="emailMessage" matInput required></textarea>
             <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('emailMessage').value" (click)="this.contactForm.get('emailMessage').setValue('')"></i-x-circle>
             <mat-error class="mt-1" *ngIf="errors && contactForm.controls['emailMessage'].invalid">{{errors.emailMessage}}</mat-error>

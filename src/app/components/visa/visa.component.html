@@ -1,8 +1,8 @@
 <app-header></app-header>
-<div>
+<!-- <div>
     <img class="img-fluid" src="assets/img/visa-background-image.jpg">
-</div>
-<section class="visa-contents">
+</div> -->
+<section class="visa-contents" style="padding: 5px">
     <div class="container sidebar">
         <!-- <div class="section-title">
         <h1>visit visa</h1>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-sm-9 order-sm-2" *ngIf="page_info">
                 <h1>{{ page_info.countryName }}</h1>
-                <nav aria-label="breadcrumb">
+                <!-- <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a routerLink="/">Home</a>
@@ -41,7 +41,7 @@
                         </li>
                         <li class="breadcrumb-item active">{{ page_info.countryName }}</li>
                     </ol>
-                </nav>
+                </nav> -->
                 <!--listing start-->
                 <div class="row card-deck">
                     <div class="col-sm-4" *ngFor="let item of page_info.visaDetails; let i=index;">
@@ -67,10 +67,10 @@
                             </div>
                         </div> -->
                         <!-- New Design Start -->
-                        <span class="visa-duration">{{ item.durationId }}</span>
+                        <span class="visa-duration">{{ item.durationId | slice:0:12 }}</span>
                         <div class="visa-type-card mx-0 card shadow mb-4 text-center">
                             <div>
-                                <h3>{{ item.visaTypeId }}</h3>
+                                <h3 [attr.class]="item.visaTypeId.length > 13 ? 'visa-type-h3' : ''">{{ item.visaTypeId }}</h3>
                                 <small>{{ item.numEntries }}</small>
                             </div>
                             <div class="visa-price-pp text-center w-100">{{ item.currencyCode }} {{ item.visaPrice }} /-
@@ -91,7 +91,7 @@
                             <div class="visa-includes pt-0 text-left">
                                 <h5>INCLUDES</h5>
                                 <ul>
-                                    <li *ngFor="let inc of item.visaIncludes"><i class="fa fa-check-circle text-primary"></i> {{ inc.item_text }}</li>
+                                    <li *ngFor="let inc of item.visaIncludes | slice:0:5"><i class="fa fa-check-circle text-primary"></i> {{ inc.item_text }}</li>
                                 </ul>
                                 <!-- <p *ngFor="let inc of item.visaIncludes"><i class="fa fa-check-circle text-primary"></i> {{ inc.item_text }}</p> -->
                             </div>

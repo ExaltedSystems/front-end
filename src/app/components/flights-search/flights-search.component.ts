@@ -380,10 +380,17 @@ export class FlightsSearchComponent implements OnInit {
 	
 		this.flyingFromAutocomplete.setValue(this.flyingFrom);
 		this.flyingToAutocomplete.setValue(this.flyingTo);
-		
+		let isMobile = window.matchMedia("(max-width:768px)").matches;
+		jQuery('.fly-from-row').animate({"marginLeft" : "+=114%"}, 300);
+		jQuery('.fly-to-row').animate({"marginLeft" : "-=114%"}, 300);
+		window.setTimeout(() => {
+			jQuery('.fly-from-row').removeAttr('style');
+			jQuery('#fly_from_row').removeAttr('style');
+			jQuery('.fly-to-row').removeAttr('style');
+			jQuery('#fly_to_row').removeAttr('style');
+		}, 500);
 		this.flightSearch.controls['flyingFrom'].setValue(this.flyingFrom);
-		this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);
-	
+		this.flightSearch.controls['flyingTo'].setValue(this.flyingTo);	
 	}
 
 	setDatepickerTitle(evt) {
