@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from 'src/app/services/main.service';
 import { AirPortsPipe } from 'src/app/air-ports.pipe';
 import { DatePipe } from '@angular/common';
@@ -31,7 +31,8 @@ export class PnrViewComponent implements OnInit {
   pnrReceivedFrom;
   validatingCarrier;
   specialServices = [];
-  constructor(private __actRouter: ActivatedRoute, private __ms: MainService) {
+  
+  constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router) {
     window.scroll(0, 300);
   }
 
@@ -40,19 +41,47 @@ export class PnrViewComponent implements OnInit {
     this.refNo = this.queryParams.__token;
     let flightInfoObj = {
       _refrenceNo: this.refNo,
-      _token: localStorage.getItem("paxToken"),
-      _flag: 'ccard'
+      _token: localStorage.getItem("paxToken")
+      // _flag: 'ccard'
     } 
     Object.assign({refrenceNo:this.refNo}, {token:localStorage.getItem("paxToken")})
     let flightInfoUrl = this.__ms.backEndUrl + 'Ticket/retFlightInfo';
     this.__ms.postData(flightInfoUrl, flightInfoObj).subscribe(res => {
+      // console.log(res)
+      // if(res['res_flag'] == true && res['OTC'] == false){
+      //   let pnr = this.createPnr(res);
+      //   this.pnrCreated(pnr);
+      // }else if(res['res_flag'] == true && res['OTC'] == true){
+      //   let pnr = this.createPnr(res);        
+      //   this.__router.navigate(["/thank-you"], {
+      //     // relativeTo: this.__route,
+      //     queryParams: {
+      //       _token: localStorage.getItem("paxToken")
+      //     }
+      //   });
+      // }else if(res['res_flag'] == false){
+      //   if(res['pnr']){
+      //     this.airItinerary(res['pnr']);
+      //   }else{
+      //     this.pnrResponse = res['ERROR'];
+      //   }
+      // }
       if(res['res_flag'] == true){
         this.createPnr(res);
       }else if(res['res_flag'] == false){
-        if(res['pnr']){
+        if(res['pnr'] && res['OTC']){
+          // GO TO THANK YOU PAGE
+          this.__router.navigate(["/thank-you"], {
+            // relativeTo: this.__route,
+            queryParams: {
+              _token: localStorage.getItem("paxToken")
+            }
+          });
+        }else if(res['pnr']){
           this.airItinerary(res['pnr']);
         }else{
           this.pnrResponse = res['ERROR'];
+          
         }
       }
     })
@@ -64,6 +93,7 @@ export class PnrViewComponent implements OnInit {
     this.__ms.createPnr(flightInfos).subscribe(resp => {
       console.log(resp)
       let pnr = resp['__isPnr']; // res['__isPnr'];
+      // return pnr;
       this.pnrCreated(pnr);
     })
     // JFLWVB
@@ -74,12 +104,21 @@ export class PnrViewComponent implements OnInit {
 
   pnrCreated(pnr){
 
-    this.__ms.pnrCreated(pnr, 1).subscribe(res => {
+    this.__ms.pnrCreated(pnr).subscribe(res => {
       if(res['tkt_flag'] == true){
         this.airItinerary(pnr, 'tkt')
         // call for ticket issuance
         // this.issueTicket(pnr);
         // this.airItinerary(pnr)
+      }else if(res['tkt_flag'] == false && res['OTC'] == true){
+        this.__router.navigate(["/thank-you"], {
+          // relativeTo: this.__route,
+          queryParams: {
+            _token: localStorage.getItem("paxToken")
+          }
+        });
+      }else{
+        this.airItinerary(pnr);
       }
     })
   } //

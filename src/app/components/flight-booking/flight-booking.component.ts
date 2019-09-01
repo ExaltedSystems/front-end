@@ -494,7 +494,7 @@ export class FlightBookingComponent implements OnInit {
 
   pnrCreated(pnr) {
     this.insertPNR(pnr);
-    this.__ms.pnrCreated(pnr, this.paymentFlag).subscribe(res => {
+    this.__ms.pnrCreated(pnr).subscribe(res => {
       //console.log(res)
       this.__router.navigate(["/thank-you"], {
         // relativeTo: this.__route,
@@ -551,7 +551,7 @@ export class FlightBookingComponent implements OnInit {
   } //
 
   jazzCashPost(formInputs) {
-
+    this.paymentFlag = 5;
     let jazzCashUrl = this.__ms.backEndUrl + 'Ticket/jazzCash';
     let jazzCashObj = Object.assign(formInputs, this.travellersObj, { _token: localStorage.getItem("paxToken"), _paymentFlag: this.paymentFlag });
     this.__ms.postData(jazzCashUrl, jazzCashObj).subscribe(res => {

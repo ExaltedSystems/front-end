@@ -333,12 +333,11 @@ export class MainService {
   }
 
 
-  pnrCreated(pnr, paymentFlag){
+  pnrCreated(pnr){
     let pnrSaveUrl = this.backEndUrl+'Ticket/pnrCreated';
     let pnrSaveObj = {
       pnr: pnr,
-      _token: localStorage.getItem("paxToken"),
-      _paymentFlag: paymentFlag
+      _token: localStorage.getItem("paxToken")
     }
     return this.postData(pnrSaveUrl, pnrSaveObj)
   } // end pnrcreated
