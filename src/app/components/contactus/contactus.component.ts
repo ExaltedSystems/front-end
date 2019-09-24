@@ -14,6 +14,7 @@ import { isObject } from 'util';
 })
 export class ContactusComponent implements OnInit {
     page_info: any;
+    baseUrl: string;
     contactForm: FormGroup;
     deviceFullInfo = null;
     browser = null;
@@ -27,7 +28,8 @@ export class ContactusComponent implements OnInit {
         this.deviceFullInfo = this.__dd.getDeviceInfo();
         this.browser = this.__dd.browser;
         this.operatingSys = this.__dd.os;
-        window.scroll(0, 300);
+        // window.scroll(0, 300);
+        this.baseUrl = this.__ms.baseUrl;
     }
 
     ngOnInit() {

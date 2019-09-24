@@ -18,7 +18,7 @@ export class HotelSubscribeComponent implements OnInit {
 
   ngOnInit() {
     this.hotelSubscribeForm = this.__fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]]
     });
   }
 

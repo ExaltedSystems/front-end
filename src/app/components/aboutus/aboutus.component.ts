@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AboutusComponent implements OnInit {
   page_info: any;
+  baseUrl: string;
   bankDetails: object;
   aboutUsPdf:string = "doc/profile-book-version-02April.pdf";
   constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title) {
-    window.scroll(0, 300);    
+    // window.scroll(0, 300); 
+    this.baseUrl = this.__ms.baseUrl;
   }
 
   ngOnInit() {

@@ -4,6 +4,9 @@
 </div> -->
 <section class="visa-contents" style="padding: 5px">
     <div class="container sidebar">
+        <div class="section-title" *ngIf="page_info">
+            <h1>{{ page_info.countryName }}</h1>
+        </div>
         <!-- <div class="section-title">
         <h1>visit visa</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -30,7 +33,7 @@
                 </div> -->
             </div>
             <div class="col-sm-9 order-sm-2" *ngIf="page_info">
-                <h1>{{ page_info.countryName }}</h1>
+                <!-- <h1>{{ page_info.countryName }}</h1> -->
                 <!-- <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -70,7 +73,7 @@
                         <span class="visa-duration">{{ item.durationId | slice:0:12 }}</span>
                         <div class="visa-type-card mx-0 card shadow mb-4 text-center">
                             <div>
-                                <h3 [attr.class]="item.visaTypeId.length > 13 ? 'visa-type-h3' : ''">{{ item.visaTypeId }}</h3>
+                                <h3 [attr.class]="item.visaTypeId.length > 17 ? 'visa-type-h3' : ''">{{ item.visaTypeId }}</h3>
                                 <small>{{ item.numEntries }}</small>
                             </div>
                             <div class="visa-price-pp text-center w-100">{{ item.currencyCode }} {{ item.visaPrice }} /-
@@ -101,6 +104,12 @@
                 </div>
                 <!--listing end-->
                 <div class="ck-editor-data" [innerHTML]="page_info.details"></div>
+                <p>&nbsp;</p>
+                <div class="main-container-callback d-none d-sm-block">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <p>&nbsp;</p>
+                <app-related-links></app-related-links>
             </div>
         </div>
     </div>

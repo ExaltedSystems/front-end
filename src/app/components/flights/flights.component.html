@@ -6,13 +6,19 @@
 </mat-sidenav> -->
 <app-header></app-header>
 <div class="banner d-flex align-items-center">
-    <img src="assets/img/flights-page.jpg" class="img-fluid d-none d-sm-inline-block">
+    <img src="{{(page_info && page_info.image != null) ? baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image : 'assets/img/flights-page.jpg'}}" class="img-fluid d-none d-sm-inline-block">
     <div class="page-search">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <!-- <div class="modifySearchForm mb-4 d-none d-sm-block"> -->
-                    <mat-card class="main-search-form p-3 mat-card mat-card mt-3 pt-3" style="background: rgba(255,255,255,.7)">
+                    <!-- <ul class="nav nav-tabs border-bottom-0" id="myTab" role="tablist">
+                        <li class="nav-item mb-0">
+                            <a class="nav-link rounded-0 border-0 active" id="flights-tab" data-toggle="tab" href="#flights">Flights</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent"> -->
+                    <mat-card class="main-search-form p-3 mat-card mat-card pt-3" style="background: rgba(255,255,255,.7)">
+                        <!-- <h3 class="text-primary text-center">Search Cheap Flights</h3> -->
                         <app-flights-search [sideForm]="sideForm"></app-flights-search>
                     </mat-card>
                     <!-- </div> -->
@@ -31,6 +37,12 @@
         </div>
         <div [innerHTML]="page_info.description"></div>
         <app-popular-airline-and-hotels></app-popular-airline-and-hotels>
+        <p>&nbsp;</p>
+        <div class="main-container-callback d-none d-sm-block">
+            <app-requst-call-back-form></app-requst-call-back-form>
+        </div>
+        <p>&nbsp;</p>
+        <app-related-links></app-related-links>
     </div>
 </section>
 <app-footer></app-footer>

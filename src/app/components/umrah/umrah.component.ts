@@ -9,10 +9,18 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class UmrahComponent implements OnInit {
 	page_info: any;
+	baseUrl: string;
+	lineBr: string = " || ";
+	spaceBr: string = "Package Includes :";
 	constructor(private _ms: MainService, private router: Router, private __meta: Meta, private __title: Title) {
-        window.scroll(0, 300);
+		window.scroll(0, 300);
+		this.baseUrl = this._ms.baseUrl;
 		this.router.routeReuseStrategy.shouldReuseRoute = function () {
 			return false;
+		}
+		if(window.matchMedia('(max-width: 768px)').matches) {
+			this.lineBr = "<br>";
+			this.spaceBr = "Package<br>Includes:";
 		}
 	}
 	ngOnInit() {

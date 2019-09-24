@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <base href="/">
     <title>Cheap Flights - Visit Visa - Pakistan & World Tours - Umrah</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Abdul Rehman">
     <meta name="abstract" content="We are the leading travel agency in Pakistan." />
@@ -24,6 +24,25 @@
     <!-- <link rel="canonical" href="https://www.rehmantravel.com/" /> -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        // console.log('Page:', [window.location.pathname, window.location])
+        window.onscroll = function(e) {
+            // console.log(e)
+            let pageBody = document.body; //IE 'quirks'
+            let pageDoc = document.documentElement; //IE with doctype
+            pageDoc = (pageDoc.clientHeight) ? pageDoc : pageBody;
+            var isMobile = window.matchMedia('(max-width: 768px').matches;
+            console.log('isMobile:', isMobile)
+            if (!isMobile) {
+                var ele = document.getElementById('fiexed-top');
+                ele.classList.add("fixed-top");
+                if (pageDoc.scrollTop == 0) {
+                    ele.classList.remove("fixed-top");
+                }
+            }
+            // ele.className = "fixed-top";
+        }
+    </script>
 </head>
 
 <body>

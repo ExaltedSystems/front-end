@@ -8,24 +8,26 @@
     </div>
 </section>-->
 <div>
-    <img class="img-fluid" src="assets/img/visa-background-image.jpg">
+    <img class="img-fluid" src="{{(page_info && page_info.image != null) ? baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image : 'assets/img/visa-background-image.jpg'}}">
 </div>
 <section class="visa-contents">
     <div class="container sidebar">
-        <h1 *ngIf="page_info">{{ page_info.name }}</h1>
-        <nav aria-label="breadcrumb">
+        <!-- <h1 *ngIf="page_info">{{ page_info.name }}</h1> -->
+        <div class="section-title" *ngIf="page_info">
+            <h1>{{ page_info.name }}</h1>
+        </div>
+        <!-- <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
                 <li class="breadcrumb-item active" *ngIf="page_info">{{ page_info.name }}</li>
             </ol>
-        </nav>
-        <div *ngIf="page_info" [innerHTML]="page_info.description"></div>
+        </nav> -->
         <div class="row">
             <div class="col-sm-5">
                 <form class="main-search-form position-relative" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
                     <div class="form-group row mb-1">
                         <div class="col-sm-12">
-                            <mat-form-field class="form-control material-input mb-3 shadow">
+                            <mat-form-field class="form-control border-input mb-3 shadow">
                                 <input matInput placeholder="Name" class="rounded-5" formControlName="name" required>
                                 <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('name').value" (click)="this.contactForm.get('name').setValue('')"></i-x-circle>
                                 <mat-error class="mt-1 mt-sm-0" *ngIf="errors && contactForm.controls['name'].invalid">
@@ -38,7 +40,7 @@
                     </div>
                     <div class="form-group row mb-1">
                         <div class="col-sm-12">
-                            <mat-form-field class="form-control material-input mb-3 shadow">
+                            <mat-form-field class="form-control border-input mb-3 shadow">
                                 <input matInput placeholder="Email" class="rounded-5" formControlName="email" required>
                                 <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('email').value" (click)="this.contactForm.get('email').setValue('')"></i-x-circle>
                                 <mat-error class="mt-1 mt-sm-0" *ngIf="errors && contactForm.controls['email'].invalid">
@@ -54,7 +56,7 @@
                     </div>
                     <div class="form-group row mb-1">
                         <div class="col-sm-12">
-                            <mat-form-field class="form-control material-input mb-3 shadow">
+                            <mat-form-field class="form-control border-input mb-3 shadow">
                                 <input matInput placeholder="Phone" class="rounded-5" formControlName="phone" required>
                                 <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('phone').value" (click)="this.contactForm.get('phone').setValue('')"></i-x-circle>
                                 <mat-error class="mt-1 mt-sm-0" *ngIf="errors && contactForm.controls['phone'].invalid">
@@ -71,7 +73,7 @@
                     </div>
                     <div class="form-group row mb-1">
                         <div class="col-sm-12">
-                            <mat-form-field class="material-input textarea-input mb-3 shadow">
+                            <mat-form-field class="border-input textarea-input mb-3 shadow">
                                 <textarea matInput rows="9" placeholder="Message" class="rounded-5" formControlName="emailMessage" required></textarea>
                                 <i-x-circle class="feather-x-circle" *ngIf="this.contactForm.get('emailMessage').value" (click)="this.contactForm.get('emailMessage').setValue('')"></i-x-circle>
                                 <mat-error class="mt-1 mt-sm-0" *ngIf="errors && contactForm.controls['emailMessage'].invalid">
@@ -95,6 +97,7 @@
                     width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
             </div>
         </div>
+        <div *ngIf="page_info" [innerHTML]="page_info.description"></div>
     </div>
 </section>
 <app-footer></app-footer>

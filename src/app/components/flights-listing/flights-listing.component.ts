@@ -82,6 +82,7 @@ export class FlightsListingComponent implements OnInit {
   msideNav: boolean = false;
   mbyTag = null;
   mOriginDestinationOptions = [];
+  mFareDetailsOption = {AirItineraryPricingInfo:[{'PTC_FareBreakdowns':{'PTC_FareBreakdown':''}}]};
 
   mChangeSearch: boolean = false;
   currDate: Date = new Date();
@@ -93,10 +94,11 @@ export class FlightsListingComponent implements OnInit {
 
   constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router,
     private __fb: FormBuilder, private __cookieService: CookieService, private __device: DeviceDetectorService) {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     this.deviceFullInfo = this.__device.getDeviceInfo();
     this.browser = this.__device.browser;
     this.operatingSys = this.__device.os;
+    console.log(this.mFareDetailsOption)
 
     if (this.__device.isMobile()) {
       this.sideForm = true;
@@ -311,16 +313,13 @@ export class FlightsListingComponent implements OnInit {
           this.availableFlights.forEach(element => {
             let lowestAmount = element.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount;
             let eachAirline = element.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].OperatingAirline.Code;
-            // console.log('StopFilter:', [eachAirline, FilterAirlineNamePipe.prototype.transform(eachAirline)])
             let airlineText = FilterAirlineNamePipe.prototype.transform(eachAirline);
-            // console.log('AirlineText:', [airlineText, airlineText[0].slice(3)])
             this.responseAirlines.push({
               checked: !1,
               value: eachAirline,
-              text: airlineText[0].slice(3),
+              text: (airlineText.length > 0 ? airlineText[0].slice(3) : airlineText),
               lowestAmount: lowestAmount
             });
-
           });
           this.loadingMore = true;
           this.responseAirlinesUnique = this.responseAirlines.filter((e = new Set, function (t) {
@@ -361,7 +360,7 @@ export class FlightsListingComponent implements OnInit {
       });
     }
     // RETRIEVE LIVE FLIGHTS END
-    window.scroll(0, 100);
+    // window.scroll(0, 100);
     // setTimeout(() => {
     //   window.scroll(0,0);
     // }, 500);
@@ -450,6 +449,7 @@ export class FlightsListingComponent implements OnInit {
       var i = this.airlineFilterValue;
       e.each(function () {
         var t = jQuery(this);
+        console.log('t:', t)
         t.removeClass(l), t.hide();
         for (var n = 0; n < i.length; n++) t.find("." + i[n]).length > 0 && (t.addClass(l), t.show())
       })
@@ -887,6 +887,11 @@ export class FlightsListingComponent implements OnInit {
       // return false;      
     }
 
+  }
+  // 20-09-2019 03:27 PM
+  showFareDetailsPopup(Itinerary, i) {
+    console.log('MFareDetailsOption:', Itinerary)
+    this.mFareDetailsOption = Itinerary;
   }
 
   closeDropDown(ev) {

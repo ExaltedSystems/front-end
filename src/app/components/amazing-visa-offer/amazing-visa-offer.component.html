@@ -16,7 +16,9 @@
         <li *ngFor="let item of allVisas | filterVisaByName: visaName">
             <a routerLink="/{{ item.visaUrl }}">
                 <img src="{{ baseUrl+'rgtapp/assets/flags/'+(item.countryName.split(' ').join('-') | lowercase)+'-flag.png' }}">
-                <p>{{ (item.countryName=='United Arab Emirates') ? "Dubai (UAE)" : item.countryName }}</p>
+                <!-- <p>{{ (item.countryName=='United Arab Emirates') ? "Dubai (UAE)" : item.countryName }}</p> -->
+                <p>{{item.visaUrl.split('-').join(' ') | slice:5 | titlecase}}</p>
+                <!-- <p>{{item.visaName | titlecase}}</p> -->
                 <p class="float-right">{{item.durationId | slice:0:12}}</p>
                 <!-- <p *ngIf="item.durationId && item.durationId.length < 9" class="float-right">{{item.durationId}}</p> -->
             </a>

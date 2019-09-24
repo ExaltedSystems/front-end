@@ -3,6 +3,10 @@
     padding-right: 5px;
     padding-left: 5px;
 }*/
+.hotel-rows {
+    margin-bottom: -20px;
+    margin-top: -20px;
+}
 
 .locations {
     max-width: 12%;
@@ -27,8 +31,11 @@ form .btn {
 .blue {
     color: #28A2DB;
 }
-
-@media(max-width:786px) {
+@media(max-width:768px) {
+    .hotel-rows {
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
     .form-group {
         margin-bottom: 0rem;
     }

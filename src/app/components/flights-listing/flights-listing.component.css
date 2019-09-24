@@ -9,10 +9,21 @@
     z-index: 11 !important;
 }
 
+.flights-headings p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .popup-clr-btn {
     margin: 0 15px !important;
 }
 
 .feather-x-circle {
     width: 30px !important;
+}
+
+@media(max-width:768px) {
+    .loading-container {
+        margin-top: 100px;
+    }
 }

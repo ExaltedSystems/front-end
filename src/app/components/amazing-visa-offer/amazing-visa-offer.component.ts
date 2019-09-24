@@ -18,7 +18,7 @@ export class AmazingVisaOfferComponent implements OnInit {
     this.getAllVisaRecords();
   }
   getAllVisaRecords() {
-    this.__ms.getData(this.__ms.backEndUrl + 'Cms/allVisaRecords/').subscribe(res => {
+    this.__ms.getData(this.__ms.backEndUrl + 'Visa/amazingVisaOffers').subscribe(res => {
       if (res.data) {
         //this.updateMetaTags(res.message);
       }

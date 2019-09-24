@@ -71,18 +71,18 @@
         <div *ngIf="sideForm == true" class="d-block d-sm-none col-12" style="height:20px;"></div>
 
         <div [ngClass]="sideForm == true ? 'col-sm-12' : 'col-sm-12 col-lg-4 mb-3 mb-lg-0'" [ngStyle]="{'margin-bottom': sideForm == true ? '15px' : '0'}">
-            <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0 border-input">
+            <div class="input-group flex-nowrap dropdown mb-4 mb-sm-0 border-input close-dropdown">
                 <div class="input-group-prepend" [hidden]="sideForm">
                     <span class="input-group-text rounded-0">
               <i-users></i-users>
             </span>
                 </div>
-                <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn" #guestFocus [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
+                <button class="form-control border-left-0 rounded-0 text-left dropdown-toggle form-dropdown-btn close-dropdown" #guestFocus [ngClass]="sideForm == true ? 'pl-2' : 'pl-0'" data-toggle="dropdown" id="flightPaxDropdownMenu" type="button">
             <small class="d-block">No of Passenger</small>
             <p class="d-inline-block mb-0">{{rooms}} Rooms - {{adults}} Adult - {{children}} Child</p>
             <i-chevron-down class="dropdown-feather"></i-chevron-down>
           </button>
-                <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3" (click)="$event.stopPropagation()">
+                <div aria-labelledby="flightPaxDropdownMenu" class="dropdown-menu shadow rounded-0 p-3 close-dropdown" (click)="$event.stopPropagation()">
                     <div class="form-group">
                         <div class="input-group mb-3 text-center">
                             <div class="input-group-prepend">

@@ -4,6 +4,9 @@
 </div>
 <section class="visa-contents">
     <div class="container sidebar">
+        <div class="section-title" *ngIf="page_info">
+            <h1>{{ page_info.name }}</h1>
+        </div>
         <div class="row">
             <div class="col-sm-3 order-last order-sm-first">
                 <div class="sidebar-list">
@@ -17,7 +20,7 @@
                 </div> -->
             </div>
             <div class="col-sm-9 order-sm-2" *ngIf="page_info">
-                <h1>{{ page_info.name }}</h1>
+                <!-- <h1>{{ page_info.name }}</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -28,8 +31,14 @@
                         </li>
                         <li class="breadcrumb-item active">{{ page_info.name }}</li>
                     </ol>
-                </nav>
+                </nav> -->
                 <div [innerHTML]="page_info.description | iframe"></div>
+                <p>&nbsp;</p>
+                <div class="main-container-callback d-none d-sm-block">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <p>&nbsp;</p>
+                <app-related-links></app-related-links>
             </div>
         </div>
     </div>

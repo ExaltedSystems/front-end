@@ -213,7 +213,7 @@ export class FlightsSearchComponent implements OnInit {
 		  return false;
 		}
 		let totalPaxWdInfant = (totalPax + (+this.infant + 1));
-		console.log('TotalPxWdInfnt:', [totalPax, this.infant, totalPaxWdInfant])
+		// console.log('TotalPxWdInfnt:', [totalPax, this.infant, totalPaxWdInfant])
 		// If Total Number of Passengers (Adult, Children and Infant) is greater than 9
 		if (totalPaxWdInfant > 9) {
 		  this.passengerError = 'Please Select Upto 9 Passengers!';
@@ -248,6 +248,12 @@ export class FlightsSearchComponent implements OnInit {
 			case 'adults': {
 				this.adults--;
 				this.adults < 1 ? this.adults = 1 : this.adults;
+				if(this.adults >= 1) {
+					if(this.adults < this.infant) {
+					  this.infant--;
+					  this.flightSearch.controls['infant'].setValue(this.infant);
+					}
+				  }
 				this.flightSearch.controls['adults'].setValue(this.adults);
 				break;
 			}
@@ -346,8 +352,9 @@ export class FlightsSearchComponent implements OnInit {
 	}
 
 	closeDropDown(ev) {
-		jQuery(ev.path[2]).removeClass('show');
-		jQuery(ev.path[3]).removeClass('show');
+		// jQuery(ev.path[2]).removeClass('show');
+		// jQuery(ev.path[3]).removeClass('show');
+		jQuery('.close-dropdown').removeClass('show');
 	}
 	resetMatInput(evt) {
 		let attrName = evt.target.getAttribute('formControlName');
@@ -372,8 +379,9 @@ export class FlightsSearchComponent implements OnInit {
 	}
 
 	swapLocations(){
-		let oldflyfrom = this.flyingFrom;
-		let oldflyto = this.flyingTo;
+
+		let oldflyfrom = this.flightSearch.controls['flyingFrom'].value; //this.flyingFrom;
+		let oldflyto = this.flightSearch.controls['flyingTo'].value; //this.flyingTo;
 	
 		this.flyingFrom = oldflyto;
 		this.flyingTo = oldflyfrom;

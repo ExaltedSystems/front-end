@@ -2,6 +2,10 @@
     background: #57a5f9;
 }
 
+.sidebar-subscribe h3 {
+    color: #fff;
+}
+
 .hotel-search-item {
     border: solid 1px #333;
 }

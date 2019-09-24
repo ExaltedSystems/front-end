@@ -1,4 +1,4 @@
-<mat-card class="p-0 rounded-0 fiexed-top">
+<mat-card class="p-0 rounded-0">
     <div class="container">
 
         <div class="navbar navbar-expand-lg navbar-light bg-light p-0">
@@ -18,7 +18,7 @@
                         <div *ngIf="item.subChild" class="dropdown-menu mega-menu v-2 row z-depth-1 special-color shadow" aria-labelledby="navbarDropdownMenuLink1">
                             <div class="row mx-md-4 mx-1">
                                 <!-- Loop Through Sub Childs Array -->
-                                <div class="col-sm-4 sub-menu my-4" *ngFor="let subitem of item.subChild;let j = index">
+                                <div class="col-sm-4 sub-menu my-sm-4" *ngFor="let subitem of item.subChild;let j = index">
                                     <h6 *ngIf="j==0" class="sub-title text-uppercase font-weight-bold white-text d-sm-block d-none">
                                         {{ item.navbarTitle }}</h6>
                                     <h6 *ngIf="j>0" class="sub-title text-uppercase font-weight-bold white-text d-sm-block d-none">

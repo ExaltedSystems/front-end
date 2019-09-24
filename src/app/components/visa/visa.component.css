@@ -1,8 +1,9 @@
 /* Visa Inline CSS */
 
-/*img {
-    width: 100% !important;
-}*/
+.visa-type-h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
 
 .visa-duration {
     text-align: center;
@@ -27,4 +28,10 @@
     margin-top: 10px;
     list-style-type: none;
     padding-left: 0px;
+}
+
+@media(max-width:768px) {
+    .visa-type-h3 {
+        margin-bottom: 0px;
+    }
 }

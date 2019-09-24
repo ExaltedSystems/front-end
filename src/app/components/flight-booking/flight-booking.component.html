@@ -509,6 +509,7 @@
                                                     <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" [disabled]="!paymentForm.valid" mat-button>Confirm</button>
                                                 </div>
                                             </form>
+                                            <mat-progress-bar mode="indeterminate" *ngIf="payProgressBar"></mat-progress-bar>
                                         </mat-tab>
                                         <mat-tab label="JazzCash" *ngIf="paymentGateways && paymentGateways.JazzCash">
                                             <h2>Pay via JazzCash</h2>
@@ -531,6 +532,7 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            <mat-progress-bar mode="indeterminate" *ngIf="payProgressBar"></mat-progress-bar>
                                         </mat-tab>
                                         <mat-tab label="Cash on Delivery" *ngIf="paymentGateways && paymentGateways.COD">
                                             <h2>Pay Cash on Delivery</h2>
@@ -538,6 +540,7 @@
                                             <form action="">
                                                 <button (click)="cashOnDelivery()" class="btn btn-primary rounded-0 btn-block shadow btn-sm" mat-button>Confirm</button>
                                             </form>
+                                            <mat-progress-bar mode="indeterminate" *ngIf="payProgressBar"></mat-progress-bar>
                                         </mat-tab>
                                         <mat-tab label="Bank" *ngIf="paymentGateways && paymentGateways.Bank">
                                             <h2>Bank</h2>
@@ -546,7 +549,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 eachBrankBranch" *ngFor="let eachBank of bankDetails">
                                                         <div class="col-sm-12 well well-sm">
-                                                            <div class="col-sm-4"><img src="https://www.rehmantravel.com/assets/banks-logos/{{eachBank.logo}}" class="width-100" alt="Allied Bank"></div>
+                                                            <div class="col-sm-4"><img src="https://www.rehmantravel.com/assets/banks-logos/{{eachBank.logo}}" alt="{{eachBank.name}} Rehman Travels"></div>
                                                             <div class="col-sm-8">
                                                                 <b>{{eachBank.name}}</b>
                                                                 <small class="inline-block">TITLE :
@@ -565,6 +568,7 @@
                                                 <form action="">
                                                     <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" (click)="byBank()" mat-button>Confirm</button>
                                                 </form>
+                                                <mat-progress-bar mode="indeterminate" *ngIf="payProgressBar"></mat-progress-bar>
                                             </div>
                                         </mat-tab>
                                         <mat-tab label="Branches">
@@ -586,6 +590,7 @@
                                                 <form action="">
                                                     <button class="btn btn-primary rounded-0 btn-block shadow btn-sm" (click)="byBranch()" mat-button>Confirm</button>
                                                 </form>
+                                                <mat-progress-bar mode="indeterminate" *ngIf="payProgressBar"></mat-progress-bar>
                                             </div>
                                         </mat-tab>
                                     </mat-tab-group>

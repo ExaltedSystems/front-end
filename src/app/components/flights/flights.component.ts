@@ -13,8 +13,10 @@ export class FlightsComponent implements OnInit {
   @Input()
   page_info: any = { name: '', description: '' };
   sideForm:boolean = false;
+  baseUrl: string = '';
   constructor(private __ms: MainService, private __router: Router, private __meta: Meta, private __title: Title, private __device: DeviceDetectorService) {
-    window.scroll(0, 300);
+    // window.scroll(0, 300);
+    this.baseUrl = this.__ms.baseUrl;
     if(this.__device.isMobile()){
       this.sideForm = true;
     }

@@ -1,9 +1,12 @@
 <app-header></app-header>
 <div>
-    <img class="img-fluid" src="assets/img/visa-background-image.jpg">
+    <img class="img-fluid" src="{{(page_info && page_info.image != null) ? baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image : 'assets/img/visa-background-image.jpg'}}">
 </div>
 <section class="visa-contents">
     <div class="container sidebar">
+        <div class="section-title" *ngIf="page_info">
+            <h1>{{ page_info.name }}</h1>
+        </div>
         <!-- <div class="section-title">
             <h1>visit visa</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -22,17 +25,23 @@
               </div> -->
             </div>
             <div class="col-sm-9 order-sm-2 ng-star-inserted" *ngIf="page_info">
-                <h1>{{ page_info.name }}</h1>
-                <nav aria-label="breadcrumb">
+                <!-- <h1>{{ page_info.name }}</h1> -->
+                <!-- <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a routerLink="/">Home</a>
                         </li>
                         <li class="breadcrumb-item active">{{ page_info.name }}</li>
                     </ol>
-                </nav>
+                </nav> -->
                 <div [innerHTML]="page_info.description"></div>
                 <iframe src="doc/profile-book-version-02April.pdf" width="100%" height="1000" frameborder="0"></iframe>
+                <p>&nbsp;</p>
+                <div class="main-container-callback">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <p>&nbsp;</p>
+                <app-related-links></app-related-links>
             </div>
             <div class="col-sm-9 order-sm-2 ng-star-inserted" *ngIf="bankDetails">
                 <h1>Bank Details</h1>
@@ -63,6 +72,12 @@
                         </div> -->
                     </div>
                 </div>
+                <p>&nbsp;</p>
+                <div class="main-container-callback">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <p>&nbsp;</p>
+                <app-related-links></app-related-links>
             </div>
         </div>
     </div>

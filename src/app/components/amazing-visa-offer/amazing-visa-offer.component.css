@@ -1,5 +1,3 @@
-/* Visa List Inline CSS */
-
 .flag-list {
     list-style-type: none;
     margin-left: 0px;
@@ -9,25 +7,33 @@
     width: 100%;
 }
 
+.flag-list li {
+    border: 1px solid #ccc;
+    padding: 0px 8px;
+    background: linear-gradient(#f8f8f8, #c1c1c1);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.sidebar-list ul li a {
+    border-bottom: none;
+}
+
 .flag-list img {
     float: left;
-    /* padding-top: 2px; */
     padding-right: 5px;
 }
 
 .flag-list p {
     text-align: right;
     display: inline-block;
-    padding-top: 5px;
 }
 
 .button {
     background-color: #4CAF50;
-    /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
-    /* text-align: center; */
     text-decoration: none;
     display: inline-block;
     text-align: left !important;
@@ -48,28 +54,16 @@
     background-color: #008CBA;
 }
 
-
-/* Blue */
-
 .button3 {
     /* background-color: #f44336; */
     background-color: #1f3166;
 }
-
-
-/* Red */
 
 .button4 {
     background-color: #e7e7e7;
     color: black;
 }
 
-
-/* Gray */
-
 .button5 {
     background-color: #555555;
 }
-
-
-/* Black */

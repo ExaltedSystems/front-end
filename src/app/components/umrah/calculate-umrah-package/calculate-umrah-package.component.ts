@@ -9,6 +9,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { isObject } from 'util';
 import { DatePipe } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-calculate-umrah-package',
@@ -49,13 +50,16 @@ export class CalculateUmrahPackageComponent implements OnInit {
   tplRoom: number = 0;
   qdRoom: number = 0;
   baseUrl: string;
+  page_info: any;
+  isTransport: boolean = true;
   // Set Column Span for table > tr > td
   tNightsVisaCol: number = 6;
   visaCol: number = 6;
   tCostCol: number = 7;
   sectorCol: number = 3;
 
-  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __dd: DeviceDetectorService, private _date: DatePipe) {
+  constructor(private __fb: FormBuilder, private __ms: MainService, private __router: Router, private __dd: DeviceDetectorService, 
+    private _date: DatePipe, private __meta: Meta, private __title: Title) {
     this.deviceFullInfo = this.__dd.getDeviceInfo();
     this.browser = this.__dd.browser;
     this.operatingSys = this.__dd.os;
@@ -69,6 +73,7 @@ export class CalculateUmrahPackageComponent implements OnInit {
     this.getTourHotels();
     this.getVehicleList();
     this.getSectorList();
+    this.pageDetails();
     this.umrahCalculatorForm = this.__fb.group({
       totalAdults: [2, Validators.required],
       totalChildrens: [0],
@@ -77,8 +82,8 @@ export class CalculateUmrahPackageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email, Validators.pattern(this.__ms.emailPattern)]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(19), Validators.pattern("^[0-9]*$")]],
       hotelRows: this.__fb.array([this.addMoreHotelRows()]),
-      isVisa: [true],
-      isTransport: [true],
+      isVisa: ['1'],
+      isTransport: ['1'],
       sectorId: [''],
       sectorName: [''],
       vehicleId: [''],
@@ -97,6 +102,13 @@ export class CalculateUmrahPackageComponent implements OnInit {
     //   startWith(''),
     //   map(val => this.filter(val))
     //   );
+  }
+  pageDetails(){
+    
+		this.__ms.getData(this.__ms.backEndUrl + 'Cms/pageDetails/?urlLink=' + this.__router.url).subscribe(res => {
+			this.page_info = res.data;
+			this.updateMetaTags(res.data);
+		});
   }
   filter(val: string): string[] {
     return this.allHotels.map(x => x.hotelName).filter(option =>
@@ -218,25 +230,25 @@ export class CalculateUmrahPackageComponent implements OnInit {
     }
     this.__setPaxVehicle();
     if (this.umrahCalculatorForm.valid) {
-      
+      let pkgRooms = this.calcPkgRooms();
       this.tNightsVisaCol = 6;
       this.visaCol = 6;
       this.tCostCol = 7;
       this.sectorCol = 3;
       // Set Column Span for table > tr > td
-      if(this.dblRoom > 0) {
+      if(pkgRooms.dblRoom > 0) {
         this.tNightsVisaCol = +this.tNightsVisaCol + 1;
         this.tCostCol = +this.tCostCol + 1;
         this.visaCol = +this.visaCol + 1;
         this.sectorCol = +this.sectorCol + 1;
       }
-      if(this.tplRoom > 0) {
+      if(pkgRooms.tplRoom > 0) {
         this.tNightsVisaCol = +this.tNightsVisaCol + 1;
         this.tCostCol = +this.tCostCol + 1;
         this.visaCol = +this.visaCol + 1;
         this.sectorCol = +this.sectorCol + 1;
       }
-      if(this.qdRoom > 0) {
+      if(pkgRooms.qdRoom > 0) {
         this.tNightsVisaCol = +this.tNightsVisaCol + 1;
         this.tCostCol = +this.tCostCol + 1;
         this.visaCol = +this.visaCol + 1;
@@ -258,7 +270,6 @@ export class CalculateUmrahPackageComponent implements OnInit {
         }
         hotels.push(rowsObj);
       }
-      console.log('Colspan:', [this.tNightsVisaCol, this.tCostCol, this.visaCol, this.sectorCol])
 
       Object.assign(formInputs, { type: 'preview', "hotelRows": hotels });
       this.__ms.postData(this.__ms.backEndUrl + 'Umrah/calcUmrahTourPkg', formInputs).subscribe(result => {
@@ -277,24 +288,25 @@ export class CalculateUmrahPackageComponent implements OnInit {
   confirmPkg() {
     this.__setPaxVehicle();
     if (this.umrahCalculatorForm.valid) {
+      let pkgRooms = this.calcPkgRooms();
       this.tNightsVisaCol = 6;
       this.visaCol = 6;
       this.tCostCol = 7;
       this.sectorCol = 3;
       // Set Column Span for table > tr > td
-      if(this.dblRoom > 0) {
+      if(pkgRooms.dblRoom > 0) {
         this.tNightsVisaCol = +this.tNightsVisaCol + 1;
         this.tCostCol = +this.tCostCol + 1;
         this.visaCol = +this.visaCol + 1;
         this.sectorCol = +this.sectorCol + 1;
       }
-      if(this.tplRoom > 0) {
+      if(pkgRooms.tplRoom > 0) {
         this.tNightsVisaCol = +this.tNightsVisaCol + 1;
         this.tCostCol = +this.tCostCol + 1;
         this.visaCol = +this.visaCol + 1;
         this.sectorCol = +this.sectorCol + 1;
       }
-      if(this.qdRoom > 0) {
+      if(pkgRooms.qdRoom > 0) {
         this.tNightsVisaCol = +this.tNightsVisaCol + 1;
         this.tCostCol = +this.tCostCol + 1;
         this.visaCol = +this.visaCol + 1;
@@ -442,6 +454,19 @@ export class CalculateUmrahPackageComponent implements OnInit {
       return false;
     }
   }
+  calcPkgRooms() {
+    // const rooms = [{dblRoom: 0}, {tplRoom: 0}, {qdRoom: 0}];
+    const rooms = {dblRoom: 0, tplRoom: 0, qdRoom: 0};
+    
+    let formArray = this.umrahCalculatorForm.controls['hotelRows'] as FormArray;
+    for (let i = 0; i < formArray.controls.length; i++) {
+      let formGroup = formArray.controls[i] as FormGroup;
+      rooms.dblRoom = +rooms.dblRoom + +formGroup.controls['dblRoom'].value;
+      rooms.tplRoom = +rooms.tplRoom + +formGroup.controls['tplRoom'].value;
+      rooms.qdRoom = +rooms.qdRoom + +formGroup.controls['qdRoom'].value;
+    }
+    return rooms;
+  }
   closeDropDown(ev, key) {
     // console.log('Events:', [ev.path[2], ev, ev.path])
     // jQuery(ev.path[2]).removeClass('show');
@@ -579,5 +604,16 @@ export class CalculateUmrahPackageComponent implements OnInit {
       this.umrahCalculatorForm.controls['vehicleName'].setValue(optionText);
     }
   }
+  setTransport(ev) {
+    let isT = ev.source.value;
+    this.isTransport = (isT == 1 ? true : false);
+  }
+	updateMetaTags(result) {
+		this.__title.setTitle(result.metaTitle);
+		this.__meta.updateTag({ name: 'description', content: result.metaDescription });
+		this.__meta.updateTag({ property: "og:title", content: result.metaTitle });
+		this.__meta.updateTag({ property: "og:description", content: result.metaDescription });
+		this.__meta.updateTag({ property: "og:url", content: window.location.href });
+	}
 
 }

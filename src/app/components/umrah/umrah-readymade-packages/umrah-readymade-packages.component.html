@@ -1,0 +1,156 @@
+<mat-tab-group class="mat-accent mat-background-primary" *ngIf="rmuPackages">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <b>5</b>
+            <mat-icon class="example-tab-icon text-warning">grade</mat-icon>
+        </ng-template>
+        <div class="card-deck col-sm-12" *ngIf="rmuPackages.fiveStar">
+            <div class="col-sm-3" *ngFor="let pkg of rmuPackages.fiveStar; let i=index">
+                <div class="package-thumb">
+                    <span class="tag">{{pkg.pkg_title}}</span>
+                    <div class="row">
+                        <div class="col-sm-12 thumbnail">
+                            <a href="https://www.rehmantravel.com/">
+                                <img src="https://www.rehmantravel.com/hotelimages/{{(pkg.mkHotelImage != null ? pkg.mkHotelImage : 'dummy.png')}}" class="img-fluid" alt="Movenpick Hajar Tower Makkah 5*">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <div class="pkg-hotels text-left">
+                            <img src="assets/img/makkah_icon.png" alt="Makkah"> {{pkg.makkahHotelName | slice:0:29}} <br>
+                            <img src="assets/img/madina_icon.png" alt="Madinah"> {{pkg.madinahHotelName | slice:0:29}}
+                        </div>
+                        <div class="center grid-btn">
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary">PKR {{((pkg.q_room_price * pkg.roe) / 4).toFixed(2)}}</button>
+                            </div>
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary dark-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck col-sm-12" *ngIf="!rmuPackages.fiveStar">
+            <p>&nbsp;</p>
+            <h3 class="form-error">No 5 Star packages exist....</h3>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <b>4</b>
+            <mat-icon class="example-tab-icon text-warning">grade</mat-icon>
+        </ng-template>
+        <div class="card-deck col-sm-12" *ngIf="rmuPackages.fourStar">
+            <div class="col-sm-3" *ngFor="let pkg of rmuPackages.fourStar; let i=index">
+                <div class="package-thumb">
+                    <span class="tag">{{pkg.pkg_title}}</span>
+                    <div class="row">
+                        <div class="col-sm-12 thumbnail">
+                            <a href="https://www.rehmantravel.com/">
+                                <img src="https://www.rehmantravel.com/hotelimages/{{(pkg.mkHotelImage != null ? pkg.mkHotelImage : 'dummy.png')}}" class="img-fluid" alt="Movenpick Hajar Tower Makkah 5*">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <div class="pkg-hotels text-left">
+                            <img src="assets/img/makkah_icon.png" alt="Makkah"> {{pkg.makkahHotelName | slice:0:29}} <br>
+                            <img src="assets/img/madina_icon.png" alt="Madinah"> {{pkg.madinahHotelName | slice:0:29}}
+                        </div>
+                        <div class="center grid-btn">
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary">PKR {{((pkg.q_room_price * pkg.roe) / 4).toFixed(2)}}</button>
+                            </div>
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary dark-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck col-sm-12" *ngIf="!rmuPackages.fourStar">
+            <p>&nbsp;</p>
+            <h3 class="form-error">No 4 Star packages exist....</h3>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <b>3</b>
+            <mat-icon class="example-tab-icon text-warning">grade</mat-icon>
+        </ng-template>
+        <div class="card-deck col-sm-12" *ngIf="rmuPackages.threeStar">
+            <div class="col-sm-3" *ngFor="let pkg of rmuPackages.threeStar; let i=index">
+                <div class="package-thumb">
+                    <span class="tag">{{pkg.pkg_title}}</span>
+                    <div class="row">
+                        <div class="col-sm-12 thumbnail">
+                            <a href="https://www.rehmantravel.com/">
+                                <img src="https://www.rehmantravel.com/hotelimages/{{(pkg.mkHotelImage != null ? pkg.mkHotelImage : 'dummy.png')}}" class="img-fluid" alt="Movenpick Hajar Tower Makkah 5*">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <div class="pkg-hotels text-left">
+                            <img src="assets/img/makkah_icon.png" alt="Makkah"> {{pkg.makkahHotelName | slice:0:29}} <br>
+                            <img src="assets/img/madina_icon.png" alt="Madinah"> {{pkg.madinahHotelName | slice:0:29}}
+                        </div>
+                        <div class="center grid-btn">
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary">PKR {{((pkg.q_room_price * pkg.roe) / 4).toFixed(2)}}</button>
+                            </div>
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary dark-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck col-sm-12" *ngIf="!rmuPackages.threeStar">
+            <p>&nbsp;</p>
+            <h3 class="form-error">No 3 Star packages exist....</h3>
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <b>Economy</b>
+        </ng-template>
+        <div class="card-deck col-sm-12" *ngIf="rmuPackages.economy">
+            <div class="col-sm-3" *ngFor="let pkg of rmuPackages.economy; let i=index">
+                <div class="package-thumb">
+                    <span class="tag">{{pkg.pkg_title}}</span>
+                    <div class="row">
+                        <div class="col-sm-12 thumbnail">
+                            <a href="https://www.rehmantravel.com/">
+                                <img src="https://www.rehmantravel.com/hotelimages/{{(pkg.mkHotelImage != null ? pkg.mkHotelImage : 'dummy.png')}}" class="img-fluid" alt="Movenpick Hajar Tower Makkah 5*">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <div class="pkg-hotels text-left">
+                            <img src="assets/img/makkah_icon.png" alt="Makkah"> {{pkg.makkahHotelName | slice:0:29}} <br>
+                            <img src="assets/img/madina_icon.png" alt="Madinah"> {{pkg.madinahHotelName | slice:0:29}}
+                        </div>
+                        <div class="center grid-btn">
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary">PKR {{((pkg.q_room_price * pkg.roe) / 4).toFixed(2)}}</button>
+                            </div>
+                            <div class="btn-item">
+                                <button class="btn btn-sm btn-block btn-primary dark-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck col-sm-12" *ngIf="!rmuPackages.economy">
+            <p>&nbsp;</p>
+            <h3 class="form-error">No economy packages exist....</h3>
+        </div>
+    </mat-tab>
+</mat-tab-group>

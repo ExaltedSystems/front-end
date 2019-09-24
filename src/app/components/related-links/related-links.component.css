@@ -1,0 +1,22 @@
+.related-links {
+    list-style: none outside none;
+    padding: 0;
+}
+
+.related-links>li {
+    padding: 6px 3px;
+    border: 1px solid #53a2f8;
+    width: 24%;
+    float: left;
+    margin: 0px 8px 10px 0px;
+    background: linear-gradient(#f8f8f8, #c1c1c1);
+    box-shadow: 2px 2px #08080857;
+    cursor: pointer;
+}
+
+@media(max-width: 768px) {
+    .related-links>li {
+        width: 100%;
+        /*float: left;*/
+    }
+}

@@ -1,39 +1,100 @@
 <app-header></app-header>
 <div>
-  <img class="img-fluid" src="assets/img/visa-background-image.jpg">
+    <img class="img-fluid" src="{{(page_info && page_info.image != null) ? baseUrl+'rgtapp/uploads/cms/pages/'+page_info.image : 'assets/img/visa-background-image.jpg'}}">
 </div>
 <section class="visa-contents">
     <div class="container sidebar">
-     <!-- <div class="section-title">
+        <div class="section-title" *ngIf="page_info">
+            <h1>{{ page_info.name }}</h1>
+        </div>
+        <!-- <div class="section-title">
         <h1>visit visa</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>-->
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="sidebar-list">
-            <app-requst-call-back-form></app-requst-call-back-form>
-          </div>
-          <app-amazing-visa-offer></app-amazing-visa-offer>
-          <!-- <div class="sidebar-subscribe mt-4">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="sidebar-list">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <app-amazing-visa-offer></app-amazing-visa-offer>
+                <!-- <div class="sidebar-subscribe mt-4">
             <p class="mb-0">Subscribe to Get Amazing Offers</p>
             <h3>Tour Alerts</h3>
             <button class="btn btn-secondary">Subscribe</button>
           </div> -->
-        </div>
-        <div class="col-sm-9" *ngIf="page_info">
-        	<h1>{{ page_info.name }}</h1>
-        	<nav _ngcontent-c37="" aria-label="breadcrumb">
+            </div>
+            <div class="col-sm-9" *ngIf="page_info">
+                <!-- <h1>{{ page_info.name }}</h1> -->
+                <!-- <nav _ngcontent-c37="" aria-label="breadcrumb">
   	          <ol _ngcontent-c37="" class="breadcrumb">
   	            <li class="breadcrumb-item">
   	              <a routerLink="/">Home</a>
   	            </li>
   	            <li class="breadcrumb-item active">{{ page_info.name }}</li>
   	          </ol>
-  	        </nav>
-        	<div [innerHTML]="page_info.description"></div>
+              </nav> -->
+                <div [innerHTML]="page_info.shortDescription"></div>
+                <div class="umrah-pkg-details" *ngIf="page_info.umrahContent">
+                    <div class="table-responsive" *ngFor="let pkg of page_info.umrahContent;let i=index;">
+                        <!-- <table class="table umrah-pkg-details">
+                            <tr>
+                                <td> -->
+                        <table class="table table-bordered umrah-pkg-details">
+                            <thead>
+                                <tr>
+                                    <td colspan="1" align="center" id="pkg_numbering">Package <br> 0{{(i+1)}}</td>
+                                    <td colspan="6" id="pkg_headings">{{pkg.mkHotelName}} <span [innerHTML]="lineBr"></span> {{pkg.mdHotelName}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: #e7e8ea;">
+                                    <td class="pkg-details-td"><b>Duration</b></td>
+                                    <td class="pkg-details-td hotel-td"><b>Makkah</b></td>
+                                    <td class="pkg-details-td hotel-td"><b>Madinah</b></td>
+                                    <td class="pkg-details-td" *ngIf="pkg.isSharing"><b>Quint</b></td>
+                                    <td class="pkg-details-td"><b>Quad</b></td>
+                                    <td class="pkg-details-td"><b>Triple</b></td>
+                                    <td class="pkg-details-td"><b>Double</b></td>
+                                </tr>
+                                <tr *ngFor="let d of pkg.pkgDetails" style="background: #fff;">
+                                    <td class="pkg-details-td">{{d.duration}} Days</td>
+                                    <td class="pkg-details-td hotel-td">{{d.makkahNights}} Nights</td>
+                                    <td class="pkg-details-td hotel-td">{{d.medinahNights}} Nights</td>
+                                    <td class="pkg-details-td" *ngIf="pkg.isSharing">{{d.sharingPrice}}</td>
+                                    <td class="pkg-details-td">{{d.quadPrice}}</td>
+                                    <td class="pkg-details-td">{{d.triplePrice}}</td>
+                                    <td class="pkg-details-td">{{d.doublePrice}}</td>
+                                </tr>
+                                <!-- Durations -->
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered umrah-pkg-details">
+                            <tbody>
+                                <tr>
+                                    <td align="center" class="pkg-note-td">NOTE :</td>
+                                    <td style="color: #fff;background: #31b0d5;">{{pkg.pkgComments}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="pkg-note-td" [innerHTML]="spaceBr"></td>
+                                    <td style="color: #fff;background: #31b0d5;">{{pkg.pkgIncludes}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- </td>
+                            </tr>
+                        </table> -->
+                    </div>
+                </div>
+                <div [innerHTML]="page_info.description"></div>
+                <p>&nbsp;</p>
+                <div class="main-container-callback d-none d-sm-block">
+                    <app-requst-call-back-form></app-requst-call-back-form>
+                </div>
+                <p>&nbsp;</p>
+                <app-related-links></app-related-links>
+            </div>
         </div>
-      </div>
     </div>
 </section>
 <app-footer></app-footer>

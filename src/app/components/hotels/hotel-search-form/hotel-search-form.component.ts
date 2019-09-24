@@ -322,8 +322,9 @@ export class HotelSearchFormComponent implements OnInit {
   }
   closeDropDown(ev) {
     // console.log(ev.path[2]);
-    jQuery(ev.path[2]).removeClass('show')
-    jQuery(ev.path[3]).removeClass('show')
+    // jQuery(ev.path[2]).removeClass('show')
+    // jQuery(ev.path[3]).removeClass('show')
+		jQuery('.close-dropdown').removeClass('show');
 
   }
 	setDateHeader(evt, type) {

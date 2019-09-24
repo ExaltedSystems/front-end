@@ -8,9 +8,10 @@ import { MainService } from  "src/app/services/main.service";
 })
 export class HotelsComponent implements OnInit {
   page_info:any = {name:'', description:''};
+  baseUrl: string = '';
 
   constructor(private __ms:MainService) {
-    window.scroll(0, 300);
+    this.baseUrl = this.__ms.baseUrl;
   }
 
   ngOnInit() {

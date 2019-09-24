@@ -1,31 +1,131 @@
 <mat-drawer-container class="mat-drawer-container mat-drawer-transition">
-    <!-- <mat-drawer #filterForm class="mat-drawer">
-            <div class="sidebar-list">
-                <h3 class="sidebar-title">Filter Your Search
-                    <i-x-circle class="dropdown-feather" (click)="filterForm.close()"></i-x-circle>
-                </h3>
+    <mat-drawer #filterForm class="mat-drawer">
+        <div class="sidebar-list">
+            <h3 class="sidebar-title">Filter Your Search
+                <i-x-circle class="dropdown-feather" (click)="filterForm.close()"></i-x-circle>
+            </h3>
+            <div *ngIf="responseAirlinesUnique.length > 0">
+                <h3 class="sidebar-title">By AirLine</h3>
                 <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
-                    <li *ngFor="let stopFilteritem of stopFilteritems">
-                        <mat-checkbox (change)="airlineFilters($event, 'stop', 'm')" value="{{stopFilteritem.value}}" class="mat-checkbox">
-                            {{stopFilteritem.text}} </mat-checkbox>
+                    <li *ngFor="let eachAirLine of responseAirlinesUnique">
+                        <mat-checkbox (change)="airlineFilters($event, 'airline', 'm')" value="{{eachAirLine.value}}" class="mat-checkbox">
+                            <img src="AirlineLogos/{{eachAirLine.value}}.png" alt="{{eachAirLine.text}}" width="30"> {{eachAirLine.text}} </mat-checkbox>
                     </li>
                 </ul>
-                <div *ngIf="responseAirlinesUnique.length > 0">
-                    <h3 class="sidebar-title">Filter By AirLine</h3>
-                    <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
-                        <li *ngFor="let eachAirLine of responseAirlinesUnique">
-                            <mat-checkbox (change)="airlineFilters($event, 'airline', 'm')" value="{{eachAirLine.value}}" class="mat-checkbox">
-                                {{eachAirLine.text}} </mat-checkbox>
-                        </li>
-                    </ul>
-                </div>
             </div>
-        </mat-drawer> -->
+        </div>
+    </mat-drawer>
     <mat-drawer #searchForm class="mat-drawer" position="end">
         <h3 class="sidebar-title mb-3">Change Your Search
             <i-x-circle class="dropdown-feather" (click)="searchForm.close()"></i-x-circle>
         </h3>
         <app-flights-search [sideForm]="sideForm"></app-flights-search>
+    </mat-drawer>
+    <mat-drawer #fareDetailsPopup class="mat-drawer" position="start">
+        <h3 class="sidebar-title">
+            Fare Details
+            <i-x-circle class="dropdown-feather popup-clr-btn" (click)="fareDetailsPopup.close();"></i-x-circle>
+        </h3>
+        <div class="flight-segment-details" *ngIf="mFareDetailsOption">
+            <div class="flight-segment-details rounded-0">
+                <!-- start of fare Breakup detail -->
+                <div class="bg-white">
+                    <div class="flight-segment-details-header py-1 px-2 d-flex align-items-center">
+                        Fare Breakup Details
+                    </div>
+                    <div class="row m-0" style="background:#ccc">
+                        <table class="table">
+                            <tr>
+                                <th>Passenger</th>
+                                <th>Base Fare</th>
+                                <th>Total</th>
+                            </tr>
+                            <tr *ngFor="let Fare of mFareDetailsOption.AirItineraryPricingInfo[0].PTC_FareBreakdowns.PTC_FareBreakdown;let f=index;">
+                                <td>{{Fare.PassengerTypeQuantity.Code}} X {{Fare.PassengerTypeQuantity.Quantity}}</td>
+                                <td>{{Fare.PassengerFare.EquivFare.CurrencyCode}} {{Fare.PassengerFare.EquivFare.Amount}}</td>
+                                <td>{{Fare.PassengerFare.EquivFare.CurrencyCode}} {{Fare.PassengerFare.EquivFare.Amount * Fare.PassengerTypeQuantity.Quantity}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- end of fare Breakup detail -->
+                <!-- start of tax Breakup detail -->
+                <div class="bg-white">
+                    <div class="flight-segment-details-header py-1 px-2 d-flex align-items-center">
+                        Tax Breakup Details
+                    </div>
+                    <div class="row m-0" style="background:#ccc">
+                        <table class="table">
+                            <tr *ngFor="let Tax of mFareDetailsOption.AirItineraryPricingInfo[0].PTC_FareBreakdowns.PTC_FareBreakdown;let t=index;">
+                                <table>
+                                    <tr>
+                                        <th>Passenger</th>
+                                        <th>Tax Fare</th>
+                                        <th>Total Tax</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{Tax.PassengerTypeQuantity.Code}} X {{Tax.PassengerTypeQuantity.Quantity}}</td>
+                                        <td>{{Tax.PassengerFare.Taxes.TotalTax.CurrencyCode}} {{Tax.PassengerFare.Taxes.TotalTax.Amount}}</td>
+                                        <td>{{Tax.PassengerFare.Taxes.TotalTax.CurrencyCode}} {{Tax.PassengerFare.Taxes.TotalTax.Amount * Tax.PassengerTypeQuantity.Quantity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><b>Breakup: </b><span *ngFor="let breakup of Tax.PassengerFare.Taxes.Tax;">
+                                                <span *ngIf="breakup.Amount != 0">
+                                                    {{breakup.Amount}}{{breakup.TaxCode}} 
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- end of tax Breakup detail -->
+                <!-- start of allowance detail -->
+                <div class="bg-white" *ngFor="let TPA of mFareDetailsOption.AirItineraryPricingInfo[0].PTC_FareBreakdowns.PTC_FareBreakdown;let ra=index;">
+                    <div *ngIf="ra == 0" class="flight-segment-details-header py-1 px-2 d-flex align-items-center">
+                        Restrictions & Allowance
+                    </div>
+                    <div *ngIf="ra == 0" class="row m-0 py-1" style="background:#ccc">
+                        <div class="col-sm-6"><b>Endorsment / Restrictions</b></div>
+                        <div class="col-sm-6">
+                            <span *ngFor="let message of TPA.PassengerFare.TPA_Extensions.Messages.Message;let msgIndex = index">
+                                    {{message.Info}}<br />
+                                </span>
+                        </div>
+                        <div class="col-sm-2"><b>Baggage</b></div>
+                        <div class="col-sm-2">
+                            <span *ngIf="TPA.PassengerFare.TPA_Extensions.BaggageInformationList.BaggageInformation[0].Allowance[0].Weight">
+                                        {{TPA.PassengerFare.TPA_Extensions.BaggageInformationList.BaggageInformation[0].Allowance[0].Weight}}
+                                        {{TPA.PassengerFare.TPA_Extensions.BaggageInformationList.BaggageInformation[0].Allowance[0].Unit}}
+                                    </span>
+                            <span *ngIf="TPA.PassengerFare.TPA_Extensions.BaggageInformationList.BaggageInformation[0].Allowance[0].Pieces">
+                                        {{TPA.PassengerFare.TPA_Extensions.BaggageInformationList.BaggageInformation[0].Allowance[0].Pieces}} Pieces
+                                    </span>
+                        </div>
+                        <div class="col-sm-4"><b>Fare Information</b></div>
+                        <div class="col-sm-4">
+                            <span><b>Base Fare:</b>
+                                    {{TPA.PassengerFare.EquivFare.Amount * TPA.PassengerTypeQuantity.Quantity}}
+                                    {{TPA.PassengerFare.EquivFare.CurrencyCode}}
+                                </span><br />
+                            <span>
+                                    <b>Total Taxes:</b>
+                                    {{TPA.PassengerFare.Taxes.TotalTax.Amount * TPA.PassengerTypeQuantity.Quantity}}
+                                    {{TPA.PassengerFare.Taxes.TotalTax.CurrencyCode}}
+                                </span><br />
+                            <span>
+                                    <b>Total Fare:</b>
+                                    {{TPA.PassengerFare.TotalFare.Amount * TPA.PassengerTypeQuantity.Quantity}}
+                                    {{TPA.PassengerFare.TotalFare.CurrencyCode}}
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of allowance detail -->
+            </div>
+        </div>
     </mat-drawer>
     <mat-drawer #flightDetailsPopup class="mat-drawer" position="start">
         <h3 class="sidebar-title">
@@ -191,6 +291,12 @@
                         Search</button>
                 </div>
             </div>
+            <p><button class="btn rounded-0 shadow btn-primary" (click)="filterForm.toggle();"><i-sliders class="button-feather"></i-sliders> Filter Your Search</button>
+            </p>
+            <!-- <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 mat-card" style="background: none;">
+                <div class="d-flex justify-content-between">
+                    </div>
+            </mat-card> -->
         </sticky>
         <!-- <mat-sidenav-container class="example-container">
             <mat-sidenav mode="side" opened="{{msideNav}}">
@@ -381,7 +487,7 @@
                                 <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">
                                     <li *ngFor="let eachAirLine of responseAirlinesUnique">
                                         <mat-checkbox (change)="airlineFilters($event, 'airline', 'd')" value="{{eachAirLine.value}}" class="mat-checkbox">
-                                            <img src="http://cheapfly.pk/AirlineLogos/{{eachAirLine.value}}.png" alt="{{eachAirLine.text}}"> {{eachAirLine.text}}
+                                            <img src="AirlineLogos/{{eachAirLine.value}}.png" alt="{{eachAirLine.text}}" width="30"> {{eachAirLine.text}}
                                         </mat-checkbox>
                                         <span class="pull-right">{{eachAirLine.lowestAmount}}</span>
                                     </li>
@@ -397,11 +503,11 @@
                     </div>
                     <div class="col-sm-9 flight-listing">
                         <!-- <mat-card class="flight-list-header d-block d-sm-none mb-2 py-2 px-2 px-sm-3 mat-card">
-                                <div class="d-flex justify-content-between">
-                                    <button class="btn rounded-0 shadow btn-secondary" (click)="filterForm.toggle();"><i-sliders class="button-feather"></i-sliders> Filter</button>
-                                </div>
-                            </mat-card> -->
-                        <div *ngIf="availableFlights == 'Loading'" class="loading-container">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn rounded-0 shadow btn-secondary" (click)="filterForm.toggle();"><i-sliders class="button-feather"></i-sliders> Filter</button>
+                            </div>
+                        </mat-card> -->
+                        <div class="loading-container" *ngIf="availableFlights == 'Loading'">
                             <p class="center">Loading Results</p>
                             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                         </div>
@@ -440,7 +546,7 @@
                                     </b></td>
                                 </tr>
                             </table> -->
-                            <div class="d-block d-sm-none" *ngFor="let Itinerary of availableFlights; let i=index; let la = last">
+                            <div class="d-block d-sm-none eachRowM" *ngFor="let Itinerary of availableFlights; let i=index; let la = last">
                                 <mat-card class="mobile-flight-segment-logo d-flex justify-content-center align-items-center bg-white py-1 px-2 pb-0 rounded-0 mat-card">
                                     <div class="d-inline-block">
                                         <div class="d-inline-block text-center">
@@ -486,27 +592,55 @@
                                             <span id="isValidatingMsgM_{{i}}">Checking Information</span>
                                             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                                         </div>
-                                        <div class="segment-footer pl-3 d-flex justify-content-between align-items-center">
-                                            <div class="price font-weight-bold"></div>
+                                        <div class="segment-footer d-flex justify-content-between align-items-center">
+                                            <!-- <div class="price font-weight-bold"></div> -->
                                             <div class="book-details d-flex">
-                                                <button class="btn btn-default align-items-center p-3" (click)="flightDetailsPopup.toggle();showFlightDetailsM(Itinerary, i);">
+                                                <button class="btn btn-default rounded-0 align-items-center p-3" (click)="flightDetailsPopup.toggle();showFlightDetailsM(Itinerary, i);">
                                                     <i-plus-circle></i-plus-circle> Details
                                                 </button>
-                                                <button class="flight-select-btn btn btn-primary rounded-0 border-0 p-3 px-4 ml-2" (click)="airByTag(Itinerary, i, 'MS')">Select
+                                                <button class="flight-select-btn btn btn-primary rounded-0 border-0 p-3" (click)="airByTag(Itinerary, i, 'MS')">Select
                                                     <i-arrow-right class="feather"></i-arrow-right>
                                                 </button>
-                                                <b class="btn btn-warning price font-weight-bold d-flex align-items-center p-3 pl-3 pr-3">
-                                                    {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
+                                                <button class="btn btn-primary rounded-0 price dark-btn font-weight-bold d-flex align-items-center p-3" (click)="fareDetailsPopup.toggle();showFareDetailsPopup(Itinerary, i);">
+                                                        <i-plus-circle></i-plus-circle> {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.CurrencyCode}}
                                                     {{Itinerary.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount}}
                                                     /-
-                                                </b>
+                                                </button>
                                             </div>
                                         </div>
                                     </mat-card>
                                 </div>
+                                <div class="{{Itinerary.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].OperatingAirline.Code}}" style="display:none;">&nbsp;</div>
                             </div>
                             <!-- mobile listing end -->
                             <!-- desktop listing -->
+                            <div class="card shadow rounded-0 mb-3 p-0 d-none d-sm-block">
+                                <div class="card-body">
+                                    <div>
+                                        <div>
+                                            <div class="flights-headings">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="col-sm-1 pr-2">
+                                                        <p>Airline</p>
+                                                    </div>
+                                                    <div class="col-sm-3 px-2">
+                                                        <p>Duration</p>
+                                                    </div>
+                                                    <div class="col-sm-3 px-2">
+                                                        <p>Departure</p>
+                                                    </div>
+                                                    <div class="col-sm-2 px-2 center">
+                                                        <p>Stop</p>
+                                                    </div>
+                                                    <div class="col-sm-3 px-2">
+                                                        <p>Arrival</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card shadow rounded-0 mb-3 p-0 d-none d-sm-block eachRow" *ngFor="let Itinerary of availableFlights; let i=index;">
                                 <div class="card-body">
                                     <div>
@@ -1004,6 +1138,7 @@
                             <h4 class="center">No Matching Results</h4>
                         </div>
                     </div>
+                    <app-popular-airline-and-hotels></app-popular-airline-and-hotels>
                 </div>
             </div>
         </section>

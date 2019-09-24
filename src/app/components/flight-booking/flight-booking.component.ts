@@ -43,6 +43,7 @@ export class FlightBookingComponent implements OnInit {
   travellersObj: object;
   tagExpired: boolean = false;
   tokenExpired: boolean = false;
+  payProgressBar: boolean = false;
   byTagResponse;
   issuingCountries: any;
 
@@ -100,7 +101,7 @@ export class FlightBookingComponent implements OnInit {
   paymentFlag = 1;
   constructor(private __fb: FormBuilder, private __actRouter: ActivatedRoute, private __router: Router,
     private __ms: MainService, private __datepipe: DatePipe) {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     this.getIssuingCountriesList();
   }
 
@@ -411,6 +412,7 @@ export class FlightBookingComponent implements OnInit {
   }
 
   creditCardPost(formInputs) {
+    this.payProgressBar = true;
     let creditCardUrl = this.__ms.backEndUrl + 'Ticket/creditCard';
     let reservationObj = Object.assign(formInputs, this.travellersObj, this.segmentInfoArr, { _token: localStorage.getItem('paxToken') });
     this.__ms.postData(creditCardUrl, reservationObj).subscribe(res => {
@@ -426,6 +428,7 @@ export class FlightBookingComponent implements OnInit {
   } //
 
   cashOnDelivery() {
+    this.payProgressBar = true;
     this.paymentFlag = 3;
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
@@ -440,11 +443,13 @@ export class FlightBookingComponent implements OnInit {
         this.createPnr(res);
       } else if (res['res_flag'] == false) {
         this.tokenExpired = true;
+        this.payProgressBar = false;
       }
     })
   } //
 
   byBank() {
+    this.payProgressBar = true;
     this.paymentFlag = 2;
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
@@ -459,11 +464,13 @@ export class FlightBookingComponent implements OnInit {
         this.createPnr(res);
       } else if (res['res_flag'] == false) {
         this.tokenExpired = true;
+        this.payProgressBar = false;
       }
     })
   }// end by bank
 
   byBranch() {
+    this.payProgressBar = true;
     this.paymentFlag = 7;
     let flightInfoObj = {
       _refrenceNo: this.referenceNo,
@@ -478,6 +485,7 @@ export class FlightBookingComponent implements OnInit {
         this.createPnr(res);
       } else if (res['res_flag'] == false) {
         this.tokenExpired = true;
+        this.payProgressBar = false;
       }
     })
   }// end by branch

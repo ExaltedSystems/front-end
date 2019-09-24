@@ -1,0 +1,6 @@
+<h3 *ngIf="relatedLinks">Related Links:</h3>
+<ul *ngIf="relatedLinks" class="related-links">
+    <li *ngFor="let link of relatedLinks">
+        <a routerLink="/{{link.urlLink}}" title="{{link.navbarTitle}}">{{link.navbarTitle | slice:0:(isMobile?link.navbarTitle.length:21)}}</a>
+    </li>
+</ul>

@@ -77,6 +77,8 @@ import { AgmCoreModule } from '@agm/core';
 import { CalculateUmrahPackageComponent } from './components/umrah/calculate-umrah-package/calculate-umrah-package.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { FilterAirlineNamePipe } from './pipes/filter-airline-name.pipe';
+import { RelatedLinksComponent } from './components/related-links/related-links.component';
+import { UmrahReadymadePackagesComponent } from './components/umrah/umrah-readymade-packages/umrah-readymade-packages.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +136,8 @@ import { FilterAirlineNamePipe } from './pipes/filter-airline-name.pipe';
     CalculateUmrahPackageComponent,
     SafeHtmlPipe,
     FilterAirlineNamePipe,
+    RelatedLinksComponent,
+    UmrahReadymadePackagesComponent,
   ],
   imports: [
     BrowserModule,
