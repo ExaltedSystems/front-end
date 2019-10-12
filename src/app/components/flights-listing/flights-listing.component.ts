@@ -91,7 +91,14 @@ export class FlightsListingComponent implements OnInit {
   deviceFullInfo = null;
   browser = null;
   operatingSys = null;
-
+  // VARIABLES FOR PRICE RANGE SLIDER
+  minPrice: number = 0;
+  maxPrice: number = 0;
+  options = {
+    floor: 0,
+    ceil: 0
+  };
+  // END VARIABLES FOR PRICE RANGE SLIDER
   constructor(private __actRouter: ActivatedRoute, private __ms: MainService, private __router: Router,
     private __fb: FormBuilder, private __cookieService: CookieService, private __device: DeviceDetectorService) {
     // window.scroll(0, 0);
@@ -310,8 +317,14 @@ export class FlightsListingComponent implements OnInit {
           } else {
             this.availableFlights = null;
           }
-          this.availableFlights.forEach(element => {
+          this.availableFlights.forEach((element, index) => {
             let lowestAmount = element.AirItineraryPricingInfo[0].ItinTotalFare.TotalFare.Amount;
+
+            if(index == 0){
+              this.minPrice = lowestAmount;
+            }
+            this.maxPrice = lowestAmount;
+
             let eachAirline = element.AirItinerary.OriginDestinationOptions.OriginDestinationOption[0].FlightSegment[0].OperatingAirline.Code;
             let airlineText = FilterAirlineNamePipe.prototype.transform(eachAirline);
             this.responseAirlines.push({
@@ -321,6 +334,7 @@ export class FlightsListingComponent implements OnInit {
               lowestAmount: lowestAmount
             });
           });
+          
           this.loadingMore = true;
           this.responseAirlinesUnique = this.responseAirlines.filter((e = new Set, function (t) {
             return !e.has(t.value) && e.add(t.value)
@@ -901,5 +915,23 @@ export class FlightsListingComponent implements OnInit {
   }
   desktopSideForm() {
     this.sideForm = true;
+  }
+
+  rangeUpdated(){
+    let newMin = this.minPrice
+    let newMax = this.maxPrice
+    
+    var priceInputs = jQuery('.priceInput');
+
+    jQuery.each(priceInputs, function(index, eachInput) {
+      /* iterate through array or object */
+      let eachVal:number = parseInt(jQuery(eachInput).val())
+      if(eachVal < newMin || eachVal > newMax){
+        jQuery(eachInput).parent().removeClass('d-sm-block');
+          
+      }else{
+        jQuery(eachInput).parent().addClass('d-sm-block');                    
+      }
+    });
   }
 }

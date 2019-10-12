@@ -482,6 +482,11 @@
                                         {{stopFilteritem.text}} </mat-checkbox>
                                 </li>
                             </ul> -->
+                            <div *ngIf="minPrice > 0">
+                                <h3 class="sidebar-title">Filter By Price</h3>
+                                <ng5-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="options" (valueChange)="rangeUpdated()"></ng5-slider>
+                            </div>
+                            
                             <div *ngIf="responseAirlinesUnique.length > 0">
                                 <h3 class="sidebar-title">Filter By AirLine</h3>
                                 <ul class="list-style-none p-0 stop-filter" *ngIf="stopFilteritems.length > 0">

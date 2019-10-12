@@ -79,6 +79,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { FilterAirlineNamePipe } from './pipes/filter-airline-name.pipe';
 import { RelatedLinksComponent } from './components/related-links/related-links.component';
 import { UmrahReadymadePackagesComponent } from './components/umrah/umrah-readymade-packages/umrah-readymade-packages.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -179,6 +180,7 @@ import { UmrahReadymadePackagesComponent } from './components/umrah/umrah-readym
     RangeSliderModule,
     FilterPipeModule,
     MatTooltipModule,
+    Ng5SliderModule,
     DeviceDetectorModule.forRoot(),
     
     AgmCoreModule.forRoot({
